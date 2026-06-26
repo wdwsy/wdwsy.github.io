@@ -249,7 +249,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2026-06-26 21:56:00 / Modified: 23:46:04" itemprop="dateCreated datePublished" datetime="2026-06-26T21:56:00+08:00">2026-06-26</time>
+      <time title="Created: 2026-06-26 21:56:00 / Modified: 23:50:43" itemprop="dateCreated datePublished" datetime="2026-06-26T21:56:00+08:00">2026-06-26</time>
     </span>
 
   
@@ -264,7 +264,7 @@
     <div class="post-body" itemprop="articleBody">
           <h1 id="BZOJ3569-DZY-Loves-Chinese-II"><a href="#BZOJ3569-DZY-Loves-Chinese-II" class="headerlink" title="BZOJ3569 DZY Loves Chinese II"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P10778">BZOJ3569 DZY Loves Chinese II</a></h1><h2 id="题意概述"><a href="#题意概述" class="headerlink" title="题意概述"></a>题意概述</h2><p>给你一个无向连通图，每次删除若干条边，问你这个图还是否连通。</p>
 <h2 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h2><p>这是一个<strong>重要结论</strong>，我们先随便拉一个 dfs 树，然后把所有非树边构成的环抑或上一个随机权值，如果删除的边的权值所构成的集合中，能找到任意一个子集的抑或和为 $0$，图不再连通。具体可以用抑或线性基来实现。</p>
-<h1 id="Proposition-Composition"><a href="#Proposition-Composition" class="headerlink" title="Proposition Composition"></a><a target="_blank" rel="noopener" href="https://qoj.ac/problem/5425/statement/zh_cn">Proposition Composition</a></h1><h1 id="P14164-ICPC-2022-Nanjing-R-命题作文"><a href="#P14164-ICPC-2022-Nanjing-R-命题作文" class="headerlink" title="P14164 [ICPC 2022 Nanjing R] 命题作文"></a>P14164 [ICPC 2022 Nanjing R] 命题作文</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>有一张由 $n$ 个点与 $(n-1)$ 条边构成的无向连通图 $G$。顶点编号从 $1$ 到 $n$（含两端），第 $i$ 条边连接顶点 $i$ 与 $(i + 1)$。</p>
+<h1 id="Proposition-Composition"><a href="#Proposition-Composition" class="headerlink" title="Proposition Composition"></a><a target="_blank" rel="noopener" href="https://qoj.ac/problem/5425/statement/zh_cn">Proposition Composition</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>有一张由 $n$ 个点与 $(n-1)$ 条边构成的无向连通图 $G$。顶点编号从 $1$ 到 $n$（含两端），第 $i$ 条边连接顶点 $i$ 与 $(i + 1)$。</p>
 <p>接下来向图中依次加入额外 $m$ 条边（加入后不删除）。每次加入一条额外边后，求从图中选择两条边 $e$ 与 $f$ 的方案数，满足如果边 $e$ 与 $f$ 同时被删除，图将变得不连通（即图中至少有两个连通块）。</p>
 <p>请注意，先选择 $e$ 再选择 $f$，和先选择 $f$ 再选择 $e$ 被认为是同一种方案。</p>
 <h2 id="做法-1"><a href="#做法-1" class="headerlink" title="做法"></a>做法</h2><p>我们考虑上一题的结论，现在只删除两条边，也就意味着它们要么一个为 $0$，要么两者相等。<br>由于刚开始图是以一条链的形式连通的，所以我们想让这个图不连通，一定要删除一条链上的边，对于删边情况的统计，我们可以分以下三种方式统计：</p>
@@ -282,17 +282,7 @@
 
 </details>
 
-<h1 id="WC2019-I-君的商店"><a href="#WC2019-I-君的商店" class="headerlink" title="[WC2019] I 君的商店"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5208">[WC2019] I 君的商店</a></h1><h1 id="P5208-WC2019-I-君的商店"><a href="#P5208-WC2019-I-君的商店" class="headerlink" title="P5208 [WC2019] I 君的商店"></a>P5208 [WC2019] I 君的商店</h1><h2 id="题目背景"><a href="#题目背景" class="headerlink" title="题目背景"></a>题目背景</h2><h3 id="特别提示"><a href="#特别提示" class="headerlink" title="特别提示"></a>特别提示</h3><p><strong>在洛谷提交本题时的一些注意事项（与原题面不同之处请以此处为准）：</strong></p>
-<ol>
-<li>与原题不同的是，你不需要，也不应该在程序开头包含 <code>shop.h</code> 头文件。</li>
-<li>提交时，请在程序中加入以下函数声明语句：</li>
-</ol>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> *S, <span class="type">int</span> nS, <span class="type">int</span> *T, <span class="type">int</span> nT)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>仅支持 <code>C++</code>（含 <code>C++</code>，<code>C++11</code>，<code>C++14</code>，<code>C++17</code>）提交。</li>
-</ol>
-<h2 id="题目简述"><a href="#题目简述" class="headerlink" title="题目简述"></a>题目简述</h2><p>给你一个长度为 $n$ 的 $0&#x2F;1$ 序列 $a$，每次可以询问两个集合 $S,T$，交互库会按照如下方式返回：</p>
+<h1 id="WC2019-I-君的商店"><a href="#WC2019-I-君的商店" class="headerlink" title="[WC2019] I 君的商店"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5208">[WC2019] I 君的商店</a></h1><h1 id="P5208-WC2019-I-君的商店"><a href="#P5208-WC2019-I-君的商店" class="headerlink" title="P5208 [WC2019] I 君的商店"></a>P5208 [WC2019] I 君的商店</h1><h2 id="题目简述"><a href="#题目简述" class="headerlink" title="题目简述"></a>题目简述</h2><p>给你一个长度为 $n$ 的 $0&#x2F;1$ 序列 $a$，每次可以询问两个集合 $S,T$，交互库会按照如下方式返回：</p>
 <ul>
 <li>$\sum\limits_{x\in S} a_x &lt; \sum\limits_{y\in T} a_y$ 返回 <code>1</code>。</li>
 <li>$\sum\limits_{x\in S} a_x &gt; \sum\limits_{y\in T} a_y$ 返回 <code>0</code>。</li>
@@ -337,6 +327,7 @@
 <h3 id="正解一"><a href="#正解一" class="headerlink" title="正解一"></a>正解一</h3><p>我们枚举 $k$，然后再枚举这一位改成字符。<br>具体做法上，可以把 $s,t$ 拼到一起建立 SA，然后先找到满足 $lcp(s[j,n],t[i,k]),j \in [l,r]$ 的区间 $[l,r]$，然后我们再在 $[l,r]$ 中二分，找到满足 $k$ 这一位字符的区间 $[l^\prime,r^\prime]$，最后找到这个区间内使得 $lcp(s[j+k-i+1,n],t[i+1, m]),j\in [l^\prime,r^\prime]$ 最大的 $j$，这同样可以通过二分。<br>时间复杂度 $\mathcal{O}(m|\Sigma|\log n)$。其中 $|\Sigma|$ 为字符集大小。</p>
 <h3 id="正解二"><a href="#正解二" class="headerlink" title="正解二"></a>正解二</h3><p>我们考虑一个 $\mathcal{O}((n+m)\log n)$ 的做法，我们考虑把 $s,t$ 拼起来正反各做一遍 SA。<br>考虑这个时候如何不枚举字符，枚举 $k$，来找到最长最大的位置 $p_k$ 使得 $t[i,p_k]$ 可以一次被拼出来。<br>考虑如何判定这个问题，其实就是以下问题：<br>$$<br>\max\limits_{lcs(s[1,j-1],t[1,k-1]) \geq k-i}lcp(s[j+1,n],t[k+1,m])<br>$$</p>
 <p>这个我们可以对前缀后缀两个 SA 的 sa 序列分别为 x,y 轴建立主席树，然后可以发现每次其实就是查询 $\max\limits_{pre_{rk}[x-1]\in [L,R]} lcp(s[x+1,n],t[k+1,m])$，其实这个最大值，一定取在<br>$$<br>arg\min\limits_{pre_{rk}[x-1]\in [L,R],suf_{rk}[x-1]&gt;suf_{rk}[k+1]} suf_{rk}[x-1]-suf_{rk}[k+1]<br>$$<br>或者<br>$$<br>arg\min\limits_{pre_{rk}[x-1]\in [L,R],suf_{rk}[x-1]&lt;suf_{rk}[k+1]} suf_{rk}[x-1]-suf_{rk}[k+1]<br>$$</p>
+<p><img src="/images/6-26presuf.png" alt="pre,suf 的意义"></p>
 <p>那么我们在主席树上查询这两个位置就好，具体实现还是有很多细节的，写的不好就会像我一样调半天，建议参考了代码或者想清楚再写。</p>
 <details>
 <summary>点击展开：完整代码</summary>
