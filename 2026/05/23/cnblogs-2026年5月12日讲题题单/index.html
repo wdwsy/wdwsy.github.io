@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wdwsy.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":240},"hljswrap":true,"codeblock":{"theme":{"light":"github-dark","dark":"github-dark-dimmed"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat","show_result":true},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":true,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="原文来自 博客园  A - 百万富翁大概就是每次可以询问一对 $(i,j)$ 位置，要求出序列中的最大值是谁。首先一个直观的想法就是每次两两分组打擂台，然后递归所有胜者，但是我们发现这样不能够通过，因为这个题目要求询问轮数只能是 $8$，而我们的这个做法需要询问 log 轮。同时我们可以注意到，我们可以询问的次数是大于 n 的，所以自然可以猜想，我们可以调整最后的几次操作，看看能不能满足要求。具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2026年5月12日讲题题单">
+<meta property="og:url" content="https://wdwsy.github.io/2026/05/23/cnblogs-2026%E5%B9%B45%E6%9C%8812%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/index.html">
+<meta property="og:site_name" content="wdwsy&#39;s Blog">
+<meta property="og:description" content="原文来自 博客园  A - 百万富翁大概就是每次可以询问一对 $(i,j)$ 位置，要求出序列中的最大值是谁。首先一个直观的想法就是每次两两分组打擂台，然后递归所有胜者，但是我们发现这样不能够通过，因为这个题目要求询问轮数只能是 $8$，而我们的这个做法需要询问 log 轮。同时我们可以注意到，我们可以询问的次数是大于 n 的，所以自然可以猜想，我们可以调整最后的几次操作，看看能不能满足要求。具">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wdwsy.github.io/images/5-12-tidan.png">
+<meta property="article:published_time" content="2026-05-23T12:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-23T15:44:12.839Z">
+<meta property="article:author" content="wdwsy">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="线段树">
+<meta property="article:tag" content="题单">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wdwsy.github.io/images/5-12-tidan.png">
+
+
+<link rel="canonical" href="https://wdwsy.github.io/2026/05/23/cnblogs-2026%E5%B9%B45%E6%9C%8812%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://wdwsy.github.io/2026/05/23/cnblogs-2026%E5%B9%B45%E6%9C%8812%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/","path":"2026/05/23/cnblogs-2026年5月12日讲题题单/","title":"2026年5月12日讲题题单"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>2026年5月12日讲题题单 | wdwsy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">wdwsy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">算法的世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A-%E7%99%BE%E4%B8%87%E5%AF%8C%E7%BF%81"><span class="nav-number">1.</span> <span class="nav-text">A - 百万富翁</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B-%E5%85%83%E6%97%A6%E6%BF%80%E5%85%89%E7%82%AE"><span class="nav-number">2.</span> <span class="nav-text">B - 元旦激光炮</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-%E7%94%9F%E4%BA%A7%E8%AE%A1%E5%88%92-Day-2"><span class="nav-number">3.</span> <span class="nav-text">C - 生产计划 (Day 2)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#D-%E6%9C%AB%E6%97%A5%E9%AD%94%E6%B3%95%E5%B0%91%E5%A5%B3%E8%AE%A1%E5%88%92"><span class="nav-number">4.</span> <span class="nav-text">D - 末日魔法少女计划</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#E-%E4%BC%97%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text">E - 众数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#F-%E7%BC%96%E7%A8%8B%E6%B5%8B%E8%AF%95"><span class="nav-number">6.</span> <span class="nav-text">F - 编程测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#G-%E7%A9%BF%E8%B6%8A"><span class="nav-number">7.</span> <span class="nav-text">G - 穿越</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#J-Souvenirs"><span class="nav-number">8.</span> <span class="nav-text">J - Souvenirs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#K-rpmtdq"><span class="nav-number">9.</span> <span class="nav-text">K - rpmtdq</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#L-TEST-199"><span class="nav-number">10.</span> <span class="nav-text">L - TEST_199</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#M-%E9%AA%B0%E5%AD%90-Kostki"><span class="nav-number">11.</span> <span class="nav-text">M - 骰子 &#x2F; Kostki</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wdwsy"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">wdwsy</p>
+  <div class="site-description" itemprop="description">算法竞赛、C++、OI 技术分享</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wdwsy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wdwsy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/05/23/cnblogs-2026%E5%B9%B45%E6%9C%8812%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="2026年5月12日讲题题单 | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2026年5月12日讲题题单
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-05-23 20:00:00" itemprop="dateCreated datePublished" datetime="2026-05-23T20:00:00+08:00">2026-05-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-06-23 23:44:12" itemprop="dateModified" datetime="2026-06-23T23:44:12+08:00">2026-06-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">算法竞赛</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>原文来自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/sggfishpotato/p/20134384">博客园</a></p>
+</blockquote>
+<h1 id="A-百万富翁"><a href="#A-百万富翁" class="headerlink" title="A - 百万富翁"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P10786">A - 百万富翁</a></h1><p>大概就是每次可以询问一对 $(i,j)$ 位置，要求出序列中的最大值是谁。<br>首先一个直观的想法就是每次两两分组打擂台，然后递归所有胜者，但是我们发现这样不能够通过，因为这个题目要求询问轮数只能是 $8$，而我们的这个做法需要询问 log 轮。同时我们可以注意到，我们可以询问的次数是大于 n 的，所以自然可以猜想，我们可以调整最后的几次操作，看看能不能满足要求。<br>具体的，我们可以设 $f_{i,j}$ 表示 $i$ 个人，经过 $j$ 次轮操作之后只剩下 一个人的代价最小是多少，转移就是 $f_{i,j} &#x3D; f_{p, j - 1} + cost(i, p)$，其中 $cost(i,p)$ 指的是把 $i$ 个人经过一轮操作剩下$p$ 个人的最小代价，显然，因为代价类似于二次函数，所以每一组分成的人数大概一样的时候代价最小，换句话说，我们将所有人划分成 $p$ 组，每一组之间两两比较，最后每两组之间最多相差一。这个可能还是跑不出来，但是其实这就是个打表题，而且我们可以猜测，前面几次都是两两分组。</p>
+<h1 id="B-元旦激光炮"><a href="#B-元旦激光炮" class="headerlink" title="B - 元旦激光炮"></a><a target="_blank" rel="noopener" href="https://uoj.ac/problem/52">B - 元旦激光炮</a></h1><p>联合多分！<br>这是一道交互题。</p>
+<p>给你三个排好序的数组，让你在有限次数询问中找到第 $k$ 小值。<br><strong>经典做法</strong>：先把 $a,b,c$ 都 resize 到 $k$ 我们设置 $l &#x3D; \lfloor \frac{n}{3} \rfloor$，接下来询问 $a[l],b[l],c[l]$ 这三个位置，我们找到这三个值中的最小值，并删除这个最小值所在的数组的前 $l$ 个元素，容易证明这 $l$ 个元素不可能是可行的第 $k$ 小值，所以直接递归到 $k-l$ 的子问题就行，$k &lt; 3$ 的时候特殊处理一下。<br>特别的，对于只有两个数组的时候，我们有更加优秀的做法，<mark>联合二分</mark>，我们可以每次把两个数组都删去一半，让迭代更快。</p>
+<p><img src="/images/5-12-tidan.png"></p>
+<h1 id="C-生产计划-Day-2"><a href="#C-生产计划-Day-2" class="headerlink" title="C - 生产计划 (Day 2)"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P11111">C - 生产计划 (Day 2)</a></h1><p>好题，首先我们定义 $L, R$。</p>
+<ul>
+<li>如果 $\forall a_i&#x3D;l_i$，求出的答案为 $L$。</li>
+<li>如果 $\forall a_i&#x3D;r_i$，求出的答案为 $R$。</li>
+</ul>
+<p>先所有位置都取 $l_i$ 我们考虑给某一个位置增加 $1$，最大独立集要么增加 $1$ ，要么不变，袋券独立集的答案  $ans \in [L, R]$。我们仔细思考每个位置从 $l_i \to r_i$ 的过程，发现一定是一开始它不在独立集里面，然后随着它增大，它进入了独立集，此后每次 $+1$ 答案都 $+1$，我们可以用动态 $dp$，维护这个东西，但是太麻烦，我们其实可以使用换根 dp，按照 dfs 序遍历即可。</p>
+<h1 id="D-末日魔法少女计划"><a href="#D-末日魔法少女计划" class="headerlink" title="D - 末日魔法少女计划"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P8984">D - 末日魔法少女计划</a></h1><p>确实好题。</p>
+<p>首先 $k &#x3D; 2$ 的时候是猫树 $k &#x3D; logn$ 的时候是线段树。<br>这题的思路其实还是 dp 构造，我们沿用猫树的构造，每次确定中间的链接点，然后仍然是把剩余区间平均分，但是这里需要注意，两端的点不需要向单边连边，所以可以设置的稍微长一点。<br>具体 dp 不是很重要，就不写了。</p>
+<h1 id="E-众数"><a href="#E-众数" class="headerlink" title="E - 众数"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P11398">E - 众数</a></h1><p>倒着进行二进制分块。</p>
+<h1 id="F-编程测试"><a href="#F-编程测试" class="headerlink" title="F - 编程测试"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P11587">F - 编程测试</a></h1><p>首先我们看到这个题目可以建网络流，但是我们肯定不能暴力去跑，注意到这个网络流类似二分图匹配，于是我们考虑霍尔定理，然后二分答案 $x$ 再用霍尔定理 check，容易发现，只 check 每个区间即可，不需要 check 每一个子集。<br>然后观察到 $l&#x3D;1$ 的特殊性质，我们可以直接用 李超线段树+二分 处理出所有前缀答案。但是 $l$ 不是 1 怎么办呢，我认为这种问题要么扫描线，要么分治，我们考虑后者，这样我们每次处理跨过当前 mid 的区间，都在左右端点都在左边的，我们只需要用 李超线段树判断是否有交点就行（这个地方好像题解继续用二分，导致复杂度变成 $O(nlog^3n)$）。然后跨段的，我们发现左右端点的决策是独立的，所以我们分开用两个可持久化李超线段树，然后二分答案，找到两侧的最值 check 即可。</p>
+<h1 id="G-穿越"><a href="#G-穿越" class="headerlink" title="G - 穿越"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P11706">G - 穿越</a></h1><p>没有见过这样的题目，好题。<br>我竟然没有想出来单组 $A,B$ 怎么做。<br>对于单组 $A,B$，我们可以用 segment tree beats，我们就只有几个操作</p>
+<ul>
+<li>$[Y1[i], Y2[i]]$ 区间加。</li>
+<li>查询全局 min</li>
+<li>全局 (min _+ B) 对全局进行 check min</li>
+</ul>
+<p>但是，我们没办法快速回答多组询问，于是我们考虑答案在什么时候取道，经过思考发现，这个答案一定在 横轴为 A 的个数，纵轴为 B 的个数的一个凸包上，于是我们考虑线段树莓哥节点是一个凸包，然后我们在凸包意义下做这个操作就好。<br>但是注意一下，这个复杂度不是 $O(n^2 \log n)$ 的，因为 $A,B$ 个数的值域都是 $[1,n]$ 所以有一个结论，凸包的节点只有 $n^{\frac{2}{3}}$ 个。<br>于是复杂度为 $O(n^{\frac{5}{3}}\log n)$。</p>
+<h1 id="J-Souvenirs"><a href="#J-Souvenirs" class="headerlink" title="J - Souvenirs"></a><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/765/F">J - Souvenirs</a></h1><p>支配对经典题目，其实 $(a_i - a_j)_{\min}$ 和 $(a_i + a_j)_{\min}$ 都是可以求出来的，不同的是，前者的支配对个数为 $O(n \log n)$ 但是后者的支配对个数为 $O(n)$。</p>
+<h1 id="K-rpmtdq"><a href="#K-rpmtdq" class="headerlink" title="K - rpmtdq"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P9058">K - rpmtdq</a></h1><p>我们知道序列上 $a_i + a_j$ 的支配对个数是 $O(n)$ 的，但是现在在树上，我们考虑树上的序列哪里来，容易想到是点分治，这样我们每次把当前连通块内的点到分治中心到距离当作 $a_i$，对这个序列统计支配对就好，最后回答询问的时候全部离线，然后扫描线即可。<br>注：在分治中心 $rt$ 同一个子树内的点对的距离不是 $a_i + a_j$ ，但是他的答案我们算大了所以不会影响最终的答案。</p>
+<h1 id="L-TEST-199"><a href="#L-TEST-199" class="headerlink" title="L - TEST_199"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/U559574">L - TEST_199</a></h1><p>求出支配对之后，上 K-D Tree。</p>
+<h1 id="M-骰子-Kostki"><a href="#M-骰子-Kostki" class="headerlink" title="M - 骰子 &#x2F; Kostki"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P15985">M - 骰子 &#x2F; Kostki</a></h1><p>推式子题目，设 $f_i$ 表示刚好跳到 $i$，$g_i$ 表示跳过了 $i$，落在 $[i+1,i+k-1]$ 的概率。推式子不想讲。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+              <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag"># 线段树</a>
+              <a href="/tags/%E9%A2%98%E5%8D%95/" rel="tag"># 题单</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/05/20/cnblogs-2026%E5%B9%B45%E6%9C%8816%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/" rel="prev" title="2026年5月16日讲题题单">
+                  <i class="fa fa-angle-left"></i> 2026年5月16日讲题题单
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/05/26/cnblogs-2026%E5%B9%B45%E6%9C%8822%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/" rel="next" title="2026年5月22日讲题题单">
+                  2026年5月22日讲题题单 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class=""></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">wdwsy</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
