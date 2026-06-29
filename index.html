@@ -247,9 +247,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2026-06-28 22:59:23 / Modified: 23:41:13" itemprop="dateCreated datePublished" datetime="2026-06-28T22:59:23+08:00">2026-06-28</time>
+      <time title="Created: 2026-06-28 22:59:23" itemprop="dateCreated datePublished" datetime="2026-06-28T22:59:23+08:00">2026-06-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-06-29 23:13:14" itemprop="dateModified" datetime="2026-06-29T23:13:14+08:00">2026-06-29</time>
     </span>
 
   
@@ -313,7 +319,7 @@
 <div class="note info"><p>💡 我们可以钦定每次选择<strong>最靠前</strong>的覆盖一次的位置进行分裂，这样显然没有重复。</p>
 </div>
 
-<p>但是要注意⚠️，现在的转移也是有条件的，由于左右两边的子问题中是有覆盖 $1$ 次的位置的，所以对于左子问题中覆盖为 $1$ 的位置，我们一定要在 $j$ 覆盖它们（否则 $j$ 就不是覆盖一次的最靠前的位置了）。于是我们可以发现，假设左子问题中第一次出现覆盖一次的位置为 $p$，那么 $j$ 的左端点有 $p$ 中选择，于是我们记录辅助转移数组 $g_i$ 表示长度为 $i$ 的合法序列中的 $\sum p$，于是我们就可以转移了，式子可以看代码。</p>
+<p>但是要注意⚠️，现在的转移也是有条件的，由于左右两边的子问题中是有覆盖 $1$ 次的位置的，所以对于左子问题中覆盖为 $1$ 的位置，我们一定要在 $j$ 覆盖它们（否则 $j$ 就不是覆盖一次的最靠前的位置了）。于是我们可以发现，假设左子问题中第一次出现覆盖一次的位置为 $p$，那么 $j$ 的左端点有 $p$ 种选择，于是我们记录辅助转移数组 $g_i$ 表示长度为 $i$ 的合法序列中的 $\sum p$，于是我们就可以转移了，式子可以看代码。</p>
 <details>
 <summary>点击展开：完整代码</summary>
 
@@ -321,7 +327,37 @@
 
 </details>
 
+<h2 id="（类）DAG-计数"><a href="#（类）DAG-计数" class="headerlink" title="（类）DAG 计数"></a>（类）DAG 计数</h2><p>由于本模块的题目，基本都有很长的数学公式，所以就只阐述思路了，不然太浪费时间。</p>
+<h3 id="How-Many-of-Them"><a href="#How-Many-of-Them" class="headerlink" title="How Many of Them"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P6596">How Many of Them</a></h3><p>这个题目没有 DAG，实际上因为是无向边，所以是一颗树，会更简单一些。</p>
+<h4 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h4><p>求满足如下条件的无向连通图的数量：</p>
+<ol>
+<li>由 $n$ 个结点构成，结点有标号。</li>
+<li>割边不超过 $m$ 条。</li>
+<li>没有重边和自环。</li>
+</ol>
+<p>答案对 $10^{9}+7$ 取模。</p>
+<h4 id="做法-2"><a href="#做法-2" class="headerlink" title="做法"></a>做法</h4><p>首先我们考虑如何控制最后的图的割边数量。<br>我们可以发现最后缩点之后，一定是一个树。这样我们其实可以把一张图看作几个边双按照树的样子拼起来得到的。<br>最后拼起来的方式可以按照 Cayley 公式来得到，具体式子如下：<br>$$<br>n^{k-2}\prod\limits_{i&#x3D;1}^k a_i<br>$$<br>其中 $k$ 表示边双个树，$a_i$ 表示每一个边双的大小，$n$ 为总共的节点个数。</p>
+<p>接下来我们设 $f_{i,j}$ 表示一共有 $i$ 个点，有 $j$ 条割边的图的 $a_i$ 乘积和。</p>
+<p>那么答案应为：</p>
+<p>$$<br>\text{ans} &#x3D; \sum_{i&#x3D;1}^m f_{n,i} \times n^{i-1} \tag{3}<br>$$</p>
+<hr>
+<h5 id="动态规划计算-f-i-j"><a href="#动态规划计算-f-i-j" class="headerlink" title="动态规划计算 $f_{i,j}$"></a>动态规划计算 $f_{i,j}$</h5><p>考虑如何计算 $f$，容易列出转移方程：</p>
+<p>$$<br>f_{i,j} &#x3D; \sum_{k&#x3D;1}^{i-1} f_{i-k,j-1} \times f_{k,0} \times \binom{i}{k} \tag{4}<br>$$</p>
+<p>这个方程没有限制 $j+1$ 个边双的顺序，去重的话直接最后给每个 $f$ 除以 $(j+1)!$ 即可。</p>
+<p>$$<br>f_{i,j} &#x3D; \sum_{k&#x3D;1}^{i-1} f_{i-k,j-1} \times f_{k,0} \times \binom{i-1}{k-1} \tag{4’}<br>$$<br>其实这样就没有重复了，不要除以 $(j+1)!$ 了。</p>
+<hr>
+<h5 id="边界条件：-j-0-时的处理"><a href="#边界条件：-j-0-时的处理" class="headerlink" title="边界条件：$j&#x3D;0$ 时的处理"></a>边界条件：$j&#x3D;0$ 时的处理</h5><p>这个动态规划还没有边界条件，即 $j&#x3D;0$ 时怎么办。我们考虑容斥：将所有的方案减去不合法方案，即所有连通无向图减去 $j \neq 0$ 时的答案（形式如 (3)）。</p>
+<hr>
+<h5 id="连通无向图的计数"><a href="#连通无向图的计数" class="headerlink" title="连通无向图的计数"></a>连通无向图的计数</h5><p>连通无向图的求法较为简单。设 $g_n$ 为有 $n$ 个点时的答案，同样正难则反：</p>
+<p>$$<br>g_n &#x3D; 2^{\binom{n}{2}} - \sum_{i&#x3D;1}^{n-1} g_i \times \binom{n-1}{i-1} \times 2^{\binom{n-i}{2}} \tag{5}<br>$$</p>
+<p>其意义为：钦定点 $1$ 所在的连通块，其它不相关的边任选。</p>
+<p>那么不难发现：<br>$$<br>f_{n,0}&#x3D;g_n-\sum\limits_{i&#x3D;1}^n n^{i-1} \times f_{i,j}<br>$$</p>
+<details>
+<summary>点击展开：完整代码</summary>
 
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> mod = <span class="number">1000000007</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line">ll f[<span class="number">55</span>][<span class="number">55</span>], g[<span class="number">55</span>], c[<span class="number">55</span>][<span class="number">55</span>], pw[<span class="number">2505</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">    m = <span class="built_in">min</span>(n - <span class="number">1</span>, m);</span><br><span class="line">    f[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">1</span>, g[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        c[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= i; j++) &#123;</span><br><span class="line">            c[i][j] = c[i - <span class="number">1</span>][j - <span class="number">1</span>] + c[i - <span class="number">1</span>][j];</span><br><span class="line">            <span class="keyword">if</span> (c[i][j] &gt;= mod) c[i][j] -= mod;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    pw[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n * n; i++) &#123;</span><br><span class="line">        pw[i] = pw[i - <span class="number">1</span>] * <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (pw[i] &gt;= mod) pw[i] -= mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; i; j++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">1</span>; k &lt; i; k++) &#123;</span><br><span class="line">                <span class="comment">// 强制钦定现在选的位置是最小的，所以乘上组合数 c[i - 1][k - 1]</span></span><br><span class="line">                (f[i][j] += f[i - k][j - <span class="number">1</span>] * f[k][<span class="number">0</span>] % mod * c[i - <span class="number">1</span>][k - <span class="number">1</span>]) %= mod;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        g[i] = pw[c[i][<span class="number">2</span>]];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; i; j++) &#123;</span><br><span class="line">            g[i] = (g[i] - c[i - <span class="number">1</span>][j - <span class="number">1</span>] * g[j] % mod * pw[c[i - j][<span class="number">2</span>]] % mod + mod) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">        ll res = g[i], mul = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; i; j++) &#123;</span><br><span class="line">            res = (res - f[i][j] * mul % mod + mod) % mod;</span><br><span class="line">            mul = mul * i % mod;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (i != n) f[i][<span class="number">0</span>] = i * res % mod;</span><br><span class="line">        <span class="keyword">else</span> f[i][<span class="number">0</span>] = res;</span><br><span class="line">    &#125;</span><br><span class="line">    ll ans = f[n][<span class="number">0</span>], mul = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">        (ans += f[n][i] * mul) %= mod;</span><br><span class="line">        mul = mul * n % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
       
     </div>
 
