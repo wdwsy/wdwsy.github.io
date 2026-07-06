@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wdwsy.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":240},"hljswrap":true,"codeblock":{"theme":{"light":"github-dark","dark":"github-dark-dimmed"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat","show_result":true},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":true,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="原文来自 博客园  序列妙妙值很好的母题。我们首先考虑 $dp$。 显然我们可以设 $dp_{i,j}$ 表示，到了位置 $i$，选了 $j$ 段之后的最小和。 暴力转移就是 $O(n^2 k)$ 的做法了。设 $v &#x3D; \lfloor log_2(x) \rfloor$。 但是我们注意到 $v \leq 16$，这非常特殊，不是我们想办法让复杂度带上 $v$。 注意到我们的转移方程是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2026.6.11 做题记录">
+<meta property="og:url" content="https://wdwsy.github.io/2026/06/11/cnblogs-2026611-%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="wdwsy&#39;s Blog">
+<meta property="og:description" content="原文来自 博客园  序列妙妙值很好的母题。我们首先考虑 $dp$。 显然我们可以设 $dp_{i,j}$ 表示，到了位置 $i$，选了 $j$ 段之后的最小和。 暴力转移就是 $O(n^2 k)$ 的做法了。设 $v &#x3D; \lfloor log_2(x) \rfloor$。 但是我们注意到 $v \leq 16$，这非常特殊，不是我们想办法让复杂度带上 $v$。 注意到我们的转移方程是">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-06-11T12:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-23T15:44:12.833Z">
+<meta property="article:author" content="wdwsy">
+<meta property="article:tag" content="DP">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="线段树">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://wdwsy.github.io/2026/06/11/cnblogs-2026611-%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://wdwsy.github.io/2026/06/11/cnblogs-2026611-%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/","path":"2026/06/11/cnblogs-2026611-做题记录/","title":"2026.6.11 做题记录"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>2026.6.11 做题记录 | wdwsy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">wdwsy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">算法的世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%A6%99%E5%A6%99%E5%80%BC"><span class="nav-number">1.</span> <span class="nav-text">序列妙妙值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E3%80%90MX-X8-T7%E3%80%91%E3%80%8CTAOI-3%E3%80%8D2236-A-D"><span class="nav-number">2.</span> <span class="nav-text">【MX-X8-T7】「TAOI-3」2236 A.D.</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E6%84%8F%E7%AE%80%E8%BF%B0%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">题意简述：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E6%83%B3%E5%88%B0%E4%BA%86%E5%95%A5"><span class="nav-number">2.2.</span> <span class="nav-text">我想到了啥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95"><span class="nav-number">2.3.</span> <span class="nav-text">解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%BE%99%E9%97%A8%E8%80%83%E5%8F%A4"><span class="nav-number">3.</span> <span class="nav-text">龙门考古</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E6%84%8F%E7%AE%80%E8%BF%B0"><span class="nav-number">3.1.</span> <span class="nav-text">题意简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">做法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#USACO24DEC-All-Pairs-Similarity-P"><span class="nav-number">4.</span> <span class="nav-text">[USACO24DEC] All Pairs Similarity P</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E5%85%B3%E4%B8%80%E4%BA%9B%E9%87%8D%E8%A6%81%E7%9A%84%E5%85%AC%E5%BC%8F"><span class="nav-number">4.1.</span> <span class="nav-text">有关一些重要的公式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9B%86%E5%90%88"><span class="nav-number">5.</span> <span class="nav-text">集合</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wdwsy"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">wdwsy</p>
+  <div class="site-description" itemprop="description">算法竞赛、C++、OI 技术分享</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wdwsy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wdwsy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/06/11/cnblogs-2026611-%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="2026.6.11 做题记录 | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2026.6.11 做题记录
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-06-11 20:00:00" itemprop="dateCreated datePublished" datetime="2026-06-11T20:00:00+08:00">2026-06-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-06-23 23:44:12" itemprop="dateModified" datetime="2026-06-23T23:44:12+08:00">2026-06-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">算法竞赛</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>原文来自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/sggfishpotato/p/20462384">博客园</a></p>
+</blockquote>
+<h1 id="序列妙妙值"><a href="#序列妙妙值" class="headerlink" title="序列妙妙值"></a><a target="_blank" rel="noopener" href="https://uoj.ac/problem/549">序列妙妙值</a></h1><p>很好的母题。<br>我们首先考虑 $dp$。</p>
+<p>显然我们可以设 $dp_{i,j}$ 表示，到了位置 $i$，选了 $j$ 段之后的最小和。</p>
+<p>暴力转移就是 $O(n^2 k)$ 的做法了。<br>设 $v &#x3D; \lfloor log_2(x) \rfloor$。</p>
+<p>但是我们注意到 $v \leq 16$，这非常特殊，不是我们想办法让复杂度带上 $v$。</p>
+<p>注意到我们的转移方程是<br>$$dp_{i,j} &#x3D; \min(dp_{x,j} + (b_{x+1}\ xor \ b_{x+2} \dots \ xor \ b_j))<br>$$如果我们记录 $s_i &#x3D; b_1 \ xor\  b_2 \ xor\ \dots \ xor \ b_i$</p>
+<p>那么转移方程可以写成：<br>$$dp_{i,j} &#x3D; \min(dp_{x,j} + (s_x \ xor \ s_j))<br>$$于是所有 $s_x$ 相同的位置 $x$，我们就记录最小值就好了，但是这样还是超时。</p>
+<p>于是我们发现现在修改我们的记录数组的代价是 $O(1)$ 的，但是每次查询是 $O(2^v)$ 的，于是考虑平衡这两部分的复杂度。<br>具体的我们可以把每个 $s_x$ 拆成前 $\frac{v}{2}$ 和后 $\frac{v}{2}$ 位考虑，分别记为 $a, b$，我们按照 $a$ 给这些  $s_x$ 分组，然后预处理出来，如果询问的 $s_i$ 的 $b$ 位当前我们枚举的值的时候，我们就会选择位置 $pos[a][b]$ 作为最优解，于是就平衡到 $O(2^{\frac{v}{2}})$ 了。</p>
+<h1 id="【MX-X8-T7】「TAOI-3」2236-A-D"><a href="#【MX-X8-T7】「TAOI-3」2236-A-D" class="headerlink" title="【MX-X8-T7】「TAOI-3」2236 A.D."></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P11648">【MX-X8-T7】「TAOI-3」2236 A.D.</a></h1><h2 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h2><p>给你一个数，每个节点上有一个颜色，每个颜色有一个权值，输出每一个子树中的所有路径的权值之和，一个路径的权值为这个路径上存在的所有颜色的权值乘积。</p>
+<h2 id="我想到了啥"><a href="#我想到了啥" class="headerlink" title="我想到了啥"></a>我想到了啥</h2><p>我会暴力！</p>
+<p>如果我们要计算子树 $u$ 中的答案，其实每次计算经过了 $u$ 的所有路径和就够了。</p>
+<p>但是没有用，我们计算这些还是 $n^2$ 的。</p>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><p>注意到 $k \leq 15$ ，这可能是我们优化的关键。<br>想要优化复杂度，直观的想法就是先计算重儿子，看看能不能快一点。<br>首先我们对重儿子 $son$，可以继承他的信息，具体的，对于一个子树中的每个位置，我们可以用一个二进制数表示这个位置到子树的根经过了哪些颜色，然后对于 $2^k$ 种不同的二进制数，我们记录一下各有多少种。<br>有一个常用的结论，就是每个点的所有轻子树大小之和是 $O(n \log n)$ 的，所以我们可以对轻子树中的位置进行暴力<strong>插入</strong>。<br>现在我们看看这个做法复杂度怎么样。<br>我们进行重剖的预处理部分是 $O(n)$ 的。</p>
+<p>然后计算的时候，我们有 $O(n \log n )$ 次插入和查询，其中插入是 $O(1)$ 的，查询（即更新插入一个数字之后的答案）是 $O(2^k)$ 的。</p>
+<p>所以总体的复杂度就是 $O(n \log n \times 2^k)$<br>发现还是不能接受，于是我们可以想到 <a target="_blank" rel="noopener" href="https://uoj.ac/problem/549">序列妙妙值</a> 的做法。</p>
+<p>我们考虑平衡查询和插入的复杂度，如果他们两个都是 $O(2^{k&#x2F;2})$ 的，我们总复杂度 $O(n \log n \times 2^{k&#x2F;2})$ 就足矣通过这个题目了。<br>接下来我就来详细说说如何完成这个壮举！</p>
+<p>我们先把每个二进制数字的二进制位拆开，前 $k&#x2F;2$ 位为 $a$，后 $k&#x2F;2$ 位为 $b$，那么我们按照不同的 $a$，把所有可能的二进制数进行分组，然后每次插入的时候，预处理出来，如果查询的值的 $b$ 为 $x$，那么在集合 $a$ 中的数字产生的贡献是多少，这样就可以了。<br>虽然思路难在这里，但是实际上写起来我把预处理继承的时候的挂载问题调了 3 h，同机房大佬卡常卡了一下午。祭….</p>
+<h1 id="龙门考古"><a href="#龙门考古" class="headerlink" title="龙门考古"></a><a target="_blank" rel="noopener" href="https://uoj.ac/problem/840">龙门考古</a></h1><h2 id="题意简述"><a href="#题意简述" class="headerlink" title="题意简述"></a>题意简述</h2><p>给你一个长度为 $n$ 的排列 $b$。</p>
+<p>现在询问你有多少种选择方式满足：你现在可以选择一些位置留下，其他位置上的数字消失，然后在满足所有前缀最大值的位置不变的前提下，能填出来的最小的排列恰好为 $b$。</p>
+<h2 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h2><p><a target="_blank" rel="noopener" href="https://zhoukangyang.blog.uoj.ac/blog/8974">官方题解</a></p>
+<p>首先，考虑用一个充要条件来描述合法的选择方式。</p>
+<p>设 $c_i&#x3D;[位置 i 是前缀最大值]$。</p>
+<ul>
+<li>假设前缀最大值集合为 $T &#x3D; {t_1,t_2,\dots}$，那么需要满足 $t_1 &lt; t_2 &lt; t_3 \dots$</li>
+<li>所有不选的 $c_i&#x3D;0$ 的位置的值，都是随着位置递增的（否则可以交换位置）。</li>
+<li>虽有不选的 $c_i&#x3D;1$ 的位置，记下一个 $c_i&#x3D;1$ 的位置为 $nxt$，$[1,nxt)$ 之间的最大值为 $b_i$，次大值为 $v$，要求 $(v, b_i)$ 之间的值所对应的位置都要选。（否则可以交换位置）。</li>
+</ul>
+<p>$tip:$ 显然在第三种情况中，$nxt$ 之前不存在 $(v, b_i)$ 之间的值。<br>容易验证，这三条就是充要条件。<br>于是我们可以进行 $dp$，$dp_i$ 表示做到位置 $i$ 的方案数。<br>我们考虑用一下两种方式来统计方案数。</p>
+<ul>
+<li>$c_i&#x3D;0$ 的位置，我们用 $dp$ 统计。</li>
+<li>$c_i&#x3D;1$ 的位置，如果在它要求的 $(v, b_i)$ 之间没有选择任何一个，那么它随便选不选，否则必须选。</li>
+</ul>
+<p>于是我们就有了 $dp$ 转移：<br>$$dp_i&#x3D;\sum\limits_{j&#x3D;0}^{i-1}\ dp_j \times 2^{f(i,j)}<br>$$其中 $f(i,j)$ 表示 $(v,b_x) \subseteq (i,j)$ 的区间 $(v,b_x)$ 的个数。<br>接下来我们用树状数组优化这个过程，注意到所有的 $(v,b_x)$ 不交，发现我们可以把 $f_0$ 设为 $2^{\sum [c_i&#x3D;0]}$。</p>
+<p>然后如果现在是第一次进入当前区间，即 $j &lt; v &lt; i &lt; b_x$  那么 $dp_i \leftarrow dp_j &#x2F; 2$，否则 $dp_i \leftarrow dp_j$。</p>
+<h1 id="USACO24DEC-All-Pairs-Similarity-P"><a href="#USACO24DEC-All-Pairs-Similarity-P" class="headerlink" title="[USACO24DEC] All Pairs Similarity P"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P11458">[USACO24DEC] All Pairs Similarity P</a></h1><h2 id="有关一些重要的公式"><a href="#有关一些重要的公式" class="headerlink" title="有关一些重要的公式"></a>有关一些重要的公式</h2><p><a target="_blank" rel="noopener" href="https://chat.deepseek.com/share/072ofd06s66atk99e0">deepseek推导</a></p>
+<h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P13275">集合</a></h1>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/DP/" rel="tag"># DP</a>
+              <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag"># 线段树</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/06/06/cnblogs-%E6%A6%82%E7%8E%87%E6%9C%9F%E6%9C%9Bdp/" rel="prev" title="概率期望dp">
+                  <i class="fa fa-angle-left"></i> 概率期望dp
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/06/15/math-test/" rel="next" title="数学公式 &amp; 图片测试">
+                  数学公式 & 图片测试 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class=""></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">wdwsy</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
