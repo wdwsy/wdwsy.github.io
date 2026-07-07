@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://wdwsy.github.io/images/7-7-2.png">
 <meta property="og:image" content="https://wdwsy.github.io/images/7-7-4.png">
 <meta property="article:published_time" content="2026-07-07T14:55:30.000Z">
-<meta property="article:modified_time" content="2026-07-07T16:10:02.197Z">
+<meta property="article:modified_time" content="2026-07-07T16:12:39.346Z">
 <meta property="article:author" content="wdwsy">
 <meta property="article:tag" content="算法,OIC++,NOI,信息学竞赛">
 <meta name="twitter:card" content="summary">
@@ -264,7 +264,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-07-08 00:10:02" itemprop="dateModified" datetime="2026-07-08T00:10:02+08:00">2026-07-08</time>
+      <time title="Modified: 2026-07-08 00:12:39" itemprop="dateModified" datetime="2026-07-08T00:12:39+08:00">2026-07-08</time>
     </span>
 
   
@@ -318,7 +318,7 @@
 <p>有人可能发现了，如果这样的话，所有红色的点都会走到蓝色的点，貌似蓝色的点被走到 $\mathcal{O}(n)$ 次，复杂度一眼假。</p>
 <p>但是我们再次观察这个式子：<br>$$<br>\max(i,L_j,\left\lceil \frac{l_i+j}{2} \right\rceil) \leq m \leq \min(j-1,R_i-1,\left\lfloor \frac{r_j+i-2}{2} \right\rfloor)<br>$$<br>其中 $L_i,R_i - 1$ 的限制到底代表什么，其实表示了这些相等的数字之间的 $m$ 区间不交。<br><img src="/images/7-7-2.png"><br>这样我们总能找到一个位置，它在没有 $L_i,R_i - 1$ 的限制下包含整个的绿色区间，这个位置可能是两端，也可能是中间，那么我们可以用这个代表点的复杂度来参与计算，（注意我们原来的在排列下复杂度正确性分析不需要 $L_i,R_i - 1$ 的限制），就可以证明复杂度正确。</p>
 <h3 id="L-R-的情况"><a href="#L-R-的情况" class="headerlink" title="L &#x3D; R 的情况"></a>L &#x3D; R 的情况</h3><p>此时我们不可能缩点了，但是我们这个时候统计贡献的时候只需要计算相邻两个点对之间的贡献就好，也就是说相当于现在每个点只会访问其在笛卡尔树上的直接父亲，于是我们构造每个点的权值 $a_i^\prime$ 是二元组 $(a_i,i)$ 即可套用排列证明。</p>
-<div class="note warning"><p>⚠️  不能反过来，使用二元组 $(a_i,n-i+1)$ 建立笛卡尔树。<br>这样会导致相等位置的子树之间的贡献大量叠加，导致复杂度错误 @zzy。<br><img src="/images/7-7-4.png"><br>例如红色的点都相等，那么这颗树中复杂度总是为 $\frac{p_{j+1} - p_j + i - l_0}{2}$，显然是 O($j$ 的重子树) 级别的，显然总复杂度 $\mathcal{O}(n^2)$，导致超时。这个真的太坑了，发现的时候简直惊呼😰。</p>
+<div class="note warning"><p>⚠️  不能反过来，使用二元组 $(a_i,n-i+1)$ 建立笛卡尔树。<br>这样会导致相等位置的子树之间的贡献大量叠加，导致复杂度错误 @zzy。<br><img src="/images/7-7-4.png"><br>例如红色的点都相等，那么这颗树中复杂度总是为 $\frac{r_{j} - j + i - l_i}{2}$，显然是 O($j$ 的重子树) 级别的，显然总复杂度 $\mathcal{O}(n^2)$，导致超时。这个真的太坑了，发现的时候简直惊呼😰。</p>
 </div>
 
 
