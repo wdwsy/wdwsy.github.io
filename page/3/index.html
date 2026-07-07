@@ -178,7 +178,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -210,6 +210,114 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/05/16/cnblogs-516-%E6%9E%84%E9%80%A0%E9%A2%98%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/05/16/cnblogs-516-%E6%9E%84%E9%80%A0%E9%A2%98%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">5.16 构造题总结</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-05-16 20:00:00" itemprop="dateCreated datePublished" datetime="2026-05-16T20:00:00+08:00">2026-05-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-06-23 23:44:12" itemprop="dateModified" datetime="2026-06-23T23:44:12+08:00">2026-06-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">算法竞赛</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>原文来自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/sggfishpotato/p/20059677">博客园</a></p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://vjudge.net/problem/QOJ-15814/origin">https://vjudge.net/problem/QOJ-15814/origin</a></p>
+<p>这个题目很简单，但是我没有做出来，应该去补一下白草净华才行。</p>
+<p>其实就是倍增，发现这种有循环的题目经常使用倍增方式，我们先倍增找到合法的区间，然后在这个区间里面二分。<br><a target="_blank" rel="noopener" href="https://vjudge.net/problem/QOJ-16101/origin">https://vjudge.net/problem/QOJ-16101/origin</a></p>
+<p>随机399 次排列然后发现这些输出的点都是独立集，他们之间一定没有边，最后一次给所有环定向。<br><a target="_blank" rel="noopener" href="https://vjudge.net/problem/QOJ-16775/origin">https://vjudge.net/problem/QOJ-16775/origin</a></p>
+<p>stable sort 或者二分 Acwing 讲过<br><a target="_blank" rel="noopener" href="https://vjudge.net/problem/QOJ-18174/origin">https://vjudge.net/problem/QOJ-18174/origin</a></p>
+<p>考虑问出一个十字架，接下来就每个位置一次询问了，首先问出一列，每次向下增加 0&#x2F;1 如果增加了 0&#x2F;1 都不行，那么说明这条链到头了，我们就向上增加，接下来带着这条列拓展出一行就找到了十字架，于是我们就做完了。<br><a target="_blank" rel="noopener" href="https://vjudge.net/problem/QOJ-17668/origin">https://vjudge.net/problem/QOJ-17668/origin</a></p>
+<p>没有做出来。</p>
+<p>但是我想这种题目答案不是 n&#x2F;2 就是 n&#x2F;3，我猜的是 n&#x2F;2 报废了。考虑把这个点集分成基本上差不多大的点集。然后经过一些调整我们发现答案的上界是 floor((n+1)&#x2F;3) 接下来构造还是有点难度。第一反应是构造三元环，但是不行，万一问出出来都是 0&#x2F;1 就完蛋了，于是我们考虑先问两个点的链</p>
+<p>那么他们两个人中间可能是好朋友也可能不是</p>
+<ul>
+<li>如果他们呢都是好朋友，那么直接输出</li>
+<li>如果都不是好朋友，直接输出</li>
+<li>不然我们将一对是好朋友的，和一对不是好朋友的合并，然后转化成前两种情况</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://vjudge.net/problem/%E6%B4%9B%E8%B0%B7-P15168/origin">https://vjudge.net/problem/洛谷-P15168/origin</a></p>
+<p>神秘 ad-hoc</p>
+<p>结论: 如果存在 $a_i &gt; \lfloor m&#x2F;i \rfloor$ 那么就会 B 获胜</p>
+<p>考虑证明这个结论，我只会用构造证明。</p>
+<p>满足条件，就会有 $i &gt; \lfloor m&#x2F;a_i \rfloor$，所以每次选取 $a_i$ 的倍数就行。</p>
+<p>不满足，根据鸽巢原理，一定能找到一个长度大于等于 $a_i$ 的未选段，给出这个段就行。<br><a target="_blank" rel="noopener" href="https://vjudge.net/problem/%E6%B4%9B%E8%B0%B7-P14395/origin">https://vjudge.net/problem/洛谷-P14395/origin</a></p>
+<p>分类讨论题目，不说了。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
