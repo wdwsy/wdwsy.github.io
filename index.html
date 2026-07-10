@@ -255,7 +255,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-07-11 00:00:41" itemprop="dateModified" datetime="2026-07-11T00:00:41+08:00">2026-07-11</time>
+      <time title="Modified: 2026-07-11 00:04:29" itemprop="dateModified" datetime="2026-07-11T00:04:29+08:00">2026-07-11</time>
     </span>
 
   
@@ -295,11 +295,11 @@
 </ol>
 <p>我们考虑刻画这个过程，为了简化问题，我们先只考虑对 $n$ 个二进制位的其中一个进行变换的情况。<br>由于 FWT 是线性变换，我们假设 $a,b$ 正变换后分别为 $x_0a_0+x_1a_1,y_0b_0+y_1b_1$，同样，$c$ 未进行逆变换前的结果为 $z_0c_0+z_1c_1$。</p>
 <p>我们假设现在我们是 or 卷积，那么我们希望有：<br>$$<br>(x_0a_0+x_1a_1)(y_0b_0+y_1b_1)&#x3D;z_0c_0+z_1c_1&#x3D;z_0a_0b_0+z_1(a_0b_1+a_1b_0+a_1b_1)<br>$$</p>
-<div class="note info"><p>💡 即我们希望 $c$ 这一位是 $0$ 的答案 是 $a,b$ 这一位都为 $0$ 的答案，而 $c$ 这一位为 $1$ 的答案应该是 $a,b$ 任意一个这一位为 $1$ 的答案，想要：<br>$$<br>\begin{aligned}<br>&amp; c_0&#x3D;a_0b_0\<br>&amp; c_1&#x3D;a_0b_1+a_1b_0+a_1b_1<br>\end{aligned}<br>$$</p>
+<div class="note info"><p>💡 即我们希望 $c$ 这一位是 $0$ 的答案 是 $a,b$ 这一位都为 $0$ 的答案，而 $c$ 这一位为 $1$ 的答案应该是 $a,b$ 任意一个这一位为 $1$ 的答案，想要：$c_0&#x3D;a_0b_0,c_1&#x3D;a_0b_1+a_1b_0+a_1b_1$</p>
 </div>
 
 
-<p>于是可以得到方程：<br>$$<br>\begin{cases}<br>x_0 y_0 &#x3D; z_0 \<br>x_0 y_1 &#x3D; z_1 \<br>x_1 y_0 &#x3D; z_1 \<br>x_1 y_1 &#x3D; z_1<br>\end{cases}<br>\tag{1}<br>$$<br>因为我们想要得到 $c_0,c_1$ 两个变量，所以需要两组 $(z_0,z_1)$ 不同的解，并用这个二元一次方程组解出 $c_0,c_1$。<br>对于 or 卷积，我们可以构造出 $(x_0,x_1,y_0,y_1,z_0,z_1)$ 为 $(1,0,1,0,1,0)$ 和 $(1,1,1,1,1,1)$ 两组解。</p>
+<p>于是可以得到方程：<br>$$<br>\begin{cases}<br>x_0 y_0 &#x3D; z_0 \<br>x_0 y_1 &#x3D; z_1 \<br>x_1 y_0 &#x3D; z_1 \<br>x_1 y_1 &#x3D; z_1<br>\end{cases} \tag{1}<br>$$<br>因为我们想要得到 $c_0,c_1$ 两个变量，所以需要两组 $(z_0,z_1)$ 不同的解，并用这个二元一次方程组解出 $c_0,c_1$。<br>对于 or 卷积，我们可以构造出 $(x_0,x_1,y_0,y_1,z_0,z_1)$ 为 $(1,0,1,0,1,0)$ 和 $(1,1,1,1,1,1)$ 两组解。</p>
 <p>为了方便描述 $(x_0^{\prime},x_1^{\prime},y_0^{\prime},y_1^{\prime},z_0^{\prime},z_1^{\prime})&#x3D;(1,0,1,0,1,0),(x_0^{\prime\prime},x_1^{\prime\prime},y_0^{\prime\prime},y_1^{\prime\prime},z_0^{\prime\prime},z_1^{\prime\prime})&#x3D;(1,1,1,1,1,1)$</p>
 <p>具体流程上，我们根据<br>$$<br>\begin{aligned}<br>&amp; \begin{bmatrix}<br>a_{0} &amp; a_{1}\<br>\end{bmatrix}<br>\begin{bmatrix}<br>x_0^{\prime} &amp; x_1^{\prime} \<br>x_0^{\prime\prime} &amp; x_1^{\prime\prime}<br>\end{bmatrix} &#x3D;<br>\begin{bmatrix}<br>a_{0}^{\prime} &amp; a_{1}^{\prime}\<br>\end{bmatrix}\<br>&amp; \begin{bmatrix}<br>b_{0} &amp; b_{1}\<br>\end{bmatrix}<br>\begin{bmatrix}<br>y_0^{\prime} &amp; y_1^{\prime} \<br>y_0^{\prime\prime} &amp; y_1^{\prime\prime}<br>\end{bmatrix} &#x3D;<br>\begin{bmatrix}<br>b_{0}^{\prime} &amp; b_{1}^{\prime}\<br>\end{bmatrix}<br>\end{aligned}<br>$$<br>推出 $\hat{a},\hat{b}$，然后乘出 $\hat{c}$，最后解出逆矩阵，用类似的方式变换出 $c$ 即可。</p>
 <p>于是我们知道怎么只变换一位。接下来我们对于每一位都做同样的变换，根据 FWT 的结论，其实是互不干扰的。</p>
