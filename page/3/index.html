@@ -178,7 +178,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -210,6 +210,103 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/05/17/cnblogs-high-elements-%E9%A2%98%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/05/17/cnblogs-high-elements-%E9%A2%98%E8%A7%A3/" class="post-title-link" itemprop="url">High Elements 题解</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-05-17 20:00:00" itemprop="dateCreated datePublished" datetime="2026-05-17T20:00:00+08:00">2026-05-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-06-23 23:44:12" itemprop="dateModified" datetime="2026-06-23T23:44:12+08:00">2026-06-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">算法竞赛</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="solution"><a href="#solution" class="headerlink" title="solution"></a>solution</h1><h2 id="学长使用了更强大的做法！！"><a href="#学长使用了更强大的做法！！" class="headerlink" title="学长使用了更强大的做法！！"></a>学长使用了更强大的做法！！</h2><p>我们考虑用图来思考这个问题。<br><img src="/images/high-elements.png"><br>容易发现，最后的等式条件是 红色点个数+[0-x]&#x3D;绿色点个数+[0-y]</p>
+<p>要满足这个条件，其实一定有一边是 0，调整法容易证明。<br>对于判定一个后缀是否还存在合法解，我们可以考虑一开始全都是红色点（不妨假设红色点取0），这样我们发现替换掉一个在 LIS 上的点，使得等式左右两边的差变化了2，选一个在红色斜杠矩形中的点会让差变化1，于是我们给每个点赋值 1&#x2F;2 就可以判断是否有解。</p>
+<h2 id="闲话"><a href="#闲话" class="headerlink" title="闲话"></a>闲话</h2><p><s>atcoder 数据太水了，所有目前放了代码的题解都被我 hack 了。</s><br>但是其他题解的大致思路都是正确的，这篇题解主要解析如何想到这种思路的。</p>
+<h2 id="约定"><a href="#约定" class="headerlink" title="约定"></a>约定</h2><p>设当前 $X$ 和 $Y$ 中 high 元素的个数分别为 $C_X,C_Y$，最大值分别为         $H_X,H_Y$，我们想要判断是否能将剩下的元素分配给 $X$ 或者 $Y$ 使得 high 元素个数相等。<br>假设在分配之后，$X$ 中新增的 high 元素为 $a_1,a_2,\cdots,a_{|a|}$， $Y$ 中新增的 high 元素为 $b_1,b_2,\cdots,b_{|b|}$，那么他们必须满足：</p>
+<ul>
+<li>$H_X&lt;a_1&lt;a_2&lt;\cdots&lt;a_{|a|},H_Y&lt;b_1&lt;b_2&lt;\cdots&lt;b_{|b|}$</li>
+<li>$C_X+|a|&#x3D;C_Y+|b|$</li>
+</ul>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>首先发现这个题目要同时解决两个序列的构造问题，考虑到我们之前解决过这样的问题，比如传纸条。但是这道题目不适用，我们要是记录两个序列的信息来转移肯定会超时。<br>于是我们考虑两个序列之间的关系，我猜测肯定有一个可行序列的 high 元素就是原序列的 high 元素，很遗憾我猜错了。于是进行一些调整我们发现，肯定有一个序列的 high 元素包含于原序列的 high 元素之中。考虑调整法证明这个结论，如果两个序列都有 high 元素不是原序列的 high 元素，我们可以交换它们两个的位置，可以发现，交换之后，这两个元素都不会是 high 元素，就意味着 $|a|-1$ 并且 $|b|-1$，可以发现等式仍然成立，所以存在这样一组解。<br>为了方便描述，我们不妨让 $a$ 都是原序列的 high 元素。<br>有了这个结论真的非常非常有用，原因是这样我们如果可以找到一个合法的 $b$，那么就可以唯一对应一个合法的 $a$，也就是说，确定了合法的 $b$，就对应了这个解合法（显然这里只确定了 $a$ 就难以唯一对应了）。接下来就考虑在描述序列 $b$ 的同时找到合法解。于是我们设 $b$ 中 high 元素为个数为 $k$，不是 high 元素的个数为 $m$，那么显然 $k+m&#x3D;|b|$，$Q-k&#x3D;|a|$就有：<br>$C_X+|a|&#x3D;C_Y+|b|$</p>
+<p>$C_X+Q-k&#x3D;C_Y+k+m$</p>
+<p>$C_X-C_Y+Q&#x3D;2k+m$<br>于是我们就需要找到满足这个条件的 $b$ 就行了，具体操作可以把每个值给权值 $1$ 或 $2$ 来 dp 得到。</p>
+<p>但是直接 dp 可能复杂度不允许，但是我们发现我们可以通过删除 $b$ 中的元素来构造当前序列权值 $x$ 减掉 $2$ 之后的结果。于是我们只要记录最大的奇权值和偶权值就行，可以用线段树维护。<br>时间复杂度 $\mathcal O(n\log n)$。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">200005</span>, INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> a[N], tag[N];</span><br><span class="line"><span class="type">char</span> ans[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Segtree</span> &#123;</span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> ls u &lt;&lt; 1</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> rs u &lt;&lt; 1 | 1</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> tree[N &lt;&lt; <span class="number">2</span>], v;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">build</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">        tree[u] = v;</span><br><span class="line">        <span class="keyword">if</span> (l == r) <span class="keyword">return</span>;</span><br><span class="line">        <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">build</span>(l, mid, ls);</span><br><span class="line">        <span class="built_in">build</span>(mid + <span class="number">1</span>, r, rs);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">modify</span><span class="params">(<span class="type">int</span> p, <span class="type">int</span> x, <span class="type">int</span> l = <span class="number">1</span>, <span class="type">int</span> r = n, <span class="type">int</span> u = <span class="number">1</span>)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">            tree[u] = x;</span><br><span class="line">            <span class="keyword">return</span>; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (p &lt;= mid) <span class="built_in">modify</span>(p, x, l, mid, ls);</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">modify</span>(p, x, mid + <span class="number">1</span>, r, rs);</span><br><span class="line">        tree[u] = <span class="built_in">max</span>(tree[ls], tree[rs]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> L, <span class="type">int</span> R, <span class="type">int</span> l = <span class="number">1</span>, <span class="type">int</span> r = n, <span class="type">int</span> u = <span class="number">1</span>)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (L &lt;= l &amp;&amp; r &lt;= R) &#123;</span><br><span class="line">            <span class="keyword">return</span> tree[u];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>, res = v;</span><br><span class="line">        <span class="keyword">if</span> (L &lt;= mid) res = <span class="built_in">max</span>(res, <span class="built_in">query</span>(L, R, l, mid, ls));</span><br><span class="line">        <span class="keyword">if</span> (R &gt; mid) res = <span class="built_in">max</span>(res, <span class="built_in">query</span>(L, R, mid + <span class="number">1</span>, r, rs));</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="keyword">undef</span> ls</span></span><br><span class="line">    <span class="meta">#<span class="keyword">undef</span> rs</span></span><br><span class="line">&#125;f[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">check</span><span class="params">(<span class="type">int</span> H, <span class="type">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (val &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> f[val &amp; <span class="number">1</span>].<span class="built_in">query</span>(H, n) &gt;= val;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>, mx = <span class="number">0</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">        <span class="keyword">if</span> (a[i] &gt; mx) mx = a[i], tag[i] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    f[<span class="number">0</span>].v = <span class="number">0</span>, f[<span class="number">0</span>].<span class="built_in">build</span>(<span class="number">1</span>, n, <span class="number">1</span>);</span><br><span class="line">    f[<span class="number">1</span>].v = -INF, f[<span class="number">1</span>].<span class="built_in">build</span>(<span class="number">1</span>, n, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = n; i &gt;= <span class="number">1</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (tag[i]) &#123;</span><br><span class="line">            f[<span class="number">0</span>].<span class="built_in">modify</span>(a[i], f[<span class="number">0</span>].<span class="built_in">query</span>(a[i] + <span class="number">1</span>, n) + <span class="number">2</span>);</span><br><span class="line">            f[<span class="number">1</span>].<span class="built_in">modify</span>(a[i], f[<span class="number">1</span>].<span class="built_in">query</span>(a[i] + <span class="number">1</span>, n) + <span class="number">2</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            f[<span class="number">0</span>].<span class="built_in">modify</span>(a[i], f[<span class="number">1</span>].<span class="built_in">query</span>(a[i] + <span class="number">1</span>, n) + <span class="number">1</span>);</span><br><span class="line">            f[<span class="number">1</span>].<span class="built_in">modify</span>(a[i], f[<span class="number">0</span>].<span class="built_in">query</span>(a[i] + <span class="number">1</span>, n) + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (i &lt; n) tag[i] += tag[i + <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> C = <span class="number">0</span>, HX = <span class="number">0</span>, HY = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        f[<span class="number">0</span>].<span class="built_in">modify</span>(a[i], <span class="number">0</span>), f[<span class="number">1</span>].<span class="built_in">modify</span>(a[i], -INF);</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">check</span>(HY, tag[i + <span class="number">1</span>] + C + (a[i] &gt; HX)) || <span class="built_in">check</span>(<span class="built_in">max</span>(HX, a[i]), tag[i + <span class="number">1</span>] - C - (a[i] &gt; HX))) &#123;</span><br><span class="line">            ans[i] = <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">            C += (a[i] &gt; HX);</span><br><span class="line">            HX = <span class="built_in">max</span>(HX, a[i]);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ans[i] = <span class="string">&#x27;1&#x27;</span>;</span><br><span class="line">            C -= (a[i] &gt; HY);</span><br><span class="line">            HY = <span class="built_in">max</span>(HY, a[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (C) <span class="built_in">puts</span>(<span class="string">&quot;-1&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, ans + <span class="number">1</span>);</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
