@@ -255,7 +255,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-07-11 00:04:29" itemprop="dateModified" datetime="2026-07-11T00:04:29+08:00">2026-07-11</time>
+      <time title="Modified: 2026-07-11 00:08:00" itemprop="dateModified" datetime="2026-07-11T00:08:00+08:00">2026-07-11</time>
     </span>
 
   
@@ -299,9 +299,9 @@
 </div>
 
 
-<p>于是可以得到方程：<br>$$<br>\begin{cases}<br>x_0 y_0 &#x3D; z_0 \<br>x_0 y_1 &#x3D; z_1 \<br>x_1 y_0 &#x3D; z_1 \<br>x_1 y_1 &#x3D; z_1<br>\end{cases} \tag{1}<br>$$<br>因为我们想要得到 $c_0,c_1$ 两个变量，所以需要两组 $(z_0,z_1)$ 不同的解，并用这个二元一次方程组解出 $c_0,c_1$。<br>对于 or 卷积，我们可以构造出 $(x_0,x_1,y_0,y_1,z_0,z_1)$ 为 $(1,0,1,0,1,0)$ 和 $(1,1,1,1,1,1)$ 两组解。</p>
+<p>于是可以得到方程：<br>$$<br>\begin{cases}<br>x_0 y_0 &#x3D; z_0 \\<br>x_0 y_1 &#x3D; z_1 \\<br>x_1 y_0 &#x3D; z_1 \\<br>x_1 y_1 &#x3D; z_1<br>\end{cases} \tag{1}<br>$$<br>因为我们想要得到 $c_0,c_1$ 两个变量，所以需要两组 $(z_0,z_1)$ 不同的解，并用这个二元一次方程组解出 $c_0,c_1$。<br>对于 or 卷积，我们可以构造出 $(x_0,x_1,y_0,y_1,z_0,z_1)$ 为 $(1,0,1,0,1,0)$ 和 $(1,1,1,1,1,1)$ 两组解。</p>
 <p>为了方便描述 $(x_0^{\prime},x_1^{\prime},y_0^{\prime},y_1^{\prime},z_0^{\prime},z_1^{\prime})&#x3D;(1,0,1,0,1,0),(x_0^{\prime\prime},x_1^{\prime\prime},y_0^{\prime\prime},y_1^{\prime\prime},z_0^{\prime\prime},z_1^{\prime\prime})&#x3D;(1,1,1,1,1,1)$</p>
-<p>具体流程上，我们根据<br>$$<br>\begin{aligned}<br>&amp; \begin{bmatrix}<br>a_{0} &amp; a_{1}\<br>\end{bmatrix}<br>\begin{bmatrix}<br>x_0^{\prime} &amp; x_1^{\prime} \<br>x_0^{\prime\prime} &amp; x_1^{\prime\prime}<br>\end{bmatrix} &#x3D;<br>\begin{bmatrix}<br>a_{0}^{\prime} &amp; a_{1}^{\prime}\<br>\end{bmatrix}\<br>&amp; \begin{bmatrix}<br>b_{0} &amp; b_{1}\<br>\end{bmatrix}<br>\begin{bmatrix}<br>y_0^{\prime} &amp; y_1^{\prime} \<br>y_0^{\prime\prime} &amp; y_1^{\prime\prime}<br>\end{bmatrix} &#x3D;<br>\begin{bmatrix}<br>b_{0}^{\prime} &amp; b_{1}^{\prime}\<br>\end{bmatrix}<br>\end{aligned}<br>$$<br>推出 $\hat{a},\hat{b}$，然后乘出 $\hat{c}$，最后解出逆矩阵，用类似的方式变换出 $c$ 即可。</p>
+<p>具体流程上，我们根据<br>$$<br>\begin{aligned}<br>&amp; \begin{bmatrix}<br>a_{0} &amp; a_{1}\\<br>\end{bmatrix}<br>\begin{bmatrix}<br>x_0^{\prime} &amp; x_1^{\prime} \\<br>x_0^{\prime\prime} &amp; x_1^{\prime\prime}<br>\end{bmatrix} &#x3D;<br>\begin{bmatrix}<br>a_{0}^{\prime} &amp; a_{1}^{\prime}\\<br>\end{bmatrix}\\<br>&amp; \begin{bmatrix}<br>b_{0} &amp; b_{1}\\<br>\end{bmatrix}<br>\begin{bmatrix}<br>y_0^{\prime} &amp; y_1^{\prime} \\<br>y_0^{\prime\prime} &amp; y_1^{\prime\prime}<br>\end{bmatrix} &#x3D;<br>\begin{bmatrix}<br>b_{0}^{\prime} &amp; b_{1}^{\prime}\\<br>\end{bmatrix}<br>\end{aligned}<br>$$<br>推出 $\hat{a},\hat{b}$，然后乘出 $\hat{c}$，最后解出逆矩阵，用类似的方式变换出 $c$ 即可。</p>
 <p>于是我们知道怎么只变换一位。接下来我们对于每一位都做同样的变换，根据 FWT 的结论，其实是互不干扰的。</p>
 <div class="note default"><p>📌 关于互不干扰的说明：其实我们对于 $n$ 为依次做，做到第 $i$ 为的时候，相当于一个位置上已经累计了 $2^i$ 个原位置上的答案（每合并一次 $\times 2$），所以可以把他再看成一个新的数字（一次变换都没有做），我们接着做当前位的变换，当然不会影响。</p>
 </div>
@@ -309,7 +309,7 @@
 <h2 id="本题的应用"><a href="#本题的应用" class="headerlink" title="本题的应用"></a>本题的应用</h2><p>知道 FWT 本质之后，这个题目就不难了，重点在于解出 $(x_0,y_0,x_1,y_1,z_0,z_1)$ 的两组解。</p>
 <p>这次，我们希望：<br>$$<br>(x_0a_0 + x_1a_1)(y_0b_0 + y_1b_1) &#x3D; z_0c_0 + z_1c_1 &#x3D; z_0a_0b_0 + z_1a_1b_1 + w(z_0 + z_1)(a_0b_1 + a_1b_0).<br>$$</p>
 <p>于是得到方程：</p>
-<p>$$<br>\begin{cases}<br>x_0y_0 &#x3D; z_0 \<br>x_1y_1 &#x3D; z_1 \<br>x_1y_0 &#x3D; w(z_0 + z_1) \<br>x_0y_1 &#x3D; w(z_0 + z_1)<br>\end{cases} \tag{2}<br>$$</p>
+<p>$$<br>\begin{cases}<br>x_0y_0 &#x3D; z_0 \\<br>x_1y_1 &#x3D; z_1 \\<br>x_1y_0 &#x3D; w(z_0 + z_1) \\<br>x_0y_1 &#x3D; w(z_0 + z_1)<br>\end{cases} \tag{2}<br>$$</p>
 <p>接下来就是要构造方便我们算的解了。我们需要找到 $ n+1 $ 个合适的 $ w $，并且为每个 $ w $ 构造两组 $ (x_0, x_1, y_0, y_1, z_0, z_1) $。</p>
 <p>我们不妨大胆地令其中一组解的形式为 $ x_0 &#x3D; y_0 &#x3D; 1, x_1 &#x3D; y_1 &#x3D; X $，于是可以计算出 $ z_0 &#x3D; 1, z_1 &#x3D; X^2 $。</p>
 <p>接下来要做的是保持 $ w $ 不变，构造第二组 $ (x_0, x_1, y_0, y_1, z_0, z_1) $。</p>
