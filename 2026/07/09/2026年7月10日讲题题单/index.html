@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wdwsy.github.io/images/7-9-1.png">
 <meta property="article:published_time" content="2026-07-09T15:18:30.000Z">
-<meta property="article:modified_time" content="2026-07-10T15:57:03.706Z">
+<meta property="article:modified_time" content="2026-07-10T16:00:41.708Z">
 <meta property="article:author" content="wdwsy">
 <meta property="article:tag" content="题单">
 <meta name="twitter:card" content="summary">
@@ -261,7 +261,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-07-10 23:57:03" itemprop="dateModified" datetime="2026-07-10T23:57:03+08:00">2026-07-10</time>
+      <time title="Modified: 2026-07-11 00:00:41" itemprop="dateModified" datetime="2026-07-11T00:00:41+08:00">2026-07-11</time>
     </span>
 
   
@@ -288,7 +288,7 @@
 <h1 id="C-JOI-国的节日-2-Festivals-in-JOI-Kingdom-2"><a href="#C-JOI-国的节日-2-Festivals-in-JOI-Kingdom-2" class="headerlink" title="C - JOI 国的节日 2 &#x2F; Festivals in JOI Kingdom 2"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P9330">C - JOI 国的节日 2 &#x2F; Festivals in JOI Kingdom 2</a></h1><h1 id="D-Not-a-work-of-Idol"><a href="#D-Not-a-work-of-Idol" class="headerlink" title="D - Not a work of Idol"></a><a target="_blank" rel="noopener" href="https://qoj.ac/problem/11114/statement/zh_cn">D - Not a work of Idol</a></h1><h1 id="E-Super-Backpack"><a href="#E-Super-Backpack" class="headerlink" title="E - Super Backpack"></a><a target="_blank" rel="noopener" href="https://qoj.ac/problem/14123/statement/zh_cn">E - Super Backpack</a></h1><h2 id="题面描述"><a href="#题面描述" class="headerlink" title="题面描述"></a>题面描述</h2><p>有 $n$ 种物品。Vasya 拥有第 $i$ 种物品 $k_i$ 个。第 $i$ 种物品中的第 $j$ 个物品占用 $j$ 个单位的体积，且价值为 $a_{i,j}$。Vasya 想要从每种物品中恰好选择一个，使得它们的总体积恰好为 $t$。请帮助 Vasya 确定他能选择的物品的最大总价值。</p>
 <h2 id="关键-trick"><a href="#关键-trick" class="headerlink" title="关键 trick"></a>关键 trick</h2><p>有四种重量的物品分别为 $1,2,3,4$，如果选择一些物品的总重量为 $24$，那么一定存在这些物品的一个子集重量和为 $12$。<br>我不会证明，而且猜测如果物品重量为 $1\sim n$ 如果选择一些物品的总重量为 $2lcm(1\sim n)$，那么一定存在这些物品的一个子集重量和为 $lcm(1\sim n)$。</p>
 <p>然后直接维护十二个凸包，暴力用类似线段树的方式分治，然后暴力两两合并即可。</p>
-<h1 id="⭐️⭐️⭐️H-Say-Goodbye-to-the-Past"><a href="#⭐️⭐️⭐️H-Say-Goodbye-to-the-Past" class="headerlink" title="⭐️⭐️⭐️H - Say Goodbye to the Past"></a>⭐️⭐️⭐️<a target="_blank" rel="noopener" href="https://uoj.ac/contest/108/problem/1090">H - Say Goodbye to the Past</a></h1><p>非常不错的题目，利于理解 fwt 的本质。</p>
+<h1 id="⭐️⭐️⭐️H-Say-Goodbye-to-the-Past"><a href="#⭐️⭐️⭐️H-Say-Goodbye-to-the-Past" class="headerlink" title="⭐️⭐️⭐️H - Say Goodbye to the Past"></a>⭐️⭐️⭐️<a target="_blank" rel="noopener" href="https://uoj.ac/contest/108/problem/1090">H - Say Goodbye to the Past</a></h1><p>非常不错的题目，利于理解 fwt 的本质。<br>本题题解部分借鉴了<a target="_blank" rel="noopener" href="https://www.cnblogs.com/SDSXC/p/21226498">详细揭秘：如何使用初中数学解决 ULR#4 D Say Goodbye to the Past</a>，原作者写得很好，我都不需要改了🐶。</p>
 <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>定义 $ f(x, y) $ 为符合以下要求的 $ 0 \leq z &lt; 2^k $ 的 $ c_z $ 之和：</p>
 <ul>
 <li>对于任意 $ 0 \leq i &lt; k $，$ z $ 在二进制下第 $ i $ 位（即 $ 2^i $ 位）要么等于 $ x $ 在二进制下的第 $ i $ 位，要么等于 $ y $ 在二进制下的第 $ i $ 位。</li>
@@ -319,8 +319,7 @@
 </div>
 
 <h2 id="本题的应用"><a href="#本题的应用" class="headerlink" title="本题的应用"></a>本题的应用</h2><p>知道 FWT 本质之后，这个题目就不难了，重点在于解出 $(x_0,y_0,x_1,y_1,z_0,z_1)$ 的两组解。</p>
-<p>这次，我们希望：</p>
-<p>$$<br>(x_0a_0 + x_1a_1)(y_0b_0 + y_1b_1) &#x3D; z_0c_0 + z_1c_1 &#x3D; z_0a_0b_0 + z_1a_1b_1 + w(z_0 + z_1)(a_0b_1 + a_1b_0).<br>$$</p>
+<p>这次，我们希望：<br>$$<br>(x_0a_0 + x_1a_1)(y_0b_0 + y_1b_1) &#x3D; z_0c_0 + z_1c_1 &#x3D; z_0a_0b_0 + z_1a_1b_1 + w(z_0 + z_1)(a_0b_1 + a_1b_0).<br>$$</p>
 <p>于是得到方程：</p>
 <p>$$<br>\begin{cases}<br>x_0y_0 &#x3D; z_0 \<br>x_1y_1 &#x3D; z_1 \<br>x_1y_0 &#x3D; w(z_0 + z_1) \<br>x_0y_1 &#x3D; w(z_0 + z_1)<br>\end{cases} \tag{2}<br>$$</p>
 <p>接下来就是要构造方便我们算的解了。我们需要找到 $ n+1 $ 个合适的 $ w $，并且为每个 $ w $ 构造两组 $ (x_0, x_1, y_0, y_1, z_0, z_1) $。</p>
@@ -330,7 +329,7 @@
 <p>于是我们就得到了：取 $ w &#x3D; \frac{X}{X^2 + 1} $，两组 $ x, y, z $ 为 $ (1, X, 1, X, 1, X^2) $ 和 $ (1, \frac{1}{X}, 1, \frac{1}{X}, 1, \frac{1}{X^2}) $。</p>
 <p>注意需要保证两组解不一样所以 $ X $ 不能取 $ 1, -1 $，不妨取 $ X &#x3D; 2 \sim n+2 $。</p>
 <p>因为这些解都是有理数，模数也是质数，我们可以直接在 $ F_{10^9+7} $ 里面做，不需要像某些构造一样先扩域。</p>
-<p>复杂度是算一个 $ w $ 需要 $ \mathcal{O}(n^2) $，$ n+1 $ 个点值 $ \mathcal{O}(n^2) $。</p>
+<p>复杂度是算一个 $ w $ 需要 $ \mathcal{O}(n2^n) $，$ n+1 $ 个点值 $ \mathcal{O}(n^22^n) $。</p>
 
     </div>
 
