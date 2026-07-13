@@ -219,6 +219,103 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/05/17/cnblogs-high-elements-%E9%A2%98%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/05/17/cnblogs-high-elements-%E9%A2%98%E8%A7%A3/" class="post-title-link" itemprop="url">High Elements 题解</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-05-17 20:00:00" itemprop="dateCreated datePublished" datetime="2026-05-17T20:00:00+08:00">2026-05-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-06-23 23:44:12" itemprop="dateModified" datetime="2026-06-23T23:44:12+08:00">2026-06-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">算法竞赛</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="solution"><a href="#solution" class="headerlink" title="solution"></a>solution</h1><h2 id="学长使用了更强大的做法！！"><a href="#学长使用了更强大的做法！！" class="headerlink" title="学长使用了更强大的做法！！"></a>学长使用了更强大的做法！！</h2><p>我们考虑用图来思考这个问题。<br><img src="/images/high-elements.png"><br>容易发现，最后的等式条件是 红色点个数+[0-x]&#x3D;绿色点个数+[0-y]</p>
+<p>要满足这个条件，其实一定有一边是 0，调整法容易证明。<br>对于判定一个后缀是否还存在合法解，我们可以考虑一开始全都是红色点（不妨假设红色点取0），这样我们发现替换掉一个在 LIS 上的点，使得等式左右两边的差变化了2，选一个在红色斜杠矩形中的点会让差变化1，于是我们给每个点赋值 1&#x2F;2 就可以判断是否有解。</p>
+<h2 id="闲话"><a href="#闲话" class="headerlink" title="闲话"></a>闲话</h2><p><s>atcoder 数据太水了，所有目前放了代码的题解都被我 hack 了。</s><br>但是其他题解的大致思路都是正确的，这篇题解主要解析如何想到这种思路的。</p>
+<h2 id="约定"><a href="#约定" class="headerlink" title="约定"></a>约定</h2><p>设当前 $X$ 和 $Y$ 中 high 元素的个数分别为 $C_X,C_Y$，最大值分别为         $H_X,H_Y$，我们想要判断是否能将剩下的元素分配给 $X$ 或者 $Y$ 使得 high 元素个数相等。<br>假设在分配之后，$X$ 中新增的 high 元素为 $a_1,a_2,\cdots,a_{|a|}$， $Y$ 中新增的 high 元素为 $b_1,b_2,\cdots,b_{|b|}$，那么他们必须满足：</p>
+<ul>
+<li>$H_X&lt;a_1&lt;a_2&lt;\cdots&lt;a_{|a|},H_Y&lt;b_1&lt;b_2&lt;\cdots&lt;b_{|b|}$</li>
+<li>$C_X+|a|&#x3D;C_Y+|b|$</li>
+</ul>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>首先发现这个题目要同时解决两个序列的构造问题，考虑到我们之前解决过这样的问题，比如传纸条。但是这道题目不适用，我们要是记录两个序列的信息来转移肯定会超时。<br>于是我们考虑两个序列之间的关系，我猜测肯定有一个可行序列的 high 元素就是原序列的 high 元素，很遗憾我猜错了。于是进行一些调整我们发现，肯定有一个序列的 high 元素包含于原序列的 high 元素之中。考虑调整法证明这个结论，如果两个序列都有 high 元素不是原序列的 high 元素，我们可以交换它们两个的位置，可以发现，交换之后，这两个元素都不会是 high 元素，就意味着 $|a|-1$ 并且 $|b|-1$，可以发现等式仍然成立，所以存在这样一组解。<br>为了方便描述，我们不妨让 $a$ 都是原序列的 high 元素。<br>有了这个结论真的非常非常有用，原因是这样我们如果可以找到一个合法的 $b$，那么就可以唯一对应一个合法的 $a$，也就是说，确定了合法的 $b$，就对应了这个解合法（显然这里只确定了 $a$ 就难以唯一对应了）。接下来就考虑在描述序列 $b$ 的同时找到合法解。于是我们设 $b$ 中 high 元素为个数为 $k$，不是 high 元素的个数为 $m$，那么显然 $k+m&#x3D;|b|$，$Q-k&#x3D;|a|$就有：<br>$C_X+|a|&#x3D;C_Y+|b|$</p>
+<p>$C_X+Q-k&#x3D;C_Y+k+m$</p>
+<p>$C_X-C_Y+Q&#x3D;2k+m$<br>于是我们就需要找到满足这个条件的 $b$ 就行了，具体操作可以把每个值给权值 $1$ 或 $2$ 来 dp 得到。</p>
+<p>但是直接 dp 可能复杂度不允许，但是我们发现我们可以通过删除 $b$ 中的元素来构造当前序列权值 $x$ 减掉 $2$ 之后的结果。于是我们只要记录最大的奇权值和偶权值就行，可以用线段树维护。<br>时间复杂度 $\mathcal O(n\log n)$。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">200005</span>, INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> a[N], tag[N];</span><br><span class="line"><span class="type">char</span> ans[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Segtree</span> &#123;</span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> ls u &lt;&lt; 1</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> rs u &lt;&lt; 1 | 1</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> tree[N &lt;&lt; <span class="number">2</span>], v;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">build</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">        tree[u] = v;</span><br><span class="line">        <span class="keyword">if</span> (l == r) <span class="keyword">return</span>;</span><br><span class="line">        <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">build</span>(l, mid, ls);</span><br><span class="line">        <span class="built_in">build</span>(mid + <span class="number">1</span>, r, rs);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">modify</span><span class="params">(<span class="type">int</span> p, <span class="type">int</span> x, <span class="type">int</span> l = <span class="number">1</span>, <span class="type">int</span> r = n, <span class="type">int</span> u = <span class="number">1</span>)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">            tree[u] = x;</span><br><span class="line">            <span class="keyword">return</span>; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (p &lt;= mid) <span class="built_in">modify</span>(p, x, l, mid, ls);</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">modify</span>(p, x, mid + <span class="number">1</span>, r, rs);</span><br><span class="line">        tree[u] = <span class="built_in">max</span>(tree[ls], tree[rs]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> L, <span class="type">int</span> R, <span class="type">int</span> l = <span class="number">1</span>, <span class="type">int</span> r = n, <span class="type">int</span> u = <span class="number">1</span>)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (L &lt;= l &amp;&amp; r &lt;= R) &#123;</span><br><span class="line">            <span class="keyword">return</span> tree[u];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>, res = v;</span><br><span class="line">        <span class="keyword">if</span> (L &lt;= mid) res = <span class="built_in">max</span>(res, <span class="built_in">query</span>(L, R, l, mid, ls));</span><br><span class="line">        <span class="keyword">if</span> (R &gt; mid) res = <span class="built_in">max</span>(res, <span class="built_in">query</span>(L, R, mid + <span class="number">1</span>, r, rs));</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="keyword">undef</span> ls</span></span><br><span class="line">    <span class="meta">#<span class="keyword">undef</span> rs</span></span><br><span class="line">&#125;f[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">check</span><span class="params">(<span class="type">int</span> H, <span class="type">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (val &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> f[val &amp; <span class="number">1</span>].<span class="built_in">query</span>(H, n) &gt;= val;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>, mx = <span class="number">0</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">        <span class="keyword">if</span> (a[i] &gt; mx) mx = a[i], tag[i] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    f[<span class="number">0</span>].v = <span class="number">0</span>, f[<span class="number">0</span>].<span class="built_in">build</span>(<span class="number">1</span>, n, <span class="number">1</span>);</span><br><span class="line">    f[<span class="number">1</span>].v = -INF, f[<span class="number">1</span>].<span class="built_in">build</span>(<span class="number">1</span>, n, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = n; i &gt;= <span class="number">1</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (tag[i]) &#123;</span><br><span class="line">            f[<span class="number">0</span>].<span class="built_in">modify</span>(a[i], f[<span class="number">0</span>].<span class="built_in">query</span>(a[i] + <span class="number">1</span>, n) + <span class="number">2</span>);</span><br><span class="line">            f[<span class="number">1</span>].<span class="built_in">modify</span>(a[i], f[<span class="number">1</span>].<span class="built_in">query</span>(a[i] + <span class="number">1</span>, n) + <span class="number">2</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            f[<span class="number">0</span>].<span class="built_in">modify</span>(a[i], f[<span class="number">1</span>].<span class="built_in">query</span>(a[i] + <span class="number">1</span>, n) + <span class="number">1</span>);</span><br><span class="line">            f[<span class="number">1</span>].<span class="built_in">modify</span>(a[i], f[<span class="number">0</span>].<span class="built_in">query</span>(a[i] + <span class="number">1</span>, n) + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (i &lt; n) tag[i] += tag[i + <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> C = <span class="number">0</span>, HX = <span class="number">0</span>, HY = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        f[<span class="number">0</span>].<span class="built_in">modify</span>(a[i], <span class="number">0</span>), f[<span class="number">1</span>].<span class="built_in">modify</span>(a[i], -INF);</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">check</span>(HY, tag[i + <span class="number">1</span>] + C + (a[i] &gt; HX)) || <span class="built_in">check</span>(<span class="built_in">max</span>(HX, a[i]), tag[i + <span class="number">1</span>] - C - (a[i] &gt; HX))) &#123;</span><br><span class="line">            ans[i] = <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">            C += (a[i] &gt; HX);</span><br><span class="line">            HX = <span class="built_in">max</span>(HX, a[i]);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ans[i] = <span class="string">&#x27;1&#x27;</span>;</span><br><span class="line">            C -= (a[i] &gt; HY);</span><br><span class="line">            HY = <span class="built_in">max</span>(HY, a[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (C) <span class="built_in">puts</span>(<span class="string">&quot;-1&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, ans + <span class="number">1</span>);</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/05/16/cnblogs-516-%E6%9E%84%E9%80%A0%E9%A2%98%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -700,131 +797,6 @@
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/582114938">关于输出最大独立集</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/article/jhpww84r">关于输出最大独立集和最长反链</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.luogu.me/article/ny2po69f">杂题提单</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2000/07/09/2026%E5%B9%B47%E6%9C%8810%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wdwsy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wdwsy's Blog">
-      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | wdwsy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2000/07/09/2026%E5%B9%B47%E6%9C%8810%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/" class="post-title-link" itemprop="url">2026年7月10日讲题题单</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2000-07-09 23:18:30" itemprop="dateCreated datePublished" datetime="2000-07-09T23:18:30+08:00">2000-07-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-07-11 00:09:11" itemprop="dateModified" datetime="2026-07-11T00:09:11+08:00">2026-07-11</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="A-Laser-Strike-激光突击"><a href="#A-Laser-Strike-激光突击" class="headerlink" title="A - Laser Strike &#x2F; 激光突击"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P13346">A - Laser Strike &#x2F; 激光突击</a></h1><p>神秘通信题，坑，待填。</p>
-<h1 id="B-摆放-Slaganje"><a href="#B-摆放-Slaganje" class="headerlink" title="B - 摆放 &#x2F; Slaganje"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P15568">B - 摆放 &#x2F; Slaganje</a></h1><h2 id="题意简述"><a href="#题意简述" class="headerlink" title="题意简述"></a>题意简述</h2><p>你有 $n$ 棵一模一样的树，你现在要把它们顶点重合地放到一个 $n$ 边形上，使得每两个顶点之间都有边。<br>一定有解，需要输出构造的方案。</p>
-<h2 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h2><p>我想不到。<br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/article/bj1oijdm">题解链接</a><br>题解猜测，一定先假设一个顶点对应集合 $p$，即树上顶点 $i$ 和多边形顶点 $p_i$ 重合，然后对这个 $p$ 进行循环移位构造可行方案。<br>那么问题就简化成要求任意距离($1\sim \lfloor \frac{n}{2} \rfloor$)的点对都出现在初始 $p_i$ 中。<br>思索之后发现菊花是比较好的结构，我们只需要找到一些菊花，它们的总点数大于 $\lfloor \frac{n}{2} \rfloor$ 即可，这是容易的。</p>
-<p><img src="/images/7-9-1.png"></p>
-<p>点表示多边形的顶点，上面的数字是距离，可以见得，只要存在边数大于 $1$ 的菊花，这样填下去就不会重叠。</p>
-<h1 id="C-JOI-国的节日-2-Festivals-in-JOI-Kingdom-2"><a href="#C-JOI-国的节日-2-Festivals-in-JOI-Kingdom-2" class="headerlink" title="C - JOI 国的节日 2 &#x2F; Festivals in JOI Kingdom 2"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P9330">C - JOI 国的节日 2 &#x2F; Festivals in JOI Kingdom 2</a></h1><h1 id="D-Not-a-work-of-Idol"><a href="#D-Not-a-work-of-Idol" class="headerlink" title="D - Not a work of Idol"></a><a target="_blank" rel="noopener" href="https://qoj.ac/problem/11114/statement/zh_cn">D - Not a work of Idol</a></h1><h1 id="E-Super-Backpack"><a href="#E-Super-Backpack" class="headerlink" title="E - Super Backpack"></a><a target="_blank" rel="noopener" href="https://qoj.ac/problem/14123/statement/zh_cn">E - Super Backpack</a></h1><h2 id="题面描述"><a href="#题面描述" class="headerlink" title="题面描述"></a>题面描述</h2><p>有 $n$ 种物品。Vasya 拥有第 $i$ 种物品 $k_i$ 个。第 $i$ 种物品中的第 $j$ 个物品占用 $j$ 个单位的体积，且价值为 $a_{i,j}$。Vasya 想要从每种物品中恰好选择一个，使得它们的总体积恰好为 $t$。请帮助 Vasya 确定他能选择的物品的最大总价值。</p>
-<h2 id="关键-trick"><a href="#关键-trick" class="headerlink" title="关键 trick"></a>关键 trick</h2><p>有四种重量的物品分别为 $1,2,3,4$，如果选择一些物品的总重量为 $24$，那么一定存在这些物品的一个子集重量和为 $12$。<br>我不会证明，而且猜测如果物品重量为 $1\sim n$ 如果选择一些物品的总重量为 $2lcm(1\sim n)$，那么一定存在这些物品的一个子集重量和为 $lcm(1\sim n)$。</p>
-<p>然后直接维护十二个凸包，暴力用类似线段树的方式分治，然后暴力两两合并即可。</p>
-<h1 id="⭐️⭐️⭐️H-Say-Goodbye-to-the-Past"><a href="#⭐️⭐️⭐️H-Say-Goodbye-to-the-Past" class="headerlink" title="⭐️⭐️⭐️H - Say Goodbye to the Past"></a>⭐️⭐️⭐️<a target="_blank" rel="noopener" href="https://uoj.ac/contest/108/problem/1090">H - Say Goodbye to the Past</a></h1><p>非常不错的题目，利于理解 fwt 的本质。<br>本题题解部分借鉴了<a target="_blank" rel="noopener" href="https://www.cnblogs.com/SDSXC/p/21226498">详细揭秘：如何使用初中数学解决 ULR#4 D Say Goodbye to the Past</a>，原作者写得很好，我都不需要改了🐶。</p>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>定义 $ f(x, y) $ 为符合以下要求的 $ 0 \leq z &lt; 2^k $ 的 $ c_z $ 之和：</p>
-<ul>
-<li>对于任意 $ 0 \leq i &lt; k $，$ z $ 在二进制下第 $ i $ 位（即 $ 2^i $ 位）要么等于 $ x $ 在二进制下的第 $ i $ 位，要么等于 $ y $ 在二进制下的第 $ i $ 位。</li>
-</ul>
-<p>给定长度为 $ 2^k $ 的序列 $ a, b, c $（均为 0-indexed）。</p>
-<p>对于 $ i &#x3D; 0 \sim k $，求</p>
-<p>$$ d_i &#x3D; \sum_{0 \leq x, y &lt; 2^k} f(x, y) a_x b_y $$</p>
-<p>popcount($ x \oplus y $) &#x3D; $ i $</p>
-<p>对 $ 10^9 + 7 $ 取模。<br>$k\leq 21$。</p>
-<h2 id="初步转化"><a href="#初步转化" class="headerlink" title="初步转化"></a>初步转化</h2><p>首先 $k$ 太反人类了，我们换成 $n$。<br>我们把答案看成一个多项式：<br>$$<br>f(w)&#x3D;\sum\limits_{i&#x3D;0}^{2^n-1} d_iw^i<br>$$<br>然后我们只需要求出这个多项式任意 $n+1$ 个点的差值，然后使用拉格朗日插值就可以求出答案。</p>
-<h2 id="FWT-的本质"><a href="#FWT-的本质" class="headerlink" title="FWT 的本质"></a>FWT 的本质</h2><p>考虑我们做 FWT 的过程：</p>
-<ol>
-<li>依次对于 $a,b$ 每一位的 $0&#x2F;1$ 不同的一对位置乘上一个矩阵进行转移，得到 $\hat{a},\hat{b}$，即对 $a,b$ 做正变换。</li>
-<li>$\hat{c}_i &#x3D; \hat{a_i}\times\hat{b}_i$。</li>
-<li>对 $\hat{c}$ 乘上一个矩阵，进行逆变换，得到我们想要的数组 $c$。</li>
-</ol>
-<p>我们考虑刻画这个过程，为了简化问题，我们先只考虑对 $n$ 个二进制位的其中一个进行变换的情况。<br>由于 FWT 是线性变换，我们假设 $a,b$ 正变换后分别为 $x_0a_0+x_1a_1,y_0b_0+y_1b_1$，同样，$c$ 未进行逆变换前的结果为 $z_0c_0+z_1c_1$。</p>
-<p>我们假设现在我们是 or 卷积，那么我们希望有：<br>$$<br>(x_0a_0+x_1a_1)(y_0b_0+y_1b_1)&#x3D;z_0c_0+z_1c_1&#x3D;z_0a_0b_0+z_1(a_0b_1+a_1b_0+a_1b_1)<br>$$</p>
-<div class="note info"><p>💡 即我们希望 $c$ 这一位是 $0$ 的答案 是 $a,b$ 这一位都为 $0$ 的答案，而 $c$ 这一位为 $1$ 的答案应该是 $a,b$ 任意一个这一位为 $1$ 的答案，想要：$c_0&#x3D;a_0b_0,c_1&#x3D;a_0b_1+a_1b_0+a_1b_1$</p>
-</div>
-
-
-<p>于是可以得到方程：<br>$$<br>\begin{cases}<br>x_0 y_0 &#x3D; z_0 \\<br>x_0 y_1 &#x3D; z_1 \\<br>x_1 y_0 &#x3D; z_1 \\<br>x_1 y_1 &#x3D; z_1<br>\end{cases} \tag{1}<br>$$<br>因为我们想要得到 $c_0,c_1$ 两个变量，所以需要两组 $(z_0,z_1)$ 不同的解，并用这个二元一次方程组解出 $c_0,c_1$。<br>对于 or 卷积，我们可以构造出 $(x_0,x_1,y_0,y_1,z_0,z_1)$ 为 $(1,0,1,0,1,0)$ 和 $(1,1,1,1,1,1)$ 两组解。</p>
-<p>为了方便描述 $(x_0^{\prime},x_1^{\prime},y_0^{\prime},y_1^{\prime},z_0^{\prime},z_1^{\prime})&#x3D;(1,0,1,0,1,0),(x_0^{\prime\prime},x_1^{\prime\prime},y_0^{\prime\prime},y_1^{\prime\prime},z_0^{\prime\prime},z_1^{\prime\prime})&#x3D;(1,1,1,1,1,1)$</p>
-<p>具体流程上，我们根据<br>$$<br>\begin{aligned}<br>&amp; \begin{bmatrix}<br>a_{0} &amp; a_{1}\\<br>\end{bmatrix}<br>\begin{bmatrix}<br>x_0^{\prime} &amp; x_1^{\prime} \\<br>x_0^{\prime\prime} &amp; x_1^{\prime\prime}<br>\end{bmatrix} &#x3D;<br>\begin{bmatrix}<br>a_{0}^{\prime} &amp; a_{1}^{\prime}\\<br>\end{bmatrix}\\<br>&amp; \begin{bmatrix}<br>b_{0} &amp; b_{1}\\<br>\end{bmatrix}<br>\begin{bmatrix}<br>y_0^{\prime} &amp; y_1^{\prime} \\<br>y_0^{\prime\prime} &amp; y_1^{\prime\prime}<br>\end{bmatrix} &#x3D;<br>\begin{bmatrix}<br>b_{0}^{\prime} &amp; b_{1}^{\prime}\\<br>\end{bmatrix}<br>\end{aligned}<br>$$<br>推出 $\hat{a},\hat{b}$，然后乘出 $\hat{c}$，最后解出逆矩阵，用类似的方式变换出 $c$ 即可。</p>
-<p>于是我们知道怎么只变换一位。接下来我们对于每一位都做同样的变换，根据 FWT 的结论，其实是互不干扰的。</p>
-<div class="note default"><p>📌 关于互不干扰的说明：其实我们对于 $n$ 为依次做，做到第 $i$ 为的时候，相当于一个位置上已经累计了 $2^i$ 个原位置上的答案（每合并一次 $\times 2$），所以可以把他再看成一个新的数字（一次变换都没有做），我们接着做当前位的变换，当然不会影响。</p>
-</div>
-
-<h2 id="本题的应用"><a href="#本题的应用" class="headerlink" title="本题的应用"></a>本题的应用</h2><p>知道 FWT 本质之后，这个题目就不难了，重点在于解出 $(x_0,y_0,x_1,y_1,z_0,z_1)$ 的两组解。</p>
-<p>这次，我们希望：<br>$$<br>(x_0a_0 + x_1a_1)(y_0b_0 + y_1b_1) &#x3D; z_0c_0 + z_1c_1 &#x3D; z_0a_0b_0 + z_1a_1b_1 + w(z_0 + z_1)(a_0b_1 + a_1b_0).<br>$$</p>
-<p>于是得到方程：</p>
-<p>$$<br>\begin{cases}<br>x_0y_0 &#x3D; z_0 \\<br>x_1y_1 &#x3D; z_1 \\<br>x_1y_0 &#x3D; w(z_0 + z_1) \\<br>x_0y_1 &#x3D; w(z_0 + z_1)<br>\end{cases} \tag{2}<br>$$</p>
-<p>接下来就是要构造方便我们算的解了。我们需要找到 $ n+1 $ 个合适的 $ w $，并且为每个 $ w $ 构造两组 $ (x_0, x_1, y_0, y_1, z_0, z_1) $。</p>
-<p>我们不妨大胆地令其中一组解的形式为 $ x_0 &#x3D; y_0 &#x3D; 1, x_1 &#x3D; y_1 &#x3D; X $，于是可以计算出 $ z_0 &#x3D; 1, z_1 &#x3D; X^2 $。</p>
-<p>接下来要做的是保持 $ w $ 不变，构造第二组 $ (x_0, x_1, y_0, y_1, z_0, z_1) $。</p>
-<p>带回下面两个方程，$ w(X^2 + 1) &#x3D; X $，于是韦达定理一下，可以得到另外一个 $ w $ 相同的 $ X’ &#x3D; \frac{1}{X} $。</p>
-<p>于是我们就得到了：取 $ w &#x3D; \frac{X}{X^2 + 1} $，两组 $ x, y, z $ 为 $ (1, X, 1, X, 1, X^2) $ 和 $ (1, \frac{1}{X}, 1, \frac{1}{X}, 1, \frac{1}{X^2}) $。</p>
-<p>注意需要保证两组解不一样所以 $ X $ 不能取 $ 1, -1 $，不妨取 $ X &#x3D; 2 \sim n+2 $。</p>
-<p>因为这些解都是有理数，模数也是质数，我们可以直接在 $ F_{10^9+7} $ 里面做，不需要像某些构造一样先扩域。</p>
-<p>复杂度是算一个 $ w $ 需要 $ \mathcal{O}(n2^n) $，$ n+1 $ 个点值 $ \mathcal{O}(n^22^n) $。</p>
 
       
     </div>
