@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wdwsy.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":240},"hljswrap":true,"codeblock":{"theme":{"light":"github-dark","dark":"github-dark-dimmed"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat","show_result":true},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":true,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="一、在去noi之前就没有太大的希望。因为知道自己的水平不可能够到金牌线的（但是还认为其实拿银牌🥈并不困难），感觉去的时候就是定局，应该没有什么悬念的，但是想到我在学校的模拟赛中都是死磕第一题，然后后面反正都做不出来，所以就等着补题了，感觉可能有些摆烂了，做完第一题就去想 T2 正解，想不出来就得到 100+eps 分，然后就结束了。于是我抱着必 Ag 的坐上了去青岛的高铁，之前著名预测网站 rn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="noi游记">
+<meta property="og:url" content="https://wdwsy.github.io/2026/07/23/noi%E6%B8%B8%E8%AE%B0/index.html">
+<meta property="og:site_name" content="wdwsy&#39;s Blog">
+<meta property="og:description" content="一、在去noi之前就没有太大的希望。因为知道自己的水平不可能够到金牌线的（但是还认为其实拿银牌🥈并不困难），感觉去的时候就是定局，应该没有什么悬念的，但是想到我在学校的模拟赛中都是死磕第一题，然后后面反正都做不出来，所以就等着补题了，感觉可能有些摆烂了，做完第一题就去想 T2 正解，想不出来就得到 100+eps 分，然后就结束了。于是我抱着必 Ag 的坐上了去青岛的高铁，之前著名预测网站 rn">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-07-23T01:14:46.000Z">
+<meta property="article:modified_time" content="2026-07-23T07:03:07.788Z">
+<meta property="article:author" content="wdwsy">
+<meta property="article:tag" content="算法,OIC++,NOI,信息学竞赛">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://wdwsy.github.io/2026/07/23/noi%E6%B8%B8%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://wdwsy.github.io/2026/07/23/noi%E6%B8%B8%E8%AE%B0/","path":"2026/07/23/noi游记/","title":"noi游记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>noi游记 | wdwsy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">wdwsy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">算法的世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81"><span class="nav-number">1.</span> <span class="nav-text">一、</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81"><span class="nav-number">2.</span> <span class="nav-text">二、</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81"><span class="nav-number">3.</span> <span class="nav-text">三、</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81"><span class="nav-number">4.</span> <span class="nav-text">四、</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wdwsy"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">wdwsy</p>
+  <div class="site-description" itemprop="description">算法竞赛、C++、OI 技术分享</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wdwsy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wdwsy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/07/23/noi%E6%B8%B8%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="noi游记 | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          noi游记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-07-23 09:14:46 / Modified: 15:03:07" itemprop="dateCreated datePublished" datetime="2026-07-23T09:14:46+08:00">2026-07-23</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="一、"><a href="#一、" class="headerlink" title="一、"></a>一、</h2><p>在去noi之前就没有太大的希望。因为知道自己的水平不可能够到金牌线的（但是还认为其实拿银牌🥈并不困难），感觉去的时候就是定局，应该没有什么悬念的，但是想到我在学校的模拟赛中都是死磕第一题，然后后面反正都做不出来，所以就等着补题了，感觉可能有些摆烂了，做完第一题就去想 T2 正解，想不出来就得到 100+eps 分，然后就结束了。<br>于是我抱着必 Ag 的坐上了去青岛的高铁，之前著名预测网站 rngdle.com 曾预测安徽省队最高分将达到 656（或许预示着 asdfz 不可能三年无金）。</p>
+<h2 id="二、"><a href="#二、" class="headerlink" title="二、"></a>二、</h2><p>前面没有什么好说的，直接说 Day 1 吧，首先我大概 30min 想出来了一个 $\mathcal{O}(nmk)$ 的 dp（后来得知我复杂度算错了，其实是 $\mathcal{O}{n^2k}$，由于 $\max(n) &#x3D; 1000,\max(m) &#x3D; 3000$，所以导致空间复杂度计算也错了）。然后我这样空间无论怎么卡都不行，于是考虑降掉一维，发现这样的点值问题可以使用前几天学习 FFT 的差值方式降掉 $k$，那太棒了，直接开始写，写完之后发现由于其实构造的多项式是 $Ans(x)&#x3D;a_0+a_1x+a_2x^2 + \dots$，发现我们由于每次转移的时候都 $f \leftarrow f \times x$ 无法控制 $x$ 的最高次幂次，然后废了，差值必须要差 $n+1$ 个点，直接时间复杂度退化成了 $\mathcal{O}(n^3)$，没救了，交上去大概获得了 $45$ pts，然后简单观察之后其实直接把 $k$ 这一维提到最外面就好了，感觉天塌了，来回乱搞已经浪费了 3h20min 才过 T1。</p>
+<p>看到 T2，读完题目 10min 发现思路没有难度，就是写大 ds，我感觉以我的 ds 能力可能写不出来了（实际上根本写不出来），于是写了一个暴力，发现只剩一个小时，感觉肯定没有办法写出 T3 比较好的分数了，于是决定直接冲 T2，最后还剩 5min 才过编译，看一下发现重心找错了，直接摆烂了，获得 145 的完蛋分数。</p>
+<p>出考场发现这次重头在 T3，基本乱搞都能获得 50 pts+，甚至有一位大神乱搞到了 95pts，完蛋了，我 T3 题目都没有看。</p>
+<h2 id="三、"><a href="#三、" class="headerlink" title="三、"></a>三、</h2><p>Day1 结束之后是一个活动日，去了当地的军事博物馆，但是感觉没有什么东西，回来的时候也已经错过午饭的时间了，感觉有些折腾。</p>
+<p>到了 Day2，开 T1 ，大概 40min，发现可以直接写一个贪心，但是发现在 $k&#x3D;2,3,5$ 的时候会错，于是进行了巨大的打补丁，最后到 2h20min 的时候才通过这个题目，但是比 Day1 的 T1 快了 1h，感觉还可以，看 T2，是 prufer 序列，之前学过，但是基本没有用过，所以早就忘记了，没办法，定义都是看题目中的提示部分的，我能隐隐感受到这个题目是 DS 题目，我想我想出来也写不了，而且大概率想不出来，于是我直接开了 T3，发现 T3 还是比较可做的，写出多项式做法应该不困难，但是到最后拼的几个包都没有调出来，我本来准备用任意一个包调对之后去拍暴力，然后再用暴力去调其他包的，没想到一个都没有调出来，完蛋了，收获 0pts。</p>
+<p>出考场之后知道我 T3 题目看错了，要求的是祖先，不是父亲，我也不知道我是怎么看错的。</p>
+<h2 id="四、"><a href="#四、" class="headerlink" title="四、"></a>四、</h2><p>我这个成绩可以说是没救了，只有铜牌了。<br>感觉其实 Day1 和 Day2 题目都选择有问题，在 Day1 应该是 T3 更容易用随机化得分，而 Day2 应该选择 T2，但是其实 Day1 是 T1 写太久了导致的，还是其实实力就在 银&#x2F;铜 的位置，还需要加训。</p>
+<p>而且在闭幕式的时候 ccf 的人说他们引入了量化标准，估计看来希望达到算法考察的全覆盖，而且还包含 Day1 Day2 的标准差，也就是说不想让选手一天能打好，另外一天掉下去，希望难度比较平衡。看来复习的时候也要全覆盖。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/07/09/2026%E5%B9%B47%E6%9C%8810%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/" rel="prev" title="2026年7月10日讲题题单">
+                  <i class="fa fa-angle-left"></i> 2026年7月10日讲题题单
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/07/26/%E6%A0%91%E5%BD%A2dp%E4%B8%93%E9%A2%98%E5%88%86%E4%BA%AB/" rel="next" title="树形dp专题分享">
+                  树形dp专题分享 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class=""></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">wdwsy</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
