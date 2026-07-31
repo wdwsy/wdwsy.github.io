@@ -28,7 +28,7 @@
 <meta property="og:description" content="💩A - 皮配题意简述    蓝阵营 红阵营    鸭派系 Y Z   R 派系 r R   Y, Z, r, R 代表了四位导师，现在每个学校的 $s_i$ 个人属于一个导师，第 $i$ 的学校位于城市 $b_i$，对于同一个城市的所有学校，必须属于同一个阵营，一共有 $n$ 所学校，$c$ 座城市，特殊的，有 $k$ 所学校必须不能分配到某个导师。现在要求计算可能的导师分配方案数。 第一行人">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-06-28T14:59:23.000Z">
-<meta property="article:modified_time" content="2026-07-13T15:35:01.078Z">
+<meta property="article:modified_time" content="2026-07-31T11:49:47.757Z">
 <meta property="article:author" content="wdwsy">
 <meta property="article:tag" content="DP">
 <meta property="article:tag" content="题单">
@@ -260,7 +260,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-07-13 23:35:01" itemprop="dateModified" datetime="2026-07-13T23:35:01+08:00">2026-07-13</time>
+      <time title="Modified: 2026-07-31 19:49:47" itemprop="dateModified" datetime="2026-07-31T19:49:47+08:00">2026-07-31</time>
     </span>
 
   
@@ -372,7 +372,7 @@
 
 <h3 id="🔥F-主旋律"><a href="#🔥F-主旋律" class="headerlink" title="🔥F - 主旋律"></a>🔥<a target="_blank" rel="noopener" href="https://qoj.ac/problem/7">F - 主旋律</a></h3><h4 id="题目简述"><a href="#题目简述" class="headerlink" title="题目简述"></a>题目简述</h4><p>给你一个有向图，回答有多少边生成子图是强连通的。<br>$n \leq 15, m \leq n(n-1)$。</p>
 <h4 id="做法-3"><a href="#做法-3" class="headerlink" title="做法"></a>做法</h4><h5 id="DAG-通用容斥"><a href="#DAG-通用容斥" class="headerlink" title="DAG 通用容斥"></a>DAG 通用容斥</h5><p>首先对于 DAG 问题，我们考虑每次剥掉它入度为 $0$ 的点，具体做法上我们可以钦定一个集合 $S$ 中的点入度为 $0$，然后按照。$(-1)^{|S|+1}$ 的系数计入贡献最后就能得到正确的 DAG 个数，用二项式定理不难证明。</p>
-<h5 id="状态设计"><a href="#状态设计" class="headerlink" title="状态设计"></a>状态设计</h5><p>设 $dp_S$ 表示集合 $S$ 中缩成一个点的方案数，即集合 $S$ 的答案。<br>设 $g_S$ 表示结合 $S$ 缩成若干个入度为 $0$ 的点的方案数。</p>
+<h5 id="状态设计"><a href="#状态设计" class="headerlink" title="状态设计"></a>状态设计</h5><p>设 $dp_S$ 表示集合 $S$ 中缩成一个点的方案数，即集合 $S$ 的答案。<br>设 $g_S$ 表示集合 $S$ 缩成若干个入度为 $0$ 的点的方案数。</p>
 <p>对于 $dp_S$，缩成一个点找不到子结构，难以转移，所以我们考虑容斥为 所有方案-缩成大于第一个点的方案：<br>$$dp_{S}&#x3D;2^{E_{S,S}}-\sum_{T\subset S,T\neq \emptyset}(-1)^{?}g_T2^{E_{T,S-T}+E_{S-T,S-T}}$$</p>
 <p>但是发现容斥系数是不确定的，因为并不知道 $T$ 内的点到底缩成了多少个点。于是考虑修改 $g_T$ 的定义，令其包含上容斥系数，即缩成奇数个点的方案数减去缩成偶数个点的方案数，再写：</p>
 <p>$$dp_{S}&#x3D;2^{E_{S,S}}-\sum_{T\subset S,T\neq \emptyset}g_T2^{E_{T,S-T}+E_{S-T,S-T}}$$</p>
@@ -380,6 +380,9 @@
 <p>$$g_S&#x3D;dp_S-\sum_{T\subset S,\operatorname{lowbit}(S)&#x3D;\operatorname{lowbit}(T)}dp_Tg_{S-T}$$</p>
 <p>更多细节可以参考<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/article/s9xcssc8">这个题解</a>。</p>
 <div class="note default"><p>📌 我一直在想，缩点之后也不是只有入度为 $0$ 的点啊，那么 DAG 中其他部分的结构去哪了呢，其实在 $g_T2^{E_{T,S-T}+E_{S-T,S-T}}$ 中我们获得了所有的 DAG 结构。</p>
+</div>
+
+<div class="note primary"><p>🔷 其实对于一般的图容斥，我们还需需要一个 dp 数组 $f_S$，表示缩出来的 DAG 包含点集为 $S$ 的方案数，但是现在不需要了，因为我们只要求输出形成一个强连通分量的答案。</p>
 </div>
 
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>其实对于这种容斥，我们发现单位结构其实就是缩点之后的一个分量，首先我们考虑求出一个这种分量，发现没有子结构，所以不好求，于是我们就考虑用所有的减去不合法的（即多个分量的方案数），那么不合法的部分就具有子结构，接下来我们有了最小的单位分量，于是我们就可以组合出多个分量的方案数。两者相互转移就好。</p>
