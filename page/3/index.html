@@ -178,7 +178,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -210,6 +210,227 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/06/06/cnblogs-%E6%A6%82%E7%8E%87%E6%9C%9F%E6%9C%9Bdp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/06/06/cnblogs-%E6%A6%82%E7%8E%87%E6%9C%9F%E6%9C%9Bdp/" class="post-title-link" itemprop="url">概率期望dp</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-06-06 20:00:00" itemprop="dateCreated datePublished" datetime="2026-06-06T20:00:00+08:00">2026-06-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-06-23 23:44:12" itemprop="dateModified" datetime="2026-06-23T23:44:12+08:00">2026-06-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">算法竞赛</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>原文来自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/sggfishpotato/p/20348658">博客园</a></p>
+</blockquote>
+<h1 id="可重集"><a href="#可重集" class="headerlink" title="可重集"></a><a target="_blank" rel="noopener" href="http://172.17.226.198/OnlineJudge/problempage.php?problem_id=5837">可重集</a></h1><p>设我和我的父亲之间的转移为 k</p>
+<h1 id="游走"><a href="#游走" class="headerlink" title="游走"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3232">游走</a></h1><p>注意到 n 并不是很大，但是我们发现边数量还是比较大的，于是我们考虑求出每个点可能被走到的期望次数。</p>
+<p>用 $f_u$ 表示。<br>进行高斯消元求出期望，然后用 $g_i&#x3D;f_u \times deg_u + f_v \times deg_v$ 来计算一条边 $(u,v)$ 走到的概率。</p>
+<p>最后按照排序不等式分配边权就好。</p>
+<h1 id="Parallel-Universes-Hard"><a href="#Parallel-Universes-Hard" class="headerlink" title="Parallel Universes (Hard)"></a><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1184/D2">Parallel Universes (Hard)</a></h1><p>我们直接列出式子并高斯消元可以获得 $\mathcal{O}(m^6)$ 做法。</p>
+<p>但是我们观察这个转移方程。</p>
+
+$$
+\begin{aligned}
+dp[i][j]=&(1-\dfrac{i}{m})\cdot \dfrac{j}{i+1}\cdot dp[i+1][j+1]+(1-\dfrac{i}{m})\cdot \dfrac{i+1-j}{i+1}\cdot dp[i+1][j]\\
+&+\dfrac{i}{m}\cdot\dfrac{1}{i-1}\cdot (\sum_{k=1}^{j-1}dp[i-k][j-k]+\sum_{k=1}^{i-j}dp[i-k][j])
+\end{aligned}
+$$
+
+
+<p>这个转移显然是成环的，但是发现其实只有一个使得 $j$ 增大的转移，于是我们把这一项放到最前面来。</p>
+
+$$
+\begin{aligned}
+dp[i+1][j+1]=&\left[(1-\dfrac{i}{m})\cdot \dfrac{j}{i+1}\right]^{-1}(
+dp[i][j]-(1-\dfrac{i}{m})\cdot \dfrac{i+1-j}{i+1}\cdot dp[i+1][j]\\
+&-\dfrac{i}{m}\cdot\dfrac{1}{i-1}\cdot (\sum_{k=1}^{j-1}dp[i-k][j-k]+\sum_{k=1}^{i-j}dp[i-k][j]))
+\end{aligned}
+$$
+
+
+<p>这样我们发现，其实转移构成一个类似树的结构，这样我们可以由 $dp[x][2],x\in[3,m]$ 和常数项的线性组合得到所有 $dp[i][j]$ 特别的 $dp[i][i]&#x3D;dp[i][1]&#x3D;i$。</p>
+<p>考虑这样做之后，我们还有 $dp[m][x],x\in [3,m]$ 的转移没有用，因为没有 $dp[m+1][x]$，于是我们根据这些转移列出方程，我们会惊讶的发现，现在的矩阵是 $m<br>\times m$ 的了，我们现在消元就是 $\mathcal{O}(m^3)$ 的了！</p>
+<div class="note warning"><p><strong>注意</strong>：<strong>这个转移方程对于 $i&#x3D;j$ 或者 $j&#x3D;1$ 的边界情况并不成立</strong>，所以千万不要用这个来计算，否则会导致错误。</p>
+</div>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/05/26/cnblogs-2026%E5%B9%B45%E6%9C%8822%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/05/26/cnblogs-2026%E5%B9%B45%E6%9C%8822%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/" class="post-title-link" itemprop="url">2026年5月22日讲题题单</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-05-26 20:00:00" itemprop="dateCreated datePublished" datetime="2026-05-26T20:00:00+08:00">2026-05-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-07-30 23:45:37" itemprop="dateModified" datetime="2026-07-30T23:45:37+08:00">2026-07-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">算法竞赛</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="D-帽子-Sesiri"><a href="#D-帽子-Sesiri" class="headerlink" title="D - 帽子 Šeširi"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P10873">D - 帽子 Šeširi</a></h1><p>神秘构造题，我们考虑最后的帽子集合是怎么样情况的时候第 $i$ 个人无法分辨自己的帽子，发现当且仅当他看到别人的帽子相同的时候。</p>
+<p>于是我们想到，可以建立双射。 集合 $S$ 和 集合 $S \cup {i}$ 之间建立双射，发现这两种情况只能满足一个猜对，所以我们就把这两个点连接一条无向边。</p>
+<p>我们对这个图跑一个欧拉回路按照我们跑出来的回路的方向定向每条边，永远满足出边的那个集合可以猜对就好。</p>
+<p>（trick：如果有一些点的度数为奇数，我们可以把这个点连接向一个边到虚拟点 n+1，这样可以满足所有点的度数为偶数）。<br>这个题目根据写法不同会需要二进制反转，太毒瘤了！</p>
+<h1 id="E-Permutation-Counting-2"><a href="#E-Permutation-Counting-2" class="headerlink" title="E - Permutation Counting 2"></a><a target="_blank" rel="noopener" href="https://qoj.ac/problem/7759">E - Permutation Counting 2</a></h1><p>直接计数很困难，考虑转化这个问题。其实个人觉得本质就是如何在一个好用的形式来描述这个问题。</p>
+<p>首先我们发现直接算 $k$ 个上升段不好算，于是我们进行容斥，改成钦定 $k$ 个上升段。</p>
+<p>这题，我们对于每一个连续段考虑整体转移。如果我们按照下标从小到大填了 $p$ 每一个连续段，那么也就相当于每次在 $p^{-1}$ 中填上了前几小的数字（而且这几个数组的下标就是我在 $p$ 中的值）。</p>
+<p>不难发现，我们用一个矩阵 $a_{i,j}$ 表示在填 $p$ 的第 $i$ 个连续段的同时，$p^{-1}$ 中第 $j$ 个连续段多填了多少个。</p>
+<p>这样我们就很好计算了，我们只要满足一下条件即可。</p>
+<ul>
+<li>每一行不全部为 $0$。</li>
+<li>每一列不全部为 $0$。</li>
+<li>矩阵内所有数字的和为 $n$。</li>
+</ul>
+<p>这个我们需要再来一次容斥，把前两个条件先去掉，最后再用二维二项式反演回去就行。</p>
+<p>一共要反演 $4$ 次。</p>
+<h1 id="P-Quantifier"><a href="#P-Quantifier" class="headerlink" title="P - Quantifier"></a><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/2081/E">P - Quantifier</a></h1><p>巨大的推式子题，先考虑每次把所有芯片尽量下放，然后再向上归并。</p>
+<p>设 $f_{u,i,j}$ 表示在节点 $u$，颜色为 $i$ 的芯片开头，连续开头长度为 $j$。</p>
+<p>式子太长了，不如放一下关键函数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">void merge(int g[2][N], int f[2][N], int m, int n) &#123; // g 的长度为 m，f 的长度为 n 合并这两个兄弟</span><br><span class="line">    // 清空</span><br><span class="line"></span><br><span class="line">    sg[0][m + 1] = sg[1][m + 1] = 0;</span><br><span class="line">    for (int i = m; i &gt;= 1; i--) &#123;</span><br><span class="line">        sg[0][i] = (sg[0][i + 1] + g[0][i]);</span><br><span class="line">        sg[1][i] = (sg[1][i + 1] + g[1][i]);</span><br><span class="line">    &#125;</span><br><span class="line">    sf[0][n + 1] = sf[1][n + 1] = 0;</span><br><span class="line">    for (int i = n; i &gt;= 1; i--) &#123;</span><br><span class="line">        sf[0][i] = (sf[0][i + 1] + f[0][i]);</span><br><span class="line">        sf[1][i] = (sf[1][i + 1] + f[1][i]);</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    // 省略取 mod</span><br><span class="line">    // 下面每个 for 中第一行为颜色相同的开头合并，其他为不同颜色合并</span><br><span class="line">    for (int i = 0; i &lt;= 1; i++) &#123;</span><br><span class="line">        for (int k = 0; k &lt; m; k++) &#123;</span><br><span class="line">            for (int t = 1; t &lt;= n; t++) &#123;</span><br><span class="line">                add(tmp[i][k + t], (ll)sg[i][k + 1] * f[i][t] * C[k + t][t] * C[m - k + n - t - 1][m - k]);</span><br><span class="line">                if (k) add(tmp[i][k], (ll)sg[i][k + 1] * f[i ^ 1][t] * C[m - k + n - 1][m - k]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for (int i = 0; i &lt;= 1; i++) &#123;</span><br><span class="line">        for (int k = 0; k &lt; n; k++) &#123;</span><br><span class="line">            for (int j = 1; j &lt;= m; j++) &#123;</span><br><span class="line">                add(tmp[i][k + j], (ll)g[i][j] * sf[i][k + 1] * C[k + j][j] * C[m - j - 1 + n - k][n - k]);</span><br><span class="line">                if (k) add(tmp[i][k], (ll)g[i ^ 1][j] * sf[i][k + 1] * C[m - 1 + n - k][n - k]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for (int i = 0; i &lt;= 1; i++) &#123;</span><br><span class="line">        for (int j = 1; j &lt;= m; j++) &#123;</span><br><span class="line">            for (int t = 1; t &lt;= n; t++) &#123;</span><br><span class="line">                add(tmp[i][j + t], (ll)g[i][j] * f[i][t] * C[j + t][t] * C[m - j + n - t][m - j]);</span><br><span class="line">                add(tmp[i][j], (ll)g[i][j] * f[i ^ 1][t] * C[m - j + n][n]);</span><br><span class="line">                add(tmp[i][t], (ll)g[i ^ 1][j] * f[i][t] * C[m + n - t][m]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for (int j = 0; j &lt;= 1; j++) &#123;</span><br><span class="line">        for (int k = 0; k &lt;= n + m; k++) &#123;</span><br><span class="line">            g[j][k] = tmp[j][k];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1050,102 +1271,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/04/20/cnblogs-%E9%A2%98%E5%8D%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wdwsy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wdwsy's Blog">
-      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | wdwsy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/04/20/cnblogs-%E9%A2%98%E5%8D%95/" class="post-title-link" itemprop="url">题单</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2026-04-20 20:00:00" itemprop="dateCreated datePublished" datetime="2026-04-20T20:00:00+08:00">2026-04-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-06-23 23:44:12" itemprop="dateModified" datetime="2026-06-23T23:44:12+08:00">2026-06-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">算法竞赛</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>原文来自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/sggfishpotato/p/19897687">博客园</a></p>
-</blockquote>
-<p>10013 14016<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/The-Shadow-Dragon/p/18650825">https://www.cnblogs.com/The-Shadow-Dragon/p/18650825</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/maoyiting/p/14178833.html">https://www.cnblogs.com/maoyiting/p/14178833.html</a></p>
-<p>10107</p>
-<p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/70442c8366ce0508763231126edb6f1aff007120.html">https://wenku.baidu.com/view/70442c8366ce0508763231126edb6f1aff007120.html</a>?<em>wkts</em>&#x3D;1768999790016&amp;needWelcomeRecommand&#x3D;1&amp;unResetStore&#x3D;1&amp;ILK&#x3D;17689997-0873-4238-0314-364190049713</p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/582114938">关于输出最大独立集</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/article/jhpww84r">关于输出最大独立集和最长反链</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.me/article/ny2po69f">杂题提单</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
