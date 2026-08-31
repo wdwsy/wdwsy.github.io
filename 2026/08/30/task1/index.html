@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"wdwsy.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":240},"hljswrap":true,"codeblock":{"theme":{"light":"github-dark","dark":"github-dark-dimmed"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat","show_result":true},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":true,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="算法竞赛、C++、OI 技术分享">
+    <meta name="description" content="P17334 「TPOI-2D」Still Shining题目描述给定长 $n$ 的数组 $a$。 对于一个 $1 \sim n$ 的排列 $p$，记 $t(p)&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}\sum_{j&#x3D;\min(p_i,p_{i-1})}^{\max(p_i,p_{i-1})}a_j$。特别的，令 $p_0&#x3D;p_n$。 设 $">
 <meta property="og:type" content="article">
 <meta property="og:title" content="task1">
 <meta property="og:url" content="https://wdwsy.github.io/2026/08/30/task1/index.html">
 <meta property="og:site_name" content="wdwsy&#39;s Blog">
-<meta property="og:description" content="算法竞赛、C++、OI 技术分享">
+<meta property="og:description" content="P17334 「TPOI-2D」Still Shining题目描述给定长 $n$ 的数组 $a$。 对于一个 $1 \sim n$ 的排列 $p$，记 $t(p)&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}\sum_{j&#x3D;\min(p_i,p_{i-1})}^{\max(p_i,p_{i-1})}a_j$。特别的，令 $p_0&#x3D;p_n$。 设 $">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-08-30T15:22:35.000Z">
-<meta property="article:modified_time" content="2026-08-30T15:23:17.639Z">
+<meta property="article:modified_time" content="2026-08-31T10:27:30.162Z">
 <meta property="article:author" content="wdwsy">
 <meta property="article:tag" content="算法,OIC++,NOI,信息学竞赛">
 <meta name="twitter:card" content="summary">
@@ -153,7 +153,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -166,6 +166,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#P17334-%E3%80%8CTPOI-2D%E3%80%8DStill-Shining"><span class="nav-number">1.</span> <span class="nav-text">P17334 「TPOI-2D」Still Shining</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%BB%E7%94%BB%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">刻画问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E6%82%94%E8%B4%AA%E5%BF%83"><span class="nav-number">1.3.</span> <span class="nav-text">反悔贪心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E7%A1%AE%E6%80%A7%E8%AF%81%E6%98%8E"><span class="nav-number">1.4.</span> <span class="nav-text">正确性证明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%BD%AC%E5%8C%96%E4%B8%BA%E8%B5%84%E6%BA%90%E5%88%86%E9%85%8D%E9%97%AE%E9%A2%98"><span class="nav-number">1.4.1.</span> <span class="nav-text">1. 转化为资源分配问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%94%A8%E8%B4%B9%E7%94%A8%E6%B5%81%E5%BB%BA%E6%A8%A1"><span class="nav-number">1.4.2.</span> <span class="nav-text">2. 用费用流建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%8F%8D%E6%82%94%E8%B4%AA%E5%BF%83%E5%AF%B9%E5%BA%94%E8%B4%B9%E7%94%A8%E6%B5%81%E7%9A%84%E8%BF%9E%E7%BB%AD%E6%9C%80%E7%9F%AD%E8%B7%AF"><span class="nav-number">1.4.3.</span> <span class="nav-text">3. 反悔贪心对应费用流的连续最短路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AF%E4%BB%A5%E4%BF%9D%E6%8C%81%E5%89%8D%E7%BC%80%E5%92%8C%E6%81%B0%E5%A5%BD%E4%B8%BA-1"><span class="nav-number">1.4.4.</span> <span class="nav-text">4. 为什么可以保持前缀和恰好为 $-1$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.5.</span> <span class="nav-text">5. 总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#slope-trick-%E5%81%9A%E6%B3%95"><span class="nav-number">1.5.</span> <span class="nav-text">slope trick 做法</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -180,7 +181,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -250,9 +251,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2026-08-30 23:22:35 / Modified: 23:23:17" itemprop="dateCreated datePublished" datetime="2026-08-30T23:22:35+08:00">2026-08-30</time>
+      <time title="Created: 2026-08-30 23:22:35" itemprop="dateCreated datePublished" datetime="2026-08-30T23:22:35+08:00">2026-08-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-08-31 18:27:30" itemprop="dateModified" datetime="2026-08-31T18:27:30+08:00">2026-08-31</time>
     </span>
 
   
@@ -271,7 +278,64 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body" itemprop="articleBody"><h1 id="P17334-「TPOI-2D」Still-Shining"><a href="#P17334-「TPOI-2D」Still-Shining" class="headerlink" title="P17334 「TPOI-2D」Still Shining"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P17334">P17334 「TPOI-2D」Still Shining</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定长 $n$ 的数组 $a$。</p>
+<p>对于一个 $1 \sim n$ 的排列 $p$，记 $t(p)&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}\sum_{j&#x3D;\min(p_i,p_{i-1})}^{\max(p_i,p_{i-1})}a_j$。<strong>特别的，令 $p_0&#x3D;p_n$。</strong></p>
+<p>设 $S$ 为所有长度为 $n$ 的排列组成的集合，求 $g(a)&#x3D;\displaystyle\min_{p \in S}\ t(p)$。</p>
+<h2 id="刻画问题"><a href="#刻画问题" class="headerlink" title="刻画问题"></a>刻画问题</h2><p>考虑去刻画这个问题。<br>我们的总体思路是用尽量少的变量来依托数学式子描述这个问题。</p>
+<p>设 $s_i&#x3D;\sum\limits_{i&#x3D;1}^{i} a_i$。</p>
+<p>那么<br>$$<br>t(p)&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}\sum_{j&#x3D;\min(p_i,p_{i-1})}^{\max(p_i,p_{i-1})}a_j&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}s_{\max(p_i,p_{i-1})}-s_{\min(p_i,p_{i-1}) -1}<br>$$</p>
+<p>我们继续拆这个式子，假设 $d_i$ 与值为 $i$ 的数字相邻的两个位置中比 $i$ 小的数字的个数。显然 $d_i&#x3D;0&#x2F;1&#x2F;2$。那么有<br>$$<br>t(p)&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}d_i\times s_i-(2-d_i)\times s_{i-1}<br>$$</p>
+<p>目前这个式子为两项差的形式，还是不是很优美，于是我们考虑继续简化。<br>我们想要合并同类项，于是设 $t_i&#x3D;d_i-1$。<br>$$<br>t(p)&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}(t_i+1)\times s_i-(1-t_i)\times s_{i-1}<br>$$<br>化简得到：<br>$$<br>t(p)&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}a_i+\displaystyle\sum_{i&#x3D;1}^{n}t_i\times (s_i+s_{i-1})<br>$$<br>但是我们不难发现此时 $t_i$ 任意取值不一定总能找到合法的构造方式，于是考虑 $t_i$ 的实际意义：</p>
+<ul>
+<li>$t_i&#x3D;-1$ 可以看作有两个待匹配的左括号。</li>
+<li>$t_i&#x3D;0$ 可以看作先形成了一个右括号和之前的括号匹配，然后再生成了一个左括号。</li>
+<li>$t_i&#x3D;1$ 可以看作生成了两个右括号。</li>
+</ul>
+<p>我们考虑有合法序列的条件其实就是这个括号序列合法（这个可以给读者自行证明），于是我们就转化为以下问题：</p>
+<p>约束条件：<br>$$<br>t_1&#x3D;-1\<br>t_n&#x3D;1\<br>\sum\limits_{i&#x3D;1}^{n} t_i &#x3D; 0 \<br>\forall k,\sum\limits_{i&#x3D;1}^{k} t_i \leq 0<br>$$<br>要求最小化<br>$$<br>t(p)&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}a_i+\displaystyle\sum_{i&#x3D;1}^{n}t_i\times (s_i+s_{i-1})<br>$$</p>
+<h2 id="反悔贪心"><a href="#反悔贪心" class="headerlink" title="反悔贪心"></a>反悔贪心</h2><p>我们每次加入 $i$ 位置的时候，保证当前 $t_i$ 的前缀和为 $-1$，先来贪心地假设其 $t_i&#x3D;1$，然后在大根堆里面放入两个 $s_i+s_{i-1}$ 表示可以反悔两次 $t_i$，使得其值减 $1$。那么此时 $t_i$ 的前缀和为 $0$，我们反悔队首元素即可继续保证 $t_i$ 的前缀和为 $-1$。 </p>
+<h2 id="正确性证明"><a href="#正确性证明" class="headerlink" title="正确性证明"></a>正确性证明</h2><p>我们可以用<strong>模拟费用流</strong>的视角来理解这个反悔贪心的正确性。</p>
+<hr>
+<h3 id="1-转化为资源分配问题"><a href="#1-转化为资源分配问题" class="headerlink" title="1. 转化为资源分配问题"></a>1. 转化为资源分配问题</h3><p>回顾转化后的目标：</p>
+<p>$$<br>\min \sum_{i&#x3D;1}^n t_i c_i<br>$$</p>
+<p>约束：</p>
+<p>$$<br>t_1&#x3D;-1,\quad t_n&#x3D;1,\quad -1\le t_i\le 1,\quad \sum_{i&#x3D;1}^n t_i&#x3D;0,\quad \forall k,\ \sum_{i&#x3D;1}^k t_i\le 0.<br>$$</p>
+<p>令 $x_i &#x3D; t_i+1$，则 $x_i\in{0,1,2}$，且 $x_1&#x3D;0,\ x_n&#x3D;2$。目标变为：</p>
+<p>$$<br>\min \sum_{i&#x3D;1}^n x_i c_i - \sum_{i&#x3D;1}^n c_i,<br>$$</p>
+<p>等价于最小化 $\sum x_i c_i$。约束：</p>
+<p>$$<br>\sum_{i&#x3D;1}^n x_i &#x3D; n,\quad \forall k,\ \sum_{i&#x3D;1}^k x_i \le k.<br>$$</p>
+<p>初始令所有中间位置 $x_i&#x3D;2$（即 $t_i&#x3D;1$），此时前 $k$ 个位置的和为 $1+2(k-1)&#x3D;2k-1$，显然超过了约束 $\le k$。我们需要将某些位置的 $x_i$ 减小（每个位置最多减 2 次），总共需要减去的总量为</p>
+<p>$$<br>\sum_{i&#x3D;2}^{n-1} (2 - x_i) &#x3D; n-2.<br>$$</p>
+<p>每次将某个 $x_j$ 减小 1，会使 $\sum x_i c_i$ 减小 $c_j$。因此，问题等价于：在满足前缀和约束的前提下，选择 $n-2$ 次“减 1”操作，使被减位置的 $c_j$ 之和尽可能大。</p>
+<hr>
+<h3 id="2-用费用流建模"><a href="#2-用费用流建模" class="headerlink" title="2. 用费用流建模"></a>2. 用费用流建模</h3><p>我们可以建立一个费用流模型：</p>
+<ul>
+<li>有 $n-2$ 个“减操作”需要分配到各个位置 $i&#x3D;2,\dots,n-1$。</li>
+<li>每个位置 $i$ 最多接受 2 次减操作（因为 $x_i$ 只能从 2 降到 0）。</li>
+<li>前缀和约束要求：对于任意 $k$，前 $k$ 个位置接受的减操作总数至少为 $k-2$（即 $\sum_{i&#x3D;2}^k b_i \ge k-2$，其中 $b_i&#x3D;2-x_i$）。</li>
+<li>目标是最小化 $\sum x_i c_i$，即最大化 $\sum b_i c_i$。</li>
+</ul>
+<p>这是一个经典的<strong>最小费用流</strong>问题：我们要从源点向每个位置连容量为 2、费用为 $-c_i$ 的边（因为最大化收益），再通过一些中间节点满足前缀约束。由于费用是线性的，且约束具有区间性，该费用流问题可以用反悔贪心求解。</p>
+<hr>
+<h3 id="3-反悔贪心对应费用流的连续最短路"><a href="#3-反悔贪心对应费用流的连续最短路" class="headerlink" title="3. 反悔贪心对应费用流的连续最短路"></a>3. 反悔贪心对应费用流的连续最短路</h3><p>在费用流中，若我们按照一定的顺序依次发送单位流量，每次选择当前费用最小的增广路，最终得到全局最优解。本题的约束恰好保证每次增广路都非常简单：</p>
+<ul>
+<li>初始时所有位置都未进行减操作，即所有 $b_i&#x3D;0$。</li>
+<li>我们依次处理位置 $i&#x3D;2,\dots,n-1$。</li>
+<li>当处理到位置 $i$ 时，为了满足前 $i$ 个位置的前缀约束（减操作总数至少为 $i-2$），我们需要在前 $i$ 个位置中额外增加一次减操作（因为之前已经保证了前 $i-1$ 个位置减操作总数为 $i-2$，现在前 $i$ 个位置需要 $i-1$ 次）。</li>
+<li>选择哪个位置进行这次减操作？显然应选择当前<strong>可减且收益最大</strong>的位置，即 $c_j$ 最大的位置。用大根堆维护即可。</li>
+</ul>
+<p>因为每次只增加一次减操作，且该操作只影响当前前缀约束，对后续没有后效性，所以这种贪心恰好对应费用流中每一步选择费用最小（收益最大）的增广路。由于费用流存在最优性原理，这样逐步构造的解就是全局最优。</p>
+<hr>
+<h3 id="4-为什么可以保持前缀和恰好为-1"><a href="#4-为什么可以保持前缀和恰好为-1" class="headerlink" title="4. 为什么可以保持前缀和恰好为 $-1$"></a>4. 为什么可以保持前缀和恰好为 $-1$</h3><p>算法保持每个前缀和 $\sum_{i&#x3D;1}^k t_i &#x3D; -1$，即前 $k$ 个位置减操作总数恰好为 $k-1$。这是所有可行解中最“紧”的情况：它刚好满足前缀约束 $\le 0$，且没有多余的缓冲。</p>
+<p>如果某个最优解在某个前缀处和小于 $-1$（即减操作多了），那么我们可以将多出的那次减操作移动到后面某个尚未减两次的位置，只要该位置的 $c_j$ 不小于原位置，就能使目标函数不增。经过这样的调整，最终可以得到一个前缀和始终为 $-1$ 的最优解。因此，算法保持 $-1$ 不会遗漏最优解。</p>
+<hr>
+<h3 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h3><ul>
+<li>反悔贪心的本质是<strong>模拟费用流</strong>：将减操作视为单位流量，每次选择收益最大的位置进行减操作。</li>
+<li>前缀和约束使得每一步需要增加的减操作数量是确定的，且每次只需新增一次，因此可以用堆高效实现。</li>
+<li>算法等价于在费用流网络中沿着最大收益的路径逐次增广，从而得到全局最优。</li>
+</ul>
+<p>因此，该反悔贪心是正确的。</p>
+<h2 id="slope-trick-做法"><a href="#slope-trick-做法" class="headerlink" title="slope trick 做法"></a>slope trick 做法</h2>
     </div>
 
     
@@ -289,6 +353,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2026/08/31/%E6%B5%85%E8%B0%88slope-trick/" rel="next" title="浅谈slope trick">
+                  浅谈slope trick <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>

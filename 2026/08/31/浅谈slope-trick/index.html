@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wdwsy.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":240},"hljswrap":true,"codeblock":{"theme":{"light":"github-dark","dark":"github-dark-dimmed"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat","show_result":true},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":true,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="slope trick 的核心是维护一个下凸的分段线性函数，通常用两个优先队列（堆）记录它的斜率变化点。下面把常见的技巧和模型梳理一下。  一、核心数据结构设当前凸函数为 $f(x)$，用：  左堆 L：大根堆，存储最小值平台左侧的负斜率变化点； 右堆 R：小根堆，存储最小值平台右侧的正斜率变化点； 两个全局懒标记： addL：左堆整体平移量； addR：右堆整体平移量； add：整个函数的斜率整">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈slope trick">
+<meta property="og:url" content="https://wdwsy.github.io/2026/08/31/%E6%B5%85%E8%B0%88slope-trick/index.html">
+<meta property="og:site_name" content="wdwsy&#39;s Blog">
+<meta property="og:description" content="slope trick 的核心是维护一个下凸的分段线性函数，通常用两个优先队列（堆）记录它的斜率变化点。下面把常见的技巧和模型梳理一下。  一、核心数据结构设当前凸函数为 $f(x)$，用：  左堆 L：大根堆，存储最小值平台左侧的负斜率变化点； 右堆 R：小根堆，存储最小值平台右侧的正斜率变化点； 两个全局懒标记： addL：左堆整体平移量； addR：右堆整体平移量； add：整个函数的斜率整">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-08-31T06:17:58.000Z">
+<meta property="article:modified_time" content="2026-08-31T06:19:20.834Z">
+<meta property="article:author" content="wdwsy">
+<meta property="article:tag" content="算法,OIC++,NOI,信息学竞赛">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://wdwsy.github.io/2026/08/31/%E6%B5%85%E8%B0%88slope-trick/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://wdwsy.github.io/2026/08/31/%E6%B5%85%E8%B0%88slope-trick/","path":"2026/08/31/浅谈slope-trick/","title":"浅谈slope trick"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>浅谈slope trick | wdwsy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">wdwsy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">算法的世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%A0%B8%E5%BF%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">一、核心数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C%E6%8A%80%E5%B7%A7"><span class="nav-number">2.</span> <span class="nav-text">二、常见操作技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%8A%A0%E5%85%A5%E7%BB%9D%E5%AF%B9%E5%80%BC%E5%87%BD%E6%95%B0-x-a"><span class="nav-number">2.1.</span> <span class="nav-text">1. 加入绝对值函数 $ |x-a| $</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%8A%A0%E4%B8%8A%E7%BA%BF%E6%80%A7%E9%A1%B9-c-x"><span class="nav-number">2.2.</span> <span class="nav-text">2. 加上线性项 $c x$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Lipschitz-%E8%BD%AC%E7%A7%BB"><span class="nav-number">2.3.</span> <span class="nav-text">3. Lipschitz 转移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%88%AA%E6%96%AD-%E5%8C%BA%E9%97%B4%E9%99%90%E5%88%B6"><span class="nav-number">2.4.</span> <span class="nav-text">4. 截断 &#x2F; 区间限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%B9%B3%E7%A7%BB%E6%95%B4%E4%B8%AA%E5%87%BD%E6%95%B0"><span class="nav-number">2.5.</span> <span class="nav-text">5. 平移整个函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%8F%96%E6%9C%80%E5%B0%8F%E5%80%BC-%E6%8B%BC%E6%8E%A5%E6%93%8D%E4%BD%9C"><span class="nav-number">2.6.</span> <span class="nav-text">6. 取最小值 &#x2F; 拼接操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E7%BB%B4%E6%8A%A4%E5%B8%B8%E6%95%B0%E9%A1%B9"><span class="nav-number">2.7.</span> <span class="nav-text">7. 维护常数项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%B8%B8%E8%A7%81%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">三、常见模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%BB%9D%E5%AF%B9%E4%B8%AD%E4%BD%8D%E6%95%B0%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.</span> <span class="nav-text">1. 绝对中位数问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%9B%B8%E9%82%BB%E5%B7%AE%E7%BA%A6%E6%9D%9F%E7%9A%84%E7%BA%BF%E6%80%A7%E4%BB%A3%E4%BB%B7"><span class="nav-number">3.2.</span> <span class="nav-text">2. 相邻差约束的线性代价</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BF%9D%E5%BA%8F%E5%9B%9E%E5%BD%92%EF%BC%88Isotonic-Regression%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">3. 保序回归（Isotonic Regression）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%82%A1%E7%A5%A8%E4%BA%A4%E6%98%93-%E6%8C%81%E4%BB%93%E9%97%AE%E9%A2%98"><span class="nav-number">3.4.</span> <span class="nav-text">4. 股票交易 &#x2F; 持仓问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%8C%BA%E9%97%B4%E6%89%A9%E5%B1%95%E4%BB%A3%E4%BB%B7"><span class="nav-number">3.5.</span> <span class="nav-text">5. 区间扩展代价</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%87%B8%E8%B5%84%E6%BA%90%E5%88%86%E9%85%8D"><span class="nav-number">3.6.</span> <span class="nav-text">6. 凸资源分配</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%AE%9E%E7%8E%B0%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="nav-number">4.</span> <span class="nav-text">四、实现注意点</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wdwsy"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">wdwsy</p>
+  <div class="site-description" itemprop="description">算法竞赛、C++、OI 技术分享</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wdwsy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wdwsy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/08/31/%E6%B5%85%E8%B0%88slope-trick/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="浅谈slope trick | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          浅谈slope trick
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-08-31 14:17:58 / Modified: 14:19:20" itemprop="dateCreated datePublished" datetime="2026-08-31T14:17:58+08:00">2026-08-31</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>slope trick 的核心是维护一个<strong>下凸的分段线性函数</strong>，通常用两个优先队列（堆）记录它的斜率变化点。下面把常见的技巧和模型梳理一下。</p>
+<hr>
+<h2 id="一、核心数据结构"><a href="#一、核心数据结构" class="headerlink" title="一、核心数据结构"></a>一、核心数据结构</h2><p>设当前凸函数为 $f(x)$，用：</p>
+<ul>
+<li><strong>左堆 <code>L</code></strong>：大根堆，存储最小值平台左侧的负斜率变化点；</li>
+<li><strong>右堆 <code>R</code></strong>：小根堆，存储最小值平台右侧的正斜率变化点；</li>
+<li>两个全局懒标记：<ul>
+<li><code>addL</code>：左堆整体平移量；</li>
+<li><code>addR</code>：右堆整体平移量；</li>
+<li><code>add</code>：整个函数的斜率整体偏移量；</li>
+<li><code>min_val</code>：当前最小函数值。</li>
+</ul>
+</li>
+</ul>
+<p>始终维护：</p>
+<p>$$<br>\max(L) \le \min(R)<br>$$</p>
+<p>否则交换两者，并更新最小值。</p>
+<hr>
+<h2 id="二、常见操作技巧"><a href="#二、常见操作技巧" class="headerlink" title="二、常见操作技巧"></a>二、常见操作技巧</h2><h3 id="1-加入绝对值函数-x-a"><a href="#1-加入绝对值函数-x-a" class="headerlink" title="1. 加入绝对值函数 $ |x-a| $"></a>1. 加入绝对值函数 $ |x-a| $</h3><p>相当于在 $a$ 处斜率从 $-1$ 跳到 $+1$，总斜率跳变 $+2$。</p>
+<p>实现时把 $a$ 插入左堆和右堆各一次：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">L.push(a - addL)</span><br><span class="line">R.push(a - addR)</span><br></pre></td></tr></table></figure>
+
+<p>然后检查是否 <code>max(L) &gt; min(R)</code>，如果发生，则交换堆顶并调整 <code>min_val</code>。</p>
+<hr>
+<h3 id="2-加上线性项-c-x"><a href="#2-加上线性项-c-x" class="headerlink" title="2. 加上线性项 $c x$"></a>2. 加上线性项 $c x$</h3><p>整体斜率加 $c$，可用全局标记：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add += c</span><br></pre></td></tr></table></figure>
+
+<p>如果 $c&gt;0$，最小值点可能左移；如果 $c&lt;0$，最小值点可能右移。<br>具体实现时可以通过插入断点来模拟，但全局懒标记更高效。</p>
+<hr>
+<h3 id="3-Lipschitz-转移"><a href="#3-Lipschitz-转移" class="headerlink" title="3. Lipschitz 转移"></a>3. Lipschitz 转移</h3><p>常见转移：</p>
+<p>$$<br>g(x)&#x3D;\min_{y\in[x-d,;x+d]} f(y)<br>$$</p>
+<p>这个操作的 slope trick 实现是：</p>
+<ul>
+<li>最小值平台左右各扩展 $d$；</li>
+<li>所有负斜率断点左移 $d$；</li>
+<li>所有正斜率断点右移 $d$。</li>
+</ul>
+<p>即：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">addL -= d</span><br><span class="line">addR += d</span><br></pre></td></tr></table></figure>
+
+<p>这是处理相邻差约束的核心技巧。</p>
+<hr>
+<h3 id="4-截断-区间限制"><a href="#4-截断-区间限制" class="headerlink" title="4. 截断 &#x2F; 区间限制"></a>4. 截断 &#x2F; 区间限制</h3><p>若约束 $x \ge L$：</p>
+<ul>
+<li>删除左堆中实际位置小于 $L$ 的断点；</li>
+<li>若最小值平台左端小于 $L$，则把左端拉到 $L$，并更新 <code>min_val</code>。</li>
+</ul>
+<p>若约束 $x \le R$：</p>
+<ul>
+<li>对称地处理右堆。</li>
+</ul>
+<p>若约束 $x \in [L,R]$，则两边都做。</p>
+<hr>
+<h3 id="5-平移整个函数"><a href="#5-平移整个函数" class="headerlink" title="5. 平移整个函数"></a>5. 平移整个函数</h3><p>如果令 $x’ &#x3D; x - a$，即函数整体向右平移 $a$，只需：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">addL += a</span><br><span class="line">addR += a</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="6-取最小值-拼接操作"><a href="#6-取最小值-拼接操作" class="headerlink" title="6. 取最小值 &#x2F; 拼接操作"></a>6. 取最小值 &#x2F; 拼接操作</h3><p>例如求两个凸函数的最小值：</p>
+<p>$$<br>h(x)&#x3D;\min(f(x), g(x))<br>$$</p>
+<p>slope trick 一般不支持直接做，但很多 DP 转移本质是：</p>
+<p>$$<br>h(x)&#x3D;\min_{y} {f(y) + \text{cost}(x,y)}<br>$$</p>
+<p>如果 cost 是 $|x-y|$ 或区间限制，就可以用上述平移、加绝对值等组合完成。</p>
+<hr>
+<h3 id="7-维护常数项"><a href="#7-维护常数项" class="headerlink" title="7. 维护常数项"></a>7. 维护常数项</h3><p>每当左右堆发生重排、截断、扩展时，最小值可能改变，要更新：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">min_val += ...</span><br></pre></td></tr></table></figure>
+
+<p>比如在加绝对值后交换堆顶时，最小值的增量通常是 $2 \times ( \max(L)-\min(R) )$ 的绝对值。</p>
+<hr>
+<h2 id="三、常见模型"><a href="#三、常见模型" class="headerlink" title="三、常见模型"></a>三、常见模型</h2><h3 id="1-绝对中位数问题"><a href="#1-绝对中位数问题" class="headerlink" title="1. 绝对中位数问题"></a>1. 绝对中位数问题</h3><p>给一串数 $a_1,\dots,a_n$，求最小化：</p>
+<p>$$<br>\sum_{i&#x3D;1}^n |x-a_i|<br>$$</p>
+<p>经典结论是最小值在任意中位数处取得。<br>用 slope trick 维护就是依次插入每个 $a_i$，左右堆分别存较小一半和较大一半，最小值平台就是中位数区间。</p>
+<hr>
+<h3 id="2-相邻差约束的线性代价"><a href="#2-相邻差约束的线性代价" class="headerlink" title="2. 相邻差约束的线性代价"></a>2. 相邻差约束的线性代价</h3><p>比如：</p>
+<p>$$<br>\min \sum_{i&#x3D;1}^{n} c_i x_i<br>$$</p>
+<p>约束：</p>
+<p>$$<br>|x_i-x_{i-1}| \le 1<br>$$</p>
+<p>这正是你前面提到的问题。<br>核心操作是：</p>
+<ul>
+<li>Lipschitz 转移：左右断点分别平移；</li>
+<li>加线性项：全局 <code>add</code>；</li>
+<li>非负约束：截断。</li>
+</ul>
+<hr>
+<h3 id="3-保序回归（Isotonic-Regression）"><a href="#3-保序回归（Isotonic-Regression）" class="headerlink" title="3. 保序回归（Isotonic Regression）"></a>3. 保序回归（Isotonic Regression）</h3><p>给定 $y_i$，求非降序列 $x_1\le x_2\le \dots \le x_n$，最小化：</p>
+<p>$$<br>\sum_{i&#x3D;1}^n |x_i-y_i|<br>$$</p>
+<p>这是一个经典 slope trick 应用。<br>每步把 $y_i$ 插入左堆，然后如果出现违反非降条件，就把左堆最大值拉回，等价于调整断点。</p>
+<hr>
+<h3 id="4-股票交易-持仓问题"><a href="#4-股票交易-持仓问题" class="headerlink" title="4. 股票交易 &#x2F; 持仓问题"></a>4. 股票交易 &#x2F; 持仓问题</h3><p>状态 $x$ 表示当前持仓量，转移可能有：</p>
+<ul>
+<li>买入&#x2F;卖出费用与 $x$ 线性相关；</li>
+<li>持仓变化量有限制；</li>
+<li>风险代价为 $|x|$ 或 $|x-a|$。</li>
+</ul>
+<p>这类 DP 的函数也是凸的，可以用 slope trick 优化。</p>
+<hr>
+<h3 id="5-区间扩展代价"><a href="#5-区间扩展代价" class="headerlink" title="5. 区间扩展代价"></a>5. 区间扩展代价</h3><p>形如：</p>
+<p>$$<br>g(x)&#x3D;\min_{y} { f(y) + w \cdot |x-y| }<br>$$</p>
+<p>相当于：</p>
+<ul>
+<li>先做 Lipschitz 扩展；</li>
+<li>再加上 $w|x|$ 或 $w|x-a|$。</li>
+</ul>
+<p>很多动态规划都可以归约到这个形式。</p>
+<hr>
+<h3 id="6-凸资源分配"><a href="#6-凸资源分配" class="headerlink" title="6. 凸资源分配"></a>6. 凸资源分配</h3><p>给 n 个任务分配连续资源 $x_i$，代价是凸函数 $c_i(x_i)$，总资源有限：</p>
+<p>$$<br>\sum x_i &#x3D; S<br>$$</p>
+<p>如果 $c_i$ 是分段线性凸函数，可以用 slope trick + 二分拉格朗日乘子解决。</p>
+<hr>
+<h2 id="四、实现注意点"><a href="#四、实现注意点" class="headerlink" title="四、实现注意点"></a>四、实现注意点</h2><ul>
+<li><p><strong>整数断点与实数断点</strong>：<br>若斜率变化为整数，可以直接用堆；若为实数，需要带权断点或用平衡树。</p>
+</li>
+<li><p><strong>懒标记</strong>：<br>左右堆的实际值 &#x3D; 堆内值 + 对应的 <code>addL</code> &#x2F; <code>addR</code>。<br>插入新断点时，先减去懒标记再入堆。</p>
+</li>
+<li><p><strong>初始状态</strong>：<br>常设置为某个单点约束，例如 $x&#x3D;0$ 处有值，其余为 $+\infty$，对应在左右堆中插入该点。</p>
+</li>
+<li><p><strong>维护最小值</strong>：<br>最小值通常出现在左堆最大值和右堆最小值之间，更新时要注意常数项变化。</p>
+</li>
+</ul>
+<hr>
+<p>总结一下，slope trick 的本质是：</p>
+<blockquote>
+<p>用两个堆维护凸函数的斜率断点，<br>用懒标记处理平移、加线性项、截断，<br>从而把复杂的 min-plus DP 转移变成 O(log n) 的堆操作。</p>
+</blockquote>
+<p>常见组合是：</p>
+<p>$$<br>\text{Lipschitz 扩展} + \text{绝对值惩罚} + \text{线性项}<br>$$</p>
+<p>掌握了这几个基本操作，就能套用到大量凸分段线性 DP 中。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/08/30/task1/" rel="prev" title="task1">
+                  <i class="fa fa-angle-left"></i> task1
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/08/31/%E6%B5%85%E8%B0%88%E4%B8%80%E7%B1%BB%E4%B8%8A%E4%BC%A0%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/" rel="next" title="浅谈一类上传序列问题">
+                  浅谈一类上传序列问题 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class=""></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">wdwsy</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

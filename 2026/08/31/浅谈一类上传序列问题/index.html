@@ -20,27 +20,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"wdwsy.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":240},"hljswrap":true,"codeblock":{"theme":{"light":"github-dark","dark":"github-dark-dimmed"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat","show_result":true},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":true,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="原文来自 博客园  A - 谜题 II官方题解https:&#x2F;&#x2F;chat.deepseek.com&#x2F;share&#x2F;xrylflnahyz8ijyjns 首先我们按照小于好方向建边，$A_{x1,y1}&lt;A_{x2,y2}$ 那么就建边 $(x1,y1) \to (x2,y2)$。那么，这个问题就是一个拓扑序计数，一个常见的想法是把边容斥掉。但是即便这样还是很难化简问题，我们会发现有些边没有办法">
+    <meta name="description" content="E - Child to Parentfzoj战争 形式化题面给定一棵 $n$ 个点以 1 为根的树，初始点有点权 $a_i$。 定义一次操作为选择一个 $a_u &gt; 0$ 的点，令 $a_u \leftarrow a_u - 1, a_{fa_u} \leftarrow a_{fa_u} + k$。求任意次操作后可能得到的序列 $a$ 的数量。 做法用这个题目来介绍一下这个上传序列问题到底">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2026年5月18日讲题题单">
-<meta property="og:url" content="https://wdwsy.github.io/2026/05/19/cnblogs-2026%E5%B9%B45%E6%9C%8818%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/index.html">
+<meta property="og:title" content="浅谈一类上传序列问题">
+<meta property="og:url" content="https://wdwsy.github.io/2026/08/31/%E6%B5%85%E8%B0%88%E4%B8%80%E7%B1%BB%E4%B8%8A%E4%BC%A0%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="wdwsy&#39;s Blog">
-<meta property="og:description" content="原文来自 博客园  A - 谜题 II官方题解https:&#x2F;&#x2F;chat.deepseek.com&#x2F;share&#x2F;xrylflnahyz8ijyjns 首先我们按照小于好方向建边，$A_{x1,y1}&lt;A_{x2,y2}$ 那么就建边 $(x1,y1) \to (x2,y2)$。那么，这个问题就是一个拓扑序计数，一个常见的想法是把边容斥掉。但是即便这样还是很难化简问题，我们会发现有些边没有办法">
+<meta property="og:description" content="E - Child to Parentfzoj战争 形式化题面给定一棵 $n$ 个点以 1 为根的树，初始点有点权 $a_i$。 定义一次操作为选择一个 $a_u &gt; 0$ 的点，令 $a_u \leftarrow a_u - 1, a_{fa_u} \leftarrow a_{fa_u} + k$。求任意次操作后可能得到的序列 $a$ 的数量。 做法用这个题目来介绍一下这个上传序列问题到底">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-05-19T12:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-23T15:44:12.850Z">
+<meta property="article:published_time" content="2026-08-31T10:25:09.000Z">
+<meta property="article:modified_time" content="2026-08-31T10:25:24.629Z">
 <meta property="article:author" content="wdwsy">
-<meta property="article:tag" content="题单">
+<meta property="article:tag" content="算法,OIC++,NOI,信息学竞赛">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://wdwsy.github.io/2026/05/19/cnblogs-2026%E5%B9%B45%E6%9C%8818%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/">
+<link rel="canonical" href="https://wdwsy.github.io/2026/08/31/%E6%B5%85%E8%B0%88%E4%B8%80%E7%B1%BB%E4%B8%8A%E4%BC%A0%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://wdwsy.github.io/2026/05/19/cnblogs-2026%E5%B9%B45%E6%9C%8818%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/","path":"2026/05/19/cnblogs-2026年5月18日讲题题单/","title":"2026年5月18日讲题题单"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://wdwsy.github.io/2026/08/31/%E6%B5%85%E8%B0%88%E4%B8%80%E7%B1%BB%E4%B8%8A%E4%BC%A0%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/","path":"2026/08/31/浅谈一类上传序列问题/","title":"浅谈一类上传序列问题"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>2026年5月18日讲题题单 | wdwsy's Blog</title>
+<title>浅谈一类上传序列问题 | wdwsy's Blog</title>
   
 
 
@@ -166,7 +166,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A-%E8%B0%9C%E9%A2%98-II"><span class="nav-number">1.</span> <span class="nav-text">A - 谜题 II</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#E-Child-to-Parent"><span class="nav-number">1.</span> <span class="nav-text">E - Child to Parent</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%A2%E5%BC%8F%E5%8C%96%E9%A2%98%E9%9D%A2"><span class="nav-number">1.1.</span> <span class="nav-text">形式化题面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">做法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P14991-%E6%88%98%E7%95%A5%E6%B8%B8%E6%88%8F"><span class="nav-number">2.</span> <span class="nav-text">P14991 战略游戏</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -223,7 +223,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/05/19/cnblogs-2026%E5%B9%B45%E6%9C%8818%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/08/31/%E6%B5%85%E8%B0%88%E4%B8%80%E7%B1%BB%E4%B8%8A%E4%BC%A0%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -236,12 +236,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="2026年5月18日讲题题单 | wdwsy's Blog">
+      <meta itemprop="name" content="浅谈一类上传序列问题 | wdwsy's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          2026年5月18日讲题题单
+          浅谈一类上传序列问题
         </h1>
 
         <div class="post-meta-container">
@@ -251,24 +251,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2026-05-19 20:00:00" itemprop="dateCreated datePublished" datetime="2026-05-19T20:00:00+08:00">2026-05-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-06-23 23:44:12" itemprop="dateModified" datetime="2026-06-23T23:44:12+08:00">2026-06-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">算法竞赛</span></a>
-        </span>
+      <time title="Created: 2026-08-31 18:25:09 / Modified: 18:25:24" itemprop="dateCreated datePublished" datetime="2026-08-31T18:25:09+08:00">2026-08-31</time>
     </span>
 
   
@@ -287,11 +272,29 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><blockquote>
-<p>原文来自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/sggfishpotato/p/20083913">博客园</a></p>
-</blockquote>
-<h1 id="A-谜题-II"><a href="#A-谜题-II" class="headerlink" title="A - 谜题 II"></a><a target="_blank" rel="noopener" href="https://qoj.ac/problem/17203">A - 谜题 II</a></h1><p><a target="_blank" rel="noopener" href="https://qoj.ac/download.php?type=solution&id=17203">官方题解</a><br><a target="_blank" rel="noopener" href="https://chat.deepseek.com/share/xrylflnahyz8ijyjns">https://chat.deepseek.com/share/xrylflnahyz8ijyjns</a></p>
-<p>首先我们按照小于好方向建边，$A_{x1,y1}&lt;A_{x2,y2}$ 那么就建边 $(x1,y1) \to (x2,y2)$。<br>那么，这个问题就是一个拓扑序计数，一个常见的想法是把边容斥掉。但是即便这样还是很难化简问题，我们会发现有些边没有办法容斥掉。<br>首先这个图的点数 $2^k$ 十分特殊，我们假设这个图不是弱联通的，那么就存在不连通的两部分时独立的，在结合这两部分的时候，就需要乘上一个组合数 $2^k \choose x $，$0 &lt; x &lt; 2^k$ 根据卢卡斯定理，这个式子在 mod 2 意义下总是 0。<br>接下来我们就发现我们就可以任意反向割边了，这样就可以转化图了，我们可以发现原图有环就会无解，否则我么可以把 DAG 全部转化为一棵内向树，因为树上的边都是割边。由于在 2 行的网格图中，最多度数为 3，其中一个是父亲，所以一个点最多有两个儿子。那么这个树的拓扑序方案数为奇数，当且仅当每一个为有两个孩子的节点，他的两个子树的大小的二进制位没有交。<br>还有一个容易忽略的转化，就是我们每次把图上横边定向为向右，其实是想在做网格dp的时候顺便进行最后内向树的树形dp，更好的利用本道题目的性质来优化。<br>还有一个dp trick就是把我们的条件放到枚举里面，这题就是把枚举所有可能的前驱，变成枚举子集降低了复杂度。<br>这样进行一些推式子之后还是没有办法做到正确的复杂度，但是我们敏锐地发现数据组数位 32，而且输入的时候也是用 unsigned 把这 32 组数据压在一个整形内的，32 刚好是 unsigned 类型的大小，于是我们考虑把 T 组数据一起处理，我们惊讶地发现无论 dp,a,b,c 这些数组如何，都不会影响我们都有固定的转移路径（只不过有些边不能转移），于是我们整体转移就可以消除一个 32 的常数，就可以通过了。</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="E-Child-to-Parent"><a href="#E-Child-to-Parent" class="headerlink" title="E - Child to Parent"></a><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/agc063/tasks/agc063_e">E - Child to Parent</a></h1><p><a target="_blank" rel="noopener" href="http://172.17.226.198/OnlineJudge/contestproblem.php?id=15975740">fzoj战争</a></p>
+<h2 id="形式化题面"><a href="#形式化题面" class="headerlink" title="形式化题面"></a>形式化题面</h2><p>给定一棵 $n$ 个点以 1 为根的树，初始点有点权 $a_i$。</p>
+<p>定义一次操作为选择一个 $a_u &gt; 0$ 的点，令 $a_u \leftarrow a_u - 1, a_{fa_u} \leftarrow a_{fa_u} + k$。求任意次操作后可能得到的序列 $a$ 的数量。</p>
+<h2 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h2><p>用这个题目来介绍一下这个上传序列问题到底是什么东西。</p>
+<p>首先我们发现，如果我们固定了每个位置的操作次数，那么，只需要对这这个操作次数序列计数，那么就等价于原来序列的个数。<br>显然，我们可以直接从叶子到根依次操作一定不劣。<br>我们要是直接对这个题目暴力 dp，会发现，由于值域太大，所以每次记录当前位置剩余的点的个数是同样和值域有关系，所以不行。</p>
+<p>我们考虑重新刻画这个问题，让这个问题更加具体。<br>初始情况下，我们可以把每一个位置上的值 $a_i$ 看作 $a_i$ 个不同的物品，代表第 $i$ 个物品的二元组为 $(dfn_i,i)$，然后我们每次相当于是把子树中的物品合并进来，可以发现，现在每次合并之后仍然能保证所有二元组有序，然后我们接下来需要把手里的物品进行“上传”，也就对应了本题（-1 父亲 +k）的操作，由于所有物品本质上是等价的，所以我们可以钦定每次上传的都是一个前缀的物品。</p>
+<p>我们一通操作什么用都没有，别急，重要的来了。<br>我们考虑到底那些位置是重要的，其实我们只需要刻画出每次上传的“断点”位置，（也就是说端点之前的会上传，端点及其之后的位置会不上传）就好了。于是我们使用提前钦定的思想，在初始状态下，就去钦定每一个物品是不是断点。</p>
+<p>在上传的时候，显然最后一个钦定的断点就是当前的断点（不然就有端点不合法，被提前删掉了）。</p>
+<p>考虑设置 dp。<br>设 $f_{u,i}$ 表示在点 $u$ 的物品序列中有 $i$ 个断点的方案数。<br>$g_{u,i}$ 表示从 $u$ 上传 $i$ 个断点的方案数。<br>此外我们还需要一个预处理的数组，因为我们在上传的过程中，每一个物品可以分裂出 $k$ 个，这也可能会导致新增加断点，$dp_{i,j}$ 表示原来有 $i$ 个断点，在上传的时候变成了 $j$ 个断点的方案数。</p>
+<p>转移如下：</p>
+<ul>
+<li>初始化 $f_{u,i}&#x3D; {a_u\choose i}$</li>
+<li>合并子树 $f^\prime_{u,i}&#x3D;\sum f_{u,j}\times g_{v,i-j}$ </li>
+<li>当前位置可能使用掉一个断点 $f^\prime_{u,i}&#x3D;f_{u,i}+f_{u,i+1}$</li>
+<li>转换为上传序列 $g_{u,i}&#x3D;f_{u,j}\times dp_{j,i}$</li>
+<li>$dp_{i,j}&#x3D;dp_{i-1,x}\times {k\choose j-x}$</li>
+</ul>
+<p>最后一定要让所有断点全部用完，这样才能用断点来唯一刻画一个序列。<br>所以答案为 $f_{1,0}$ （1为根）</p>
+<p>小总结：<br>其实我们发现，这种类型的题目特征为，操作的点数量很多（$a_i$ 很大），操作大致为删点，但是删除点的次数只有 $O(n)$ 次，那么我们就可以用这种钦定关键点的方法。<br>em。。可能这里还要要求 $a_i$ 个物品要能够被视作相同的。</p>
+<p>在 dp 设计上我们可以设置 $f_{u,i}$ 表示有 $i$ 个段点的方案数，然后设 $g_{u,i}$ 表示上传了 $i$ 个端点的方案数，然后考虑用辅助数组或者其他方式进行转移 $f\rightarrow g\rightarrow f\rightarrow \dots$</p>
+<p>切记，这种问题由于进行了转化，一定要保证端点序列能够唯一对应一个答案序列！！</p>
+<h1 id="P14991-战略游戏"><a href="#P14991-战略游戏" class="headerlink" title="P14991 战略游戏"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P14991">P14991 战略游戏</a></h1><p><a href="https://wdwsy.github.io/2026/07/09/2026%E5%B9%B47%E6%9C%8810%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/?highlight=%E6%88%98%E7%95%A5#%E2%AD%90%EF%B8%8FG-%E6%88%98%E7%95%A5%E6%B8%B8%E6%88%8F">题解索引</a></p>
+<p>这个题目的区别就是，由于点上要求相邻颜色不同，但是边上可能相邻颜色相同，所以转移的时候需要枚举 $t_i$ 表示在 $b_i$ 次拓展中有多少次仍然相邻颜色相同，然后乘上容斥系数 $(-1)^{t_i}$。最后转移完成之后，还要给原来钦定在一起的位置解除绑定。</p>
 
     </div>
 
@@ -300,22 +303,16 @@
     
 
     <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E9%A2%98%E5%8D%95/" rel="tag"># 题单</a>
-          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2026/05/17/cnblogs-high-elements-%E9%A2%98%E8%A7%A3/" rel="prev" title="High Elements 题解">
-                  <i class="fa fa-angle-left"></i> High Elements 题解
+                <a href="/2026/08/31/%E6%B5%85%E8%B0%88slope-trick/" rel="prev" title="浅谈slope trick">
+                  <i class="fa fa-angle-left"></i> 浅谈slope trick
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2026/05/20/cnblogs-2026%E5%B9%B45%E6%9C%8816%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/" rel="next" title="2026年5月16日讲题题单">
-                  2026年5月16日讲题题单 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
