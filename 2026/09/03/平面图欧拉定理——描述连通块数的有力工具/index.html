@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"wdwsy.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":240},"hljswrap":true,"codeblock":{"theme":{"light":"github-dark","dark":"github-dark-dimmed"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat","show_result":true},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":true,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="平面图定义：除了顶点之外，平面内没有任何一个点被大于 $1$ 条边经过点图为平面图。 定理内容平面图欧拉定理简洁地揭示了图中常见量：顶点数 $V$, 边数 $E$，面数 $F$，连通块数 $K$ 之间的关系。具体等式如下：$$V-E+F&#x3D;K$$ 这是类似于容斥的形式，应该容易理解，可以描述为 $\test{1维}-\test{2维}+\test{3维}&#x3D;\test{连通块数}$">
+    <meta name="description" content="平面图定义：除了顶点之外，平面内没有任何一个点被大于 $1$ 条边经过点图为平面图。 定理内容平面图欧拉定理简洁地揭示了图中常见量：顶点数 $V$, 边数 $E$，面数 $F$，连通块数 $K$ 之间的关系。具体等式如下：$$V-E+F&#x3D;K$$ 这是类似于容斥的形式，应该容易理解，可以描述为 $\text{1维}-\text{2维}+\text{3维}&#x3D;\text{连通块数}$">
 <meta property="og:type" content="article">
 <meta property="og:title" content="平面图欧拉定理——描述连通块数的有力工具">
 <meta property="og:url" content="https://wdwsy.github.io/2026/09/03/%E5%B9%B3%E9%9D%A2%E5%9B%BE%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86%E2%80%94%E2%80%94%E6%8F%8F%E8%BF%B0%E8%BF%9E%E9%80%9A%E5%9D%97%E6%95%B0%E7%9A%84%E6%9C%89%E5%8A%9B%E5%B7%A5%E5%85%B7/index.html">
 <meta property="og:site_name" content="wdwsy&#39;s Blog">
-<meta property="og:description" content="平面图定义：除了顶点之外，平面内没有任何一个点被大于 $1$ 条边经过点图为平面图。 定理内容平面图欧拉定理简洁地揭示了图中常见量：顶点数 $V$, 边数 $E$，面数 $F$，连通块数 $K$ 之间的关系。具体等式如下：$$V-E+F&#x3D;K$$ 这是类似于容斥的形式，应该容易理解，可以描述为 $\test{1维}-\test{2维}+\test{3维}&#x3D;\test{连通块数}$">
+<meta property="og:description" content="平面图定义：除了顶点之外，平面内没有任何一个点被大于 $1$ 条边经过点图为平面图。 定理内容平面图欧拉定理简洁地揭示了图中常见量：顶点数 $V$, 边数 $E$，面数 $F$，连通块数 $K$ 之间的关系。具体等式如下：$$V-E+F&#x3D;K$$ 这是类似于容斥的形式，应该容易理解，可以描述为 $\text{1维}-\text{2维}+\text{3维}&#x3D;\text{连通块数}$">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-09-03T04:32:53.000Z">
-<meta property="article:modified_time" content="2026-09-03T05:02:42.496Z">
+<meta property="article:modified_time" content="2026-09-03T14:06:56.339Z">
 <meta property="article:author" content="wdwsy">
 <meta property="article:tag" content="算法,OIC++,NOI,信息学竞赛">
 <meta name="twitter:card" content="summary">
@@ -253,7 +253,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2026-09-03 12:32:53 / Modified: 13:02:42" itemprop="dateCreated datePublished" datetime="2026-09-03T12:32:53+08:00">2026-09-03</time>
+      <time title="Created: 2026-09-03 12:32:53 / Modified: 22:06:56" itemprop="dateCreated datePublished" datetime="2026-09-03T12:32:53+08:00">2026-09-03</time>
     </span>
 
   
@@ -274,7 +274,7 @@
     
     <div class="post-body" itemprop="articleBody"><h1 id="平面图"><a href="#平面图" class="headerlink" title="平面图"></a>平面图</h1><p>定义：除了顶点之外，平面内没有任何一个点被大于 $1$ 条边经过点图为平面图。</p>
 <h1 id="定理内容"><a href="#定理内容" class="headerlink" title="定理内容"></a>定理内容</h1><p>平面图欧拉定理简洁地揭示了图中常见量：顶点数 $V$, 边数 $E$，面数 $F$，连通块数 $K$ 之间的关系。<br>具体等式如下：<br>$$<br>V-E+F&#x3D;K<br>$$</p>
-<p>这是类似于容斥的形式，应该容易理解，可以描述为 $\test{1维}-\test{2维}+\test{3维}&#x3D;\test{连通块数}$</p>
+<p>这是类似于容斥的形式，应该容易理解，可以描述为 $\text{1维}-\text{2维}+\text{3维}&#x3D;\text{连通块数}$</p>
 <h1 id="P8990-北大集训-2021-小明的树"><a href="#P8990-北大集训-2021-小明的树" class="headerlink" title="P8990 [北大集训 2021] 小明的树"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P8990">P8990 [北大集训 2021] 小明的树</a></h1><p>这个题目的关键在于如何转化题目要求的东西。</p>
 <p>我们称被点亮的的点为白点。</p>
 <p>题目中统计答案的条件是子树限制，当树的形态发生变化的时候比较难以处理。<br>考虑这个限制其实等价于任意一个黑点的祖先中都没有白点，进一步地等价于每一个所有黑点称为一个连通块（注意这里根一定为黑点）。</p>
