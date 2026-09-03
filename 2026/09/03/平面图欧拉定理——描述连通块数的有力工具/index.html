@@ -20,28 +20,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"wdwsy.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":240},"hljswrap":true,"codeblock":{"theme":{"light":"github-dark","dark":"github-dark-dimmed"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat","show_result":true},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":true,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="原文来自 博客园  CF765F Souvenirs很好的支配对题目，考虑哪些位置 (i,j) 是没有用的。">
+    <meta name="description" content="平面图定义：除了顶点之外，平面内没有任何一个点被大于 $1$ 条边经过点图为平面图。 定理内容平面图欧拉定理简洁地揭示了图中常见量：顶点数 $V$, 边数 $E$，面数 $F$，连通块数 $K$ 之间的关系。具体等式如下：$$V-E+F&#x3D;K$$ 这是类似于容斥的形式，应该容易理解，可以描述为 $\test{1维}-\test{2维}+\test{3维}&#x3D;\test{连通块数}$">
 <meta property="og:type" content="article">
-<meta property="og:title" content="做题记录">
-<meta property="og:url" content="https://wdwsy.github.io/2026/05/09/cnblogs-%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:title" content="平面图欧拉定理——描述连通块数的有力工具">
+<meta property="og:url" content="https://wdwsy.github.io/2026/09/03/%E5%B9%B3%E9%9D%A2%E5%9B%BE%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86%E2%80%94%E2%80%94%E6%8F%8F%E8%BF%B0%E8%BF%9E%E9%80%9A%E5%9D%97%E6%95%B0%E7%9A%84%E6%9C%89%E5%8A%9B%E5%B7%A5%E5%85%B7/index.html">
 <meta property="og:site_name" content="wdwsy&#39;s Blog">
-<meta property="og:description" content="原文来自 博客园  CF765F Souvenirs很好的支配对题目，考虑哪些位置 (i,j) 是没有用的。">
+<meta property="og:description" content="平面图定义：除了顶点之外，平面内没有任何一个点被大于 $1$ 条边经过点图为平面图。 定理内容平面图欧拉定理简洁地揭示了图中常见量：顶点数 $V$, 边数 $E$，面数 $F$，连通块数 $K$ 之间的关系。具体等式如下：$$V-E+F&#x3D;K$$ 这是类似于容斥的形式，应该容易理解，可以描述为 $\test{1维}-\test{2维}+\test{3维}&#x3D;\test{连通块数}$">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-05-09T12:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-23T15:44:12.894Z">
+<meta property="article:published_time" content="2026-09-03T04:32:53.000Z">
+<meta property="article:modified_time" content="2026-09-03T05:02:42.496Z">
 <meta property="article:author" content="wdwsy">
-<meta property="article:tag" content="数据结构">
-<meta property="article:tag" content="线段树">
+<meta property="article:tag" content="算法,OIC++,NOI,信息学竞赛">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://wdwsy.github.io/2026/05/09/cnblogs-%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/">
+<link rel="canonical" href="https://wdwsy.github.io/2026/09/03/%E5%B9%B3%E9%9D%A2%E5%9B%BE%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86%E2%80%94%E2%80%94%E6%8F%8F%E8%BF%B0%E8%BF%9E%E9%80%9A%E5%9D%97%E6%95%B0%E7%9A%84%E6%9C%89%E5%8A%9B%E5%B7%A5%E5%85%B7/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://wdwsy.github.io/2026/05/09/cnblogs-%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/","path":"2026/05/09/cnblogs-做题记录/","title":"做题记录"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://wdwsy.github.io/2026/09/03/%E5%B9%B3%E9%9D%A2%E5%9B%BE%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86%E2%80%94%E2%80%94%E6%8F%8F%E8%BF%B0%E8%BF%9E%E9%80%9A%E5%9D%97%E6%95%B0%E7%9A%84%E6%9C%89%E5%8A%9B%E5%B7%A5%E5%85%B7/","path":"2026/09/03/平面图欧拉定理——描述连通块数的有力工具/","title":"平面图欧拉定理——描述连通块数的有力工具"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>做题记录 | wdwsy's Blog</title>
+<title>平面图欧拉定理——描述连通块数的有力工具 | wdwsy's Blog</title>
   
 
 
@@ -167,7 +166,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CF765F-Souvenirs"><span class="nav-number">1.</span> <span class="nav-text">CF765F Souvenirs</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B3%E9%9D%A2%E5%9B%BE"><span class="nav-number">1.</span> <span class="nav-text">平面图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E7%90%86%E5%86%85%E5%AE%B9"><span class="nav-number">2.</span> <span class="nav-text">定理内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P8990-%E5%8C%97%E5%A4%A7%E9%9B%86%E8%AE%AD-2021-%E5%B0%8F%E6%98%8E%E7%9A%84%E6%A0%91"><span class="nav-number">3.</span> <span class="nav-text">P8990 [北大集训 2021] 小明的树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FZOJ-5732-%E2%80%93-%E9%BB%8E%E6%98%8E"><span class="nav-number">4.</span> <span class="nav-text">FZOJ 5732 – 黎明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E9%9D%A2%E6%A6%82%E8%BF%B0"><span class="nav-number">4.1.</span> <span class="nav-text">题面概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">做法</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -224,7 +223,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/05/09/cnblogs-%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/09/03/%E5%B9%B3%E9%9D%A2%E5%9B%BE%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86%E2%80%94%E2%80%94%E6%8F%8F%E8%BF%B0%E8%BF%9E%E9%80%9A%E5%9D%97%E6%95%B0%E7%9A%84%E6%9C%89%E5%8A%9B%E5%B7%A5%E5%85%B7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -237,12 +236,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="做题记录 | wdwsy's Blog">
+      <meta itemprop="name" content="平面图欧拉定理——描述连通块数的有力工具 | wdwsy's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          做题记录
+          平面图欧拉定理——描述连通块数的有力工具
         </h1>
 
         <div class="post-meta-container">
@@ -252,24 +251,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2026-05-09 20:00:00" itemprop="dateCreated datePublished" datetime="2026-05-09T20:00:00+08:00">2026-05-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-06-23 23:44:12" itemprop="dateModified" datetime="2026-06-23T23:44:12+08:00">2026-06-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">算法竞赛</span></a>
-        </span>
+      <time title="Created: 2026-09-03 12:32:53 / Modified: 13:02:42" itemprop="dateCreated datePublished" datetime="2026-09-03T12:32:53+08:00">2026-09-03</time>
     </span>
 
   
@@ -288,10 +272,38 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><blockquote>
-<p>原文来自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/sggfishpotato/p/20004862">博客园</a></p>
-</blockquote>
-<h2 id="CF765F-Souvenirs"><a href="#CF765F-Souvenirs" class="headerlink" title="CF765F Souvenirs"></a>CF765F Souvenirs</h2><p>很好的支配对题目，考虑哪些位置 (i,j) 是没有用的。</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="平面图"><a href="#平面图" class="headerlink" title="平面图"></a>平面图</h1><p>定义：除了顶点之外，平面内没有任何一个点被大于 $1$ 条边经过点图为平面图。</p>
+<h1 id="定理内容"><a href="#定理内容" class="headerlink" title="定理内容"></a>定理内容</h1><p>平面图欧拉定理简洁地揭示了图中常见量：顶点数 $V$, 边数 $E$，面数 $F$，连通块数 $K$ 之间的关系。<br>具体等式如下：<br>$$<br>V-E+F&#x3D;K<br>$$</p>
+<p>这是类似于容斥的形式，应该容易理解，可以描述为 $\test{1维}-\test{2维}+\test{3维}&#x3D;\test{连通块数}$</p>
+<h1 id="P8990-北大集训-2021-小明的树"><a href="#P8990-北大集训-2021-小明的树" class="headerlink" title="P8990 [北大集训 2021] 小明的树"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P8990">P8990 [北大集训 2021] 小明的树</a></h1><p>这个题目的关键在于如何转化题目要求的东西。</p>
+<p>我们称被点亮的的点为白点。</p>
+<p>题目中统计答案的条件是子树限制，当树的形态发生变化的时候比较难以处理。<br>考虑这个限制其实等价于任意一个黑点的祖先中都没有白点，进一步地等价于每一个所有黑点称为一个连通块（注意这里根一定为黑点）。</p>
+<p>那么我们如何刻画所有黑点都在一个连通块里面呢？<br>没错就是我们的平面图欧拉定理，但是现在因为是树，连环都没有，所有 $F&#x3D;0$，所以直接统计 $V-E$，动态统计用线段树区间操作是不困难的。</p>
+<p>接下来考虑统计答案，答案的贡献为白点的连通块数量，我们这里再用一次平面图欧拉定理当然没有问题，但是介于本题的特殊性，其实统计两端点颜色不同的边的数量，其本质上就等价于连通块数量。</p>
+<p>我们对于时间轴建线段树。<br>我们用 $b_u$ 代表节点 $u$ 被加入的时刻。<br>假设 $V-E$ 的值为 $v$，当前时刻的连通块数量为 $c$，加入一条边 $(u,v)$ 的时候（假设 $b_u&lt;b_v$）：</p>
+<ul>
+<li>$[1,b_u-1]$ 的 $v$ 减掉 $1$。</li>
+<li>$[b_u,b_v-1]$ 的 $c$ 加上 $1$。<br>初始时刻 $i$ 有： $v&#x3D;n-i,c&#x3D;0$。</li>
+</ul>
+<p>每次树发生改变的时候直接加入一条边删除一条就好。</p>
+<h1 id="FZOJ-5732-–-黎明"><a href="#FZOJ-5732-–-黎明" class="headerlink" title="FZOJ 5732 – 黎明"></a><a target="_blank" rel="noopener" href="http://218.22.67.60:30808/OnlineJudge/contestproblem.php?id=15965732">FZOJ 5732 – 黎明</a></h1><h2 id="题面概述"><a href="#题面概述" class="headerlink" title="题面概述"></a>题面概述</h2><p>给定一个 $n \times m$ 的整数矩阵，定义矩阵的值为所有正整数在四连通意义下形成的连通块数量。</p>
+<p>需要维护 $q$ 次操作：</p>
+<ul>
+<li><code>add x</code>：将矩阵中所有元素的值加上 $x$；</li>
+<li><code>set x y z</code>：将位置 $(x,y)$ 的值修改为 $z$。</li>
+</ul>
+<p>每次操作后输出当前矩阵的值。</p>
+<p>额外保证：任意时刻，对于任意不在矩阵边界的位置 $(i,j)$，其四个相邻位置中至少有一个值严格小于 $a_{i,j}$。</p>
+<h2 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h2><p>其实和上面一个题目基本一样。</p>
+<p>但是考虑到这里是图，所以存在面，我们考虑面是什么样的。<br>我们假设 $\leq 0$ 的位置为黑色，否则为白色。<br>我们发现由于有<strong>额外保证</strong>，所以不会出现黑色谷地，也就是说白点形成的面一定为 $(i,j),(i,j+1),(i+1,j),(i+1,j+1)$ 这样的四个位置。</p>
+<p>我们发现还有一个问题 —— add 操作，那么我们考虑图上不同结构出现的条件：</p>
+<ul>
+<li>点：这个点为白点。</li>
+<li>边: 边点两个端点都已经是白点。</li>
+<li>面: 面的四个点都是白点。</li>
+</ul>
+<p>所以对于每一个结构，我们可以找到一个 $add$ 的临界值。我们只需要线段树上大于临界值的位置加上对应的贡献就行。<br>查询的时候直接查询线段树上当前 $add$ 值对应的节点就好。</p>
+<p>具体实现上可以使用树状数组。</p>
 
     </div>
 
@@ -300,23 +312,16 @@
     
 
     <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
-              <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag"># 线段树</a>
-          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2026/05/05/cnblogs-%E5%89%8D%E7%BC%80%E7%BA%BF%E6%80%A7%E5%9F%BA/" rel="prev" title="前缀线性基">
-                  <i class="fa fa-angle-left"></i> 前缀线性基
+                <a href="/2026/09/01/%E8%80%B3%E5%88%86%E8%A7%A3%E4%B8%8E%E5%8F%8C%E6%9E%81%E5%AE%9A%E5%90%91/" rel="prev" title="耳分解与双极定向">
+                  <i class="fa fa-angle-left"></i> 耳分解与双极定向
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2026/05/16/cnblogs-516-%E6%9E%84%E9%80%A0%E9%A2%98%E6%80%BB%E7%BB%93/" rel="next" title="5.16 构造题总结">
-                  5.16 构造题总结 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>

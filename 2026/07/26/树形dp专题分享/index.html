@@ -28,7 +28,7 @@
 <meta property="og:description" content="为了方便，所有的链接都是用洛谷链接。 P12479 [集训队互测 2024] 长野原龙势流星群题意每个点有点权，对于每一个子树，求出一个平均点权最大的包含子树的根的联通块，输出这个平均值。 做法0有一个类 01 on Tree 的做法，挺简单的，但是索然无味。 做法1对于每个子树，以联通块中点的个数为横坐标，联通块中的权值和为纵坐标，发现答案一定在这样一个凸包上，合并的时候进行闵可夫斯基和，查询的">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-07-26T08:11:31.000Z">
-<meta property="article:modified_time" content="2026-08-04T23:33:19.662Z">
+<meta property="article:modified_time" content="2026-09-03T04:40:19.893Z">
 <meta property="article:author" content="wdwsy">
 <meta property="article:tag" content="DP">
 <meta property="article:tag" content="凸包">
@@ -182,7 +182,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -260,7 +260,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-08-05 07:33:19" itemprop="dateModified" datetime="2026-08-05T07:33:19+08:00">2026-08-05</time>
+      <time title="Modified: 2026-09-03 12:40:19" itemprop="dateModified" datetime="2026-09-03T12:40:19+08:00">2026-09-03</time>
     </span>
 
   
@@ -431,8 +431,8 @@
 <p>考虑计算一个点上的值 $a_i$ 造成了多少次贡献，具体的，我们给树上的每一条边定向，从先操作的边，指向后操作的边。那么 $a_i$ 造成的贡献次数就是从 $i$ 出发能到达的节点个数（包括它自己）。</p>
 <p>发现如果直接树形dp，难以处理的就是如果我的父亲比我先操作怎么办，这样会导致转移方向不确定，难以按照先孩子后父亲的常见dp顺序转移。<br>这里我们用一个常见的 trick 提前钦定。<br>考虑 $f_{u,i,j}$ 表示节点 $u$ 子树内能到达 $i$ 个点，在整个树内可以到达 $j$ 个点，转移是简单的，我们分讨每条边的定向的方向即可。</p>
 <ul>
-<li>$u\rightarrow son_u$：$f_{u,i,j}\times f_{v,k,k}\rightarrow f^\prime_{u,i+k,j}$</li>
-<li>$u\leftarrow son_u$：$f_{u,i,j}\times f_{v,k,k+j}\rightarrow f^\prime_{u,i,j}$</li>
+<li>$u\rightarrow son_u$：$f_{u,i,j} + f_{v,k,k}\rightarrow f^\prime_{u,i+k,j}$</li>
+<li>$u\leftarrow son_u$：$f_{u,i,j} + f_{v,k,k+j}\rightarrow f^\prime_{u,i,j}$</li>
 </ul>
 <p>初始值：$f_{u,i,j}&#x3D;j\times a_u$</p>
 <details>
