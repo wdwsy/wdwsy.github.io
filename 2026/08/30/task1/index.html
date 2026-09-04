@@ -28,7 +28,7 @@
 <meta property="og:description" content="P17334 「TPOI-2D」Still Shining题目描述给定长 $n$ 的数组 $a$。 对于一个 $1 \sim n$ 的排列 $p$，记 $t(p)&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}\sum_{j&#x3D;\min(p_i,p_{i-1})}^{\max(p_i,p_{i-1})}a_j$。特别的，令 $p_0&#x3D;p_n$。 设 $">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-08-30T15:22:35.000Z">
-<meta property="article:modified_time" content="2026-09-04T12:13:56.038Z">
+<meta property="article:modified_time" content="2026-09-04T12:15:09.188Z">
 <meta property="article:author" content="wdwsy">
 <meta property="article:tag" content="算法,OIC++,NOI,信息学竞赛">
 <meta name="twitter:card" content="summary">
@@ -259,7 +259,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-09-04 20:13:56" itemprop="dateModified" datetime="2026-09-04T20:13:56+08:00">2026-09-04</time>
+      <time title="Modified: 2026-09-04 20:15:09" itemprop="dateModified" datetime="2026-09-04T20:15:09+08:00">2026-09-04</time>
     </span>
 
   
@@ -350,7 +350,13 @@ $$
 <p>可以通过控制每一张牌的正反，满足 $[l,r]$ 中的每一个数字都出现了至少一次，那么说明 $[l,r]$ 是可覆盖的。</p>
 <h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>首先考虑一个固定局面判断一个 $[l,r]$ 是否可行。<br>我们考虑贪心，如果一个纸牌的两个数字，一个是我们不需要的（出现过了，或者根本不在 $[l,r]$ 中），那么我们一定选另外一个数字。（1）<br>接下来剩下的纸牌，一定是两端数字我们都想要的，发现这个时候如果把每一张牌正反两个数字之间连边，那么一定形成若干个环，而具有环的连通图中出现过的数字都是可以被覆盖的。<br>所以我们只需要看在做完（1）之后，有没有 $[l,r]$ 中的数字，其所在的连通图中没有环。</p>
 <p>但是现在不是要判断一个 $[l,r]$，现在重新假设固定纸牌，计数有多少 $[l,r]$ 可行。<br>那么对于所有没有环的连通图，如果其被完整包含，即 $l\leq \text{连通图中的最小值}$ 并且 $r\geq \text{连通图中的最大值}$，那么一定不行。<br>同时我们容易证明这个条件是充要的。<br>这样就成了二维矩形覆盖问题。每次操作相当于把一个左上角覆盖为 $0$。（初始是 $1$）</p>
-<p>但是这样不好拓展，我们假设连通块中最小值为 $x_i$，最大值是 $y_i$，那么我们对于所有 $x_i$ 相同的 $x_i$，把他们的 $y_i$ 取一个 $\min$，这个值记为 $a_{x_i}$。<br>我们假设 $a$ 数组的后缀 $\min$ 为 $b_i$，那么查询 $s,t,u,v$ 的时候，答案就是<br>$$<br>\sum_{i&#x3D;s}^{t} max{0,\min{b_i,v+1}-\max{u,i}}<br>$$</p>
+<p>但是这样不好拓展，我们假设连通块中最小值为 $x_i$，最大值是 $y_i$，那么我们对于所有 $x_i$ 相同的 $x_i$，把他们的 $y_i$ 取一个 $\min$，这个值记为 $a_{x_i}$。<br>我们假设 $a$ 数组的后缀 $\min$ 为 $b_i$，那么查询 $s,t,u,v$ 的时候，答案就是 </p>
+
+$$
+\sum_{i=s}^{t} max\{0,\min\{b_i,v+1\}-\max\{u,i\}\}
+$$
+
+
 <p>于是我们考虑用线段树去维护这个式子。<br>为了后面可以拼上修改操作，我们不能实时维护 $b$，转而维护 $a$，并用楼房重建线段树。</p>
 <p>对于修改操作我们直接上线段树分治，但是如果直接同时维护线段树会导致复杂度为 $\mathcal{O}(n \log^3 n)$ 不是很好。<br>但是我们发现由于相邻两个操作之间，只有 $\mathcal{O}(1)$ 个 $x_i,y_i$ 发生变化，所以在线段树分治的时候，记录相邻两个叶子变化的位置，并在线段树上修改即可。</p>
 <h2 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h2><p>这个题目并不是很好实现，笔者经过致死量的红温之后选择了重构。<br>原因是在查询的时候，我的处理太麻烦。</p>
