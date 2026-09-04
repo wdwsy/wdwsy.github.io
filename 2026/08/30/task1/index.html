@@ -28,7 +28,7 @@
 <meta property="og:description" content="P17334 「TPOI-2D」Still Shining题目描述给定长 $n$ 的数组 $a$。 对于一个 $1 \sim n$ 的排列 $p$，记 $t(p)&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}\sum_{j&#x3D;\min(p_i,p_{i-1})}^{\max(p_i,p_{i-1})}a_j$。特别的，令 $p_0&#x3D;p_n$。 设 $">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-08-30T15:22:35.000Z">
-<meta property="article:modified_time" content="2026-09-04T12:08:16.575Z">
+<meta property="article:modified_time" content="2026-09-04T12:13:56.038Z">
 <meta property="article:author" content="wdwsy">
 <meta property="article:tag" content="算法,OIC++,NOI,信息学竞赛">
 <meta name="twitter:card" content="summary">
@@ -259,7 +259,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-09-04 20:08:16" itemprop="dateModified" datetime="2026-09-04T20:08:16+08:00">2026-09-04</time>
+      <time title="Modified: 2026-09-04 20:13:56" itemprop="dateModified" datetime="2026-09-04T20:13:56+08:00">2026-09-04</time>
     </span>
 
   
@@ -285,8 +285,10 @@
 <p>设 $s_i&#x3D;\sum\limits_{i&#x3D;1}^{i} a_i$。</p>
 <p>那么</p>
 
-<p>$$<br>t(p)&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}\sum_{j&#x3D;\min(p_i,p_{i-1})}^{\max(p_i,p_{i-1})}a_j&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}s_{\max(p_i,p_{i-1})}-s_{\min(p_i,p_{i-1}) -1}<br>$$</p>
-{% raw %}
+$$
+t(p)=\displaystyle\sum_{i=1}^{n}\sum_{j=\min(p_i,p_{i-1})}^{\max(p_i,p_{i-1})}a_j=\displaystyle\sum_{i=1}^{n}s_{\max(p_i,p_{i-1})}-s_{\min(p_i,p_{i-1}) -1}
+$$
+
 
 <p>我们继续拆这个式子，假设 $d_i$ 与值为 $i$ 的数字相邻的两个位置中比 $i$ 小的数字的个数。显然 $d_i&#x3D;0&#x2F;1&#x2F;2$。那么有<br>$$<br>t(p)&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}d_i\times s_i-(2-d_i)\times s_{i-1}<br>$$</p>
 <p>目前这个式子为两项差的形式，还是不是很优美，于是我们考虑继续简化。<br>我们想要合并同类项，于是设 $t_i&#x3D;d_i-1$。<br>$$<br>t(p)&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}(t_i+1)\times s_i-(1-t_i)\times s_{i-1}<br>$$<br>化简得到：<br>$$<br>t(p)&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}a_i+\displaystyle\sum_{i&#x3D;1}^{n}t_i\times (s_i+s_{i-1})<br>$$<br>但是我们不难发现此时 $t_i$ 任意取值不一定总能找到合法的构造方式，于是考虑 $t_i$ 的实际意义：</p>
