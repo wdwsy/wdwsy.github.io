@@ -249,7 +249,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2026-09-08 22:08:09 / Modified: 22:49:03" itemprop="dateCreated datePublished" datetime="2026-09-08T22:08:09+08:00">2026-09-08</time>
+      <time title="Created: 2026-09-08 22:08:09 / Modified: 23:28:28" itemprop="dateCreated datePublished" datetime="2026-09-08T22:08:09+08:00">2026-09-08</time>
     </span>
 
   
@@ -262,8 +262,59 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="AT-agc041-f-AGC041F-Histogram-Rooks"><a href="#AT-agc041-f-AGC041F-Histogram-Rooks" class="headerlink" title="AT_agc041_f [AGC041F] Histogram Rooks"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/AT_agc041_f">AT_agc041_f [AGC041F] Histogram Rooks</a></h1><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/article/cp86ltz7">参考题解</a></p>
-<p>首先，一个简单的观察就是我们考虑一行一行从上往下做。<br>因为不难发现从上往下，这一行的格子逐渐趋向联通，可以建出笛卡尔树，在上面 dp。</p>
+          <h1 id="P7483-50-年后的我们"><a href="#P7483-50-年后的我们" class="headerlink" title="P7483 50 年后的我们"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P7483">P7483 50 年后的我们</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>YSGH 给一场比赛出了 $n$ 道题，第 $i$ 道题的难度为 $d_i$，价值为 $c_i$。</p>
+<p>有 $m$ 个可能参赛的选手。第 $i$ 个选手有 $p_i$ 的概率会参加比赛。若第 $i$ 个选手参加比赛，则该选手会恰好通过难度在 $l_i$ 到 $r_i$ 之间（包括 $l_i$ 和 $r_i$）的所有题目。</p>
+<p>比赛组委会最终给 YSGH 的奖金为所有题中，有选手通过的题的价值之和的 $k$ 次幂。特别地，我们定义 $0$ 的 $0$ 次幂等于 $1$。</p>
+<p>YSGH 想让你帮他求出奖金的期望。</p>
+<p>令 $P&#x3D;998244353$，设一个有理数 $x$ 表示成最简分数的形式为 $\frac{a}{b}$，若 $\gcd(b,P)&#x3D;1$，则存在唯一的整数 $c$（$0 \le c &lt; P$）满足 $b c \equiv a \pmod{P}$，我们称 $x$ 在模 $P$ 意义下的值为 $c$。</p>
+<p>可以证明，在仅给出 $p_i$ 模 $P$ 意义下的值时，答案仍然在模 $P$ 意义下唯一存在。</p>
+<p>对于 $100%$ 的数据，$1\le n\le 400$，$0\le k\le 400$，$1\le m\le 10^5$，$1\le d_i\le 10^9$，$1\le l_i\le r_i\le 10^9$，$0\le c_i,p_i &lt; 998244353$。</p>
+<h2 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h2><p>首先把题目按照 $d_i$ 排序，重定义 $l_i,r_i$ 表示这个人能通过 $[l_i,r_i]$ 范围内的题目。</p>
+<p>首先我们想到 $k$ 次幂可以使用其组合意义来解决，于是我们得到了一个 $O(n^4)$ 做法。</p>
+<div class="note warning"><p>⚠️  注意：组合意义不能直接用完全背包来递推，需要乘组合数！不然会向我一样认为直接暴力就是 $O(n^3)$ 的。</p>
+</div>
+
+<p>考虑优化，我们发现可以容斥，一个常见的方式就是把所有满足条件，变成任意一个不满足，通常会好做。但是这题这样没有用。</p>
+<p>设 $f_{i,j,k}$ 表示做到第 $i$ 道题目，钦定有 $j$ 个题目选择了但是没有通过，$k$ 选择了 $k$ 个题目的方案数。</p>
+<p>这样我们每次做完 $i$ 之后，就把 $f_{i,i-1,<em>}$ 的值全部压到 $f_{i,i,</em>}$，这样我们每次转移到时候只需要对 $f_{i,i-1,*}$ 做卷积就好，这部分复杂度就 $O(n^3)$ 了。</p>
+<p>对于 $f_{i,j,k}$ 满足 $j\geq i$ 的部分，我们显然不能 $m$ 个人都枚举，简单处理一下就好，听说这玩意叫 $\max$ 卷积，。</p>
+<h1 id="AT-arc132-e-ARC132E-Paw"><a href="#AT-arc132-e-ARC132E-Paw" class="headerlink" title="AT_arc132_e [ARC132E] Paw"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/AT_arc132_e">AT_arc132_e [ARC132E] Paw</a></h1><h2 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h2><p>有 $n$ 个格子排成一行。每个格子要么有一个向右的脚印，要么有一个向左的脚印，要么是一个洞。每个格子的初始状态由一个只包含 <code>.</code>、<code>&lt;</code>、<code>&gt;</code> 的字符串 $s$ 表示，$s$ 的第 $i$ 个字符为 <code>.</code> 时，表示从左起第 $i$ 个格子是一个洞；为 <code>&lt;</code> 时，表示该格子有一个向左的脚印；为 <code>&gt;</code> 时，表示该格子有一个向右的脚印。</p>
+<p>猫“すぬけくん”会不断重复以下操作，直到所有洞都被填满：</p>
+<ul>
+<li>Step $1$：从所有有洞的格子中，等概率随机选择一个格子。</li>
+<li>Step $2$：填上选中的洞，并站在该格子上，等概率随机选择面向左或右。</li>
+<li>Step $3$：朝着所面向的方向一直行走，直到走到下一个有洞的格子或走出格子范围。</li>
+</ul>
+<p>注意，格子的选择和朝向的选择是相互独立的。</p>
+<p>当すぬけくん走过一个没有洞的格子时，该格子会留下他行走方向的脚印。如果该格子原本就有脚印，则原有的脚印会被覆盖为新的脚印。</p>
+<p>请你求出所有洞都被填满后，最终留下向左脚印的格子数的期望值，并对 $998244353$ 取模输出。</p>
+<h2 id="做法-1"><a href="#做法-1" class="headerlink" title="做法"></a>做法</h2><p>观察最终序列会变成什么样。</p>
+<p>考虑一个例子，假设一开始是这样的 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.??????.?????.????.?</span><br></pre></td></tr></table></figure>
+<p>问号表示还没有走到的位置。<br>操作一次：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.??????.&lt;&lt;&lt;&lt;&lt;&lt;???.?</span><br></pre></td></tr></table></figure>
+
+<p>假设我们下一次操作第二个点，那么有两种不同的情况</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.??????&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;.?</span><br><span class="line">.&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;???.?</span><br></pre></td></tr></table></figure>
+<p>我们总是能发现，这两个操作，变成了连续的一段右，或左。</p>
+<p>不妨进一步思考，发现最后一定会形如这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;????&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>中间的问号可能会退化。<br>如果存在问号的话，一定是原来相邻两个 <code>.</code> 之间的一段。</p>
+<div class="note default"><p>📌 wtz：把每次操作起始和终止的 <code>.</code> 之间连边，所有的 <code>.</code> 构成一棵树，可以借用这个树来分析。</p>
+</div>
+
+
+<p>所以我们对于每一段考虑它不会被影响的概率。可以发现如果有 $x$ 个点，那么它不被影响的概率为：<br>$$<br>\sum_{i&#x3D;1}^{x} (1-\frac{1}{2i})<br>$$</p>
+<p>这是因为，每次选到最右边的 <code>.</code> 的概率为 $\frac{1}{i}$，它向右的概率是 $\frac{1}{2}$。<br>可以用一个 $f$ 数组递推得到。</p>
+<p>从右往左是对称的，直接也用 $f$。</p>
+<h1 id="AT-agc041-f-AGC041F-Histogram-Rooks"><a href="#AT-agc041-f-AGC041F-Histogram-Rooks" class="headerlink" title="AT_agc041_f [AGC041F] Histogram Rooks"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/AT_agc041_f">AT_agc041_f [AGC041F] Histogram Rooks</a></h1><div class="note success"><p>✅ 划分状物，且互不影响即为树。</p>
+</div>
+
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/article/cp86ltz7">参考题解</a></p>
+<h2 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h2><p>我们考虑一个有 $N$ 行 $N$ 列的方格网。Arbok 剪掉了网格的一部分，使得对于每个 $i &#x3D; 1, 2, \ldots, N$，从左往右第 $i$ 列的最底部剩下 $h_i$ 个方格。现在，他想在剩下的某些方格中放置车。</p>
+<p>我们称一个格子被覆盖，当且仅当它本身有车，或者有车能一步移动到该格子。</p>
+<p>请你计算有多少种方式可以在剩下的格子中放置车，使得每一个剩下的格子都被覆盖。答案对 $998244353$ 取模。</p>
+<h2 id="做法-2"><a href="#做法-2" class="headerlink" title="做法"></a>做法</h2><p>首先，一个简单的观察就是我们考虑一行一行从上往下做。<br>因为不难发现从上往下，这一行的格子逐渐趋向联通，可以建出笛卡尔树，在上面 dp。</p>
 <p>显然我们难以统计到底有多少个位置没有被车覆盖。</p>
 <p>所以考虑容斥，放置车的方案中钦定 $c$ 个位置没有被覆盖（其他位置随便有没有被覆盖）的方案数为 $p$，那么可以对答案加上 $p\times(-1)^c$。</p>
 <p>当然，我们显然不能直接枚举每一个没有被覆盖的点集。<br>但是如果想要优化，有一个巨大的问题：由于车是一行一列进行攻击的，但是我们是一行一行推的，那么我们不知道这一列中后续或者之前会不会填入车。</p>
