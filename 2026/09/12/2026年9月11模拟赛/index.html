@@ -20,27 +20,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"wdwsy.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":240},"hljswrap":true,"codeblock":{"theme":{"light":"github-dark","dark":"github-dark-dimmed"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat","show_result":true},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":true,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="平面图定义：除了顶点之外，平面内没有任何一个点被大于 $1$ 条边经过点图为平面图。 定理内容平面图欧拉定理简洁地揭示了图中常见量：顶点数 $V$, 边数 $E$，面数 $F$，连通块数 $K$ 之间的关系。具体等式如下：$$V-E+F&#x3D;K$$ 这是类似于容斥的形式，应该容易理解，可以描述为 $\text{1维}-\text{2维}+\text{3维}&#x3D;\text{连通块数}$">
+    <meta name="description" content="T2做红温了。其实是一个 trick。我们可以转换成差分，区间修改就成了两次单点修改。 T3题目概述给你一个长度为 $k$ 的可重集 $S$，你需要构造一个长度为 $n$ 的可重集 $a$，满足可以把 $a$ 划分为 $k$ 部分，每一个部分的中位数的中位数构成的可重集就是 $S$。求满足 $a_i\in [1,m]$ 的满足条件的 $a$ 有多少种。 做法首先排序 $S$由于每个 $S$ 中的数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="平面图欧拉定理——描述连通块数的有力工具">
-<meta property="og:url" content="https://wdwsy.github.io/2026/09/03/%E5%B9%B3%E9%9D%A2%E5%9B%BE%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86%E2%80%94%E2%80%94%E6%8F%8F%E8%BF%B0%E8%BF%9E%E9%80%9A%E5%9D%97%E6%95%B0%E7%9A%84%E6%9C%89%E5%8A%9B%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:title" content="2026年9月11模拟赛">
+<meta property="og:url" content="https://wdwsy.github.io/2026/09/12/2026%E5%B9%B49%E6%9C%8811%E6%A8%A1%E6%8B%9F%E8%B5%9B/index.html">
 <meta property="og:site_name" content="wdwsy&#39;s Blog">
-<meta property="og:description" content="平面图定义：除了顶点之外，平面内没有任何一个点被大于 $1$ 条边经过点图为平面图。 定理内容平面图欧拉定理简洁地揭示了图中常见量：顶点数 $V$, 边数 $E$，面数 $F$，连通块数 $K$ 之间的关系。具体等式如下：$$V-E+F&#x3D;K$$ 这是类似于容斥的形式，应该容易理解，可以描述为 $\text{1维}-\text{2维}+\text{3维}&#x3D;\text{连通块数}$">
+<meta property="og:description" content="T2做红温了。其实是一个 trick。我们可以转换成差分，区间修改就成了两次单点修改。 T3题目概述给你一个长度为 $k$ 的可重集 $S$，你需要构造一个长度为 $n$ 的可重集 $a$，满足可以把 $a$ 划分为 $k$ 部分，每一个部分的中位数的中位数构成的可重集就是 $S$。求满足 $a_i\in [1,m]$ 的满足条件的 $a$ 有多少种。 做法首先排序 $S$由于每个 $S$ 中的数">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-09-03T04:32:53.000Z">
-<meta property="article:modified_time" content="2026-09-03T14:06:56.339Z">
+<meta property="article:published_time" content="2026-09-12T04:13:41.000Z">
+<meta property="article:modified_time" content="2026-09-12T04:20:33.177Z">
 <meta property="article:author" content="wdwsy">
 <meta property="article:tag" content="算法,OIC++,NOI,信息学竞赛">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://wdwsy.github.io/2026/09/03/%E5%B9%B3%E9%9D%A2%E5%9B%BE%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86%E2%80%94%E2%80%94%E6%8F%8F%E8%BF%B0%E8%BF%9E%E9%80%9A%E5%9D%97%E6%95%B0%E7%9A%84%E6%9C%89%E5%8A%9B%E5%B7%A5%E5%85%B7/">
+<link rel="canonical" href="https://wdwsy.github.io/2026/09/12/2026%E5%B9%B49%E6%9C%8811%E6%A8%A1%E6%8B%9F%E8%B5%9B/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://wdwsy.github.io/2026/09/03/%E5%B9%B3%E9%9D%A2%E5%9B%BE%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86%E2%80%94%E2%80%94%E6%8F%8F%E8%BF%B0%E8%BF%9E%E9%80%9A%E5%9D%97%E6%95%B0%E7%9A%84%E6%9C%89%E5%8A%9B%E5%B7%A5%E5%85%B7/","path":"2026/09/03/平面图欧拉定理——描述连通块数的有力工具/","title":"平面图欧拉定理——描述连通块数的有力工具"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://wdwsy.github.io/2026/09/12/2026%E5%B9%B49%E6%9C%8811%E6%A8%A1%E6%8B%9F%E8%B5%9B/","path":"2026/09/12/2026年9月11模拟赛/","title":"2026年9月11模拟赛"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>平面图欧拉定理——描述连通块数的有力工具 | wdwsy's Blog</title>
+<title>2026年9月11模拟赛 | wdwsy's Blog</title>
   
 
 
@@ -166,7 +166,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B3%E9%9D%A2%E5%9B%BE"><span class="nav-number">1.</span> <span class="nav-text">平面图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E7%90%86%E5%86%85%E5%AE%B9"><span class="nav-number">2.</span> <span class="nav-text">定理内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P8990-%E5%8C%97%E5%A4%A7%E9%9B%86%E8%AE%AD-2021-%E5%B0%8F%E6%98%8E%E7%9A%84%E6%A0%91"><span class="nav-number">3.</span> <span class="nav-text">P8990 [北大集训 2021] 小明的树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FZOJ-5732-%E2%80%93-%E9%BB%8E%E6%98%8E"><span class="nav-number">4.</span> <span class="nav-text">FZOJ 5732 – 黎明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E9%9D%A2%E6%A6%82%E8%BF%B0"><span class="nav-number">4.1.</span> <span class="nav-text">题面概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">做法</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#T2"><span class="nav-number">1.</span> <span class="nav-text">T2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T3"><span class="nav-number">2.</span> <span class="nav-text">T3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">题目概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%9A%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">做法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T4"><span class="nav-number">3.</span> <span class="nav-text">T4</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E5%87%BA%E4%B8%8A%E7%95%8C-R"><span class="nav-number">3.1.</span> <span class="nav-text">算出上界 $R$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E5%87%BA%E4%B8%8B%E7%95%8C-L"><span class="nav-number">3.2.</span> <span class="nav-text">算出下界 $L$</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -223,7 +223,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/09/03/%E5%B9%B3%E9%9D%A2%E5%9B%BE%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86%E2%80%94%E2%80%94%E6%8F%8F%E8%BF%B0%E8%BF%9E%E9%80%9A%E5%9D%97%E6%95%B0%E7%9A%84%E6%9C%89%E5%8A%9B%E5%B7%A5%E5%85%B7/">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/09/12/2026%E5%B9%B49%E6%9C%8811%E6%A8%A1%E6%8B%9F%E8%B5%9B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -236,12 +236,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="平面图欧拉定理——描述连通块数的有力工具 | wdwsy's Blog">
+      <meta itemprop="name" content="2026年9月11模拟赛 | wdwsy's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          平面图欧拉定理——描述连通块数的有力工具
+          2026年9月11模拟赛
         </h1>
 
         <div class="post-meta-container">
@@ -253,7 +253,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2026-09-03 12:32:53 / Modified: 22:06:56" itemprop="dateCreated datePublished" datetime="2026-09-03T12:32:53+08:00">2026-09-03</time>
+      <time title="Created: 2026-09-12 12:13:41 / Modified: 12:20:33" itemprop="dateCreated datePublished" datetime="2026-09-12T12:13:41+08:00">2026-09-12</time>
     </span>
 
   
@@ -272,38 +272,23 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="平面图"><a href="#平面图" class="headerlink" title="平面图"></a>平面图</h1><p>定义：除了顶点之外，平面内没有任何一个点被大于 $1$ 条边经过点图为平面图。</p>
-<h1 id="定理内容"><a href="#定理内容" class="headerlink" title="定理内容"></a>定理内容</h1><p>平面图欧拉定理简洁地揭示了图中常见量：顶点数 $V$, 边数 $E$，面数 $F$，连通块数 $K$ 之间的关系。<br>具体等式如下：<br>$$<br>V-E+F&#x3D;K<br>$$</p>
-<p>这是类似于容斥的形式，应该容易理解，可以描述为 $\text{1维}-\text{2维}+\text{3维}&#x3D;\text{连通块数}$</p>
-<h1 id="P8990-北大集训-2021-小明的树"><a href="#P8990-北大集训-2021-小明的树" class="headerlink" title="P8990 [北大集训 2021] 小明的树"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P8990">P8990 [北大集训 2021] 小明的树</a></h1><p>这个题目的关键在于如何转化题目要求的东西。</p>
-<p>我们称被点亮的的点为白点。</p>
-<p>题目中统计答案的条件是子树限制，当树的形态发生变化的时候比较难以处理。<br>考虑这个限制其实等价于任意一个黑点的祖先中都没有白点，进一步地等价于每一个所有黑点称为一个连通块（注意这里根一定为黑点）。</p>
-<p>那么我们如何刻画所有黑点都在一个连通块里面呢？<br>没错就是我们的平面图欧拉定理，但是现在因为是树，连环都没有，所有 $F&#x3D;0$，所以直接统计 $V-E$，动态统计用线段树区间操作是不困难的。</p>
-<p>接下来考虑统计答案，答案的贡献为白点的连通块数量，我们这里再用一次平面图欧拉定理当然没有问题，但是介于本题的特殊性，其实统计两端点颜色不同的边的数量，其本质上就等价于连通块数量。</p>
-<p>我们对于时间轴建线段树。<br>我们用 $b_u$ 代表节点 $u$ 被加入的时刻。<br>假设 $V-E$ 的值为 $v$，当前时刻的连通块数量为 $c$，加入一条边 $(u,v)$ 的时候（假设 $b_u&lt;b_v$）：</p>
-<ul>
-<li>$[1,b_u-1]$ 的 $v$ 减掉 $1$。</li>
-<li>$[b_u,b_v-1]$ 的 $c$ 加上 $1$。<br>初始时刻 $i$ 有： $v&#x3D;n-i,c&#x3D;0$。</li>
-</ul>
-<p>每次树发生改变的时候直接加入一条边删除一条就好。</p>
-<h1 id="FZOJ-5732-–-黎明"><a href="#FZOJ-5732-–-黎明" class="headerlink" title="FZOJ 5732 – 黎明"></a><a target="_blank" rel="noopener" href="http://218.22.67.60:30808/OnlineJudge/contestproblem.php?id=15965732">FZOJ 5732 – 黎明</a></h1><h2 id="题面概述"><a href="#题面概述" class="headerlink" title="题面概述"></a>题面概述</h2><p>给定一个 $n \times m$ 的整数矩阵，定义矩阵的值为所有正整数在四连通意义下形成的连通块数量。</p>
-<p>需要维护 $q$ 次操作：</p>
-<ul>
-<li><code>add x</code>：将矩阵中所有元素的值加上 $x$；</li>
-<li><code>set x y z</code>：将位置 $(x,y)$ 的值修改为 $z$。</li>
-</ul>
-<p>每次操作后输出当前矩阵的值。</p>
-<p>额外保证：任意时刻，对于任意不在矩阵边界的位置 $(i,j)$，其四个相邻位置中至少有一个值严格小于 $a_{i,j}$。</p>
-<h2 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h2><p>其实和上面一个题目基本一样。</p>
-<p>但是考虑到这里是图，所以存在面，我们考虑面是什么样的。<br>我们假设 $\leq 0$ 的位置为黑色，否则为白色。<br>我们发现由于有<strong>额外保证</strong>，所以不会出现黑色谷地，也就是说白点形成的面一定为 $(i,j),(i,j+1),(i+1,j),(i+1,j+1)$ 这样的四个位置。</p>
-<p>我们发现还有一个问题 —— add 操作，那么我们考虑图上不同结构出现的条件：</p>
-<ul>
-<li>点：这个点为白点。</li>
-<li>边: 边点两个端点都已经是白点。</li>
-<li>面: 面的四个点都是白点。</li>
-</ul>
-<p>所以对于每一个结构，我们可以找到一个 $add$ 的临界值。我们只需要线段树上大于临界值的位置加上对应的贡献就行。<br>查询的时候直接查询线段树上当前 $add$ 值对应的节点就好。</p>
-<p>具体实现上可以使用树状数组。</p>
+    <div class="post-body" itemprop="articleBody"><h2 id="T2"><a href="#T2" class="headerlink" title="T2"></a>T2</h2><p>做红温了。<br>其实是一个 trick。<br>我们可以转换成差分，区间修改就成了两次单点修改。</p>
+<h2 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h2><h3 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h3><p>给你一个长度为 $k$ 的可重集 $S$，你需要构造一个长度为 $n$ 的可重集 $a$，满足可以把 $a$ 划分为 $k$ 部分，每一个部分的中位数的中位数构成的可重集就是 $S$。<br>求满足 $a_i\in [1,m]$ 的满足条件的 $a$ 有多少种。</p>
+<h3 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h3><p>首先排序 $S$<br>由于每个 $S$ 中的数字都要出现一次，所以定义 $n\leftarrow n-k$<br>首先考虑判定，找到充要条件：<br>假定 $a_{n+1}&#x3D;m+1$<br>$\forall x\in[1,n+1]$ 设 $a$ 中在区间 $(a_{x-1},a_x)$ 的数字有 $y$ 个，那么剩下的数字有 $n-y$ 个，需要满足 $y-(n-y)\leq x$<br>而且这个条件只有在绝对众数的位置才可能不满足，所以我们考虑容斥，计算</p>
+<p>$\text{总方案数}-\text{不合法的方案数}$</p>
+<p>我们考虑计算后者为：<br>$$<br>\sum_{x&#x3D;0}^{k}\sum_{y&#x3D;\lceil \frac{x+n+1}{2} \rceil}^{m} {l+y-1 \choose l-1}{m-l+n-y-1\choose m-l-1} \<br>\text{其中}\ l&#x3D;a_{x+1}-a_{x}<br>$$</p>
+<p>考虑这个式子的组合意义，需要把 $n$ 个球放在 $m$ 个盒子，就是在前 $l$ 个盒子中至少选择 $\lceil \frac{x+n+1}{2} \rceil$ 个球的方案数。<br>做法上可以枚举第 $l$ 个球所在的位置来计算：<br>$$<br>\sum_{x&#x3D;0}^{k}\sum_{t&#x3D;1}^{l} {t+y-2 \choose t-1}{m-t+n-y\choose m-t} \<br>\text{其中}\ l&#x3D;a_{x+1}-a_{x},y&#x3D;\lceil \frac{x+n+1}{2} \rceil<br>$$<br>这样时间复杂度为 $\sum_{x&#x3D;0}^{k} O(l)&#x3D;O(m)$。</p>
+<h2 id="T4"><a href="#T4" class="headerlink" title="T4"></a>T4</h2><p>题目要求的大小关系相同，等价于两个序列的笛卡尔树相同。<br>建立大根笛卡尔树，容易发现，每一个笛卡尔树上的待填点，都有一个 $(l,r)$ 的值域区间要求，其中 $l$ 是祖先的 $\min$，$r$ 自子树中的 $\max$。</p>
+<p>考虑用 hall 定理刻画有解条件。<br>一种暴力的做法就是直接用扫描线，不难。</p>
+<p>但是我们有一个好的方式，可以直接贪心。</p>
+<p>为了文章的可读性，我们先来描述一下这个问题。<br>二分图匹配问题，每一个左部点向右部点的一个区间连边，求删掉每一个左部点之后，有没有完全匹配。</p>
+<p>结论：最后可以加入的点一定在一个区间 $(L,R)$ 中。<br>证明：我们本质上，其实是要求出所有不合法的区间，即 $[l,r]$ 中所有被包含的线段（即左部点），线段个数大于 $[l,r]$ 中右部点的个数，那么显然这里没有完全匹配，也就是说，加入的点，一定要在这个区间内，不然根据 Hall 定理，这个二分图将仍然没有完全匹配。那么其实我们就是要把这样的不合法区间 $[l,r]$ 去取交。那么只需要找到所有不合法区间中的 $r_{min}$ 和 $l_{max}$ 即可。</p>
+<p>tip：如果一个区间 $[l,r]$ 中，点的个数比线段个数少了 $\geq 2$，那么补一个点也无法解决这个区间的问题，那么就全部输出 <code>No</code> ，这个在后续的算法流程中有所体现。</p>
+<h3 id="算出上界-R"><a href="#算出上界-R" class="headerlink" title="算出上界 $R$"></a>算出上界 $R$</h3><p>$R&#x3D;r_{min}$<br>我们记录每一个左部点的区间是 $(l_i,r_i)$（开区间），以 $r_i$ 升序为第一关键字，$l_i$ 为升序为第二关键字排序。然后考虑贪心去填入，也就是我们要给每一区间找一个匹配点，每次填入在 $(l_i,r_i)$ 中距离 $l_i$ 最近的点，如果没有这样的点，就说明这个区间无法找到匹配点，那么上界就是 $r_i$，注意：如果有两个区间都找不到位置插入，那么加入一个点后，仍然不可能同时满足这两个区间，直接都输出 <code>No</code>。</p>
+<h3 id="算出下界-L"><a href="#算出下界-L" class="headerlink" title="算出下界 $L$"></a>算出下界 $L$</h3><p>$L&#x3D;l_{max}$<br>同理，但是以 $l_i$ 降序为第一关键字，$r_i$ 为降序为第二关键字排序。</p>
+<p>所以我们就得到了上下界，每次输入 $d$ 的时候判断 $L&lt;d&lt;R$ 就输出 <code>Yes</code> 就好。</p>
+<p>具体实现上有一些好写（常数小）的方式。</p>
+<p>在遍历笛卡尔树的时候，可以按照值域扫，这样不用写 dfs。<br>这里我们需要是由只有删除操作的set（初始是所有右部点，然后每一次匹配成功就会删除一个点）。我们可以用链表+路径压缩实现。</p>
 
     </div>
 
@@ -317,14 +302,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2026/09/01/%E8%80%B3%E5%88%86%E8%A7%A3%E4%B8%8E%E5%8F%8C%E6%9E%81%E5%AE%9A%E5%90%91/" rel="prev" title="耳分解与双极定向">
-                  <i class="fa fa-angle-left"></i> 耳分解与双极定向
+                <a href="/2026/09/08/%E8%AE%A1%E6%95%B0%E9%A2%98%E5%8D%95%E6%80%BB%E7%BB%93/" rel="prev" title="计数题单总结">
+                  <i class="fa fa-angle-left"></i> 计数题单总结
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2026/09/08/%E8%AE%A1%E6%95%B0%E9%A2%98%E5%8D%95%E6%80%BB%E7%BB%93/" rel="next" title="计数题单总结">
-                  计数题单总结 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>

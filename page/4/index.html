@@ -178,7 +178,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -210,6 +210,95 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/05/19/cnblogs-2026%E5%B9%B45%E6%9C%8818%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/05/19/cnblogs-2026%E5%B9%B45%E6%9C%8818%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/" class="post-title-link" itemprop="url">2026年5月18日讲题题单</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-05-19 20:00:00" itemprop="dateCreated datePublished" datetime="2026-05-19T20:00:00+08:00">2026-05-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-06-23 23:44:12" itemprop="dateModified" datetime="2026-06-23T23:44:12+08:00">2026-06-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">算法竞赛</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>原文来自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/sggfishpotato/p/20083913">博客园</a></p>
+</blockquote>
+<h1 id="A-谜题-II"><a href="#A-谜题-II" class="headerlink" title="A - 谜题 II"></a><a target="_blank" rel="noopener" href="https://qoj.ac/problem/17203">A - 谜题 II</a></h1><p><a target="_blank" rel="noopener" href="https://qoj.ac/download.php?type=solution&id=17203">官方题解</a><br><a target="_blank" rel="noopener" href="https://chat.deepseek.com/share/xrylflnahyz8ijyjns">https://chat.deepseek.com/share/xrylflnahyz8ijyjns</a></p>
+<p>首先我们按照小于好方向建边，$A_{x1,y1}&lt;A_{x2,y2}$ 那么就建边 $(x1,y1) \to (x2,y2)$。<br>那么，这个问题就是一个拓扑序计数，一个常见的想法是把边容斥掉。但是即便这样还是很难化简问题，我们会发现有些边没有办法容斥掉。<br>首先这个图的点数 $2^k$ 十分特殊，我们假设这个图不是弱联通的，那么就存在不连通的两部分时独立的，在结合这两部分的时候，就需要乘上一个组合数 $2^k \choose x $，$0 &lt; x &lt; 2^k$ 根据卢卡斯定理，这个式子在 mod 2 意义下总是 0。<br>接下来我们就发现我们就可以任意反向割边了，这样就可以转化图了，我们可以发现原图有环就会无解，否则我么可以把 DAG 全部转化为一棵内向树，因为树上的边都是割边。由于在 2 行的网格图中，最多度数为 3，其中一个是父亲，所以一个点最多有两个儿子。那么这个树的拓扑序方案数为奇数，当且仅当每一个为有两个孩子的节点，他的两个子树的大小的二进制位没有交。<br>还有一个容易忽略的转化，就是我们每次把图上横边定向为向右，其实是想在做网格dp的时候顺便进行最后内向树的树形dp，更好的利用本道题目的性质来优化。<br>还有一个dp trick就是把我们的条件放到枚举里面，这题就是把枚举所有可能的前驱，变成枚举子集降低了复杂度。<br>这样进行一些推式子之后还是没有办法做到正确的复杂度，但是我们敏锐地发现数据组数位 32，而且输入的时候也是用 unsigned 把这 32 组数据压在一个整形内的，32 刚好是 unsigned 类型的大小，于是我们考虑把 T 组数据一起处理，我们惊讶地发现无论 dp,a,b,c 这些数组如何，都不会影响我们都有固定的转移路径（只不过有些边不能转移），于是我们整体转移就可以消除一个 32 的常数，就可以通过了。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 

@@ -178,7 +178,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -210,6 +210,92 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/09/12/2026%E5%B9%B49%E6%9C%8811%E6%A8%A1%E6%8B%9F%E8%B5%9B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/09/12/2026%E5%B9%B49%E6%9C%8811%E6%A8%A1%E6%8B%9F%E8%B5%9B/" class="post-title-link" itemprop="url">2026年9月11模拟赛</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-09-12 12:13:41 / Modified: 12:20:33" itemprop="dateCreated datePublished" datetime="2026-09-12T12:13:41+08:00">2026-09-12</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="T2"><a href="#T2" class="headerlink" title="T2"></a>T2</h2><p>做红温了。<br>其实是一个 trick。<br>我们可以转换成差分，区间修改就成了两次单点修改。</p>
+<h2 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h2><h3 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h3><p>给你一个长度为 $k$ 的可重集 $S$，你需要构造一个长度为 $n$ 的可重集 $a$，满足可以把 $a$ 划分为 $k$ 部分，每一个部分的中位数的中位数构成的可重集就是 $S$。<br>求满足 $a_i\in [1,m]$ 的满足条件的 $a$ 有多少种。</p>
+<h3 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h3><p>首先排序 $S$<br>由于每个 $S$ 中的数字都要出现一次，所以定义 $n\leftarrow n-k$<br>首先考虑判定，找到充要条件：<br>假定 $a_{n+1}&#x3D;m+1$<br>$\forall x\in[1,n+1]$ 设 $a$ 中在区间 $(a_{x-1},a_x)$ 的数字有 $y$ 个，那么剩下的数字有 $n-y$ 个，需要满足 $y-(n-y)\leq x$<br>而且这个条件只有在绝对众数的位置才可能不满足，所以我们考虑容斥，计算</p>
+<p>$\text{总方案数}-\text{不合法的方案数}$</p>
+<p>我们考虑计算后者为：<br>$$<br>\sum_{x&#x3D;0}^{k}\sum_{y&#x3D;\lceil \frac{x+n+1}{2} \rceil}^{m} {l+y-1 \choose l-1}{m-l+n-y-1\choose m-l-1} \<br>\text{其中}\ l&#x3D;a_{x+1}-a_{x}<br>$$</p>
+<p>考虑这个式子的组合意义，需要把 $n$ 个球放在 $m$ 个盒子，就是在前 $l$ 个盒子中至少选择 $\lceil \frac{x+n+1}{2} \rceil$ 个球的方案数。<br>做法上可以枚举第 $l$ 个球所在的位置来计算：<br>$$<br>\sum_{x&#x3D;0}^{k}\sum_{t&#x3D;1}^{l} {t+y-2 \choose t-1}{m-t+n-y\choose m-t} \<br>\text{其中}\ l&#x3D;a_{x+1}-a_{x},y&#x3D;\lceil \frac{x+n+1}{2} \rceil<br>$$<br>这样时间复杂度为 $\sum_{x&#x3D;0}^{k} O(l)&#x3D;O(m)$。</p>
+<h2 id="T4"><a href="#T4" class="headerlink" title="T4"></a>T4</h2><p>题目要求的大小关系相同，等价于两个序列的笛卡尔树相同。<br>建立大根笛卡尔树，容易发现，每一个笛卡尔树上的待填点，都有一个 $(l,r)$ 的值域区间要求，其中 $l$ 是祖先的 $\min$，$r$ 自子树中的 $\max$。</p>
+<p>考虑用 hall 定理刻画有解条件。<br>一种暴力的做法就是直接用扫描线，不难。</p>
+<p>但是我们有一个好的方式，可以直接贪心。</p>
+<p>为了文章的可读性，我们先来描述一下这个问题。<br>二分图匹配问题，每一个左部点向右部点的一个区间连边，求删掉每一个左部点之后，有没有完全匹配。</p>
+<p>结论：最后可以加入的点一定在一个区间 $(L,R)$ 中。<br>证明：我们本质上，其实是要求出所有不合法的区间，即 $[l,r]$ 中所有被包含的线段（即左部点），线段个数大于 $[l,r]$ 中右部点的个数，那么显然这里没有完全匹配，也就是说，加入的点，一定要在这个区间内，不然根据 Hall 定理，这个二分图将仍然没有完全匹配。那么其实我们就是要把这样的不合法区间 $[l,r]$ 去取交。那么只需要找到所有不合法区间中的 $r_{min}$ 和 $l_{max}$ 即可。</p>
+<p>tip：如果一个区间 $[l,r]$ 中，点的个数比线段个数少了 $\geq 2$，那么补一个点也无法解决这个区间的问题，那么就全部输出 <code>No</code> ，这个在后续的算法流程中有所体现。</p>
+<h3 id="算出上界-R"><a href="#算出上界-R" class="headerlink" title="算出上界 $R$"></a>算出上界 $R$</h3><p>$R&#x3D;r_{min}$<br>我们记录每一个左部点的区间是 $(l_i,r_i)$（开区间），以 $r_i$ 升序为第一关键字，$l_i$ 为升序为第二关键字排序。然后考虑贪心去填入，也就是我们要给每一区间找一个匹配点，每次填入在 $(l_i,r_i)$ 中距离 $l_i$ 最近的点，如果没有这样的点，就说明这个区间无法找到匹配点，那么上界就是 $r_i$，注意：如果有两个区间都找不到位置插入，那么加入一个点后，仍然不可能同时满足这两个区间，直接都输出 <code>No</code>。</p>
+<h3 id="算出下界-L"><a href="#算出下界-L" class="headerlink" title="算出下界 $L$"></a>算出下界 $L$</h3><p>$L&#x3D;l_{max}$<br>同理，但是以 $l_i$ 降序为第一关键字，$r_i$ 为降序为第二关键字排序。</p>
+<p>所以我们就得到了上下界，每次输入 $d$ 的时候判断 $L&lt;d&lt;R$ 就输出 <code>Yes</code> 就好。</p>
+<p>具体实现上有一些好写（常数小）的方式。</p>
+<p>在遍历笛卡尔树的时候，可以按照值域扫，这样不用写 dfs。<br>这里我们需要是由只有删除操作的set（初始是所有右部点，然后每一次匹配成功就会删除一个点）。我们可以用链表+路径压缩实现。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1591,91 +1677,6 @@ $$
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">400005</span>;</span><br><span class="line"><span class="type">const</span> ll INF = <span class="number">0x3f3f3f3f3f3f3f3fll</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line">ll f[N][<span class="number">2</span>], g[N][<span class="number">2</span>], h[N][<span class="number">2</span>][<span class="number">2</span>], d[N];</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; e[N];</span><br><span class="line"><span class="comment">// f 连向父亲，g 连向自己，h 连向儿子</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">chkmx</span><span class="params">(ll &amp;x, ll y)</span> </span>&#123; x &lt; y &amp;&amp; (x = y); &#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">    ll mx[<span class="number">2</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    g[u][<span class="number">0</span>] = -d[u], g[u][<span class="number">1</span>] = d[u];</span><br><span class="line">    h[u][<span class="number">0</span>][<span class="number">0</span>] = h[u][<span class="number">0</span>][<span class="number">1</span>] = h[u][<span class="number">1</span>][<span class="number">0</span>] = h[u][<span class="number">1</span>][<span class="number">1</span>] = -INF;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> v : e[u]) &#123;</span><br><span class="line">        <span class="built_in">dfs</span>(v);</span><br><span class="line">        mx[<span class="number">0</span>] += <span class="built_in">max</span>(&#123;f[v][<span class="number">0</span>], g[v][<span class="number">0</span>], g[v][<span class="number">1</span>], h[v][<span class="number">0</span>][<span class="number">0</span>], h[v][<span class="number">0</span>][<span class="number">1</span>], h[v][<span class="number">1</span>][<span class="number">0</span>], h[v][<span class="number">1</span>][<span class="number">1</span>]&#125;);</span><br><span class="line">        mx[<span class="number">1</span>] += <span class="built_in">max</span>(&#123;f[v][<span class="number">1</span>], g[v][<span class="number">0</span>], g[v][<span class="number">1</span>], h[v][<span class="number">0</span>][<span class="number">0</span>], h[v][<span class="number">0</span>][<span class="number">1</span>], h[v][<span class="number">1</span>][<span class="number">0</span>], h[v][<span class="number">1</span>][<span class="number">1</span>]&#125;);</span><br><span class="line">        g[u][<span class="number">0</span>] += <span class="built_in">max</span>(&#123;f[v][<span class="number">1</span>], h[v][<span class="number">0</span>][<span class="number">0</span>], h[v][<span class="number">0</span>][<span class="number">1</span>], h[v][<span class="number">1</span>][<span class="number">0</span>], h[v][<span class="number">1</span>][<span class="number">1</span>]&#125;);</span><br><span class="line">        g[u][<span class="number">1</span>] += <span class="built_in">max</span>(&#123;f[v][<span class="number">0</span>], h[v][<span class="number">0</span>][<span class="number">0</span>], h[v][<span class="number">0</span>][<span class="number">1</span>], h[v][<span class="number">1</span>][<span class="number">0</span>], h[v][<span class="number">1</span>][<span class="number">1</span>]&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    f[u][<span class="number">0</span>] = <span class="built_in">max</span>(mx[<span class="number">0</span>], mx[<span class="number">1</span>]) - d[u];</span><br><span class="line">    f[u][<span class="number">1</span>] = <span class="built_in">max</span>(mx[<span class="number">0</span>], mx[<span class="number">1</span>]) + d[u];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> v : e[u]) &#123;</span><br><span class="line">        ll v0 = mx[<span class="number">0</span>] - <span class="built_in">max</span>(&#123;f[v][<span class="number">0</span>], g[v][<span class="number">0</span>], g[v][<span class="number">1</span>], h[v][<span class="number">0</span>][<span class="number">0</span>], h[v][<span class="number">0</span>][<span class="number">1</span>], h[v][<span class="number">1</span>][<span class="number">0</span>], h[v][<span class="number">1</span>][<span class="number">1</span>]&#125;);</span><br><span class="line">        ll v1 = mx[<span class="number">1</span>] - <span class="built_in">max</span>(&#123;f[v][<span class="number">1</span>], g[v][<span class="number">0</span>], g[v][<span class="number">1</span>], h[v][<span class="number">0</span>][<span class="number">0</span>], h[v][<span class="number">0</span>][<span class="number">1</span>], h[v][<span class="number">1</span>][<span class="number">0</span>], h[v][<span class="number">1</span>][<span class="number">1</span>]&#125;);</span><br><span class="line">        <span class="built_in">chkmx</span>(h[u][<span class="number">0</span>][<span class="number">0</span>], v0 + <span class="built_in">max</span>(&#123;g[v][<span class="number">1</span>], h[v][<span class="number">1</span>][<span class="number">0</span>], h[v][<span class="number">0</span>][<span class="number">0</span>]&#125;) - d[u]);</span><br><span class="line">        <span class="built_in">chkmx</span>(h[u][<span class="number">0</span>][<span class="number">1</span>], v1 + <span class="built_in">max</span>(&#123;g[v][<span class="number">1</span>], h[v][<span class="number">1</span>][<span class="number">0</span>], h[v][<span class="number">0</span>][<span class="number">0</span>]&#125;) - d[u]);</span><br><span class="line">        <span class="built_in">chkmx</span>(h[u][<span class="number">1</span>][<span class="number">0</span>], v0 + <span class="built_in">max</span>(&#123;g[v][<span class="number">0</span>], h[v][<span class="number">1</span>][<span class="number">1</span>], h[v][<span class="number">0</span>][<span class="number">1</span>]&#125;) + d[u]);</span><br><span class="line">        <span class="built_in">chkmx</span>(h[u][<span class="number">1</span>][<span class="number">1</span>], v1 + <span class="built_in">max</span>(&#123;g[v][<span class="number">0</span>], h[v][<span class="number">1</span>][<span class="number">1</span>], h[v][<span class="number">0</span>][<span class="number">1</span>]&#125;) + d[u]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) cin &gt;&gt; d[i];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="type">int</span> j;</span><br><span class="line">        cin &gt;&gt; j;</span><br><span class="line">        e[j].<span class="built_in">push_back</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="built_in">max</span>(&#123;g[<span class="number">1</span>][<span class="number">0</span>], g[<span class="number">1</span>][<span class="number">1</span>], h[<span class="number">1</span>][<span class="number">0</span>][<span class="number">0</span>], h[<span class="number">1</span>][<span class="number">0</span>][<span class="number">1</span>], h[<span class="number">1</span>][<span class="number">1</span>][<span class="number">0</span>], h[<span class="number">1</span>][<span class="number">1</span>][<span class="number">1</span>]&#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </details>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/07/23/noi%E6%B8%B8%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wdwsy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wdwsy's Blog">
-      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | wdwsy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/07/23/noi%E6%B8%B8%E8%AE%B0/" class="post-title-link" itemprop="url">noi游记</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2026-07-23 09:14:46" itemprop="dateCreated datePublished" datetime="2026-07-23T09:14:46+08:00">2026-07-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-07-31 23:29:21" itemprop="dateModified" datetime="2026-07-31T23:29:21+08:00">2026-07-31</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="一、"><a href="#一、" class="headerlink" title="一、"></a>一、</h2><p>在去noi之前就没有太大的希望。因为知道自己的水平不可能够到金牌线的（但是还认为其实拿银牌🥈并不困难），感觉去的时候就是定局，应该没有什么悬念的，但是想到我在学校的模拟赛中都是死磕第一题，然后后面反正都做不出来，所以就等着补题了，感觉可能有些摆烂了，做完第一题就去想 T2 正解，想不出来就得到 100+eps 分，然后就结束了。<br>于是我抱着必 Ag 的坐上了去青岛的高铁，之前著名预测网站 rngdle.com 曾预测安徽省队最高分将达到 656（或许预示着 asdfz 不可能三年无金）。</p>
-<h2 id="二、"><a href="#二、" class="headerlink" title="二、"></a>二、</h2><p>前面没有什么好说的，直接说 Day 1 吧，首先我大概 30min 想出来了一个 $\mathcal{O}(nmk)$ 的 dp（后来得知我复杂度算错了，其实是 $\mathcal{O}{n^2k}$，由于 $\max(n) &#x3D; 1000,\max(m) &#x3D; 3000$，所以导致空间复杂度计算也错了）。然后我这样空间无论怎么卡都不行，于是考虑降掉一维，发现这样的点值问题可以使用前几天学习 FFT 的差值方式降掉 $k$，那太棒了，直接开始写，写完之后发现由于其实构造的多项式是 $Ans(x)&#x3D;a_0+a_1x+a_2x^2 + \dots$，发现我们由于每次转移的时候都 $f \leftarrow f \times x$ 无法控制 $x$ 的最高次幂次，然后废了，差值必须要差 $n+1$ 个点，直接时间复杂度退化成了 $\mathcal{O}(n^3)$，没救了，交上去大概获得了 $45$ pts，然后简单观察之后其实直接把 $k$ 这一维提到最外面就好了，感觉天塌了，来回乱搞已经浪费了 3h20min 才过 T1。</p>
-<p>看到 T2，读完题目 10min 发现思路没有难度，就是写大 ds，我感觉以我的 ds 能力可能写不出来了（实际上根本写不出来），于是写了一个暴力，发现只剩一个小时，感觉肯定没有办法写出 T3 比较好的分数了，于是决定直接冲 T2，最后还剩 5min 才过编译，看一下发现重心找错了，直接摆烂了，获得 145 的完蛋分数。</p>
-<p>出考场发现这次重头在 T3，基本乱搞都能获得 50 pts+，甚至有一位大神乱搞到了 95pts，完蛋了，我 T3 题目都没有看。</p>
-<h2 id="三、"><a href="#三、" class="headerlink" title="三、"></a>三、</h2><p>Day1 结束之后是一个活动日，去了当地的军事博物馆，但是感觉没有什么东西，回来的时候也已经错过午饭的时间了，感觉有些折腾。</p>
-<p>到了 Day2，开 T1 ，大概 40min，发现可以直接写一个贪心，但是发现在 $k&#x3D;2,3,5$ 的时候会错，于是进行了巨大的打补丁，最后到 2h20min 的时候才通过这个题目，但是比 Day1 的 T1 快了 1h，感觉还可以，看 T2，是 prufer 序列，之前学过，但是基本没有用过，所以早就忘记了，没办法，定义都是看题目中的提示部分的，我能隐隐感受到这个题目是 DS 题目，我想我想出来也写不了，而且大概率想不出来，于是我直接开了 T3，发现 T3 还是比较可做的，写出多项式做法应该不困难，但是到最后拼的几个包都没有调出来，我本来准备用任意一个包调对之后去拍暴力，然后再用暴力去调其他包的，没想到一个都没有调出来，完蛋了，收获 0pts。</p>
-<p>出考场之后知道我 T3 题目看错了，要求的是祖先，不是父亲，我也不知道我是怎么看错的。</p>
-<h2 id="四、"><a href="#四、" class="headerlink" title="四、"></a>四、</h2><p>我这个成绩可以说是没救了，只有铜牌了。<br>感觉其实 Day1 和 Day2 题目都选择有问题，在 Day1 应该是 T3 更容易用随机化得分，而 Day2 应该选择 T2，但是其实 Day1 是 T1 写太久了导致的，还是其实实力就在 银&#x2F;铜 的位置，还需要加训。</p>
-<p>而且在闭幕式的时候 ccf 的人说他们引入了量化标准，估计看来希望达到算法考察的全覆盖，而且还包含 Day1 Day2 的标准差，也就是说不想让选手一天能打好，另外一天掉下去，希望难度比较平衡。看来复习的时候也要全覆盖。</p>
-<p>fz 1Au 2Ag 1Cu + 1夏令营Cu</p>
-
       
     </div>
 

@@ -178,7 +178,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -210,6 +210,127 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/06/22/2026-6-22%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/06/22/2026-6-22%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">2026-6-22做题记录</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-06-22 21:55:28" itemprop="dateCreated datePublished" datetime="2026-06-22T21:55:28+08:00">2026-06-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-06-23 23:44:12" itemprop="dateModified" datetime="2026-06-23T23:44:12+08:00">2026-06-23</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="风结"><a href="#风结" class="headerlink" title="风结"></a><a target="_blank" rel="noopener" href="https://xinyoudui.com/ac/contest/745010385000B9E08E4054/problem/45754">风结</a></h1><h3 id="暴力做法"><a href="#暴力做法" class="headerlink" title="暴力做法"></a>暴力做法</h3><p>我们设 $p_u$ 代表从 $u$ 出发的路径方案数，特别的如果 $p_u \geq 10^{11}$ 我们就看作 $10^{11}$，然后每次暴力走的时候可以按照 $p_u$ 排序，如果当前的 $k \leq p_u$ 那么就走下去，不然 $k \leftarrow k - p_u$。</p>
+<h3 id="DAG-链剖分"><a href="#DAG-链剖分" class="headerlink" title="DAG 链剖分"></a>DAG 链剖分</h3><p>对于 DAG，其实一般来说我们束手无策，我们的一般做法都是基于序列的，所以我们也考虑一种可以把 DAG 映射到序列上的方法，具体的有一下两种剖分方式。</p>
+<h3 id="剖分方式1（来自-zxc）"><a href="#剖分方式1（来自-zxc）" class="headerlink" title="剖分方式1（来自 zxc）"></a>剖分方式1（来自 zxc）</h3><p>em好像 zxc 本人叫做倍增分块？<br>其实我们可以按照值域分块，具体的假设在节点 $u$，对于所有存在 $u\rightarrow v$ 的节点 $v$ 按照他们的 $\sum p_v$ 的一半分块。具体的，按照 $p_v$ 排序之后，如果 $u\rightarrow v$ 这条边加入之后，和就大于了 $\sum p_v$ 的一半，那么久把这个边设置为重边。我们可以预处理，保证走重边的复杂度在 $\mathcal{O}(\log V)$，这样如果走一条轻边 $k$ 值就会减少一半，原因如下：</p>
+<ol>
+<li>如果走的是在分界点以前，那么 $k$ 相当于为 $\sum p_v$ 的一半。</li>
+<li>如果走的是在分界点以后，因为当前的 $k \leq \sum p_v$ ，此时又会执行 $k \leftarrow k - s$（$s$ 表示 $p_v$ 排序后前缀和仍然小于 $k$ 的最大值）。显然这时的 $k$ 仍然小于 $\sum p_v$ 的一半，所以达到了减半的效果。</li>
+</ol>
+<h3 id="剖分方式2（来自-wtz）"><a href="#剖分方式2（来自-wtz）" class="headerlink" title="剖分方式2（来自 wtz）"></a>剖分方式2（来自 wtz）</h3><p>我们可以发现，我们可以找到 $p_v$ 最大的 $v$，设置 $u\rightarrow v$ 为重链，同样用倍增维护重链信息，达到快速跳跃的效果，然后显然，除去最大的 $p_v$ 剩下的轻边的 $p_v$ 都小于等于 $\sum p_v$ 的一半。</p>
+<h3 id="一些特殊情况"><a href="#一些特殊情况" class="headerlink" title="一些特殊情况"></a>一些特殊情况</h3><p>这题我们的 $p_u$ 值大于 $10^{11}$ 的时候会被记作 $10^{11}$，这样有可能导致我们跳过一条轻边之后 $k$ 还是 $10^{11}$，那么时间复杂度就会错误。于是我们考虑其实对于一个 $u$ 节点，我们只关心第一次出现 $10^{11}$ 之前的所有边，剩下的边都可以删掉了，这样久保证了走过一条轻边之后一定 $p_u \not &#x3D; 10^{11}$。</p>
+<h3 id="DAG-的做法"><a href="#DAG-的做法" class="headerlink" title="DAG 的做法"></a>DAG 的做法</h3><p>直接上 DAG 链剖分，注意到需要带修，我们可以上懒惰标记，更具有拓展性的做法其实是对于所有重边，其实构成了一颗树的结构，我们可以对这个树上一个 BIT，每个位置记录到根链长度，然后这样就能查出任意一段重链的值了，轻边的值显然是好统计的。</p>
+<h3 id="普通图上的做法"><a href="#普通图上的做法" class="headerlink" title="普通图上的做法"></a>普通图上的做法</h3><p>其实和 DAG 基本一致，轻边都可以直接跳，这个是好做的。<br>对于重边，我们发现现在他们构成了内向基环树森林，而且由于每个点只有一条出边，所以所以环一定在树的根部。我们对于环单独维护一个 BIT 和 一个这个环上走一圈的代价 $S$， 对于散的步数我们就在 BIT 上查询。</p>
+<div class="note warning"><p><strong>注意</strong>：其实即使走上环之后也不一定一直在环上转，可能会从环上逃逸到其他基环树，但是这样仍然满足我们对 DAG 的复杂度分析。</p>
+</div>
+
+<h1 id="Parallel-Universes-Hard"><a href="#Parallel-Universes-Hard" class="headerlink" title="Parallel Universes (Hard)"></a><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1184/D2">Parallel Universes (Hard)</a></h1><p>我们直接列出式子并高斯消元可以获得 $\mathcal{O}(m^6)$ 做法。</p>
+<p>但是我们观察这个转移方程。</p>
+
+$$
+\begin{aligned}
+dp[i][j]=&(1-\dfrac{i}{m})\cdot \dfrac{j}{i+1}\cdot dp[i+1][j+1]+(1-\dfrac{i}{m})\cdot \dfrac{i+1-j}{i+1}\cdot dp[i+1][j]\\
+&+\dfrac{i}{m}\cdot\dfrac{1}{i-1}\cdot (\sum_{k=1}^{j-1}dp[i-k][j-k]+\sum_{k=1}^{i-j}dp[i-k][j])
+\end{aligned}
+$$
+
+
+<p>这个转移显然是成环的，但是发现其实只有一个使得 $j$ 增大的转移，于是我们把这一项放到最前面来。</p>
+
+$$
+\begin{aligned}
+dp[i+1][j+1]=&\left[(1-\dfrac{i}{m})\cdot \dfrac{j}{i+1}\right]^{-1}(
+dp[i][j]-(1-\dfrac{i}{m})\cdot \dfrac{i+1-j}{i+1}\cdot dp[i+1][j]\\
+&-\dfrac{i}{m}\cdot\dfrac{1}{i-1}\cdot (\sum_{k=1}^{j-1}dp[i-k][j-k]+\sum_{k=1}^{i-j}dp[i-k][j]))
+\end{aligned}
+$$
+
+
+<p>这样我们发现，其实转移构成一个类似树的结构，这样我们可以由 $dp[x][2],x\in[3,m]$ 和常数项的线性组合得到所有 $dp[i][j]$ 特别的 $dp[i][i]&#x3D;dp[i][1]&#x3D;i$。</p>
+<p>考虑这样做之后，我们还有 $dp[m][x],x\in [3,m]$ 的转移没有用，因为没有 $dp[m+1][x]$，于是我们根据这些转移列出方程，我们会惊讶的发现，现在的矩阵是 $m<br>\times m$ 的了，我们现在消元就是 $\mathcal{O}(m^3)$ 的了！</p>
+<div class="note warning"><p><strong>注意</strong>：<strong>这个转移方程对于 $i&#x3D;j$ 或者 $j&#x3D;1$ 的边界情况并不成立</strong>，所以千万不要用这个来计算，否则会导致错误。</p>
+</div>
+
+<details>
+<summary>点击展开：完整代码</summary>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">255</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> mod = <span class="number">1000000007</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, k, m;</span><br><span class="line"><span class="type">int</span> dp[N][N][N], a[N][N][N], b[N][N][N];</span><br><span class="line">ll inv[N], g[N][N], d[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">ksm</span><span class="params">(ll a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">    ll res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (b) &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &amp; <span class="number">1</span>) res = res * a % mod;</span><br><span class="line">        a = a * a % mod;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> &amp;x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">    x += y;</span><br><span class="line">    <span class="keyword">if</span> (x &gt;= mod) x -= mod;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;n, &amp;k, &amp;m);</span><br><span class="line">    <span class="keyword">if</span> (k == <span class="number">1</span> || k == n) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, n);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    inv[<span class="number">0</span>] = inv[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= m; i++) &#123;</span><br><span class="line">        inv[i] = (mod - mod / i) * inv[mod % i] % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">        dp[i][i][<span class="number">1</span>] = dp[i][<span class="number">1</span>][<span class="number">1</span>] = i; <span class="comment">// [][][1] 表示常数项</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">3</span>; i &lt;= m; i++) &#123;</span><br><span class="line">        dp[i][<span class="number">2</span>][i] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>, j = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">1</span>; k &lt;= m; k++) &#123;</span><br><span class="line">            a[i][j][k] = (dp[i][j][k] + a[i - <span class="number">1</span>][j - <span class="number">1</span>][k]) % mod;</span><br><span class="line">            b[i][j][k] = (dp[i][j][k] + b[i - <span class="number">1</span>][j][k]) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">2</span>; j &lt; m; j++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = j; i &lt;= m; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">1</span>; k &lt;= m; k++) &#123;</span><br><span class="line">                a[i][j][k] = (dp[i][j][k] + a[i - <span class="number">1</span>][j - <span class="number">1</span>][k]) % mod;</span><br><span class="line">                b[i][j][k] = (dp[i][j][k] + b[i - <span class="number">1</span>][j][k]) % mod;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = j + <span class="number">1</span>; i &lt; m; i++) &#123;</span><br><span class="line">            ll coef = <span class="built_in">ksm</span>((mod + <span class="number">1</span> - i * inv[m] % mod) * inv[i + <span class="number">1</span>] % mod * j % mod, mod - <span class="number">2</span>);</span><br><span class="line">            ll c1 = (mod + <span class="number">1</span> - i * inv[m] % mod) * (i + <span class="number">1</span> - j + mod) % mod * inv[i + <span class="number">1</span>] % mod;</span><br><span class="line">            ll c2 = (i * inv[m] % mod * inv[i - <span class="number">1</span>] % mod);</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">1</span>; k &lt;= m; k++) &#123;</span><br><span class="line">                ll tmp = ((dp[i][j][k] - c1 * dp[i + <span class="number">1</span>][j][k] - c2 * (a[i - <span class="number">1</span>][j - <span class="number">1</span>][k] + b[i - <span class="number">1</span>][j][k])) % mod + mod);</span><br><span class="line">                dp[i + <span class="number">1</span>][j + <span class="number">1</span>][k] = coef * tmp % mod;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (j &gt; <span class="number">1</span> &amp;&amp; j &lt; m) &#123;</span><br><span class="line">            d[j + <span class="number">1</span>] = ((inv[m - <span class="number">1</span>] * (a[m - <span class="number">1</span>][j - <span class="number">1</span>][<span class="number">1</span>] + b[m - <span class="number">1</span>][j][<span class="number">1</span>]) - dp[m][j][<span class="number">1</span>]) % mod + mod) % mod;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">3</span>; k &lt;= m; k++) &#123;</span><br><span class="line">                g[j + <span class="number">1</span>][k] = ((dp[m][j][k] - inv[m - <span class="number">1</span>] * (a[m - <span class="number">1</span>][j - <span class="number">1</span>][k] + b[m - <span class="number">1</span>][j][k])) % mod + mod) % mod;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    d[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">3</span>; i &lt;= m; i++) &#123;</span><br><span class="line">        <span class="type">int</span> p = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = i; j &lt;= m; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (g[j][i]) &#123;</span><br><span class="line">                p = j;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (p == <span class="number">-1</span>) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="built_in">assert</span>(p != <span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">if</span> (p != i) <span class="built_in">swap</span>(g[p], g[i]), <span class="built_in">swap</span>(d[p], d[i]);</span><br><span class="line">        ll mul = <span class="built_in">ksm</span>(g[i][i], mod - <span class="number">2</span>);</span><br><span class="line">        d[i] = d[i] * mul % mod;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> k = i; k &lt;= m; k++) g[i][k] = g[i][k] * mul % mod;</span><br><span class="line">        <span class="built_in">assert</span>(g[i][i] == <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt;= m; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (g[j][i]) &#123;</span><br><span class="line">                ll tmp = g[j][i];</span><br><span class="line">                d[j] = (d[j] - d[i] * tmp % mod + mod) % mod;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> k = i; k &lt;= m; k++) &#123;</span><br><span class="line">                    g[j][k] = (g[j][k] - g[i][k] * tmp % mod + mod) % mod;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = m; i &gt;= <span class="number">3</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt;= m; j++) &#123;</span><br><span class="line">            d[i] = (d[i] - d[j] * g[i][j] % mod + mod) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> t = <span class="number">1</span>; t &lt;= m; t++) &#123;</span><br><span class="line">        <span class="built_in">add</span>(ans, (ll)dp[n][k][t] * d[t] % mod);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1275,95 +1396,6 @@ $$
 <p>可以发现 $i$ 的值为 $a$，$i+m$ 的值为 $b+c$，$i+2\times m$ 的值为 $d$ （第三行一定没有操作左端点）。<br>然后这样写之后，发现运行第三个样例 RE 了！！！</p>
 <p>原来 c 有这么大，但是我们可以根据做法 1 发现答案是一个关于 $c$ 的 $n$ 次多项式，所以我们拉格朗日插值就做完了。</p>
 <h1 id="G-Arkady-and-Rectangles"><a href="#G-Arkady-and-Rectangles" class="headerlink" title="G - Arkady and Rectangles"></a><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/983/D">G - Arkady and Rectangles</a></h1><p>势能分析下的正确扫描线。以区间内剩余还没有被看见的矩形为势能。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/05/19/cnblogs-2026%E5%B9%B45%E6%9C%8818%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wdwsy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wdwsy's Blog">
-      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | wdwsy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/05/19/cnblogs-2026%E5%B9%B45%E6%9C%8818%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/" class="post-title-link" itemprop="url">2026年5月18日讲题题单</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2026-05-19 20:00:00" itemprop="dateCreated datePublished" datetime="2026-05-19T20:00:00+08:00">2026-05-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-06-23 23:44:12" itemprop="dateModified" datetime="2026-06-23T23:44:12+08:00">2026-06-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">算法竞赛</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>原文来自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/sggfishpotato/p/20083913">博客园</a></p>
-</blockquote>
-<h1 id="A-谜题-II"><a href="#A-谜题-II" class="headerlink" title="A - 谜题 II"></a><a target="_blank" rel="noopener" href="https://qoj.ac/problem/17203">A - 谜题 II</a></h1><p><a target="_blank" rel="noopener" href="https://qoj.ac/download.php?type=solution&id=17203">官方题解</a><br><a target="_blank" rel="noopener" href="https://chat.deepseek.com/share/xrylflnahyz8ijyjns">https://chat.deepseek.com/share/xrylflnahyz8ijyjns</a></p>
-<p>首先我们按照小于好方向建边，$A_{x1,y1}&lt;A_{x2,y2}$ 那么就建边 $(x1,y1) \to (x2,y2)$。<br>那么，这个问题就是一个拓扑序计数，一个常见的想法是把边容斥掉。但是即便这样还是很难化简问题，我们会发现有些边没有办法容斥掉。<br>首先这个图的点数 $2^k$ 十分特殊，我们假设这个图不是弱联通的，那么就存在不连通的两部分时独立的，在结合这两部分的时候，就需要乘上一个组合数 $2^k \choose x $，$0 &lt; x &lt; 2^k$ 根据卢卡斯定理，这个式子在 mod 2 意义下总是 0。<br>接下来我们就发现我们就可以任意反向割边了，这样就可以转化图了，我们可以发现原图有环就会无解，否则我么可以把 DAG 全部转化为一棵内向树，因为树上的边都是割边。由于在 2 行的网格图中，最多度数为 3，其中一个是父亲，所以一个点最多有两个儿子。那么这个树的拓扑序方案数为奇数，当且仅当每一个为有两个孩子的节点，他的两个子树的大小的二进制位没有交。<br>还有一个容易忽略的转化，就是我们每次把图上横边定向为向右，其实是想在做网格dp的时候顺便进行最后内向树的树形dp，更好的利用本道题目的性质来优化。<br>还有一个dp trick就是把我们的条件放到枚举里面，这题就是把枚举所有可能的前驱，变成枚举子集降低了复杂度。<br>这样进行一些推式子之后还是没有办法做到正确的复杂度，但是我们敏锐地发现数据组数位 32，而且输入的时候也是用 unsigned 把这 32 组数据压在一个整形内的，32 刚好是 unsigned 类型的大小，于是我们考虑把 T 组数据一起处理，我们惊讶地发现无论 dp,a,b,c 这些数组如何，都不会影响我们都有固定的转移路径（只不过有些边不能转移），于是我们整体转移就可以消除一个 32 的常数，就可以通过了。</p>
 
       
     </div>
