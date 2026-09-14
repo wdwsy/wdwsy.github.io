@@ -178,7 +178,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -210,6 +210,134 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/05/20/cnblogs-2026%E5%B9%B45%E6%9C%8816%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/05/20/cnblogs-2026%E5%B9%B45%E6%9C%8816%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/" class="post-title-link" itemprop="url">2026年5月16日讲题题单</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-05-20 20:00:00" itemprop="dateCreated datePublished" datetime="2026-05-20T20:00:00+08:00">2026-05-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-06-28 11:04:55" itemprop="dateModified" datetime="2026-06-28T11:04:55+08:00">2026-06-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">算法竞赛</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a href="file:///Users/dongwang/Downloads/5.16zhk.pdf">mylink</a></p>
+<h1 id="A-Занулити-пiдвiдрiзок"><a href="#A-Занулити-пiдвiдрiзок" class="headerlink" title="A - Занулити пiдвiдрiзок"></a><a target="_blank" rel="noopener" href="https://qoj.ac/problem/8602">A - Занулити пiдвiдрiзок</a></h1><p>首先观察发现我们至少要把 $x$ 加到最大值到最高二进制位，接下来我们可以考虑增大 x，那么小于等于 x 的数字都会只用一次，其他两次，具体式子：</p>
+<p><img src="/images/5-16-tidan1.png"></p>
+<p>然后我们维护字典序最大的一组匹配，实际上类似于前缀线性积，只不过这次在线段树上了。</p>
+<h3 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h3><p>到底什么样的区间信息可以使用类似前缀线性积的思想（时时维护最大字典序）来解决呢。我觉得其实是在元素在不考虑字典序位置的情况下等价。</p>
+<p>在这题中就是，我们发现在线段树中加入一个数字之后如果不满足匹配了，那么我们随意删除比最前面不满足要求的位置的 $s_i$ 小的任意一个位置都行。</p>
+<h1 id="B-Increment-and-Swap"><a href="#B-Increment-and-Swap" class="headerlink" title="B - Increment and Swap"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/AT_cf17_exhibition_b">B - Increment and Swap</a></h1><p>列出式子：</p>
+<p>$\sum_{i&#x3D;1}^n \left( b_i - a_i + \sum_{j&#x3D;1}^{i-1} [b_j &gt; b_i] \right)$，其中 $- a_i$ 是固定的。</p>
+<p>然后我们可以感觉到，直接在当前 i 位置选择最优解，也就是 $min( b_i + \sum_{j&#x3D;1}^{i-1} [b_j &gt; b_i])$ 即可，</p>
+<p>如果当前位置不选择最优解，而选择了一个更小的数字，那么他的好处就是对后面有贡献，但是我们可以证明这个是没有用的，其实感性理解就发现在后面选择会更加不优。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/article/ki0cab1j">证明</a>可以戳这里</p>
+<h1 id="E-乘积的期望"><a href="#E-乘积的期望" class="headerlink" title="E - 乘积的期望"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P11420">E - 乘积的期望</a></h1><h2 id="乘积的期望的组合意义"><a href="#乘积的期望的组合意义" class="headerlink" title="乘积的期望的组合意义"></a>乘积的期望的组合意义</h2><p>首先，对于乘积的期望我们不好做，于是考虑乘积的组合意义，我们首先假设每个点都向后走，然后如果对一个后缀 $[j, n]$ 加上 $1$，就相当于走到 $j$ 的时候，我们捡起来了一个小工具，我们接下来每次移动，都可以选择用小工具走，或者走原来的边 $a_i$，这样发现其实就是把乘积用<strong>乘法分配律</strong>拆开，正确性显然。<br>但是具体实现的时候，我们一般设 $f_{i,j}$ 为走到位置 $i$ 已经使用过的小工具为 $j$ 个的总乘积和，每次转移的时候，考虑</p>
+<ul>
+<li>使用的是哪个小工具。。</li>
+<li>这个小工具有多少种出现的位置。</li>
+</ul>
+<p>举例：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF1842G">https://www.luogu.com.cn/problem/CF1842G</a><br>具体地，定义 $f_{i, j}$ 表示考虑了前 $i$ 处，使用了 $j$ 个工具的方案数，转移分三类：</p>
+<ol>
+<li>使用 $a_{i+1}$，$f_{i + 1, j} \gets f_{i, j} \cdot a_{i+1}$；</li>
+<li>使用一个被使用过的工具，$f_{i+1, j} \gets f_{i, j} \cdot j \cdot v$；</li>
+<li>使用一个还未被使用过的工具，需要先确定这个工具是哪里来的，$f_{i+1, j+1} \gets f_{i, j} \cdot (i+1) \cdot (m-j)\cdot v$。</li>
+</ol>
+<div class="note info"><p>💡 可以思考一下这个题目的计数思路，其实一个比较常见的思路是在这个小工具第一次出现的时候加入我们的 dp 状态，但是发现这样转移的时候必须要枚举当前这个位置出现了几个小工具，那么复杂度就会变高，但是我们如果改成现在这样，在第一次使用的时候统计答案，那么就没有这些问题了。<br>也因此，我们在转移选择一个新的工具的时候，要确定它是从哪里来的，所以要乘上一个 $i+1$ 的系数。</p>
+</div>
+
+<h3 id="tip"><a href="#tip" class="headerlink" title="tip"></a>tip</h3><p>可以设想一下，我们不这样 dp，那么可以设 $f_{i,j}$ 表示到了第 $i$ 个位置，有 $j$ 个小工具在前面。</p>
+<p>但是发现这样转移复杂度比较高，因为相同位置上的小工具需要用组合数去计算。</p>
+<p>那么，对于每一个 $f_{i,j}$ 转移的时候，都需要枚举位置 $i$ 上选了多少个小工具，直接就到了，$O(n^3)$。</p>
+<h2 id="具体到本题"><a href="#具体到本题" class="headerlink" title="具体到本题"></a>具体到本题</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">操作 c 次，每次以 b_i 的概率，进行长度为 m 左端点为 i 的区间加。问最后乘积的期望.</span><br></pre></td></tr></table></figure>
+
+<p>发现是区间加，区间 $[l,r] + 1$，我们就拆成 $[l,n] + 1, [r + 1, n] - 1$。</p>
+<p>因为每个位置加的概率不一样，所以我们当作每个位置会被选 $b_i$ 次，最后都除以 $(\sum b_i)^c$ 即可。<br>但是我们发现，我们如果要选择之前已经选择过的小工具来转移，这个小工具和我的距离也不能超过 $m$ 这是难以记录的，我们考虑压缩一个 $m$ 位的二进制状态来记录。</p>
+<h3 id="抽象一下这个问题"><a href="#抽象一下这个问题" class="headerlink" title="抽象一下这个问题"></a>抽象一下这个问题</h3><p>假设我们同时使用一个小工具转移的位置集合位置为 $x_1,x_2,x_3,\dots,x_k$，我们需要满足 $x_k - x_1 + 1 \leq m$<br>于是我们可以在状态 $S$ 中记录每个集合的 $x_1$ 然后每次转移的时候考虑四种情况：</p>
+<ul>
+<li>作为 $x_1$ 出现</li>
+<li>自己成为一个完整的集合</li>
+<li>作为 $x_i, 1 &lt; i &lt; k$ 出现</li>
+<li>作为 $x_k$ 出现，并计算可以覆盖这个集合的可行的左端点种类数。</li>
+</ul>
+<p>然后发现这样只能通过 $m \leq 16$ 的部分分，考虑 $m &gt; 16$ 的时候 $\frac{n}{m} &lt; 3$ 比较小， 于是我们可以在一个 $3\times m$ 的网格上 dp，具体的设 $f_{i,a,b,c,d}$ 表示左端点在 $a,b,c,d$ 的块分别有多少个。</p>
+<p><img src="/images/5-16-tidan2.png"></p>
+<p>可以发现 $i$ 的值为 $a$，$i+m$ 的值为 $b+c$，$i+2\times m$ 的值为 $d$ （第三行一定没有操作左端点）。<br>然后这样写之后，发现运行第三个样例 RE 了！！！</p>
+<p>原来 c 有这么大，但是我们可以根据做法 1 发现答案是一个关于 $c$ 的 $n$ 次多项式，所以我们拉格朗日插值就做完了。</p>
+<h1 id="G-Arkady-and-Rectangles"><a href="#G-Arkady-and-Rectangles" class="headerlink" title="G - Arkady and Rectangles"></a><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/983/D">G - Arkady and Rectangles</a></h1><p>势能分析下的正确扫描线。以区间内剩余还没有被看见的矩形为势能。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
