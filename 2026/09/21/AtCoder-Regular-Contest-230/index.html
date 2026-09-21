@@ -20,27 +20,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"wdwsy.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":240},"hljswrap":true,"codeblock":{"theme":{"light":"github-dark","dark":"github-dark-dimmed"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat","show_result":true},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":true,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="原文来自 博客园  A - 谜题 II官方题解https:&#x2F;&#x2F;chat.deepseek.com&#x2F;share&#x2F;xrylflnahyz8ijyjns 首先我们按照小于好方向建边，$A_{x1,y1}&lt;A_{x2,y2}$ 那么就建边 $(x1,y1) \to (x2,y2)$。那么，这个问题就是一个拓扑序计数，一个常见的想法是把边容斥掉。但是即便这样还是很难化简问题，我们会发现有些边没有办法">
+    <meta name="description" content="B - Chmax and Chmin考虑把操作到着做。也就是考虑 $b\rightarrow a$。 发现无论是 $\operatorname{chmax},\operatorname{chmin}$（其他题目中可能是赋值操作）。都可以到着做。 可以发现如果一个变量被成功 $\operatorname{chmax},$ 之后我们知道它会变成 $x_i$，但是在它被 $\operatorname{">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2026年5月18日讲题题单">
-<meta property="og:url" content="https://wdwsy.github.io/2026/05/19/cnblogs-2026%E5%B9%B45%E6%9C%8818%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/index.html">
+<meta property="og:title" content="AtCoder Regular Contest++ 230">
+<meta property="og:url" content="https://wdwsy.github.io/2026/09/21/AtCoder-Regular-Contest-230/index.html">
 <meta property="og:site_name" content="wdwsy&#39;s Blog">
-<meta property="og:description" content="原文来自 博客园  A - 谜题 II官方题解https:&#x2F;&#x2F;chat.deepseek.com&#x2F;share&#x2F;xrylflnahyz8ijyjns 首先我们按照小于好方向建边，$A_{x1,y1}&lt;A_{x2,y2}$ 那么就建边 $(x1,y1) \to (x2,y2)$。那么，这个问题就是一个拓扑序计数，一个常见的想法是把边容斥掉。但是即便这样还是很难化简问题，我们会发现有些边没有办法">
+<meta property="og:description" content="B - Chmax and Chmin考虑把操作到着做。也就是考虑 $b\rightarrow a$。 发现无论是 $\operatorname{chmax},\operatorname{chmin}$（其他题目中可能是赋值操作）。都可以到着做。 可以发现如果一个变量被成功 $\operatorname{chmax},$ 之后我们知道它会变成 $x_i$，但是在它被 $\operatorname{">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-05-19T12:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-23T15:44:12.850Z">
+<meta property="article:published_time" content="2026-09-21T14:16:46.000Z">
+<meta property="article:modified_time" content="2026-09-21T14:17:28.722Z">
 <meta property="article:author" content="wdwsy">
-<meta property="article:tag" content="题单">
+<meta property="article:tag" content="算法,OIC++,NOI,信息学竞赛">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://wdwsy.github.io/2026/05/19/cnblogs-2026%E5%B9%B45%E6%9C%8818%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/">
+<link rel="canonical" href="https://wdwsy.github.io/2026/09/21/AtCoder-Regular-Contest-230/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://wdwsy.github.io/2026/05/19/cnblogs-2026%E5%B9%B45%E6%9C%8818%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/","path":"2026/05/19/cnblogs-2026年5月18日讲题题单/","title":"2026年5月18日讲题题单"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://wdwsy.github.io/2026/09/21/AtCoder-Regular-Contest-230/","path":"2026/09/21/AtCoder-Regular-Contest-230/","title":"AtCoder Regular Contest++ 230"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>2026年5月18日讲题题单 | wdwsy's Blog</title>
+<title>AtCoder Regular Contest++ 230 | wdwsy's Blog</title>
   
 
 
@@ -166,7 +166,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A-%E8%B0%9C%E9%A2%98-II"><span class="nav-number">1.</span> <span class="nav-text">A - 谜题 II</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#B-Chmax-and-Chmin"><span class="nav-number">1.</span> <span class="nav-text">B - Chmax and Chmin</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#D-Min-Max-Matrix"><span class="nav-number">2.</span> <span class="nav-text">D - Min Max Matrix</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">2.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">做法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%AE%B9%E6%96%A5%E7%B3%BB%E6%95%B0%E7%9A%84%E8%AF%81%E6%98%8E%EF%BC%9A"><span class="nav-number">2.3.</span> <span class="nav-text">关于容斥系数的证明：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E5%BC%8F%E5%AD%90"><span class="nav-number">2.4.</span> <span class="nav-text">推式子</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -223,7 +223,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/05/19/cnblogs-2026%E5%B9%B45%E6%9C%8818%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/09/21/AtCoder-Regular-Contest-230/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -236,12 +236,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="2026年5月18日讲题题单 | wdwsy's Blog">
+      <meta itemprop="name" content="AtCoder Regular Contest++ 230 | wdwsy's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          2026年5月18日讲题题单
+          AtCoder Regular Contest++ 230
         </h1>
 
         <div class="post-meta-container">
@@ -251,24 +251,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2026-05-19 20:00:00" itemprop="dateCreated datePublished" datetime="2026-05-19T20:00:00+08:00">2026-05-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-06-23 23:44:12" itemprop="dateModified" datetime="2026-06-23T23:44:12+08:00">2026-06-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">算法竞赛</span></a>
-        </span>
+      <time title="Created: 2026-09-21 22:16:46 / Modified: 22:17:28" itemprop="dateCreated datePublished" datetime="2026-09-21T22:16:46+08:00">2026-09-21</time>
     </span>
 
   
@@ -287,11 +272,28 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><blockquote>
-<p>原文来自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/sggfishpotato/p/20083913">博客园</a></p>
-</blockquote>
-<h1 id="A-谜题-II"><a href="#A-谜题-II" class="headerlink" title="A - 谜题 II"></a><a target="_blank" rel="noopener" href="https://qoj.ac/problem/17203">A - 谜题 II</a></h1><p><a target="_blank" rel="noopener" href="https://qoj.ac/download.php?type=solution&id=17203">官方题解</a><br><a target="_blank" rel="noopener" href="https://chat.deepseek.com/share/xrylflnahyz8ijyjns">https://chat.deepseek.com/share/xrylflnahyz8ijyjns</a></p>
-<p>首先我们按照小于好方向建边，$A_{x1,y1}&lt;A_{x2,y2}$ 那么就建边 $(x1,y1) \to (x2,y2)$。<br>那么，这个问题就是一个拓扑序计数，一个常见的想法是把边容斥掉。但是即便这样还是很难化简问题，我们会发现有些边没有办法容斥掉。<br>首先这个图的点数 $2^k$ 十分特殊，我们假设这个图不是弱联通的，那么就存在不连通的两部分时独立的，在结合这两部分的时候，就需要乘上一个组合数 $2^k \choose x $，$0 &lt; x &lt; 2^k$ 根据卢卡斯定理，这个式子在 mod 2 意义下总是 0。<br>接下来我们就发现我们就可以任意反向割边了，这样就可以转化图了，我们可以发现原图有环就会无解，否则我么可以把 DAG 全部转化为一棵内向树，因为树上的边都是割边。由于在 2 行的网格图中，最多度数为 3，其中一个是父亲，所以一个点最多有两个儿子。那么这个树的拓扑序方案数为奇数，当且仅当每一个为有两个孩子的节点，他的两个子树的大小的二进制位没有交。<br>还有一个容易忽略的转化，就是我们每次把图上横边定向为向右，其实是想在做网格dp的时候顺便进行最后内向树的树形dp，更好的利用本道题目的性质来优化。<br>还有一个dp trick就是把我们的条件放到枚举里面，这题就是把枚举所有可能的前驱，变成枚举子集降低了复杂度。<br>这样进行一些推式子之后还是没有办法做到正确的复杂度，但是我们敏锐地发现数据组数位 32，而且输入的时候也是用 unsigned 把这 32 组数据压在一个整形内的，32 刚好是 unsigned 类型的大小，于是我们考虑把 T 组数据一起处理，我们惊讶地发现无论 dp,a,b,c 这些数组如何，都不会影响我们都有固定的转移路径（只不过有些边不能转移），于是我们整体转移就可以消除一个 32 的常数，就可以通过了。</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="B-Chmax-and-Chmin"><a href="#B-Chmax-and-Chmin" class="headerlink" title="B - Chmax and Chmin"></a><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/arc230/tasks/arc230_b">B - Chmax and Chmin</a></h1><p>考虑把操作到着做。也就是考虑 $b\rightarrow a$。</p>
+<p>发现无论是 $\operatorname{chmax},\operatorname{chmin}$（其他题目中可能是赋值操作）。<br>都可以到着做。</p>
+<p>可以发现如果一个变量被成功 $\operatorname{chmax},$ 之后我们知道它会变成 $x_i$，但是在它被 $\operatorname{chmax}$ 之前只要满足 $\leq x_i$ 即可。</p>
+<p>所以我们可以这样描述 $\operatorname{chmax}$ 的逆操作：<br>回忆 <code>chmax l r</code>，其中<br>$$<br>x :&#x3D; X_{r-l+1},<br>$$<br>对每个 $i \in [l,r]$ 执行<br>$$<br>A_i \leftarrow \max(A_i, x).<br>$$<br>它的逆操作可以刻画如下。</p>
+<p><strong>适用条件</strong>：对每个 $i \in [l,r]$，都有<br>$$<br>x \le R_i.<br>$$</p>
+<p><strong>应用后对当前状态条件的改变</strong>：独立地对每个 $i \in [l,r]$，如果<br>$$<br>L_i \le x<br>$$<br>成立，则令<br>$$<br>L_i \leftarrow -\infty.<br>$$</p>
+<p>$\operatorname{chmin}$ 的逆操作同理。</p>
+<p>我们可以发现，只要一个位置被操作两次就会变成 $-\infty \sim \infty.$<br>所以最多操作 $2n$ 次。</p>
+<p>这样每次暴力 $\operatorname{check}$，时间复杂度 $O(n^3)$。</p>
+<h1 id="D-Min-Max-Matrix"><a href="#D-Min-Max-Matrix" class="headerlink" title="D - Min Max Matrix"></a><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/arc230/tasks/arc230_d">D - Min Max Matrix</a></h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><h2 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h2><p>神秘组合数题目，是我的大脑旋转。</p>
+<p>首先能发现，一定有一个<strong>中心</strong>，大概长这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">..........&gt;t......</span><br><span class="line">..........&gt;t......</span><br><span class="line">&lt;t&lt;t&lt;t&lt;t&lt;t=t&lt;t&lt;t&lt;t</span><br><span class="line">..........&gt;t......</span><br><span class="line">..........&gt;t......</span><br><span class="line">..........&gt;t......</span><br></pre></td></tr></table></figure>
+
+<p>只要存在这样的中心，那么这个矩阵就是合法的。</p>
+<p>直接计算显然会计算重复，所以我们考虑容斥。<br>但是这里我们不能按照 $&#x3D;t$ 的位置的个数进行容斥。<br>进一步观察这个题目的性质，不难发现，如果 $(x_1,y_1),(x_2,y_2)$ 都是中心，那么 $(x_2,y_1),(x_1,y_2)$ 都一定是中心。</p>
+<p>我们就考虑直接行列容斥，假设选择了 $h$ 行，$w$ 列，那么容斥系数就是 $(-1)^{h+w}$。</p>
+<p>最后一个难点就是用二项式定理降低复杂度，推式子就看 deepseek 吧，式子太难打了。</p>
+<h2 id="关于容斥系数的证明："><a href="#关于容斥系数的证明：" class="headerlink" title="关于容斥系数的证明："></a>关于容斥系数的证明：</h2><p>假设不同 $i$ 和 $j$ 值的个数分别为 $h,w\ge 1$。那么容斥系数的和可以表示为<br>$$<br>\sum_{a&#x3D;0}^{h}\sum_{b&#x3D;0}^{w}(-1)^a(-1)^b\binom{h}{a}\binom{w}{b}<br>\sum_{k&#x3D;0}^{(h-a)(w-b)}\binom{(h-a)(w-b)}{k}(-1)^k<br>$$</p>
+<h2 id="推式子"><a href="#推式子" class="headerlink" title="推式子"></a>推式子</h2><p>$$<br>\sum_{h&#x3D;1}^{H}\sum_{w&#x3D;1}^{W}\sum_{m&#x3D;1}^{M}<br>\binom{H}{h}\binom{W}{w}(-1)^{h+w}<br>m^{h(W-w)}(M+1-m)^{(H-h)w}M^{(H-h)(W-w)}<br>$$</p>
+<p>$$<br>f(m)&#x3D;\sum_{h&#x3D;1}^{H}\sum_{w&#x3D;1}^{W}<br>\binom{H}{h}\binom{W}{w}(-1)^{h+w}<br>m^{h(W-w)}(M+1-m)^{(H-h)w}M^{(H-h)(W-w)}<br>$$<br>利用二项式定理，我们可以将其改写为<br>$$<br>\begin{aligned}<br>f(m)<br>&amp;&#x3D;\sum_{h&#x3D;1}^{H}\binom{H}{h}(-1)^h<br>\sum_{w&#x3D;1}^{W}\binom{W}{w}<br>\left(-(M+1-m)^{H-h}\right)^w<br>\left(m^h M^{H-h}\right)^{W-w}\<br>&amp;&#x3D;\sum_{h&#x3D;1}^{H}\binom{H}{h}(-1)^h<br>\left[<br>\left(-(M+1-m)^{H-h}+m^h M^{H-h}\right)^W<br>-\left(m^h M^{H-h}\right)^W<br>\right]<br>\end{aligned}<br>$$<br>因此，对于给定的 $m$，我们可以在例如 $O(H\log(HW))$ 时间内计算 $f(m)$。</p>
+<p>答案是<br>$$<br>F(M)&#x3D;\sum_{m&#x3D;1}^{M}f(m),<br>$$<br>我们将其视为 $M$ 的多项式。一旦我们有了 $F(0),F(1),\dots,F(HW)$，就可以使用拉格朗日插值计算 $F(M)$。计算这些值最终归结为计算 $f(1),f(2),\dots,f(HW)$。（注意，如果 $f$ 依赖于这里的 $M$，这个论证就不成立了。）在预先计算好合适的阶乘表之后，拉格朗日插值本身可以在与多项式次数成线性关系的时间内完成。</p>
+<p>这样得到的算法运行时间为例如<br>$$<br>O(H^2W\log(HW)).<br>$$</p>
 
     </div>
 
@@ -300,22 +302,16 @@
     
 
     <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E9%A2%98%E5%8D%95/" rel="tag"># 题单</a>
-          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2026/05/17/cnblogs-high-elements-%E9%A2%98%E8%A7%A3/" rel="prev" title="High Elements 题解">
-                  <i class="fa fa-angle-left"></i> High Elements 题解
+                <a href="/2026/09/13/Min-Max%E5%AE%B9%E6%96%A5%E6%8B%93%E5%B1%95%E5%BD%A2%E5%BC%8F/" rel="prev" title="Min-Max容斥拓展形式">
+                  <i class="fa fa-angle-left"></i> Min-Max容斥拓展形式
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2026/05/20/cnblogs-2026%E5%B9%B45%E6%9C%8816%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/" rel="next" title="2026年5月16日讲题题单">
-                  2026年5月16日讲题题单 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
