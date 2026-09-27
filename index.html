@@ -178,7 +178,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -210,6 +210,134 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/09/27/%E8%B5%8C%E5%BE%92%E9%97%AE%E9%A2%98%E5%88%BB%E7%94%BB%E9%9A%8F%E6%9C%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%87%BA%E7%8E%B0%E6%8C%87%E5%AE%9A%E4%B8%B2%E7%9A%84%E6%9C%9F%E6%9C%9B%E9%95%BF%E5%BA%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/09/27/%E8%B5%8C%E5%BE%92%E9%97%AE%E9%A2%98%E5%88%BB%E7%94%BB%E9%9A%8F%E6%9C%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%87%BA%E7%8E%B0%E6%8C%87%E5%AE%9A%E4%B8%B2%E7%9A%84%E6%9C%9F%E6%9C%9B%E9%95%BF%E5%BA%A6/" class="post-title-link" itemprop="url">赌徒问题刻画随机字符串中第一次出现指定串的期望长度</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-09-27 22:29:06 / Modified: 22:29:46" itemprop="dateCreated datePublished" datetime="2026-09-27T22:29:06+08:00">2026-09-27</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="P4548-CTSC2006-歌唱王国-题解总结"><a href="#P4548-CTSC2006-歌唱王国-题解总结" class="headerlink" title="P4548 [CTSC2006] 歌唱王国 题解总结"></a>P4548 [CTSC2006] 歌唱王国 题解总结</h1><h2 id="核心结论"><a href="#核心结论" class="headerlink" title="核心结论"></a>核心结论</h2><p>在 $n$ 个字符均匀随机的序列中，模式 $A$ 首次出现的期望时间为：</p>
+<p>$$<br>\boxed{\mathbb E[T]&#x3D;\sum_{c\in B(A)} n^c}<br>$$</p>
+<p>其中 $B(A)$ 是 $A$ 的所有 border 长度，包括全长。</p>
+<hr>
+<h2 id="1-怎么想到的：公平赌博-鞅"><a href="#1-怎么想到的：公平赌博-鞅" class="headerlink" title="1. 怎么想到的：公平赌博 &#x2F; 鞅"></a>1. 怎么想到的：公平赌博 &#x2F; 鞅</h2><p>这个“赌徒法”可以这样记：</p>
+<ul>
+<li>每单位时间，赌场旁边来一个新赌徒，带 $1$ 铜币。</li>
+<li>他押下一秒会唱出模式第一个字符 $a_1$。</li>
+<li>猜对了，资金变成 $n$ 倍；继续全押 $a_2$。</li>
+<li>再猜对，继续全押 $a_3$，资金继续乘 $n$。</li>
+<li>猜错就空手离场。</li>
+</ul>
+<p>单次下注：成功概率 $1&#x2F;n$，赔率 $n$，期望收益为 $0$，所以是公平赌博。</p>
+<p>赌场每单位时间收到一个新赌徒的 $1$ 铜币，所以到停止时刻 $T$，总投入是 $T$。</p>
+<p>关门时，哪些赌徒还活着并且手里有钱？</p>
+<p>只有那些“从进入时刻到关门时刻”唱出的串，恰好等于模式前缀，并且这段又恰好是模式后缀的赌徒。<br>也就是说，这段长度 $c$ 必须满足：</p>
+<p>$$<br>A[1..c]&#x3D;A[L-c+1..L],<br>$$</p>
+<p>即 $c$ 是 border。</p>
+<p>这个赌徒连续押中 $c$ 次，资金变成：</p>
+<p>$$<br>n^c.<br>$$</p>
+<p>所以赌场总支出是：</p>
+<p>$$<br>\sum_{c\in B(A)} n^c.<br>$$</p>
+<p>公平赌博意味着期望总投入 &#x3D; 期望总支出：</p>
+<p>$$<br>\mathbb E[T]&#x3D;\sum_{c\in B(A)} n^c.<br>$$</p>
+<p>这就是这个题的全部直觉。</p>
+<p>记忆口诀：</p>
+<blockquote>
+<p><strong>每时刻一个赌徒，押中翻 $n$ 倍；关门时前缀&#x3D;后缀的活着；活着的奖金是 $n^{\text{border长度}}$；公平所以期望时间等于总奖金。</strong></p>
+</blockquote>
+<hr>
+<h2 id="2-必须记住的定理-公式"><a href="#2-必须记住的定理-公式" class="headerlink" title="2. 必须记住的定理 &#x2F; 公式"></a>2. 必须记住的定理 &#x2F; 公式</h2><h3 id="核心定理"><a href="#核心定理" class="headerlink" title="核心定理"></a>核心定理</h3><p>在 $n$ 个字符均匀随机的序列中，模式 $A$ 首次出现的期望时间为：</p>
+<p>$$<br>\boxed{\mathbb E[T]&#x3D;\sum_{c\in B(A)} n^c}<br>$$</p>
+<p>其中 $B(A)$ 是 $A$ 的所有 border 长度，包括全长。</p>
+<hr>
+<h2 id="3-几个有用的推论"><a href="#3-几个有用的推论" class="headerlink" title="3. 几个有用的推论"></a>3. 几个有用的推论</h2><ol>
+<li><strong>如果模式没有自重叠</strong>，除了全长没有其他 border：</li>
+</ol>
+<p>$$<br>\mathbb E[T]&#x3D;n^L.<br>$$</p>
+<ol start="2">
+<li><strong>如果模式是全同串</strong> $a^L$，所有长度 $1,2,\dots,L$ 都是 border：</li>
+</ol>
+<p>$$<br>\mathbb E[T]&#x3D;n+n^2+\cdots+n^L.<br>$$</p>
+<ol start="3">
+<li><p><strong>border 越多，期望越大</strong>。因为每次重叠都会让某些赌徒在关门时还活着，赌场要赔付更多，所以平均等待时间更长。</p>
+</li>
+<li><p>border 长度 $c$ 对应周期 $L-c$。所以也可以理解为：模式自重叠越强，首次出现越慢。</p>
+</li>
+</ol>
+<hr>
+<h2 id="6-最容易忘的点"><a href="#6-最容易忘的点" class="headerlink" title="6. 最容易忘的点"></a>6. 最容易忘的点</h2><ol>
+<li><strong>包括全长 border。</strong></li>
+<li><strong>不包括空 border $0$。</strong></li>
+</ol>
+<hr>
+<h2 id="7-最终记忆卡片"><a href="#7-最终记忆卡片" class="headerlink" title="7. 最终记忆卡片"></a>7. 最终记忆卡片</h2><blockquote>
+<p>均匀 $n$ 字母表，模式 $A$ 首次出现期望：</p>
+<p>$$<br>\mathbb E[T]&#x3D;\sum_{c\in B(A)} n^c.<br>$$</p>
+<p>$B(A)$ 是所有 border 长度，包括全长。<br>border 用 KMP fail 链求。<br>赌徒故事：每时刻来一个人，押中翻 $n$ 倍；关门时只有前缀&#x3D;后缀的赌徒活着，奖金 $n^c$；公平所以期望时间等于总奖金。z</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -521,7 +649,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-09-19 16:55:17" itemprop="dateModified" datetime="2026-09-19T16:55:17+08:00">2026-09-19</time>
+      <time title="Modified: 2026-09-27 22:30:33" itemprop="dateModified" datetime="2026-09-27T22:30:33+08:00">2026-09-27</time>
     </span>
 
   
@@ -669,6 +797,12 @@
 <h3 id="计数一种局面的方案数"><a href="#计数一种局面的方案数" class="headerlink" title="计数一种局面的方案数"></a>计数一种局面的方案数</h3><p>这个部分需要建立映射，即<br>$$S_1)S_2)S_3)\dots S_x)S_{x+1}(S_{x+2}(S_{x+3}\dots(S_{x+y+1}$$<br>与<br>$$(((((((S_1)S_2)S_3)\dots S_x)S_{x+1})S_{x+2})S_{x+3}\dots)S_{x+y+1}$$<br>建立双射，下面简单用格路计数即可，相当于从 $(x+y,0)$ 走到 $(x+y+t,x+y+t)$，不能经过 $y&#x3D;x+1$ 的方案数。式子为<br>$$<br>{2n+1\choose t}-{2n+1\choose t-1}<br>$$</p>
 <h3 id="计算答案"><a href="#计算答案" class="headerlink" title="计算答案"></a>计算答案</h3><p>那么就可以计算 $p$ 就是<br>$$<br>\sum_{x&#x3D;0}^{2n+1}\sum_{y&#x3D;0}^{2n+1-x}[2\nmid x+y]{y+t\choose k}\frac{t(x+[2\mid x])}{(x+y+1)(y+t)}\left( {2n+1\choose t}-{2n+1\choose t-1}\right)<br>$$</p>
 <p>发现 $t$ 以及大量式子都可以通过 $x+y$ 来计算得到，所以我们可以设置 $s&#x3D;x+y$，并且改为第一层枚举 $s$ 把之和 $s$ 有关的项提出来，优化不难。</p>
+<h1 id="AT-agc035-f-AGC035F-Two-Histograms"><a href="#AT-agc035-f-AGC035F-Two-Histograms" class="headerlink" title="AT_agc035_f [AGC035F] Two Histograms"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/AT_agc035_f">AT_agc035_f [AGC035F] Two Histograms</a></h1><p>首先，考虑对不同的 $k,l$ 计数。<br>发现如果出现 $k_i&#x3D;j,l_j&#x3D;i-1$ 或者 $k_i&#x3D;j-1,l_j&#x3D;i$ 那么这个方案可能会被计算重复，所以考虑在每次所有重复的局面中找到一个代表。</p>
+<p><strong>一个简单的方式就是直接选取满足不违反其中第一个条件的为代表</strong>。<br>不难发现这是唯一的；</p>
+<p>关于这个方案是唯一的证明：<br>如果 $k,l$ 和 $k^\prime,l^\prime$ 对应了同一个方案。<br>我们假设一个位置满足 $l_i&lt;l^\prime_i&#x3D;r$<br>那么一定满足 $k_r&gt;k^\prime_r$，那么发现在 $k^\prime,l^\prime$ 这个方案中就会不满足不出现第一个条件。</p>
+<p>接下来进行容斥：<br>$$<br>\sum_{k&#x3D;1}^{\min(n,m)}{n\choose k}{m\choose k}(-1)^{k}k!(n+1)^{m-k}(m+1)^{n-k}<br>$$</p>
+<p>这个式子成立，基于本质上不满足条件的位置在 $k,l$ 中类似匹配；即如果 $k_x$ 和 $l_y$ 不满足条件，那么不会出现 $k_x$ 和 $l^\prime_y$ 不满足条件或者 $k^\prime_x$ 和 $l_y$ 不满足条件。发现这不可能，因为 $k_x,l_y$ 只有一个固定值，所以他们只能指向一个单一的位置。</p>
+<p>所以可以直接计算了。</p>
 
       
     </div>
@@ -1233,7 +1367,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-09-14 23:21:54" itemprop="dateModified" datetime="2026-09-14T23:21:54+08:00">2026-09-14</time>
+      <time title="Modified: 2026-09-27 22:30:55" itemprop="dateModified" datetime="2026-09-27T22:30:55+08:00">2026-09-27</time>
     </span>
 
   
@@ -1416,98 +1550,93 @@ $$
 <li>否则记录 $p1_x$ 为当前块编号。</li>
 </ul>
 <p>在计算 $\operatorname{mex}$ 时，我们可以给所有出现过的值在 $\mathrm{vis}$ 数组的对应位置标记上当前块编号，这样只需要查询 $\mathrm{vis}$ 数组中第一个不是当前块编号的位置即可。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/08/30/%E6%9E%84%E9%80%A0%E9%A2%98%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wdwsy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wdwsy's Blog">
-      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | wdwsy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/08/30/%E6%9E%84%E9%80%A0%E9%A2%98%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">构造题总结</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2026-08-30 23:22:29 / Modified: 23:58:59" itemprop="dateCreated datePublished" datetime="2026-08-30T23:22:29+08:00">2026-08-30</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="P13356-GDCPC-2024-图"><a href="#P13356-GDCPC-2024-图" class="headerlink" title="P13356 [GDCPC 2024] 图"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P13356">P13356 [GDCPC 2024] 图</a></h1><p>递归子结构问题。</p>
-<p>小巧思：只要拉出 k 个生成树（森林），而且每一条边只属于一个树，那么这个题目就做完了。</p>
-<p>正确性在于，如果我们考虑每次拉一个生成树出来，然后把这用过的边都删掉，如此往复。<br>我们发现最后一定能拉出这 $k$ 个树，而且最后肯定还有至少一条边。<br>而最后剩下的这个边所连接的两个点，一定在前面都是连接的（不然之前的树中就应该选这个边了）。<br>那么我们就找到了这 $k$ 条边不相交的路径。</p>
-<p>在实现细节上这题有些意思：<br>在 GD省队集训上，大佬们提出了把重复的边压缩到一起，然后直接用 dfs 拉生成树，这样的一次 dfs 的复杂度是 $O(\min(n^2,m))$，那么总共是时间复杂度为 $O(k\times\min(n^2,m))$，可以分析到 $O(n^{\frac{3}{2}})$。</p>
-<p>当然，由于两个点连通的图，是这 $k$ 个森林中的一个前缀，所以我们可以在每次加入一条边的时候进行二分。$O(n\log n)$ 就可以解决。</p>
-<h1 id="CF1267H-Help-BerLine"><a href="#CF1267H-Help-BerLine" class="headerlink" title="CF1267H Help BerLine"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF1267H">CF1267H Help BerLine</a></h1><div class="note info"><p>💡 一些废话：额，我原来做的时候一直在对这个题目建笛卡尔树，最后红温自尽了。。</p>
-</div>
-
-<p>递归子结构问题。<br>首先观察次数是 $24$ 这样一个诡异的数字，$\frac{3}{2}^24$ 刚好超过 $n$ 于是我们猜想每次一个数字把问题规模减小到原来的 $\frac{2}{3}$ 即可。</p>
-<p>正难则反，我们考虑子结构是什么。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-----x----x-----x--</span><br></pre></td></tr></table></figure>
-<p>其中 x 表示新填的数字，而原来在没有 x 的时候，已经满足了题目中任意时刻的任意子区间存在唯一数字的要求，那么只要现在不出现 xx 相邻的情况那么仍然满足题目要求。<br>于是我们考虑就这样添入数字。<br>具体实现上可以每次把 x 添入一个位置之后，就把它左右两边的位置都标记上，之后每次都在没有标记的也没有填过的位置上添入 x，不难发现这样每次就可以把问题的规模缩小到原来的 $\frac{2}{3}$。</p>
-<h1 id="P6892-ICPC-2014-WF-Baggage"><a href="#P6892-ICPC-2014-WF-Baggage" class="headerlink" title="P6892 [ICPC 2014 WF] Baggage"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P6892">P6892 [ICPC 2014 WF] Baggage</a></h1><p>递归子结构问题。<br>观察发现 $n&#x3D;4$ 的时候有如下的构造</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--BABA??BABA</span><br><span class="line">ABBABA??B--A</span><br><span class="line">ABBA--??BBAA</span><br><span class="line">A--ABBBBAA</span><br><span class="line">AAAABBBB--</span><br></pre></td></tr></table></figure>
-<p>其中 ?? 是子结构所在的位置。<br>然后特判 $n&#x3D;3$。通过手玩或者暴力找出在 $n&#x3D;4,5,6,7$ 的解法就好，注意这个时候每个前面只能有两个空格（–）才能满足递归性质。</p>
-<h1 id="P12402-COI-2025-贪腐-Korupcija"><a href="#P12402-COI-2025-贪腐-Korupcija" class="headerlink" title="P12402 [COI 2025] 贪腐 &#x2F; Korupcija"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P12402">P12402 [COI 2025] 贪腐 &#x2F; Korupcija</a></h1><p>同样是递归子结构问题，具体可以见 <a href="https://wdwsy.github.io/2026/04/20/4%E6%9C%8820%E6%97%A5-4%E6%9C%8826%E6%97%A5%E8%AE%AD%E7%BB%83%E9%A2%98%E5%8D%95/?highlight=p12402">4月20日-4月26日训练题单</a></p>
-<h1 id="P10871-COTS-2022-皇后-Kraljice"><a href="#P10871-COTS-2022-皇后-Kraljice" class="headerlink" title="P10871 [COTS 2022] 皇后 Kraljice"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P10871">P10871 [COTS 2022] 皇后 Kraljice</a></h1><p>首先我们能猜到答案，发现奇数和偶数形式并不一样，于是我们考虑从 $n$ 的问题，转移到 $n-2$ 的问题。</p>
-<p>本来我考虑的是每次填掉外面一个环</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1111111</span><br><span class="line">1000001</span><br><span class="line">1000001</span><br><span class="line">1000001</span><br><span class="line">1111111</span><br></pre></td></tr></table></figure>
-<p>大概类似这样，但是没有办法递归到子结构。</p>
-<p>于是我们考虑另外一种常见的方式，就是构造一个 L 形来递归到 $n-2$。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">xx xx xx xx xx xx 28 26</span><br><span class="line">xx xx xx xx xx xx 24 25</span><br><span class="line">xx xx xx xx xx xx 23 22</span><br><span class="line">xx xx xx xx xx xx 20 21</span><br><span class="line">xx xx xx xx xx xx 19 18</span><br><span class="line">xx xx xx xx xx xx 16 17</span><br><span class="line">15 12 11 08 07 02 27 04</span><br><span class="line">14 13 10 09 06 03 05 01</span><br></pre></td></tr></table></figure>
-<p>具体构造大概长这样😊<br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/article/2xvkvpzv">题解链接</a></p>
+<h1 id="5480-–-最小生成树"><a href="#5480-–-最小生成树" class="headerlink" title="5480 – 最小生成树"></a><a target="_blank" rel="noopener" href="http://172.17.226.198/OnlineJudge/contestproblem.php?id=16075480">5480 – 最小生成树</a></h1><p>加入边上的一个点的时候，发现其只和边上的 $k$ 个点有关。<br>所以我们可以维护这 $k$ 个点的虚树， 发现仍然可以动态维护这个最小生成树的权值和。</p>
+<p>考虑要两端加点，那么就找到一个位置 $mid$，记录 $[l,mid],[mid+1,r]$ 的以两端各 $k$ 个点的最小生成树。发现这样支持两边加点，并且这两端可以合并，只需要加入跨段的边就好。</p>
+<p><strong>最小生成树可以和虚树配合</strong>。</p>
+<p>接下来，发现如果删除到了分界点 $mid$ 就不行了，这个时候我们可以暴力重构，并令  $mid&#x3D;(l+r)&#x2F;2$。考虑证明复杂度。</p>
+<p>这个问题等价于双栈模拟双端队列的时间复杂度。</p>
+<p>重构一次的复杂度是 $O(xk\log x)$，$x&#x3D;r-l+1$。<br>接下来看看重构次数，</p>
+<p>下面给出一种<strong>改进的双栈模拟双端队列</strong>方案，并在每次一侧为空时<strong>从中间剖开</strong>进行重构，然后用势能分析证明所有操作均摊 (O(1))。</p>
+<h1 id="双栈模拟双端队列：从中间剖开与均摊-O-1-证明"><a href="#双栈模拟双端队列：从中间剖开与均摊-O-1-证明" class="headerlink" title="双栈模拟双端队列：从中间剖开与均摊 $O(1)$ 证明"></a>双栈模拟双端队列：从中间剖开与均摊 $O(1)$ 证明</h1><h2 id="1-数据结构"><a href="#1-数据结构" class="headerlink" title="1. 数据结构"></a>1. 数据结构</h2><p>维护两个栈 $L$ 和 $R$：</p>
+<ul>
+<li>$L$ 的栈顶是队首，栈底靠近中间；</li>
+<li>$R$ 的栈顶是队尾，栈底靠近中间。</li>
+</ul>
+<p>队列中元素的顺序为：</p>
+<p>$$<br>\text{队首} \to \cdots \to \text{队尾}<br>&#x3D; L \text{ 从栈顶到栈底} + R \text{ 从栈底到栈顶}<br>$$</p>
+<p>基本操作：</p>
+<ul>
+<li><code>push_front(x)</code>：$L.push(x)$，$O(1)$</li>
+<li><code>push_back(x)</code>：$R.push(x)$，$O(1)$</li>
+<li><code>pop_front()</code>：<ul>
+<li>若 $L$ 非空，直接 $L.pop()$，$O(1)$</li>
+<li>若 $L$ 为空且 $R$ 非空，进行<strong>重构</strong>，然后 $L.pop()$</li>
+</ul>
+</li>
+<li><code>pop_back()</code>：<ul>
+<li>若 $R$ 非空，直接 $R.pop()$，$O(1)$</li>
+<li>若 $R$ 为空且 $L$ 非空，进行<strong>重构</strong>，然后 $R.pop()$</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="2-重构策略：从中间剖开"><a href="#2-重构策略：从中间剖开" class="headerlink" title="2. 重构策略：从中间剖开"></a>2. 重构策略：从中间剖开</h2><p>以 <code>pop_front()</code> 且 $L$ 为空为例。设此时 $R$ 中有 $m$ 个元素。</p>
+<ol>
+<li>将 $R$ 中所有元素弹出，得到从队尾到队首的序列。</li>
+<li>将其逆序，得到从队首到队尾的序列 $q_0, q_1, \dots, q_{m-1}$。</li>
+<li>取前 $\lceil m&#x2F;2 \rceil$ 个元素（靠近队首的一半），按从中间到队首的顺序压入 $L$，使得 $q_0$ 最终位于 $L$ 栈顶。</li>
+<li>剩余元素按从中间到队尾的顺序压入 $R$，使得 $q_{m-1}$ 最终位于 $R$ 栈顶。</li>
+</ol>
+<p>这样重构后，$L$ 和 $R$ 的大小大致相等，差不超过 $1$。</p>
+<p><code>pop_back()</code> 且 $R$ 为空时完全对称。</p>
+<hr>
+<h2 id="3-势能函数"><a href="#3-势能函数" class="headerlink" title="3. 势能函数"></a>3. 势能函数</h2><p>定义势能</p>
+<p>$$<br>\Phi &#x3D; 2 \cdot \big| |L| - |R| \big|<br>$$</p>
+<p>其中 $|L|, |R|$ 分别表示两个栈中元素个数。显然 $\Phi \ge 0$。</p>
+<hr>
+<h2 id="4-摊还代价分析"><a href="#4-摊还代价分析" class="headerlink" title="4. 摊还代价分析"></a>4. 摊还代价分析</h2><h3 id="4-1-不触发重构的操作"><a href="#4-1-不触发重构的操作" class="headerlink" title="4.1 不触发重构的操作"></a>4.1 不触发重构的操作</h3><ul>
+<li><code>push_front</code>、<code>push_back</code>：实际代价 $O(1)$。一侧大小增加 $1$，所以 $| |L| - |R| |$ 变化至多 $1$，势能变化 $|\Delta \Phi| \le 2$。摊还代价 $O(1) + 2 &#x3D; O(1)$。</li>
+<li><code>pop_front</code>、<code>pop_back</code> 且对应栈非空：实际代价 $O(1)$。一侧大小减少 $1$，势能变化至多 $2$。摊还代价 $O(1)$。</li>
+</ul>
+<h3 id="4-2-触发重构的-pop-front"><a href="#4-2-触发重构的-pop-front" class="headerlink" title="4.2 触发重构的 pop_front"></a>4.2 触发重构的 <code>pop_front</code></h3><p>设重构前 $|L| &#x3D; 0$，$|R| &#x3D; m$。此时</p>
+<p>$$<br>\Phi_{\text{before}} &#x3D; 2 \cdot |0 - m| &#x3D; 2m<br>$$</p>
+<p>重构过程：</p>
+<ul>
+<li>弹出 $R$ 中 $m$ 个元素：代价 $m$</li>
+<li>将其中一半压入 $L$，一半压入 $R$：代价 $m$</li>
+<li>最后执行一次 $L.pop()$：代价 $1$</li>
+</ul>
+<p>所以实际总代价为</p>
+<p>$$<br>2m + 1<br>$$</p>
+<p>重构后，$L$ 和 $R$ 的大小分别为 $\lceil m&#x2F;2 \rceil$ 和 $\lfloor m&#x2F;2 \rfloor$（或反之），差不超过 $1$。再执行一次弹出后，差至多 $2$，因此</p>
+<p>$$<br>\Phi_{\text{after}} \le 2 \times 2 &#x3D; 4<br>$$</p>
+<p>势能变化：</p>
+<p>$$<br>\Delta \Phi &#x3D; \Phi_{\text{after}} - \Phi_{\text{before}} \le 4 - 2m<br>$$</p>
+<p>摊还代价：</p>
+<p>$$<br>\text{摊还代价} &#x3D; \text{实际代价} + \Delta \Phi<br>\le (2m + 1) + (4 - 2m) &#x3D; 5 &#x3D; O(1)<br>$$</p>
+<h3 id="4-3-触发重构的-pop-back"><a href="#4-3-触发重构的-pop-back" class="headerlink" title="4.3 触发重构的 pop_back"></a>4.3 触发重构的 <code>pop_back</code></h3><p>与 <code>pop_front</code> 完全对称，摊还代价同样为 $O(1)$。</p>
+<hr>
+<h2 id="5-结论"><a href="#5-结论" class="headerlink" title="5. 结论"></a>5. 结论</h2><p>通过“每次重构时从中间剖开”的策略，两个栈模拟双端队列可以达到：</p>
+<ul>
+<li><strong>单次操作最坏</strong>：$O(n)$（仅发生在触发重构时）</li>
+<li><strong>均摊时间复杂度</strong>：所有操作均为 $O(1)$</li>
+</ul>
+<p>势能函数</p>
+<p>$$<br>\Phi &#x3D; 2 \cdot \big| |L| - |R| \big|<br>$$</p>
+<p>在重构时大幅下降，释放的势能恰好支付了重构的线性代价。因此，该数据结构是均摊 $O(1)$ 的。</p>
+<h1 id="P7214-JOISC-2020-治療計画"><a href="#P7214-JOISC-2020-治療計画" class="headerlink" title="P7214 [JOISC 2020] 治療計画"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P7214">P7214 [JOISC 2020] 治療計画</a></h1><p>首先考虑用一个合理的方式去刻画这个题目，发现我们可以，以时间为 $x$ 轴，序列中的区间为 $y$ 轴。<br>这样就能用直观的方式去观察这个题目；</p>
+<p>每一个操作就是一个倒着的三角形。</p>
+<p>接下来我们能发现，实际上我们呢就是要求一个从做到右的最小割。其实发现条件很简单。<br>就是：<br>$$<br>|t_i-t_j|\leq r_i-l_j+1<br>$$</p>
+<p>稍微拆一下式子不难理解。</p>
+<p>看起来可能还是二维偏序，但是我们使用 dijkstra 的方式，可以发现，每个点的所有入边其实都是相等的，而且边权非负，所以我们我们按照权值队列去访问，第一次访问的就是当前点最小的 $dis$，所以直接在线段树上删除掉能到达的节点就好，实现很简单。</p>
+<h1 id="P11094-ROI-2021-砍树-Day-2"><a href="#P11094-ROI-2021-砍树-Day-2" class="headerlink" title="P11094 [ROI 2021] 砍树 (Day 2)"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P11094">P11094 [ROI 2021] 砍树 (Day 2)</a></h1><p>感觉这个题目的思路是很经典的，见过了很多次，但是还是不会做。</p>
+<p>首先我们不难想到 $O(nq)$ 的暴力。<br>具体过程为，从 $l\rightarrow r$ 遍历，考虑用一个栈来维护。<br>当前的树为 $i$，在加入之前，先来检查栈里面的树可不可以向右倒并且不影响树 $i$，如果可以就一直弹出栈顶。如果 $i$ 树可以向左倒，那么它已经被砍伐成功，不加入栈，否则加入栈。可以获得 50pts。</p>
+<p>但是这并不够，发现这个东西不具有任何可以使用的性质，我们既不可以莫队，又不可以上线段树一类的数据结构。这个结构只能支持从左到右顺序扫描，而且不支持合并。</p>
+<p>主要原因就是树之间向多米诺骨牌一样的依赖关系，我们希望能把这些关系“解绑”。<br>具体的，可以设 $L_i,R_i$ 表示如果让 $i$ 树向左&#x2F;右倒，那么至少需要依赖的树的位置。（$[L_i,i],[i,R_i]$）</p>
+<p>其实我们可以用线段树来维护这个东西。<br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/article/hk883yif">关于线段树做法的题解</a></p>
+<p>另一种方式可以用整体二分 + $O(nq)$ 做法来解决。</p>
+<p>考虑求出 $L_i$（$R_i$ 同理）<br>我们可以二分一个位置 $l$，假设当前询问区间为 $[l,+\infty]$ 跑 $O(nq)$ 做法，每次加入的时候，看看当前能不能向左倒就可以判定 $L_i\geq l$ 是否满足。</p>
+<p>最后二维数点就好。</p>
 
       
     </div>
