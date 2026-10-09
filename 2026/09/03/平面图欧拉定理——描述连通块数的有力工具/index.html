@@ -28,9 +28,9 @@
 <meta property="og:description" content="平面图定义：除了顶点之外，平面内没有任何一个点被大于 $1$ 条边经过点图为平面图。 定理内容平面图欧拉定理简洁地揭示了图中常见量：顶点数 $V$, 边数 $E$，面数 $F$，连通块数 $K$ 之间的关系。具体等式如下：$$V-E+F&#x3D;K$$ 这是类似于容斥的形式，应该容易理解，可以描述为 $\text{1维}-\text{2维}+\text{3维}&#x3D;\text{连通块数}$">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-09-03T04:32:53.000Z">
-<meta property="article:modified_time" content="2026-09-03T14:06:56.339Z">
+<meta property="article:modified_time" content="2026-10-09T13:30:13.911Z">
 <meta property="article:author" content="wdwsy">
-<meta property="article:tag" content="算法,OIC++,NOI,信息学竞赛">
+<meta property="article:tag" content="平面图">
 <meta name="twitter:card" content="summary">
 
 
@@ -166,7 +166,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B3%E9%9D%A2%E5%9B%BE"><span class="nav-number">1.</span> <span class="nav-text">平面图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E7%90%86%E5%86%85%E5%AE%B9"><span class="nav-number">2.</span> <span class="nav-text">定理内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P8990-%E5%8C%97%E5%A4%A7%E9%9B%86%E8%AE%AD-2021-%E5%B0%8F%E6%98%8E%E7%9A%84%E6%A0%91"><span class="nav-number">3.</span> <span class="nav-text">P8990 [北大集训 2021] 小明的树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FZOJ-5732-%E2%80%93-%E9%BB%8E%E6%98%8E"><span class="nav-number">4.</span> <span class="nav-text">FZOJ 5732 – 黎明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E9%9D%A2%E6%A6%82%E8%BF%B0"><span class="nav-number">4.1.</span> <span class="nav-text">题面概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">做法</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B3%E9%9D%A2%E5%9B%BE"><span class="nav-number">1.</span> <span class="nav-text">平面图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E7%90%86%E5%86%85%E5%AE%B9"><span class="nav-number">2.</span> <span class="nav-text">定理内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P8990-%E5%8C%97%E5%A4%A7%E9%9B%86%E8%AE%AD-2021-%E5%B0%8F%E6%98%8E%E7%9A%84%E6%A0%91"><span class="nav-number">3.</span> <span class="nav-text">P8990 [北大集训 2021] 小明的树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FZOJ-5732-%E2%80%93-%E9%BB%8E%E6%98%8E"><span class="nav-number">4.</span> <span class="nav-text">FZOJ 5732 – 黎明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E9%9D%A2%E6%A6%82%E8%BF%B0"><span class="nav-number">4.1.</span> <span class="nav-text">题面概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">做法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P3776-APIO2017-%E6%96%91%E6%96%93%E4%B9%8B%E5%9C%B0"><span class="nav-number">4.3.</span> <span class="nav-text">P3776 [APIO2017] 斑斓之地</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B3%E9%9D%A2%E5%9B%BE%E6%9C%80%E5%B0%8F%E9%93%BE%E8%A6%86%E7%9B%96"><span class="nav-number">4.4.</span> <span class="nav-text">平面图最小链覆盖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P8857-POI-2000-R1-POI-2002-R3-%E6%BB%91%E9%9B%AA%E8%80%85"><span class="nav-number">4.5.</span> <span class="nav-text">P8857 [POI 2000 R1 &#x2F; POI 2002 R3] 滑雪者</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -181,7 +181,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -191,7 +191,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -251,9 +251,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2026-09-03 12:32:53 / Modified: 22:06:56" itemprop="dateCreated datePublished" datetime="2026-09-03T12:32:53+08:00">2026-09-03</time>
+      <time title="Created: 2026-09-03 12:32:53" itemprop="dateCreated datePublished" datetime="2026-09-03T12:32:53+08:00">2026-09-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-10-09 21:30:13" itemprop="dateModified" datetime="2026-10-09T21:30:13+08:00">2026-10-09</time>
     </span>
 
   
@@ -304,6 +310,14 @@
 </ul>
 <p>所以对于每一个结构，我们可以找到一个 $add$ 的临界值。我们只需要线段树上大于临界值的位置加上对应的贡献就行。<br>查询的时候直接查询线段树上当前 $add$ 值对应的节点就好。</p>
 <p>具体实现上可以使用树状数组。</p>
+<h2 id="P3776-APIO2017-斑斓之地"><a href="#P3776-APIO2017-斑斓之地" class="headerlink" title="P3776 [APIO2017] 斑斓之地"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3776">P3776 [APIO2017] 斑斓之地</a></h2><p>不难啊，也是模版题。</p>
+<p>发现首先填充水内部的点，边，面都要减掉。<br>用一个 map 不难维护。<br>接下来对于点，边，面分别开一个线段树来扫描线就好，不难。</p>
+<h2 id="平面图最小链覆盖"><a href="#平面图最小链覆盖" class="headerlink" title="平面图最小链覆盖"></a>平面图最小链覆盖</h2><h2 id="P8857-POI-2000-R1-POI-2002-R3-滑雪者"><a href="#P8857-POI-2000-R1-POI-2002-R3-滑雪者" class="headerlink" title="P8857 [POI 2000 R1 &#x2F; POI 2002 R3] 滑雪者"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P8857">P8857 [POI 2000 R1 &#x2F; POI 2002 R3] 滑雪者</a></h2><p>感觉类似模版题，想不出来很正常。</p>
+<p>这个题目有几个难点。</p>
+<p>首先发现平面图这个性质不太会用。考虑我们实际上要求最小链覆盖，可以转化为最长反链长度。</p>
+<p>这里有一个不知道是否经典的结论：对于最长反链中相邻两条链，它们一定分别是一个面的左右界的一条边。</p>
+<p>想一想这是显然正确的。</p>
+<p>接下来考虑如何 dp，发现输入是从西到东给入的。而且根据结论，我们只需要关注一个面左右（东西）两边的边之间进行转移，具体实现上和耳分解类似。</p>
 
     </div>
 
@@ -312,6 +326,9 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B9%B3%E9%9D%A2%E5%9B%BE/" rel="tag"># 平面图</a>
+          </div>
 
         
 

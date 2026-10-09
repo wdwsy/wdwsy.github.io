@@ -28,7 +28,7 @@
 <meta property="og:description" content="https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;problem&#x2F;P16433感觉这个题目 dp 状态基本想到了，但是由于转移能力比较差，没有看出这个状态可以简单转移。 题目概述给你一个残缺的序列 $p$，已知的位置中是升序的。你需要计算所有可能的 $p$ 的价值和。一个序列的价值 为 $f(q) &#x3D; \prod_{i \in S(q)} w_i$。特别地，若 $S(q) &#x3D;">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-09-08T14:08:09.000Z">
-<meta property="article:modified_time" content="2026-09-27T14:30:33.457Z">
+<meta property="article:modified_time" content="2026-10-09T01:07:36.792Z">
 <meta property="article:author" content="wdwsy">
 <meta property="article:tag" content="算法,OIC++,NOI,信息学竞赛">
 <meta name="twitter:card" content="summary">
@@ -166,7 +166,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#https-www-luogu-com-cn-problem-P16433"><span class="nav-number">1.</span> <span class="nav-text">https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;problem&#x2F;P16433</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">题目概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">做法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AT-agc055-c-AGC055C-Weird-LIS"><span class="nav-number">2.</span> <span class="nav-text">AT_agc055_c [AGC055C] Weird LIS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95-1"><span class="nav-number">2.2.</span> <span class="nav-text">做法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P7483-50-%E5%B9%B4%E5%90%8E%E7%9A%84%E6%88%91%E4%BB%AC"><span class="nav-number">3.</span> <span class="nav-text">P7483 50 年后的我们</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-1"><span class="nav-number">3.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95-2"><span class="nav-number">3.2.</span> <span class="nav-text">做法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AT-arc132-e-ARC132E-Paw"><span class="nav-number">4.</span> <span class="nav-text">AT_arc132_e [ARC132E] Paw</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-2"><span class="nav-number">4.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95-3"><span class="nav-number">4.2.</span> <span class="nav-text">做法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AT-agc041-f-AGC041F-Histogram-Rooks"><span class="nav-number">5.</span> <span class="nav-text">AT_agc041_f [AGC041F] Histogram Rooks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-3"><span class="nav-number">5.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95-4"><span class="nav-number">5.2.</span> <span class="nav-text">做法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AT-agc053-f-AGC053F-ESPers"><span class="nav-number">6.</span> <span class="nav-text">AT_agc053_f [AGC053F] ESPers</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E6%84%8F%E6%A6%82%E8%BF%B0"><span class="nav-number">6.1.</span> <span class="nav-text">题意概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95-5"><span class="nav-number">6.2.</span> <span class="nav-text">做法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%9B%BA%E5%AE%9A%E5%B1%80%E9%9D%A2%E8%83%9C%E7%8E%87"><span class="nav-number">6.2.1.</span> <span class="nav-text">计算固定局面胜率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E6%95%B0%E4%B8%80%E7%A7%8D%E5%B1%80%E9%9D%A2%E7%9A%84%E6%96%B9%E6%A1%88%E6%95%B0"><span class="nav-number">6.2.2.</span> <span class="nav-text">计数一种局面的方案数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E7%AD%94%E6%A1%88"><span class="nav-number">6.2.3.</span> <span class="nav-text">计算答案</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AT-agc035-f-AGC035F-Two-Histograms"><span class="nav-number">7.</span> <span class="nav-text">AT_agc035_f [AGC035F] Two Histograms</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#https-www-luogu-com-cn-problem-P16433"><span class="nav-number">1.</span> <span class="nav-text">https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;problem&#x2F;P16433</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">题目概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">做法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AT-agc055-c-AGC055C-Weird-LIS"><span class="nav-number">2.</span> <span class="nav-text">AT_agc055_c [AGC055C] Weird LIS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95-1"><span class="nav-number">2.2.</span> <span class="nav-text">做法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P7483-50-%E5%B9%B4%E5%90%8E%E7%9A%84%E6%88%91%E4%BB%AC"><span class="nav-number">3.</span> <span class="nav-text">P7483 50 年后的我们</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-1"><span class="nav-number">3.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95-2"><span class="nav-number">3.2.</span> <span class="nav-text">做法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AT-arc132-e-ARC132E-Paw"><span class="nav-number">4.</span> <span class="nav-text">AT_arc132_e [ARC132E] Paw</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-2"><span class="nav-number">4.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95-3"><span class="nav-number">4.2.</span> <span class="nav-text">做法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AT-agc041-f-AGC041F-Histogram-Rooks"><span class="nav-number">5.</span> <span class="nav-text">AT_agc041_f [AGC041F] Histogram Rooks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-3"><span class="nav-number">5.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95-4"><span class="nav-number">5.2.</span> <span class="nav-text">做法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AT-agc053-f-AGC053F-ESPers"><span class="nav-number">6.</span> <span class="nav-text">AT_agc053_f [AGC053F] ESPers</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E6%84%8F%E6%A6%82%E8%BF%B0"><span class="nav-number">6.1.</span> <span class="nav-text">题意概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95-5"><span class="nav-number">6.2.</span> <span class="nav-text">做法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%9B%BA%E5%AE%9A%E5%B1%80%E9%9D%A2%E8%83%9C%E7%8E%87"><span class="nav-number">6.2.1.</span> <span class="nav-text">计算固定局面胜率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E6%95%B0%E4%B8%80%E7%A7%8D%E5%B1%80%E9%9D%A2%E7%9A%84%E6%96%B9%E6%A1%88%E6%95%B0"><span class="nav-number">6.2.2.</span> <span class="nav-text">计数一种局面的方案数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E7%AD%94%E6%A1%88"><span class="nav-number">6.2.3.</span> <span class="nav-text">计算答案</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AT-agc035-f-AGC035F-Two-Histograms"><span class="nav-number">7.</span> <span class="nav-text">AT_agc035_f [AGC035F] Two Histograms</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AT-arc186-d-ARC186D-Polish-Mania"><span class="nav-number">8.</span> <span class="nav-text">AT_arc186_d [ARC186D] Polish Mania</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -181,7 +181,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -191,7 +191,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -259,7 +259,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-09-27 22:30:33" itemprop="dateModified" datetime="2026-09-27T22:30:33+08:00">2026-09-27</time>
+      <time title="Modified: 2026-10-09 09:07:36" itemprop="dateModified" datetime="2026-10-09T09:07:36+08:00">2026-10-09</time>
     </span>
 
   
@@ -419,6 +419,13 @@
 <p>接下来进行容斥：<br>$$<br>\sum_{k&#x3D;1}^{\min(n,m)}{n\choose k}{m\choose k}(-1)^{k}k!(n+1)^{m-k}(m+1)^{n-k}<br>$$</p>
 <p>这个式子成立，基于本质上不满足条件的位置在 $k,l$ 中类似匹配；即如果 $k_x$ 和 $l_y$ 不满足条件，那么不会出现 $k_x$ 和 $l^\prime_y$ 不满足条件或者 $k^\prime_x$ 和 $l_y$ 不满足条件。发现这不可能，因为 $k_x,l_y$ 只有一个固定值，所以他们只能指向一个单一的位置。</p>
 <p>所以可以直接计算了。</p>
+<h1 id="AT-arc186-d-ARC186D-Polish-Mania"><a href="#AT-arc186-d-ARC186D-Polish-Mania" class="headerlink" title="AT_arc186_d [ARC186D] Polish Mania"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/AT_arc186_d">AT_arc186_d [ARC186D] Polish Mania</a></h1><p>首先模拟一下发现只要满足两个条件就行：</p>
+<ul>
+<li>$S_n&#x3D;n-1$</li>
+<li>$\forall n\in [1,n-1],S_i\geq i$</li>
+</ul>
+<p>发现这个条件其实不困难，考虑去 check 一个序列，本质上其实就是从前往后扫，然后把每一个数字压入栈中，新加入的数字会让栈顶元素 $-1$，然后去除所有为 $0$ 的就好。不难发现只要最后栈为空（对应 $S_n$ 的限制），而且不会出现栈为空还要弹（对应 $S_i$ 的限制）。</p>
+<p>接下来考虑格路计数，不难。</p>
 
     </div>
 
