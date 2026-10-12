@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wdwsy.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":240},"hljswrap":true,"codeblock":{"theme":{"light":"github-dark","dark":"github-dark-dimmed"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat","show_result":true},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":true,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="算法标准流程Boruvka 算法结论：一个连通块向外连接的最小边，一定在最小生成树中。 使用情况：完全图最小生成树，“邀请制”最小生成树。 一开始，每一个点都是一个独立的连通块。接下来，对于每一个连通块，找到其向外（连接当前连通块和另一个连通块）的最小边。把这条边连接的两个点集用并查集合并成一个点集。 发现这样每一轮合并为 $O(n)$，每次合并之后，点集个数至少减半，所以最多 $\log n$">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Boruvka最小生成树">
+<meta property="og:url" content="https://wdwsy.github.io/2026/10/12/Boruvka%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/index.html">
+<meta property="og:site_name" content="wdwsy&#39;s Blog">
+<meta property="og:description" content="算法标准流程Boruvka 算法结论：一个连通块向外连接的最小边，一定在最小生成树中。 使用情况：完全图最小生成树，“邀请制”最小生成树。 一开始，每一个点都是一个独立的连通块。接下来，对于每一个连通块，找到其向外（连接当前连通块和另一个连通块）的最小边。把这条边连接的两个点集用并查集合并成一个点集。 发现这样每一轮合并为 $O(n)$，每次合并之后，点集个数至少减半，所以最多 $\log n$">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-10-12T13:52:31.000Z">
+<meta property="article:modified_time" content="2026-10-12T14:20:28.254Z">
+<meta property="article:author" content="wdwsy">
+<meta property="article:tag" content="最小生成树">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://wdwsy.github.io/2026/10/12/Boruvka%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://wdwsy.github.io/2026/10/12/Boruvka%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/","path":"2026/10/12/Boruvka最小生成树/","title":"Boruvka最小生成树"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Boruvka最小生成树 | wdwsy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">wdwsy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">算法的世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E6%A0%87%E5%87%86%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">算法标准流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CF888G-Xor-MST"><span class="nav-number">2.</span> <span class="nav-text">CF888G Xor-MST</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P5573-CmdOI2019-%E6%98%9F%E9%99%85kfc%E7%AF%AE%E7%90%83%E8%B5%9B"><span class="nav-number">3.</span> <span class="nav-text">P5573 [CmdOI2019] 星际kfc篮球赛</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5912-%E2%80%93-%E8%83%BD%E9%87%8F%E8%8A%82%E7%82%B9"><span class="nav-number">4.</span> <span class="nav-text">5912 – 能量节点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E6%84%8F%E7%AE%80%E8%BF%B0"><span class="nav-number">4.1.</span> <span class="nav-text">题意简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3"><span class="nav-number">4.2.</span> <span class="nav-text">题解</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wdwsy"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">wdwsy</p>
+  <div class="site-description" itemprop="description">算法竞赛、C++、OI 技术分享</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wdwsy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wdwsy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/10/12/Boruvka%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Boruvka最小生成树 | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Boruvka最小生成树
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-10-12 21:52:31 / Modified: 22:20:28" itemprop="dateCreated datePublished" datetime="2026-10-12T21:52:31+08:00">2026-10-12</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="算法标准流程"><a href="#算法标准流程" class="headerlink" title="算法标准流程"></a>算法标准流程</h1><p>Boruvka 算法结论：<strong>一个连通块向外连接的最小边，一定在最小生成树中。</strong></p>
+<p>使用情况：完全图最小生成树，“邀请制”最小生成树。</p>
+<p>一开始，每一个点都是一个独立的连通块。<br>接下来，对于每一个连通块，找到其向外（连接当前连通块和另一个连通块）的最小边。<br>把这条边连接的两个点集用并查集合并成一个点集。</p>
+<p>发现这样每一轮合并为 $O(n)$，每次合并之后，点集个数至少减半，所以最多 $\log n$ 轮，总复杂度 $O(n\log n)$。</p>
+<p>在具体计算的时候，如果只能找到每个点连出去的最小边，而难以以连通块为单位去找最小边（或者其他特殊情况），那么考虑可以维护最小边和次小边，保证两条边不在一个点集里面，那么这两条边，一定有一条满足条件。</p>
+<h1 id="CF888G-Xor-MST"><a href="#CF888G-Xor-MST" class="headerlink" title="CF888G Xor-MST"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF888G">CF888G Xor-MST</a></h1><p>我们考虑直接使用 Boruvka 算法，不难做出这个题目，但是我们考虑一个更加好写的方式。</p>
+<p>首先肯定是建出 trie 树，不难发现 Boruvka 的合并过程总是从 trie 树上叶子到根的，也就是 dfs 的回溯顺序。</p>
+<p>根据 Boruvka 算法结论：<strong>一个连通块向外连接的最小边，一定在最小生成树中。</strong></p>
+<p>所以我们可以像树形 dp 一样，合并两个子树，可以证明，左子树构成的连通块向外连接出的最小边，一定是连向右子树的某条边，所以直接暴力枚举左子树中的每一个点，查询其在右子树中的异或最小值即可。最多合并 $n$ 次，复杂度为 $O(n\log^2 V)$。</p>
+<p>实现的时候，可以现把每个数字按照值升序排序，那么 trie 树上每一个子树点集合对应排序之后的序列中的一个区间，可以简单实现，不需要启发式合并。</p>
+<h1 id="P5573-CmdOI2019-星际kfc篮球赛"><a href="#P5573-CmdOI2019-星际kfc篮球赛" class="headerlink" title="P5573 [CmdOI2019] 星际kfc篮球赛"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5573">P5573 [CmdOI2019] 星际kfc篮球赛</a></h1><p>首先利用 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF888G">CF888G Xor-MST</a>，那么可以得到三维偏序限制，然后直接离线 cdq。</p>
+<h1 id="5912-–-能量节点"><a href="#5912-–-能量节点" class="headerlink" title="5912 – 能量节点"></a><a target="_blank" rel="noopener" href="http://218.22.67.60:30808/OnlineJudge/problempage.php?problem_id=5912">5912 – 能量节点</a></h1><h2 id="题意简述"><a href="#题意简述" class="headerlink" title="题意简述"></a>题意简述</h2><p>有 $n$ 个点，值为 $a_i$。初始的时候没有点被点亮，你可以进行如下两种操作：</p>
+<ol>
+<li>点亮一个点，贡献为 $0$。</li>
+<li>$i$ 点亮 $j$，需要满足 $a_i \operatorname{AND} a_j &#x3D; 0$，并且 $i$ 已经被点亮。贡献为 $a_i$。</li>
+</ol>
+<p>求出所有点被点亮的最大贡献。</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>“邀请制”最小&#x2F;大生成树。</p>
+<p>发现每一个点都是被另外一个点邀请进入，求最后所有点都被邀请的最大贡献。</p>
+<p>把边权变成 $a_i+a_j$，那么最后每个点刚好被多计算了一次（可以看作每一个点被邀请的时候多计算了一次）。</p>
+<p>我们加入 $0$ 号点，这样原来的生成森林就变成了树。</p>
+<p>这样问题就转化成了一个最大生成树问题。</p>
+<p>然后考虑和一个点连接的的最大边怎么求，可以先做高位前缀 $\max$，记这个数组为 $b_i$，那么最大的边就是 $a_i + b_{i\oplus j}$。</p>
+<p>那么考虑最后套到 Boruvka 算法中，由于 $i$ 和 $i\oplus j$ 不能在同一个点集中，所以套路地记录最大值，以及不和最大值在同一个点集中的次大值。这样容易找到每一个点集向外连接的最大边。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/" rel="tag"># 最小生成树</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/09/29/AtCoder-Grand-Contest-078/" rel="prev" title="AtCoder Grand Contest 078">
+                  <i class="fa fa-angle-left"></i> AtCoder Grand Contest 078
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class=""></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">wdwsy</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
