@@ -340,9 +340,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2026-09-29 22:10:02 / Modified: 22:10:41" itemprop="dateCreated datePublished" datetime="2026-09-29T22:10:02+08:00">2026-09-29</time>
+      <time title="Created: 2026-09-29 22:10:02" itemprop="dateCreated datePublished" datetime="2026-09-29T22:10:02+08:00">2026-09-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-10-12 22:50:41" itemprop="dateModified" datetime="2026-10-12T22:50:41+08:00">2026-10-12</time>
     </span>
 
   
@@ -366,7 +372,7 @@
 <ul>
 <li>$(a,b) \rightarrow (a-1,b)$：费用为 $1$，容量为 $+\infty$。</li>
 <li>$(a,b) \rightarrow (a,b-1)$：费用为 $1$，容量为 $+\infty$。</li>
-<li>$(a,b) \rightarrow v$，$(a-1,b) \rightarrow v$，$(a,b-1) \rightarrow v$，$(a,b) \rightarrow (a-1,b-1)$：费用为 $0$，容量为 $1$。其中 $v$ 是一个新加入的虚拟点。</li>
+<li>$(a,b) \rightarrow v$，$(a-1,b) \rightarrow v$，$(a,b-1) \rightarrow v$，$v \rightarrow (a-1,b-1)$：费用为 $0$，容量为 $1$。其中 $v$ 是一个新加入的虚拟点。</li>
 <li>源点和汇点与相应的点连接好。</li>
 </ul>
 <p>判断最大流是否等于 $n$，就说明可以把 $B$ 移动到相对位置正确；否则无解。</p>

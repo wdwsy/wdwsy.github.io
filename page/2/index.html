@@ -450,7 +450,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-10-12 22:39:24" itemprop="dateModified" datetime="2026-10-12T22:39:24+08:00">2026-10-12</time>
+      <time title="Modified: 2026-10-12 22:55:18" itemprop="dateModified" datetime="2026-10-12T22:55:18+08:00">2026-10-12</time>
     </span>
 
   
@@ -621,9 +621,39 @@ $$
 <p>归纳法：</p>
 <p>起点：对于 ${x\mid \lfloor n&#x2F;x\rfloor&#x3D;1}$ 的位置，$\operatorname{sg}_x&#x3D;1$。</p>
 <p>接下来有</p>
-<h1 id="operatorname-sg-x"><a href="#operatorname-sg-x" class="headerlink" title="$$\operatorname{sg}_x"></a>$$<br>\operatorname{sg}_x</h1><p>\operatorname{mex}<br>\left(<br>0,<br>\operatorname{sg}<em>{2x},<br>\operatorname{sg}</em>{2x}\oplus\operatorname{sg}<em>{3x},<br>\operatorname{sg}</em>{2x}\oplus\operatorname{sg}<em>{3x}\oplus\operatorname{sg}</em>{4x},<br>\dots<br>\right)<br>$$</p>
+
+
+$$
+\operatorname{sg}_x
+=
+\operatorname{mex}
+\left(
+0,
+\operatorname{sg}_{2x},
+\operatorname{sg}_{2x}\oplus\operatorname{sg}_{3x},
+\operatorname{sg}_{2x}\oplus\operatorname{sg}_{3x}\oplus\operatorname{sg}_{4x},
+\dots
+\right)
+$$
+
+
+
 <p>于是考虑满足 $\lfloor n&#x2F;x\rfloor&#x3D;\lfloor n&#x2F;y\rfloor$ 的两个位置 $x,y$，总是有</p>
-<h1 id="left-lfloor-frac-n-kx-right-rfloor"><a href="#left-lfloor-frac-n-kx-right-rfloor" class="headerlink" title="$$\left\lfloor\frac{n}{kx}\right\rfloor"></a>$$<br>\left\lfloor\frac{n}{kx}\right\rfloor</h1><h1 id="left-lfloor-frac-lfloor-n-x-rfloor-k-right-rfloor"><a href="#left-lfloor-frac-lfloor-n-x-rfloor-k-right-rfloor" class="headerlink" title="\left\lfloor\frac{\lfloor n&#x2F;x\rfloor}{k}\right\rfloor"></a>\left\lfloor\frac{\lfloor n&#x2F;x\rfloor}{k}\right\rfloor</h1><h1 id="left-lfloor-frac-lfloor-n-y-rfloor-k-right-rfloor"><a href="#left-lfloor-frac-lfloor-n-y-rfloor-k-right-rfloor" class="headerlink" title="\left\lfloor\frac{\lfloor n&#x2F;y\rfloor}{k}\right\rfloor"></a>\left\lfloor\frac{\lfloor n&#x2F;y\rfloor}{k}\right\rfloor</h1><p>\left\lfloor\frac{n}{ky}\right\rfloor,<br>\quad k\ge 1.<br>$$</p>
+
+
+$$
+\left\lfloor\frac{n}{kx}\right\rfloor
+=
+\left\lfloor\frac{\lfloor n/x\rfloor}{k}\right\rfloor
+=
+\left\lfloor\frac{\lfloor n/y\rfloor}{k}\right\rfloor
+=
+\left\lfloor\frac{n}{ky}\right\rfloor,
+\quad k\ge 1.
+$$
+
+
+
 <p>也就是说 $\operatorname{mex}$ 内部的每一项都是一样的。</p>
 <p>所以我们用整除分块计算每一块的值。由于计算总是依赖更大的值，所以倒序扫描。</p>
 <p>在计算一块的值时，可以利用每一块中 $\operatorname{sg}$ 函数值相等的性质，只需要知道这一块中的奇偶性即可。可以发现，$kx$（$k\ge 1$）落在的不同块的数量不超过 $O(\sqrt n)$。当 $n\le 10^9$ 时可以通过，复杂度可以分析到 $O(n^{3&#x2F;4})$。</p>
