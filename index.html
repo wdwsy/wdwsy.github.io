@@ -552,9 +552,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2026-09-21 22:16:46 / Modified: 22:17:28" itemprop="dateCreated datePublished" datetime="2026-09-21T22:16:46+08:00">2026-09-21</time>
+      <time title="Created: 2026-09-21 22:16:46" itemprop="dateCreated datePublished" datetime="2026-09-21T22:16:46+08:00">2026-09-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-10-12 22:44:30" itemprop="dateModified" datetime="2026-10-12T22:44:30+08:00">2026-10-12</time>
     </span>
 
   
@@ -586,7 +592,7 @@
 <p>最后一个难点就是用二项式定理降低复杂度，推式子就看 deepseek 吧，式子太难打了。</p>
 <h2 id="关于容斥系数的证明："><a href="#关于容斥系数的证明：" class="headerlink" title="关于容斥系数的证明："></a>关于容斥系数的证明：</h2><p>假设不同 $i$ 和 $j$ 值的个数分别为 $h,w\ge 1$。那么容斥系数的和可以表示为<br>$$<br>\sum_{a&#x3D;0}^{h}\sum_{b&#x3D;0}^{w}(-1)^a(-1)^b\binom{h}{a}\binom{w}{b}<br>\sum_{k&#x3D;0}^{(h-a)(w-b)}\binom{(h-a)(w-b)}{k}(-1)^k<br>$$</p>
 <h2 id="推式子"><a href="#推式子" class="headerlink" title="推式子"></a>推式子</h2><p>$$<br>\sum_{h&#x3D;1}^{H}\sum_{w&#x3D;1}^{W}\sum_{m&#x3D;1}^{M}<br>\binom{H}{h}\binom{W}{w}(-1)^{h+w}<br>m^{h(W-w)}(M+1-m)^{(H-h)w}M^{(H-h)(W-w)}<br>$$</p>
-<p>$$<br>f(m)&#x3D;\sum_{h&#x3D;1}^{H}\sum_{w&#x3D;1}^{W}<br>\binom{H}{h}\binom{W}{w}(-1)^{h+w}<br>m^{h(W-w)}(M+1-m)^{(H-h)w}M^{(H-h)(W-w)}<br>$$<br>利用二项式定理，我们可以将其改写为<br>$$<br>\begin{aligned}<br>f(m)<br>&amp;&#x3D;\sum_{h&#x3D;1}^{H}\binom{H}{h}(-1)^h<br>\sum_{w&#x3D;1}^{W}\binom{W}{w}<br>\left(-(M+1-m)^{H-h}\right)^w<br>\left(m^h M^{H-h}\right)^{W-w}\<br>&amp;&#x3D;\sum_{h&#x3D;1}^{H}\binom{H}{h}(-1)^h<br>\left[<br>\left(-(M+1-m)^{H-h}+m^h M^{H-h}\right)^W<br>-\left(m^h M^{H-h}\right)^W<br>\right]<br>\end{aligned}<br>$$<br>因此，对于给定的 $m$，我们可以在例如 $O(H\log(HW))$ 时间内计算 $f(m)$。</p>
+<p>$$<br>f(m)&#x3D;\sum_{h&#x3D;1}^{H}\sum_{w&#x3D;1}^{W}<br>\binom{H}{h}\binom{W}{w}(-1)^{h+w}<br>m^{h(W-w)}(M+1-m)^{(H-h)w}M^{(H-h)(W-w)}<br>$$<br>利用二项式定理，我们可以将其改写为<br>$$<br>\begin{aligned}<br>f(m)<br>&amp;&#x3D;\sum_{h&#x3D;1}^{H}\binom{H}{h}(-1)^h<br>\sum_{w&#x3D;1}^{W}\binom{W}{w}<br>\left(-(M+1-m)^{H-h}\right)^w<br>\left(m^h M^{H-h}\right)^{W-w}\\<br>&amp;&#x3D;\sum_{h&#x3D;1}^{H}\binom{H}{h}(-1)^h<br>\left[<br>\left(-(M+1-m)^{H-h}+m^h M^{H-h}\right)^W<br>-\left(m^h M^{H-h}\right)^W<br>\right]<br>\end{aligned}<br>$$<br>因此，对于给定的 $m$，我们可以在例如 $O(H\log(HW))$ 时间内计算 $f(m)$。</p>
 <p>答案是<br>$$<br>F(M)&#x3D;\sum_{m&#x3D;1}^{M}f(m),<br>$$<br>我们将其视为 $M$ 的多项式。一旦我们有了 $F(0),F(1),\dots,F(HW)$，就可以使用拉格朗日插值计算 $F(M)$。计算这些值最终归结为计算 $f(1),f(2),\dots,f(HW)$。（注意，如果 $f$ 依赖于这里的 $M$，这个论证就不成立了。）在预先计算好合适的阶乘表之后，拉格朗日插值本身可以在与多项式次数成线性关系的时间内完成。</p>
 <p>这样得到的算法运行时间为例如<br>$$<br>O(H^2W\log(HW)).<br>$$</p>
 
@@ -643,9 +649,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2026-09-13 22:47:59 / Modified: 22:48:22" itemprop="dateCreated datePublished" datetime="2026-09-13T22:47:59+08:00">2026-09-13</time>
+      <time title="Created: 2026-09-13 22:47:59" itemprop="dateCreated datePublished" datetime="2026-09-13T22:47:59+08:00">2026-09-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-10-12 22:44:30" itemprop="dateModified" datetime="2026-10-12T22:44:30+08:00">2026-10-12</time>
     </span>
 
   
@@ -659,7 +671,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <h2 id="Min-Max-扩展形式"><a href="#Min-Max-扩展形式" class="headerlink" title="Min - Max 扩展形式"></a>Min - Max 扩展形式</h2><p>Min - Max 容斥得扩展形式可以解决第 $k$ 大（小）类问题。</p>
-<p>$$<br>\text{kmax}(S)&#x3D;\displaystyle\sum\limits_{T \subset S,|T| \ge k} (-1)^{|T|-k} \begin{pmatrix} |T|-1 \ k-1 \end{pmatrix} \min(T)\<br>\text{kmin}(S)&#x3D;\displaystyle\sum\limits_{T \subset S,|T| \ge k} (-1)^{|T|-k} \begin{pmatrix} |T|-1 \ k-1 \end{pmatrix} \max(T)<br>$$</p>
+<p>$$<br>\text{kmax}(S)&#x3D;\displaystyle\sum\limits_{T \subset S,|T| \ge k} (-1)^{|T|-k} \begin{pmatrix} |T|-1 \\ k-1 \end{pmatrix} \min(T)\\<br>\text{kmin}(S)&#x3D;\displaystyle\sum\limits_{T \subset S,|T| \ge k} (-1)^{|T|-k} \begin{pmatrix} |T|-1 \\ k-1 \end{pmatrix} \max(T)<br>$$</p>
 <p>同样地，这个形式在期望下也成立。</p>
 <h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><ul>
 <li>考虑构造一个容斥系数数组 $g$，满足 $\text{kmax}(S)&#x3D;\displaystyle\sum\limits_{T \subset S} g_{|T|} \min(T)$。</li>
@@ -732,9 +744,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2026-09-12 12:13:41 / Modified: 12:20:33" itemprop="dateCreated datePublished" datetime="2026-09-12T12:13:41+08:00">2026-09-12</time>
+      <time title="Created: 2026-09-12 12:13:41" itemprop="dateCreated datePublished" datetime="2026-09-12T12:13:41+08:00">2026-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-10-12 22:44:30" itemprop="dateModified" datetime="2026-10-12T22:44:30+08:00">2026-10-12</time>
     </span>
 
   
@@ -751,8 +769,8 @@
 <h2 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h2><h3 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h3><p>给你一个长度为 $k$ 的可重集 $S$，你需要构造一个长度为 $n$ 的可重集 $a$，满足可以把 $a$ 划分为 $k$ 部分，每一个部分的中位数的中位数构成的可重集就是 $S$。<br>求满足 $a_i\in [1,m]$ 的满足条件的 $a$ 有多少种。</p>
 <h3 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h3><p>首先排序 $S$<br>由于每个 $S$ 中的数字都要出现一次，所以定义 $n\leftarrow n-k$<br>首先考虑判定，找到充要条件：<br>假定 $a_{n+1}&#x3D;m+1$<br>$\forall x\in[1,n+1]$ 设 $a$ 中在区间 $(a_{x-1},a_x)$ 的数字有 $y$ 个，那么剩下的数字有 $n-y$ 个，需要满足 $y-(n-y)\leq x$<br>而且这个条件只有在绝对众数的位置才可能不满足，所以我们考虑容斥，计算</p>
 <p>$\text{总方案数}-\text{不合法的方案数}$</p>
-<p>我们考虑计算后者为：<br>$$<br>\sum_{x&#x3D;0}^{k}\sum_{y&#x3D;\lceil \frac{x+n+1}{2} \rceil}^{m} {l+y-1 \choose l-1}{m-l+n-y-1\choose m-l-1} \<br>\text{其中}\ l&#x3D;a_{x+1}-a_{x}<br>$$</p>
-<p>考虑这个式子的组合意义，需要把 $n$ 个球放在 $m$ 个盒子，就是在前 $l$ 个盒子中至少选择 $\lceil \frac{x+n+1}{2} \rceil$ 个球的方案数。<br>做法上可以枚举第 $l$ 个球所在的位置来计算：<br>$$<br>\sum_{x&#x3D;0}^{k}\sum_{t&#x3D;1}^{l} {t+y-2 \choose t-1}{m-t+n-y\choose m-t} \<br>\text{其中}\ l&#x3D;a_{x+1}-a_{x},y&#x3D;\lceil \frac{x+n+1}{2} \rceil<br>$$<br>这样时间复杂度为 $\sum_{x&#x3D;0}^{k} O(l)&#x3D;O(m)$。</p>
+<p>我们考虑计算后者为：<br>$$\begin{aligned}<br>\sum_{x&#x3D;0}^{k}\sum_{y&#x3D;\lceil \frac{x+n+1}{2} \rceil}^{m} {l+y-1 \choose l-1}{m-l+n-y-1\choose m-l-1} \\<br>\text{其中}\ l&#x3D;a_{x+1}-a_{x}<br>\end{aligned}$$</p>
+<p>考虑这个式子的组合意义，需要把 $n$ 个球放在 $m$ 个盒子，就是在前 $l$ 个盒子中至少选择 $\lceil \frac{x+n+1}{2} \rceil$ 个球的方案数。<br>做法上可以枚举第 $l$ 个球所在的位置来计算：<br>$$\begin{aligned}<br>\sum_{x&#x3D;0}^{k}\sum_{t&#x3D;1}^{l} {t+y-2 \choose t-1}{m-t+n-y\choose m-t} \\<br>\text{其中}\ l&#x3D;a_{x+1}-a_{x},y&#x3D;\lceil \frac{x+n+1}{2} \rceil<br>\end{aligned}$$<br>这样时间复杂度为 $\sum_{x&#x3D;0}^{k} O(l)&#x3D;O(m)$。</p>
 <h2 id="T4"><a href="#T4" class="headerlink" title="T4"></a>T4</h2><p>题目要求的大小关系相同，等价于两个序列的笛卡尔树相同。<br>建立大根笛卡尔树，容易发现，每一个笛卡尔树上的待填点，都有一个 $(l,r)$ 的值域区间要求，其中 $l$ 是祖先的 $\min$，$r$ 自子树中的 $\max$。</p>
 <p>考虑用 hall 定理刻画有解条件。<br>一种暴力的做法就是直接用扫描线，不难。</p>
 <p>但是我们有一个好的方式，可以直接贪心。</p>

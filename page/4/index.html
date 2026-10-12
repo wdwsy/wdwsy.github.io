@@ -376,7 +376,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-06-23 23:44:12" itemprop="dateModified" datetime="2026-06-23T23:44:12+08:00">2026-06-23</time>
+      <time title="Modified: 2026-10-12 22:44:30" itemprop="dateModified" datetime="2026-10-12T22:44:30+08:00">2026-10-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -410,7 +410,7 @@
 
 $$
 \begin{aligned}
-dp[i][j]=&(1-\dfrac{i}{m})\cdot \dfrac{j}{i+1}\cdot dp[i+1][j+1]+(1-\dfrac{i}{m})\cdot \dfrac{i+1-j}{i+1}\cdot dp[i+1][j]\\
+dp[i][j]=&(1-\dfrac{i}{m})\cdot \dfrac{j}{i+1}\cdot dp[i+1][j+1]+(1-\dfrac{i}{m})\cdot \dfrac{i+1-j}{i+1}\cdot dp[i+1][j]\\\\
 &+\dfrac{i}{m}\cdot\dfrac{1}{i-1}\cdot (\sum_{k=1}^{j-1}dp[i-k][j-k]+\sum_{k=1}^{i-j}dp[i-k][j])
 \end{aligned}
 $$
@@ -421,7 +421,7 @@ $$
 $$
 \begin{aligned}
 dp[i+1][j+1]=&\left[(1-\dfrac{i}{m})\cdot \dfrac{j}{i+1}\right]^{-1}(
-dp[i][j]-(1-\dfrac{i}{m})\cdot \dfrac{i+1-j}{i+1}\cdot dp[i+1][j]\\
+dp[i][j]-(1-\dfrac{i}{m})\cdot \dfrac{i+1-j}{i+1}\cdot dp[i+1][j]\\\\
 &-\dfrac{i}{m}\cdot\dfrac{1}{i-1}\cdot (\sum_{k=1}^{j-1}dp[i-k][j-k]+\sum_{k=1}^{i-j}dp[i-k][j]))
 \end{aligned}
 $$

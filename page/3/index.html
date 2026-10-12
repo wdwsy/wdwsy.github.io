@@ -935,7 +935,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-06-23 23:44:12" itemprop="dateModified" datetime="2026-06-23T23:44:12+08:00">2026-06-23</time>
+      <time title="Modified: 2026-10-12 22:44:30" itemprop="dateModified" datetime="2026-10-12T22:44:30+08:00">2026-10-12</time>
     </span>
 
   
@@ -967,7 +967,7 @@
 
 $$
 \begin{aligned}
-dp[i][j]=&(1-\dfrac{i}{m})\cdot \dfrac{j}{i+1}\cdot dp[i+1][j+1]+(1-\dfrac{i}{m})\cdot \dfrac{i+1-j}{i+1}\cdot dp[i+1][j]\\
+dp[i][j]=&(1-\dfrac{i}{m})\cdot \dfrac{j}{i+1}\cdot dp[i+1][j+1]+(1-\dfrac{i}{m})\cdot \dfrac{i+1-j}{i+1}\cdot dp[i+1][j]\\\\
 &+\dfrac{i}{m}\cdot\dfrac{1}{i-1}\cdot (\sum_{k=1}^{j-1}dp[i-k][j-k]+\sum_{k=1}^{i-j}dp[i-k][j])
 \end{aligned}
 $$
@@ -978,7 +978,7 @@ $$
 $$
 \begin{aligned}
 dp[i+1][j+1]=&\left[(1-\dfrac{i}{m})\cdot \dfrac{j}{i+1}\right]^{-1}(
-dp[i][j]-(1-\dfrac{i}{m})\cdot \dfrac{i+1-j}{i+1}\cdot dp[i+1][j]\\
+dp[i][j]-(1-\dfrac{i}{m})\cdot \dfrac{i+1-j}{i+1}\cdot dp[i+1][j]\\\\
 &-\dfrac{i}{m}\cdot\dfrac{1}{i-1}\cdot (\sum_{k=1}^{j-1}dp[i-k][j-k]+\sum_{k=1}^{i-j}dp[i-k][j]))
 \end{aligned}
 $$
@@ -1327,7 +1327,7 @@ pointer; font-weight: 600; color: #24292f; user-select: none;">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-06-23 23:44:12" itemprop="dateModified" datetime="2026-06-23T23:44:12+08:00">2026-06-23</time>
+      <time title="Modified: 2026-10-12 22:44:30" itemprop="dateModified" datetime="2026-10-12T22:44:30+08:00">2026-10-12</time>
     </span>
 
   
@@ -1365,7 +1365,7 @@ pointer; font-weight: 600; color: #24292f; user-select: none;">
 <li>$p[j].b$ 递减。</li>
 </ul>
 <p>所以我们可以把 $max$ 拆开，在一段前缀使用 $p[j].b$ 转移，剩下的后缀使用 $suf[j]$ 转移，看起来一点也不好写。</p>
-<h2 id="做法二"><a href="#做法二" class="headerlink" title="做法二"></a>做法二</h2><p>我们考虑暴力 dp<br>设 $f_{i,j}$ 表示按照 $b_i$ <strong>升序</strong>排序之后，前 $i$  个作品选择了 $j$ 个最小答案。<br>考虑到现在的操作顺序一定是从 $n$ 到 $1$ 的，所以我们有转移：<br>$$<br>f_{i,j} \rightarrow f_{i+1,j}\<br>max(b_i,f_{i,j})+a_i \rightarrow f_{i+1,j+1}\<br>$$<br>这个方程的转移还是很优美的，看起来可以 slope trick 优化，但是麻烦的就是那个 $max$，于是我们考虑拆掉 $max$。</p>
+<h2 id="做法二"><a href="#做法二" class="headerlink" title="做法二"></a>做法二</h2><p>我们考虑暴力 dp<br>设 $f_{i,j}$ 表示按照 $b_i$ <strong>升序</strong>排序之后，前 $i$  个作品选择了 $j$ 个最小答案。<br>考虑到现在的操作顺序一定是从 $n$ 到 $1$ 的，所以我们有转移：<br>$$\begin{aligned}<br>f_{i,j} \rightarrow f_{i+1,j}\\<br>max(b_i,f_{i,j})+a_i \rightarrow f_{i+1,j+1}\\<br>\end{aligned}$$<br>这个方程的转移还是很优美的，看起来可以 slope trick 优化，但是麻烦的就是那个 $max$，于是我们考虑拆掉 $max$。</p>
 <ul>
 <li>如果 $b_i \geq f_{i,j}$，那么我们容易发现之后会有 $f_{i,j}&#x3D;f_{i+1,j}&#x3D;f_{i+2,j}&#x3D;\dots&#x3D;f_{n,j}$，于是我们在这里就可以知道 $k&#x3D;j$ 时的答案了，我们不妨直接统计这个答案，然后简化问题。</li>
 <li>如果 $b_i &lt; f_{i,j}$，那么我们发现这里的转移总是 $f_{i,j}+a_i \rightarrow f_{i+1,j+1}$，这个容易用 slope trick 维护。</li>
@@ -1470,7 +1470,7 @@ pointer; font-weight: 600; color: #24292f; user-select: none;">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-06-23 23:44:12" itemprop="dateModified" datetime="2026-06-23T23:44:12+08:00">2026-06-23</time>
+      <time title="Modified: 2026-10-12 22:44:30" itemprop="dateModified" datetime="2026-10-12T22:44:30+08:00">2026-10-12</time>
     </span>
 
   
@@ -1487,7 +1487,7 @@ pointer; font-weight: 600; color: #24292f; user-select: none;">
 <h2 id="数学公式"><a href="#数学公式" class="headerlink" title="数学公式"></a>数学公式</h2><p><strong>行内公式</strong>：欧拉公式 $e^{i\pi} + 1 &#x3D; 0$ 是数学中最美的公式。</p>
 <p><strong>独立公式</strong>：<br>$$<br>\sum_{i&#x3D;1}^{n} i &#x3D; \frac{n(n+1)}{2}<br>$$</p>
 <p><strong>算法复杂度</strong>：线段树区间查询的时间复杂度为 $O(\log n)$。</p>
-<h1 id="矩阵：-begin-bmatrix-a-11-a-12-a-21-a-22-end-bmatrix-begin-bmatrix-x-1-x-2-end-bmatrix"><a href="#矩阵：-begin-bmatrix-a-11-a-12-a-21-a-22-end-bmatrix-begin-bmatrix-x-1-x-2-end-bmatrix" class="headerlink" title="矩阵：$$\begin{bmatrix}a_{11} &amp; a_{12} \a_{21} &amp; a_{22}\end{bmatrix}\begin{bmatrix}x_1 \x_2\end{bmatrix}"></a><strong>矩阵</strong>：<br>$$<br>\begin{bmatrix}<br>a_{11} &amp; a_{12} \<br>a_{21} &amp; a_{22}<br>\end{bmatrix}<br>\begin{bmatrix}<br>x_1 \<br>x_2<br>\end{bmatrix}</h1><p>\begin{bmatrix}<br>b_1 \<br>b_2<br>\end{bmatrix}<br>$$</p>
+<h1 id="矩阵：-begin-bmatrix-a-11-a-12-a-21-a-22-end-bmatrix-begin-bmatrix-x-1-x-2-end-bmatrix"><a href="#矩阵：-begin-bmatrix-a-11-a-12-a-21-a-22-end-bmatrix-begin-bmatrix-x-1-x-2-end-bmatrix" class="headerlink" title="矩阵：$$\begin{bmatrix}a_{11} &amp; a_{12} \\a_{21} &amp; a_{22}\end{bmatrix}\begin{bmatrix}x_1 \\x_2\end{bmatrix}"></a><strong>矩阵</strong>：<br>$$<br>\begin{bmatrix}<br>a_{11} &amp; a_{12} \\<br>a_{21} &amp; a_{22}<br>\end{bmatrix}<br>\begin{bmatrix}<br>x_1 \\<br>x_2<br>\end{bmatrix}</h1><p>\begin{bmatrix}<br>b_1 \\<br>b_2<br>\end{bmatrix}<br>$$</p>
 <p><strong>常用竞赛公式</strong>：<br>$$<br>\gcd(a, b) &#x3D; \gcd(b, a \bmod b)<br>$$</p>
 <h2 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h2><p>图片放在 <code>source/images/</code> 文件夹中，文章中这样引用：</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](<span class="link">/images/xxx.png</span>)</span><br></pre></td></tr></table></figure>

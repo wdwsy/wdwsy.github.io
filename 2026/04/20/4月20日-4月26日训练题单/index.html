@@ -28,7 +28,7 @@
 <meta property="og:description" content="4月20日-4月26日训练题单  B.CF1844G考虑树上的路径和为：$dep_x+dep_y-2 \times dep_{lca(x,y)}$于是我们考虑用二进制来构造，显然在 mod 2 意义下为  $dep_{i+1} &#x3D; d_i - dep_i$接下来构造出 mod 4 意义下的值$dep_{i+1} &#x3D; (d_i - dep_i + 2 \times dep_{lc">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-04-20T14:31:40.000Z">
-<meta property="article:modified_time" content="2026-06-28T14:55:06.463Z">
+<meta property="article:modified_time" content="2026-10-12T14:46:16.776Z">
 <meta property="article:author" content="wdwsy">
 <meta property="article:tag" content="算法,OIC++,NOI,信息学竞赛">
 <meta name="twitter:card" content="summary">
@@ -259,7 +259,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-06-28 22:55:06" itemprop="dateModified" datetime="2026-06-28T22:55:06+08:00">2026-06-28</time>
+      <time title="Modified: 2026-10-12 22:46:16" itemprop="dateModified" datetime="2026-10-12T22:46:16+08:00">2026-10-12</time>
     </span>
 
   
@@ -320,8 +320,8 @@
 <hr>
 <p>接下来我们考虑列出一对位置 $i,j(i&lt;j)$ 的式子，显然我们这样选实质上改变了原来从左向右选择的顺序，本来直观想法应该是不能做的，但是由于逆序对的特殊性，这个时候，$j$ 位置上的选择方案已经与 $[i+1,j]$ 中的选择方案无关了，无论如何，我们都有：<br>$i$ 选择方案个数：$b_i - i + 1$。<br>$j$ 选择方案个数： $b_i - i$。</p>
 <ul>
-<li>$id_i &lt; id_j, i &lt; j$。<br> 我们发现这样做会影响  $[i+1,j-1]$ 中间位置的选择，他们可以选择的数字都会少一个，因为被 $j$ 位置选过了。因此我们可以找到这一对位置的贡献：<br>$$\frac{(b_i - i + 1)(b_i - i)}{2} \times \frac{tot}{(b_i - i + 1)(b_j - j + 1)}\prod\limits_{i&lt;k&lt;j}\dfrac{b_k-k}{b_k-k+1}$$<br>$$&#x3D;\dfrac{tot \times(b_i-i)}{{2}\times(b_j-j+1)}\prod\limits_{i&lt;k&lt;j}\dfrac{b_k-k}{b_k-k+1}$$</li>
-<li>$id_i &gt; id_j, i &lt; j$<br>  这样，如果我们按照上面的那个式子来算，我们会算出正序对的数量，于是我们考虑小小地容斥一下，就能得到贡献：<br>$$&#x3D;tot-\dfrac{tot \times(b_i-i)}{{2}\times(b_j-j+1)}\prod\limits_{i&lt;k&lt;j}\dfrac{b_k-k}{b_k-k+1}$$</li>
+<li>$id_i &lt; id_j, i &lt; j$。<br> 我们发现这样做会影响  $[i+1,j-1]$ 中间位置的选择，他们可以选择的数字都会少一个，因为被 $j$ 位置选过了。因此我们可以找到这一对位置的贡献：<br>$$\frac{(b_i - i + 1)(b_i - i)}{2} \times \frac{tot}{(b_i - i + 1)(b_j - j + 1)}\prod\limits_{i&lt;k&lt;j}\dfrac{b_k-k}{b_k-k+1}$$<br>$$&#x3D;\dfrac{tot \times(b_i-i)}{2\times(b_j-j+1)}\prod\limits_{i&lt;k&lt;j}\dfrac{b_k-k}{b_k-k+1}$$</li>
+<li>$id_i &gt; id_j, i &lt; j$<br>  这样，如果我们按照上面的那个式子来算，我们会算出正序对的数量，于是我们考虑小小地容斥一下，就能得到贡献：<br>$$&#x3D;tot-\dfrac{tot \times(b_i-i)}{2\times(b_j-j+1)}\prod\limits_{i&lt;k&lt;j}\dfrac{b_k-k}{b_k-k+1}$$</li>
 </ul>
 <p>发现这个式子能够直接用线段树统计，但是其实可以使用树状数组，用树状数组的时候需要判断如果当前 $b_k-k &#x3D; 0$，那么前面的贡献都会是 $0$，进行一次清空就好。</p>
 <h2 id="H-agc025e"><a href="#H-agc025e" class="headerlink" title="H.agc025e"></a>H.<a target="_blank" rel="noopener" href="https://atcoder.jp/contests/agc025/tasks/agc025_e">agc025e</a></h2><p>做不出来，看题解感觉很诡异。感觉都是注意到有写非人类。</p>

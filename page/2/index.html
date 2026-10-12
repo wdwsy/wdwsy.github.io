@@ -450,7 +450,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-10-09 09:09:02" itemprop="dateModified" datetime="2026-10-09T09:09:02+08:00">2026-10-09</time>
+      <time title="Modified: 2026-10-12 22:39:24" itemprop="dateModified" datetime="2026-10-12T22:39:24+08:00">2026-10-12</time>
     </span>
 
   
@@ -483,7 +483,7 @@ $$
 <li>$t_i&#x3D;1$ 可以看作生成了两个右括号。</li>
 </ul>
 <p>我们考虑有合法序列的条件其实就是这个括号序列合法（这个可以给读者自行证明），于是我们就转化为以下问题：</p>
-<p>约束条件：<br>$$<br>t_1&#x3D;-1\<br>t_n&#x3D;1\<br>\sum\limits_{i&#x3D;1}^{n} t_i &#x3D; 0 \<br>\forall k,\sum\limits_{i&#x3D;1}^{k} t_i \leq 0<br>$$<br>要求最小化<br>$$<br>t(p)&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}a_i+\displaystyle\sum_{i&#x3D;1}^{n}t_i\times (s_i+s_{i-1})<br>$$</p>
+<p>约束条件：<br>$$<br>\begin{aligned}<br>t_1&amp;&#x3D;-1\\<br>t_n&amp;&#x3D;1\\<br>\sum\limits_{i&#x3D;1}^{n} t_i &amp;&#x3D; 0 \\<br>\forall k,\ \sum\limits_{i&#x3D;1}^{k} t_i &amp;\leq 0<br>\end{aligned}<br>$$<br>要求最小化<br>$$<br>t(p)&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}a_i+\displaystyle\sum_{i&#x3D;1}^{n}t_i\times (s_i+s_{i-1})<br>$$</p>
 <h2 id="反悔贪心"><a href="#反悔贪心" class="headerlink" title="反悔贪心"></a>反悔贪心</h2><p>我们每次加入 $i$ 位置的时候，保证当前 $t_i$ 的前缀和为 $-1$，先来贪心地假设其 $t_i&#x3D;1$，然后在大根堆里面放入两个 $s_i+s_{i-1}$ 表示可以反悔两次 $t_i$，使得其值减 $1$。那么此时 $t_i$ 的前缀和为 $0$，我们反悔队首元素即可继续保证 $t_i$ 的前缀和为 $-1$。 </p>
 <h2 id="正确性证明"><a href="#正确性证明" class="headerlink" title="正确性证明"></a>正确性证明</h2><p>我们可以用<strong>模拟费用流</strong>的视角来理解这个反悔贪心的正确性。</p>
 <hr>
@@ -536,7 +536,7 @@ $$
 <p>计算的时候，可以用分治中心的答案减掉其各个子树的答案</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ans += <span class="built_in">get</span>(u, u);</span><br><span class="line">ok[u] = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> v : e[u]) <span class="keyword">if</span> (!ok[v]) &#123;</span><br><span class="line">    ans -= <span class="built_in">get</span>(v, u);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>所以我们现在只需要解决对于一个子树中的所有点对，考虑其三元组的贡献和即可。<br>发现三元组合法的充要条件为：<br>$$<br>\begin{cases} mn_l&#x3D;l \ mx_r&#x3D;r \ mx_l \le r \ mx_x \le r \ mn_x \ge l \ l \le mn_r \end{cases}<br>$$</p>
+<p>所以我们现在只需要解决对于一个子树中的所有点对，考虑其三元组的贡献和即可。<br>发现三元组合法的充要条件为：<br>$$<br>\begin{cases} mn_l&#x3D;l \\ mx_r&#x3D;r \\ mx_l \le r \\ mx_x \le r \\ mn_x \ge l \\ l \le mn_r \end{cases}<br>$$</p>
 <p>其中 $mn_u$ 表示 $u$ 到子树根的最小值，$mx_u$ 表示 $u$ 到子树的根的最大值。</p>
 <p>前两个条件可以在做的时候直接判断。<br>然后我就被吓到了，四维偏序？？！</p>
 <p>这里处理偏序的方式比较有意思，我们先按照 $mx_u$ 从小到大排序。这样就满足了中间的两个限制。<br>接下来按照这个顺序扫描线，每次把 $l$ 加入到线段树下标 $l$ 的位置，把 $x$ 加入到线段树下标 $mn_x$ 的位置，然后按照倒数第二个限制进行贡献。<br>最后一个限制在查询的时候控制一端前缀即可。</p>
@@ -891,9 +891,15 @@ $$
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2026-07-30 21:48:59 / Modified: 23:45:37" itemprop="dateCreated datePublished" datetime="2026-07-30T21:48:59+08:00">2026-07-30</time>
+      <time title="Created: 2026-07-30 21:48:59" itemprop="dateCreated datePublished" datetime="2026-07-30T21:48:59+08:00">2026-07-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-10-12 22:44:30" itemprop="dateModified" datetime="2026-10-12T22:44:30+08:00">2026-10-12</time>
     </span>
 
   
@@ -919,7 +925,7 @@ $$
 
 $$
 \begin{aligned}
-& f_S=\sum\limits_{T\subseteq S} g_T \\
+& f_S=\sum\limits_{T\subseteq S} g_T \\\\
 \Rightarrow & g_S=\sum\limits_{H\subseteq S} (-1)^{|S|-|H|}f_H
 \end{aligned}
 $$
@@ -928,10 +934,10 @@ $$
 
 $$
 \begin{aligned}
-g_S & = \sum\limits_{H\subseteq S} f_H \\
-& = \sum\limits_{H\subseteq S} \sum\limits_{T\subseteq H} (-1)^{|S|-|H|}g_T \\
-& = \sum\limits_{T\subseteq H\subseteq S} (-1)^{|S|-|H|}g_T \\
-& = [S=T]g_T \\
+g_S & = \sum\limits_{H\subseteq S} f_H \\\\
+& = \sum\limits_{H\subseteq S} \sum\limits_{T\subseteq H} (-1)^{|S|-|H|}g_T \\\\
+& = \sum\limits_{T\subseteq H\subseteq S} (-1)^{|S|-|H|}g_T \\\\
+& = [S=T]g_T \\\\
 & = g_S
 \end{aligned}
 $$
@@ -966,20 +972,20 @@ $$
 <p>于是我们考虑用集合容斥来求出答案，先列出答案形式。<br>$$<br>ans&#x3D;\sum\limits_{S,T,S\cap T &#x3D; \emptyset,S\cup T &#x3D; U} f(S)g(T)<br>$$<br>其中 $U$ 表示全集，$f(S)$ 表示第一颗树的叶子<strong>恰好</strong>为 $S$ 的方案数，$g(T)$ 表示第二颗树的叶子刚好是 $T$ 的方案数。</p>
 <p>但是我们现在可以算出来的是</p>
 
-$$
-f^\prime(S)=\sum\limits_{T\supseteq S} f(T) \\
-g^\prime(S)=\sum\limits_{T\supseteq S} g(T) 
-$$
+$$\begin{aligned}
+f^\prime(S)=\sum\limits_{T\supseteq S} f(T) \\\\
+g^\prime(S)=\sum\limits_{T\supseteq S} g(T)
+\end{aligned}$$
 
 
 <p>于是我们来化简式子</p>
 
 $$
 \begin{aligned}
-ans & = \sum\limits_{S,T,S\cap T = \emptyset,S\cup T = U} f(S)g(T) \\
-& = \sum\limits_{S,T,S\cap T = \emptyset,S\cup T = U} \left( \sum\limits_{T_1\supseteq S}(-1)^{|T_1|-|S|}f^\prime(T_1) \right) \left(\sum\limits_{T_2\supseteq T}(-1)^{|T_2|-|T|}g^\prime(T_2)\right) \\
-& = \sum\limits_{S,T,S\cap T = \emptyset,S\cup T = U} \sum\limits_{T_1\supseteq S,T_2\supseteq T}(-1)^{|T_1|-|S|+|T_2|-|T|}f^\prime(T_1)g^\prime(T_2) \\
-& = \sum\limits_{T_1,T_2,T_1\cup T_2 = U}(-1)^{|T_1|+|T_2|}f^\prime(T_1)g^\prime(T_2) \sum\limits_{S\subseteq T_1,T\subseteq T_2,S\cap T = \emptyset,S\cup T = U} (-1)^{|S|+|T|}  \\
+ans & = \sum\limits_{S,T,S\cap T = \emptyset,S\cup T = U} f(S)g(T) \\\\
+& = \sum\limits_{S,T,S\cap T = \emptyset,S\cup T = U} \left( \sum\limits_{T_1\supseteq S}(-1)^{|T_1|-|S|}f^\prime(T_1) \right) \left(\sum\limits_{T_2\supseteq T}(-1)^{|T_2|-|T|}g^\prime(T_2)\right) \\\\
+& = \sum\limits_{S,T,S\cap T = \emptyset,S\cup T = U} \sum\limits_{T_1\supseteq S,T_2\supseteq T}(-1)^{|T_1|-|S|+|T_2|-|T|}f^\prime(T_1)g^\prime(T_2) \\\\
+& = \sum\limits_{T_1,T_2,T_1\cup T_2 = U}(-1)^{|T_1|+|T_2|}f^\prime(T_1)g^\prime(T_2) \sum\limits_{S\subseteq T_1,T\subseteq T_2,S\cap T = \emptyset,S\cup T = U} (-1)^{|S|+|T|}  \\\\
 \end{aligned}
 $$
 
@@ -989,8 +995,8 @@ $$
 $$
 \begin{aligned}
 ans
-& = \sum\limits_{T_1,T_2,T_1\cup T_2 = U}(-1)^{|T_1|+|T_2|}f^\prime(T_1)g^\prime(T_2) (-1)^{n}2^{|S\cap T|}  \\
-& = \sum\limits_{T_1,T_2,T_1\cup T_2 = U}(-1)^{|T_1|+|T_2|+n}2^{|S\cap T|}f^\prime(T_1)g^\prime(T_2)  \\
+& = \sum\limits_{T_1,T_2,T_1\cup T_2 = U}(-1)^{|T_1|+|T_2|}f^\prime(T_1)g^\prime(T_2) (-1)^{n}2^{|S\cap T|}  \\\\
+& = \sum\limits_{T_1,T_2,T_1\cup T_2 = U}(-1)^{|T_1|+|T_2|+n}2^{|S\cap T|}f^\prime(T_1)g^\prime(T_2)  \\\\
 \end{aligned}
 $$
 
