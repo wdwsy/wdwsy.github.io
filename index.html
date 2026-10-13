@@ -178,7 +178,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -210,6 +210,114 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/10/13/2026-10-13NOIP%E6%A8%A1%E6%8B%9F%E8%B5%9B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/10/13/2026-10-13NOIP%E6%A8%A1%E6%8B%9F%E8%B5%9B/" class="post-title-link" itemprop="url">2026-10-13NOIP模拟赛</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-10-13 21:35:29 / Modified: 21:58:41" itemprop="dateCreated datePublished" datetime="2026-10-13T21:35:29+08:00">2026-10-13</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="5919-–-迷路的送货车"><a href="#5919-–-迷路的送货车" class="headerlink" title="5919 – 迷路的送货车"></a><a target="_blank" rel="noopener" href="http://172.17.226.198/OnlineJudge/contestproblem.php?id=16165919">5919 – 迷路的送货车</a></h1><p>首先，可以发现每一点客观上肯定是有一个到终点的最小代价，假设这个代价为 $d_i$。</p>
+<p>假设一条边连接 $(u,v)$，如果 $d_u&lt;d_v$ 那么只会从 $v\rightarrow u$ 进行转移，反之亦然。原因是我们不会花钱让距离终点更远。</p>
+<p>考虑我们现在就是要求出 $d$。<br>考虑倒推，$d_n&#x3D;0$，接下来考虑直接找到距离最小的点，这里距离定义为屏蔽代价加上通行代价，按照 djkstra 的方式把这个最小点从 priority 中取出来，然后去更新别的点。这样做就是正确的。因为我们每次更新的是最小点，而最小点所有向外转移的边都已经做好了。</p>
+<p>这样思路很简单，但是因为卡空间，维护屏蔽代价的时候需要使用 fhq treap。</p>
+<p>这里介绍一个更加简单的做法，发现代价可以拆成两个部分（屏蔽代价，通行代价），并且这两种代价都非负。考虑把每一条边拆成上再新建一个点，记录 $dis_u+w$，$w$ 表示通行代价。然后我们发现进入点 $v$ 的每条边，就是按照 $dis_u+w$ 升序加入的。在计算屏蔽代价的时候，我们只关心每个点 $dis_u+w$ 的排名，这样我们在边点转移到真实点的代价也能计算了。那么直接 dijkstra 就做完了。</p>
+<p>这个题目很妙，我们在一开始不知道所有边的边权，但是在做 dijkstra 的过程中，可以逐渐知道每一条边的权值。保证我们可以完整正常的 dijkstra 流程。</p>
+<h1 id="5920-–-双轨灯幕"><a href="#5920-–-双轨灯幕" class="headerlink" title="5920 – 双轨灯幕"></a><a target="_blank" rel="noopener" href="http://218.22.67.60:30808/OnlineJudge/contestproblem.php?id=16165920">5920 – 双轨灯幕</a></h1><p>对于这样选一个递增，一个递减序列的问题，在二位坐标上表示看起来像一个 X，这种问题我们有以下两种思路：</p>
+<ol>
+<li>寻找中心点。</li>
+<li>排除不合法四元组。</li>
+</ol>
+<p>这个题目两个做法都可以，但是使用 2 会好写一些。</p>
+<h2 id="做法-1"><a href="#做法-1" class="headerlink" title="做法 1"></a>做法 1</h2><p>考虑寻找中心点。</p>
+<p>在中心点两侧分别是一段 V 字形，用单调栈不难处理冲合法的极大区间。</p>
+<p>但是我们发现有些合法构造没有办法找到中心点。<br>比如：3 1 4 2</p>
+<div class="note primary"><p>🔷 3142 表示有四元组 $(i,j,k,l)$ 满足 $(a_i,a_j,a_k,a_l)$ 从小到大的排名分别为 3 1 4 2</p>
+</div>
+
+<p>这里没有一个位置可以作为中心点。<br>但是我们发现，只有中心情况大小关系刚好是 3142 或者 2413 的时候会找不到中心点，但是仍然合法。</p>
+<p>所以可以分类讨论解决。但是太烦了。</p>
+<h2 id="做法-2"><a href="#做法-2" class="headerlink" title="做法 2"></a>做法 2</h2><p>考虑寻找不合法的四元组。</p>
+<p>发现一，二，三元组永远合法。</p>
+<p>对于 3412 或者 2143 这样的四元组，那么就会不合法。</p>
+<p>显然这是一个必要条件，是不是充要的可以打表证明，真正的证明需要使用数学图论的相关知识。<br>打表的时候可以设 $f_{i}$ 表示上升序列结尾为 $i$ 下降序列结尾数字最大是多少，$g_{i}$ 表示下降序列结尾为 $i$ 上升序列结尾的最小数字是多少。</p>
+<p>最后上一个简单的 dp，应该谁都会。</p>
+<h2 id="小总结"><a href="#小总结" class="headerlink" title="小总结"></a>小总结</h2><h2 id="对于类-X-问题"><a href="#对于类-X-问题" class="headerlink" title="对于类 X 问题"></a>对于类 X 问题</h2><p>对于选择一个上升序列和一个下降序列的问题（即选出一个 X 的问题）<br>我们有两种方式：</p>
+<ol>
+<li>找中心点。</li>
+<li>排除不合法四元组。</li>
+</ol>
+<p>对于第一种情况，如果当前不满足条件的时候，可以考虑以下几个方面来贴合题目：</p>
+<ul>
+<li>考虑分类讨论中心点的情况。</li>
+<li>把中心点看作一条链上的点，假设中心点为 $x$，然后条件修改为：后面的上升链大于 $x$ 之前第一个小于 $a_x$ 的值，后面的下降链小于 $x$ 之前第一个大于 $a_x$ 的值。</li>
+</ul>
+<h2 id="对于排除四元组问题"><a href="#对于排除四元组问题" class="headerlink" title="对于排除四元组问题"></a>对于排除四元组问题</h2><p>总结一下目前遇到的排除四元组问题类型。</p>
+<p>一个就是当前题目，要求选择一个上升序列和一个下降序列，要求不出现 2143 和 3412。</p>
+<p>还有一个题目如下：<br>给你一个序列 $a_i$，一开始每一个数字是一个单独的集合，现在每次可以把相邻两个位置合并，要求合并的两队 $[\text{集合最小值},\text{集合最大值}]$ 这样的区间没有交。求最多能合并多少次。 </p>
+<p>这个问题的要求是不出现 2413 和 3124。</p>
+<h1 id="5921-–-重剪巡游录像"><a href="#5921-–-重剪巡游录像" class="headerlink" title="5921 – 重剪巡游录像"></a><a target="_blank" rel="noopener" href="http://218.22.67.60:30808/OnlineJudge/contestproblem.php?id=16165921">5921 – 重剪巡游录像</a></h1>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1232,107 +1340,6 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">400005</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, m, s, t;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; e[N], g[N];</span><br><span class="line"><span class="type">int</span> fa[N], tc, son[N], dep[N];</span><br><span class="line"><span class="type">bool</span> tag[N], vis[N]; <span class="comment">// 记录 i-&gt;fa_i 是否被定向了 是否访问过节点i</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> f)</span> </span>&#123;</span><br><span class="line">    vis[u] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> v : e[u]) <span class="keyword">if</span> (v != f) &#123;</span><br><span class="line">        <span class="keyword">if</span> (vis[v]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (dep[v] &lt; dep[u]) g[son[v]].<span class="built_in">push_back</span>(u);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            son[u] = v, fa[v] = u, dep[v] = dep[u] + <span class="number">1</span>;</span><br><span class="line">            <span class="built_in">dfs</span>(v, u);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">work</span><span class="params">(<span class="type">int</span> O)</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m &gt;&gt; s &gt;&gt; t;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) e[i].<span class="built_in">clear</span>(), g[i].<span class="built_in">clear</span>(), vis[i] = tag[i] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">        <span class="type">int</span> a, b;</span><br><span class="line">        cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">        e[a].<span class="built_in">push_back</span>(b);</span><br><span class="line">        e[b].<span class="built_in">push_back</span>(a);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fa[s] = <span class="number">0</span>, dep[s] = <span class="number">0</span>, <span class="built_in">dfs</span>(s, <span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    vector&lt;pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; &gt; ans;</span><br><span class="line">    queue&lt;pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; &gt; q;</span><br><span class="line">    tag[s] = <span class="number">1</span>;</span><br><span class="line">    q.<span class="built_in">push</span>(&#123;t, <span class="number">1</span>&#125;);</span><br><span class="line">    <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        <span class="keyword">auto</span> [u, o] = q.<span class="built_in">front</span>();</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">while</span> (!tag[u]) &#123;</span><br><span class="line">            tag[u] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (o) ans.<span class="built_in">push_back</span>(&#123;fa[u], u&#125;);</span><br><span class="line">            <span class="keyword">else</span> ans.<span class="built_in">push_back</span>(&#123;u, fa[u]&#125;);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> v : g[u]) &#123;</span><br><span class="line">                <span class="keyword">if</span> (o) ans.<span class="built_in">push_back</span>(&#123;fa[u], v&#125;);</span><br><span class="line">                <span class="keyword">else</span> ans.<span class="built_in">push_back</span>(&#123;v, fa[u]&#125;);</span><br><span class="line">                q.<span class="built_in">push</span>(&#123;v, o ^ <span class="number">1</span>&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">            u = fa[u];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (ans.<span class="built_in">size</span>() != m) cout &lt;&lt; <span class="string">&quot;No\n&quot;</span>;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Yes\n&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> [x, y] : ans) cout &lt;&lt; x &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; y &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin &gt;&gt; T;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= T; i++) <span class="built_in">work</span>(i);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </details>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/08/31/%E6%B5%85%E8%B0%88%E4%B8%80%E7%B1%BB%E4%B8%8A%E4%BC%A0%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wdwsy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wdwsy's Blog">
-      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | wdwsy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/08/31/%E6%B5%85%E8%B0%88%E4%B8%80%E7%B1%BB%E4%B8%8A%E4%BC%A0%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">浅谈一类上传序列问题</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2026-08-31 18:25:09" itemprop="dateCreated datePublished" datetime="2026-08-31T18:25:09+08:00">2026-08-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-09-01 12:18:30" itemprop="dateModified" datetime="2026-09-01T12:18:30+08:00">2026-09-01</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="E-Child-to-Parent"><a href="#E-Child-to-Parent" class="headerlink" title="E - Child to Parent"></a><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/agc063/tasks/agc063_e">E - Child to Parent</a></h1><p><a target="_blank" rel="noopener" href="http://172.17.226.198/OnlineJudge/contestproblem.php?id=15975740">fzoj战争</a></p>
-<h2 id="形式化题面"><a href="#形式化题面" class="headerlink" title="形式化题面"></a>形式化题面</h2><p>给定一棵 $n$ 个点以 1 为根的树，初始点有点权 $a_i$。</p>
-<p>定义一次操作为选择一个 $a_u &gt; 0$ 的点，令 $a_u \leftarrow a_u - 1, a_{fa_u} \leftarrow a_{fa_u} + k$。求任意次操作后可能得到的序列 $a$ 的数量。</p>
-<h2 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h2><p>用这个题目来介绍一下这个上传序列问题到底是什么东西。</p>
-<p>首先我们发现，如果我们固定了每个位置的操作次数，那么，只需要对这这个操作次数序列计数，那么就等价于原来序列的个数。<br>显然，我们可以直接从叶子到根依次操作一定不劣。<br>我们要是直接对这个题目暴力 dp，会发现，由于值域太大，所以每次记录当前位置剩余的点的个数是同样和值域有关系，所以不行。</p>
-<p>我们考虑重新刻画这个问题，让这个问题更加具体。<br>初始情况下，我们可以把每一个位置上的值 $a_i$ 看作 $a_i$ 个不同的物品，代表第 $i$ 个物品的二元组为 $(dfn_i,i)$，然后我们每次相当于是把子树中的物品合并进来，可以发现，现在每次合并之后仍然能保证所有二元组有序，然后我们接下来需要把手里的物品进行“上传”，也就对应了本题（-1 父亲 +k）的操作，由于所有物品本质上是等价的，所以我们可以钦定每次上传的都是一个前缀的物品。</p>
-<p>我们一通操作什么用都没有，别急，重要的来了。<br>我们考虑到底那些位置是重要的，其实我们只需要刻画出每次上传的“断点”位置，（也就是说端点之前的会上传，端点及其之后的位置会不上传）就好了。于是我们使用提前钦定的思想，在初始状态下，就去钦定每一个物品是不是断点。</p>
-<p>在上传的时候，显然最后一个钦定的断点就是当前的断点（不然就有端点不合法，被提前删掉了）。</p>
-<p>考虑设置 dp。<br>设 $f_{u,i}$ 表示在点 $u$ 的物品序列中有 $i$ 个断点的方案数。<br>$g_{u,i}$ 表示从 $u$ 上传 $i$ 个断点的方案数。<br>此外我们还需要一个预处理的数组，因为我们在上传的过程中，每一个物品可以分裂出 $k$ 个，这也可能会导致新增加断点，$dp_{i,j}$ 表示原来有 $i$ 个断点，在上传的时候变成了 $j$ 个断点的方案数。</p>
-<p>转移如下：</p>
-<ul>
-<li>初始化 $f_{u,i}&#x3D; {a_u\choose i}$</li>
-<li>合并子树 $f^\prime_{u,i}&#x3D;\sum f_{u,j}\times g_{v,i-j}$ </li>
-<li>当前位置可能使用掉一个断点 $f^\prime_{u,i}&#x3D;f_{u,i}+f_{u,i+1}$</li>
-<li>转换为上传序列 $g_{u,i}&#x3D;f_{u,j}\times dp_{j,i}$</li>
-<li>$dp_{i,j}&#x3D;dp_{i-1,x}\times {k\choose j-x}$</li>
-</ul>
-<p>最后一定要让所有断点全部用完，这样才能用断点来唯一刻画一个序列。<br>所以答案为 $f_{1,0}$ （1为根）</p>
-<div class="note info"><p>💡 小总结：<br>其实我们发现，这种类型的题目特征为，操作的点数量很多（$a_i$ 很大），操作大致为删点，但是删除点的次数只有 $O(n)$ 次，那么我们就可以用这种钦定关键点的方法。<br>em。。可能这里还要要求 $a_i$ 个物品要能够被视作相同的。</p>
-<p>在 dp 设计上我们可以设置 $f_{u,i}$ 表示有 $i$ 个段点的方案数，然后设 $g_{u,i}$ 表示上传了 $i$ 个端点的方案数，然后考虑用辅助数组或者其他方式进行转移 $f\rightarrow g\rightarrow f\rightarrow \dots$</p>
-</div>
-
-
-<p>切记，这种问题由于进行了转化，一定要保证端点序列能够唯一对应一个答案序列！！</p>
-<h1 id="P14991-战略游戏"><a href="#P14991-战略游戏" class="headerlink" title="P14991 战略游戏"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P14991">P14991 战略游戏</a></h1><p><a href="https://wdwsy.github.io/2026/07/09/2026%E5%B9%B47%E6%9C%8810%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/?highlight=%E6%88%98%E7%95%A5#%E2%AD%90%EF%B8%8FG-%E6%88%98%E7%95%A5%E6%B8%B8%E6%88%8F">题解索引</a></p>
-<p>这个题目的区别就是，由于点上要求相邻颜色不同，但是边上可能相邻颜色相同，所以转移的时候需要枚举 $t_i$ 表示在 $b_i$ 次拓展中有多少次仍然相邻颜色相同，然后乘上容斥系数 $(-1)^{t_i}$。最后转移完成之后，还要给原来钦定在一起的位置解除绑定。</p>
-
       
     </div>
 

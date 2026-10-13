@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wdwsy.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":240},"hljswrap":true,"codeblock":{"theme":{"light":"github-dark","dark":"github-dark-dimmed"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat","show_result":true},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":true,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="5919 – 迷路的送货车首先，可以发现每一点客观上肯定是有一个到终点的最小代价，假设这个代价为 $d_i$。 假设一条边连接 $(u,v)$，如果 $d_u&lt;d_v$ 那么只会从 $v\rightarrow u$ 进行转移，反之亦然。原因是我们不会花钱让距离终点更远。 考虑我们现在就是要求出 $d$。考虑倒推，$d_n&#x3D;0$，接下来考虑直接找到距离最小的点，这里距离定义为屏蔽代价">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2026-10-13NOIP模拟赛">
+<meta property="og:url" content="https://wdwsy.github.io/2026/10/13/2026-10-13NOIP%E6%A8%A1%E6%8B%9F%E8%B5%9B/index.html">
+<meta property="og:site_name" content="wdwsy&#39;s Blog">
+<meta property="og:description" content="5919 – 迷路的送货车首先，可以发现每一点客观上肯定是有一个到终点的最小代价，假设这个代价为 $d_i$。 假设一条边连接 $(u,v)$，如果 $d_u&lt;d_v$ 那么只会从 $v\rightarrow u$ 进行转移，反之亦然。原因是我们不会花钱让距离终点更远。 考虑我们现在就是要求出 $d$。考虑倒推，$d_n&#x3D;0$，接下来考虑直接找到距离最小的点，这里距离定义为屏蔽代价">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-10-13T13:35:29.000Z">
+<meta property="article:modified_time" content="2026-10-13T13:58:41.845Z">
+<meta property="article:author" content="wdwsy">
+<meta property="article:tag" content="算法,OIC++,NOI,信息学竞赛">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://wdwsy.github.io/2026/10/13/2026-10-13NOIP%E6%A8%A1%E6%8B%9F%E8%B5%9B/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://wdwsy.github.io/2026/10/13/2026-10-13NOIP%E6%A8%A1%E6%8B%9F%E8%B5%9B/","path":"2026/10/13/2026-10-13NOIP模拟赛/","title":"2026-10-13NOIP模拟赛"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>2026-10-13NOIP模拟赛 | wdwsy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">wdwsy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">算法的世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#5919-%E2%80%93-%E8%BF%B7%E8%B7%AF%E7%9A%84%E9%80%81%E8%B4%A7%E8%BD%A6"><span class="nav-number">1.</span> <span class="nav-text">5919 – 迷路的送货车</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5920-%E2%80%93-%E5%8F%8C%E8%BD%A8%E7%81%AF%E5%B9%95"><span class="nav-number">2.</span> <span class="nav-text">5920 – 双轨灯幕</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95-1"><span class="nav-number">2.1.</span> <span class="nav-text">做法 1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95-2"><span class="nav-number">2.2.</span> <span class="nav-text">做法 2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E6%80%BB%E7%BB%93"><span class="nav-number">2.3.</span> <span class="nav-text">小总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8E%E7%B1%BB-X-%E9%97%AE%E9%A2%98"><span class="nav-number">2.4.</span> <span class="nav-text">对于类 X 问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8E%E6%8E%92%E9%99%A4%E5%9B%9B%E5%85%83%E7%BB%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.5.</span> <span class="nav-text">对于排除四元组问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5921-%E2%80%93-%E9%87%8D%E5%89%AA%E5%B7%A1%E6%B8%B8%E5%BD%95%E5%83%8F"><span class="nav-number">3.</span> <span class="nav-text">5921 – 重剪巡游录像</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wdwsy"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">wdwsy</p>
+  <div class="site-description" itemprop="description">算法竞赛、C++、OI 技术分享</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wdwsy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wdwsy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/10/13/2026-10-13NOIP%E6%A8%A1%E6%8B%9F%E8%B5%9B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="2026-10-13NOIP模拟赛 | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2026-10-13NOIP模拟赛
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-10-13 21:35:29 / Modified: 21:58:41" itemprop="dateCreated datePublished" datetime="2026-10-13T21:35:29+08:00">2026-10-13</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="5919-–-迷路的送货车"><a href="#5919-–-迷路的送货车" class="headerlink" title="5919 – 迷路的送货车"></a><a target="_blank" rel="noopener" href="http://172.17.226.198/OnlineJudge/contestproblem.php?id=16165919">5919 – 迷路的送货车</a></h1><p>首先，可以发现每一点客观上肯定是有一个到终点的最小代价，假设这个代价为 $d_i$。</p>
+<p>假设一条边连接 $(u,v)$，如果 $d_u&lt;d_v$ 那么只会从 $v\rightarrow u$ 进行转移，反之亦然。原因是我们不会花钱让距离终点更远。</p>
+<p>考虑我们现在就是要求出 $d$。<br>考虑倒推，$d_n&#x3D;0$，接下来考虑直接找到距离最小的点，这里距离定义为屏蔽代价加上通行代价，按照 djkstra 的方式把这个最小点从 priority 中取出来，然后去更新别的点。这样做就是正确的。因为我们每次更新的是最小点，而最小点所有向外转移的边都已经做好了。</p>
+<p>这样思路很简单，但是因为卡空间，维护屏蔽代价的时候需要使用 fhq treap。</p>
+<p>这里介绍一个更加简单的做法，发现代价可以拆成两个部分（屏蔽代价，通行代价），并且这两种代价都非负。考虑把每一条边拆成上再新建一个点，记录 $dis_u+w$，$w$ 表示通行代价。然后我们发现进入点 $v$ 的每条边，就是按照 $dis_u+w$ 升序加入的。在计算屏蔽代价的时候，我们只关心每个点 $dis_u+w$ 的排名，这样我们在边点转移到真实点的代价也能计算了。那么直接 dijkstra 就做完了。</p>
+<p>这个题目很妙，我们在一开始不知道所有边的边权，但是在做 dijkstra 的过程中，可以逐渐知道每一条边的权值。保证我们可以完整正常的 dijkstra 流程。</p>
+<h1 id="5920-–-双轨灯幕"><a href="#5920-–-双轨灯幕" class="headerlink" title="5920 – 双轨灯幕"></a><a target="_blank" rel="noopener" href="http://218.22.67.60:30808/OnlineJudge/contestproblem.php?id=16165920">5920 – 双轨灯幕</a></h1><p>对于这样选一个递增，一个递减序列的问题，在二位坐标上表示看起来像一个 X，这种问题我们有以下两种思路：</p>
+<ol>
+<li>寻找中心点。</li>
+<li>排除不合法四元组。</li>
+</ol>
+<p>这个题目两个做法都可以，但是使用 2 会好写一些。</p>
+<h2 id="做法-1"><a href="#做法-1" class="headerlink" title="做法 1"></a>做法 1</h2><p>考虑寻找中心点。</p>
+<p>在中心点两侧分别是一段 V 字形，用单调栈不难处理冲合法的极大区间。</p>
+<p>但是我们发现有些合法构造没有办法找到中心点。<br>比如：3 1 4 2</p>
+<div class="note primary"><p>🔷 3142 表示有四元组 $(i,j,k,l)$ 满足 $(a_i,a_j,a_k,a_l)$ 从小到大的排名分别为 3 1 4 2</p>
+</div>
+
+<p>这里没有一个位置可以作为中心点。<br>但是我们发现，只有中心情况大小关系刚好是 3142 或者 2413 的时候会找不到中心点，但是仍然合法。</p>
+<p>所以可以分类讨论解决。但是太烦了。</p>
+<h2 id="做法-2"><a href="#做法-2" class="headerlink" title="做法 2"></a>做法 2</h2><p>考虑寻找不合法的四元组。</p>
+<p>发现一，二，三元组永远合法。</p>
+<p>对于 3412 或者 2143 这样的四元组，那么就会不合法。</p>
+<p>显然这是一个必要条件，是不是充要的可以打表证明，真正的证明需要使用数学图论的相关知识。<br>打表的时候可以设 $f_{i}$ 表示上升序列结尾为 $i$ 下降序列结尾数字最大是多少，$g_{i}$ 表示下降序列结尾为 $i$ 上升序列结尾的最小数字是多少。</p>
+<p>最后上一个简单的 dp，应该谁都会。</p>
+<h2 id="小总结"><a href="#小总结" class="headerlink" title="小总结"></a>小总结</h2><h2 id="对于类-X-问题"><a href="#对于类-X-问题" class="headerlink" title="对于类 X 问题"></a>对于类 X 问题</h2><p>对于选择一个上升序列和一个下降序列的问题（即选出一个 X 的问题）<br>我们有两种方式：</p>
+<ol>
+<li>找中心点。</li>
+<li>排除不合法四元组。</li>
+</ol>
+<p>对于第一种情况，如果当前不满足条件的时候，可以考虑以下几个方面来贴合题目：</p>
+<ul>
+<li>考虑分类讨论中心点的情况。</li>
+<li>把中心点看作一条链上的点，假设中心点为 $x$，然后条件修改为：后面的上升链大于 $x$ 之前第一个小于 $a_x$ 的值，后面的下降链小于 $x$ 之前第一个大于 $a_x$ 的值。</li>
+</ul>
+<h2 id="对于排除四元组问题"><a href="#对于排除四元组问题" class="headerlink" title="对于排除四元组问题"></a>对于排除四元组问题</h2><p>总结一下目前遇到的排除四元组问题类型。</p>
+<p>一个就是当前题目，要求选择一个上升序列和一个下降序列，要求不出现 2143 和 3412。</p>
+<p>还有一个题目如下：<br>给你一个序列 $a_i$，一开始每一个数字是一个单独的集合，现在每次可以把相邻两个位置合并，要求合并的两队 $[\text{集合最小值},\text{集合最大值}]$ 这样的区间没有交。求最多能合并多少次。 </p>
+<p>这个问题的要求是不出现 2413 和 3124。</p>
+<h1 id="5921-–-重剪巡游录像"><a href="#5921-–-重剪巡游录像" class="headerlink" title="5921 – 重剪巡游录像"></a><a target="_blank" rel="noopener" href="http://218.22.67.60:30808/OnlineJudge/contestproblem.php?id=16165921">5921 – 重剪巡游录像</a></h1>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/10/12/Boruvka%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/" rel="prev" title="Boruvka最小生成树">
+                  <i class="fa fa-angle-left"></i> Boruvka最小生成树
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class=""></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">wdwsy</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
