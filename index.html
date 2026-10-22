@@ -178,7 +178,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -188,7 +188,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -210,6 +210,183 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/10/16/%E5%9B%9B%E5%85%83%E6%94%AF%E9%85%8D%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/10/16/%E5%9B%9B%E5%85%83%E6%94%AF%E9%85%8D%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">四元支配问题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-10-16 21:35:02 / Modified: 21:35:24" itemprop="dateCreated datePublished" datetime="2026-10-16T21:35:02+08:00">2026-10-16</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>四元支配问题，可以从以下两个角度来思考：</p>
+<ul>
+<li>分组逐步消除偏序关系，如：2143，可以 21 分一组，43 分一组。</li>
+<li>选择数数字为值域分组，如：2413，选择 24 之后，13可以贪心选择。</li>
+</ul>
+<h3 id="处理-2143-偏序的方式"><a href="#处理-2143-偏序的方式" class="headerlink" title="处理 2143 偏序的方式"></a>处理 2143 偏序的方式</h3><p>首先 21 分为一组 43 分为一组。</p>
+<p>然后在 2 处找到其右边第一个比它小的数字，就是 1。<br>在 3 处找到其左边第一个比它大的数字就是 4。</p>
+<p>接下来合并两部分，需要满足 $val_{2}&gt;val_{3},pos_{1}&lt;val_{4}$ 二维偏序，可以使用扫描线解决。</p>
+<h1 id="CF2165F-Arctic-Acquisition"><a href="#CF2165F-Arctic-Acquisition" class="headerlink" title="CF2165F Arctic Acquisition"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF2165F">CF2165F Arctic Acquisition</a></h1><h2 id="题目简述"><a href="#题目简述" class="headerlink" title="题目简述"></a>题目简述</h2><p>给你一个长度为 $n$ 序列 $a$。<br>要求计算包含 21435 的子序列个数。</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>发现多了一个 $5$。<br>所以还是考虑分组。把 21 分一组，把 435 分一组。</p>
+<p>然后发现 435 并不好计算。<br>首先我们应该只能枚举一个位置，显然考虑枚举 3 的位置。<br>接下来发现 5 只需要取第一个大于 3 的位置，然后 check 有没有合法的 4 就足够了，原因如下：<br>考虑一个合法的 435，如果 3 到 5 的位置之间有大小介于他们之间的数字，设这个数字为 $x$。</p>
+<ul>
+<li>如果 $x&gt;4$ 那么选择 43x 更优。</li>
+<li>如果 $x&lt;4$ 那么可以转而选择 4x5。</li>
+</ul>
+<p>然后就可以用类似 2143 的方式，这次是把 21 435 用偏序关系连接起来，时间复杂度 $O(n\log n)$。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/10/16/%E8%B4%AA%E5%BF%83%E9%A2%98%E5%8D%95%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/10/16/%E8%B4%AA%E5%BF%83%E9%A2%98%E5%8D%95%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">贪心题单总结</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-10-16 21:33:31 / Modified: 21:56:21" itemprop="dateCreated datePublished" datetime="2026-10-16T21:33:31+08:00">2026-10-16</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="CF2085F2-Serval-and-Colorful-Array-Hard-Version"><a href="#CF2085F2-Serval-and-Colorful-Array-Hard-Version" class="headerlink" title="CF2085F2 Serval and Colorful Array (Hard Version)"></a>CF2085F2 Serval and Colorful Array (Hard Version)</h1><p>注意，不要向我一样去枚举数字的最终位置。</p>
+<p>首先发现，如果我们一定选定了 $k$ 个位置，那么为了最小化代价，那么一定会移动到中间第 $\lfloor \frac{k}{2} \rfloor$ 的位置。所以我们可以枚举中间这个数字的位置，然后然后假设每一个数字都要移动到和中间这个数字重合。那么我只需要计算每一种数字到达中心点的最小距离就好，可以中两次差分解决。</p>
+<h1 id="P6943-ICPC-2018-WF-Conquer-The-World"><a href="#P6943-ICPC-2018-WF-Conquer-The-World" class="headerlink" title="P6943 [ICPC 2018 WF] Conquer The World"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P6943">P6943 [ICPC 2018 WF] Conquer The World</a></h1><p>感觉这个题目用模拟费用流来思考和还是比较困难的。</p>
+<p>考虑反悔贪心。<br>按照通常的思路，我们为了方便，对于每一对点之间的匹配。考虑在 lca 处决策。<br>所以我们考虑类似树形dp的方式，从下到上合并。<br>维护源点集合 $A$ 和汇点集合 $B$。<br>考虑一个子树中合并两个位置 $a,b$ 的代价为 $dep[a]+dep[b]-2\times dep[u]$，其中 $a\in A, b\in B$。<br>所以我们希望合并最浅的两个位置。<br>同时，直接贪心不一定是最优秀的，所以加入反悔操作，具体的：</p>
+<ul>
+<li>在 $B$ 中加入 $2\times dep[u] - dep[a]$。</li>
+<li>在 $A$ 中加入 $2\times dep[u] - dep[b]$。</li>
+</ul>
+<p>容易发现这可以做到反悔，在做题的时候，考虑反悔的时候（一个点抢夺了一个之前匹配过的点的时候）代价发生的变化。</p>
+<h1 id="CF1637H-Minimize-Inversions-Number"><a href="#CF1637H-Minimize-Inversions-Number" class="headerlink" title="CF1637H Minimize Inversions Number"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF1637H">CF1637H Minimize Inversions Number</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个长度为 $n$ 的排列 $p$。</p>
+<p>你可以选择任意一个子序列，将其从排列中移除，并保持其原有顺序插入到排列的开头。</p>
+<p>对于每个 $k$，$0 \leq k \leq n$，求在选择长度恰好为 $k$ 的子序列后，排列中可能的最小逆序对数。</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>这个题目和 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/AT_cf17_exhibition_b">Increment and Swap</a> 这个题目坐一桌。</p>
+<p>首先考虑描述这个代价，我们可以看出，本质上就是那些相对位置改变的的值，会让此处的逆序对取反。<br>具体的，发生在 $i&lt;j$ 并且 $j$ 被选择，$i$ 没有被选择。</p>
+<p>接下来神之一手，<del>否则你就败局已定成不了九冠王了</del>。</p>
+<p>我们猜测结论，如果存在逆序对 $(i,j)$，并且 $i$ 选择了，$j$ 没有选择，那么一定存在另外一种不劣的情况。</p>
+<p>考虑证明，我们选择其中 $j-i$ 最小的这样 $i$ 选择了但是 $j$ 没有选择的。<br>考虑要在选择的位置中把 $i$ 替换为 $j$。</p>
+<p>那么他们之间一定满足一下这个图片。</p>
+<p><img src="/images/10-16-1.png"></p>
+<p>图中涂黑的表示选择了，白色的表示没有选择。<br>解释一下，就是在 $i\sim j$ 之间，一定不存在 $p_i &lt; p_k &lt; p_j$ 满足 $i &lt; k &lt; j$，否则不满足 $j-i$ 最小了。<br>而且 $\forall k \in [i+1,j-1]$ 一定满足，如果没有选择，那么 $p_k&gt;p_i$，如果选择了，那么 $p_k&lt;p_j$。</p>
+<p>于是我们可以分类讨论每一种情况，到底会让逆序对发生什么样的变化。<br>发现每一种情况都会让逆序对个数不增。<br>因为我们要求最少的逆序对个数，所以可以发现把 $i$ 替换为 $j$ 仍然不劣。</p>
+<p>所以我们就考虑重新定义每一个点的权值，可以假设一个点如果选择，那么他后面所有和他构成逆序对的位置都要选择。<br>那么容易计算贡献为 $b_i&#x3D;\sum_{j&#x3D;1}^{i-1} [p_j&gt;p_i]-[p_j&lt;p_i]-2\times\sum_{j&#x3D;i+1}^{n}[p_j&lt;p_i]$。</p>
+<p>最后还要加上一个 $k \choose 2$，但是显然推式子不是本题的重点。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -249,7 +426,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2026-10-13 21:35:29 / Modified: 21:58:41" itemprop="dateCreated datePublished" datetime="2026-10-13T21:35:29+08:00">2026-10-13</time>
+      <time title="Created: 2026-10-13 21:35:29 / Modified: 22:16:35" itemprop="dateCreated datePublished" datetime="2026-10-13T21:35:29+08:00">2026-10-13</time>
     </span>
 
   
@@ -299,7 +476,7 @@
 </ul>
 <h2 id="对于排除四元组问题"><a href="#对于排除四元组问题" class="headerlink" title="对于排除四元组问题"></a>对于排除四元组问题</h2><p>总结一下目前遇到的排除四元组问题类型。</p>
 <p>一个就是当前题目，要求选择一个上升序列和一个下降序列，要求不出现 2143 和 3412。</p>
-<p>还有一个题目如下：<br>给你一个序列 $a_i$，一开始每一个数字是一个单独的集合，现在每次可以把相邻两个位置合并，要求合并的两队 $[\text{集合最小值},\text{集合最大值}]$ 这样的区间没有交。求最多能合并多少次。 </p>
+<p>还有一个题目如下：<br>给你一个序列 $a_i$，一开始每一个数字是一个单独的集合，现在每次可以把相邻两个位置合并，要求合并的两个集合 $[\text{集合最小值},\text{集合最大值}]$ 这样的区间没有交。求最多能合并多少次。 </p>
 <p>这个问题的要求是不出现 2413 和 3124。</p>
 <h1 id="5921-–-重剪巡游录像"><a href="#5921-–-重剪巡游录像" class="headerlink" title="5921 – 重剪巡游录像"></a><a target="_blank" rel="noopener" href="http://218.22.67.60:30808/OnlineJudge/contestproblem.php?id=16165921">5921 – 重剪巡游录像</a></h1>
       
@@ -1120,226 +1297,6 @@
 <p>发现这个条件其实不困难，考虑去 check 一个序列，本质上其实就是从前往后扫，然后把每一个数字压入栈中，新加入的数字会让栈顶元素 $-1$，然后去除所有为 $0$ 的就好。不难发现只要最后栈为空（对应 $S_n$ 的限制），而且不会出现栈为空还要弹（对应 $S_i$ 的限制）。</p>
 <p>接下来考虑格路计数，不难。</p>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/09/03/%E5%B9%B3%E9%9D%A2%E5%9B%BE%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86%E2%80%94%E2%80%94%E6%8F%8F%E8%BF%B0%E8%BF%9E%E9%80%9A%E5%9D%97%E6%95%B0%E7%9A%84%E6%9C%89%E5%8A%9B%E5%B7%A5%E5%85%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wdwsy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wdwsy's Blog">
-      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | wdwsy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/09/03/%E5%B9%B3%E9%9D%A2%E5%9B%BE%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86%E2%80%94%E2%80%94%E6%8F%8F%E8%BF%B0%E8%BF%9E%E9%80%9A%E5%9D%97%E6%95%B0%E7%9A%84%E6%9C%89%E5%8A%9B%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">平面图欧拉定理——描述连通块数的有力工具</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2026-09-03 12:32:53" itemprop="dateCreated datePublished" datetime="2026-09-03T12:32:53+08:00">2026-09-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-10-09 21:30:13" itemprop="dateModified" datetime="2026-10-09T21:30:13+08:00">2026-10-09</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="平面图"><a href="#平面图" class="headerlink" title="平面图"></a>平面图</h1><p>定义：除了顶点之外，平面内没有任何一个点被大于 $1$ 条边经过点图为平面图。</p>
-<h1 id="定理内容"><a href="#定理内容" class="headerlink" title="定理内容"></a>定理内容</h1><p>平面图欧拉定理简洁地揭示了图中常见量：顶点数 $V$, 边数 $E$，面数 $F$，连通块数 $K$ 之间的关系。<br>具体等式如下：<br>$$<br>V-E+F&#x3D;K<br>$$</p>
-<p>这是类似于容斥的形式，应该容易理解，可以描述为 $\text{1维}-\text{2维}+\text{3维}&#x3D;\text{连通块数}$</p>
-<h1 id="P8990-北大集训-2021-小明的树"><a href="#P8990-北大集训-2021-小明的树" class="headerlink" title="P8990 [北大集训 2021] 小明的树"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P8990">P8990 [北大集训 2021] 小明的树</a></h1><p>这个题目的关键在于如何转化题目要求的东西。</p>
-<p>我们称被点亮的的点为白点。</p>
-<p>题目中统计答案的条件是子树限制，当树的形态发生变化的时候比较难以处理。<br>考虑这个限制其实等价于任意一个黑点的祖先中都没有白点，进一步地等价于每一个所有黑点称为一个连通块（注意这里根一定为黑点）。</p>
-<p>那么我们如何刻画所有黑点都在一个连通块里面呢？<br>没错就是我们的平面图欧拉定理，但是现在因为是树，连环都没有，所有 $F&#x3D;0$，所以直接统计 $V-E$，动态统计用线段树区间操作是不困难的。</p>
-<p>接下来考虑统计答案，答案的贡献为白点的连通块数量，我们这里再用一次平面图欧拉定理当然没有问题，但是介于本题的特殊性，其实统计两端点颜色不同的边的数量，其本质上就等价于连通块数量。</p>
-<p>我们对于时间轴建线段树。<br>我们用 $b_u$ 代表节点 $u$ 被加入的时刻。<br>假设 $V-E$ 的值为 $v$，当前时刻的连通块数量为 $c$，加入一条边 $(u,v)$ 的时候（假设 $b_u&lt;b_v$）：</p>
-<ul>
-<li>$[1,b_u-1]$ 的 $v$ 减掉 $1$。</li>
-<li>$[b_u,b_v-1]$ 的 $c$ 加上 $1$。<br>初始时刻 $i$ 有： $v&#x3D;n-i,c&#x3D;0$。</li>
-</ul>
-<p>每次树发生改变的时候直接加入一条边删除一条就好。</p>
-<h1 id="FZOJ-5732-–-黎明"><a href="#FZOJ-5732-–-黎明" class="headerlink" title="FZOJ 5732 – 黎明"></a><a target="_blank" rel="noopener" href="http://218.22.67.60:30808/OnlineJudge/contestproblem.php?id=15965732">FZOJ 5732 – 黎明</a></h1><h2 id="题面概述"><a href="#题面概述" class="headerlink" title="题面概述"></a>题面概述</h2><p>给定一个 $n \times m$ 的整数矩阵，定义矩阵的值为所有正整数在四连通意义下形成的连通块数量。</p>
-<p>需要维护 $q$ 次操作：</p>
-<ul>
-<li><code>add x</code>：将矩阵中所有元素的值加上 $x$；</li>
-<li><code>set x y z</code>：将位置 $(x,y)$ 的值修改为 $z$。</li>
-</ul>
-<p>每次操作后输出当前矩阵的值。</p>
-<p>额外保证：任意时刻，对于任意不在矩阵边界的位置 $(i,j)$，其四个相邻位置中至少有一个值严格小于 $a_{i,j}$。</p>
-<h2 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h2><p>其实和上面一个题目基本一样。</p>
-<p>但是考虑到这里是图，所以存在面，我们考虑面是什么样的。<br>我们假设 $\leq 0$ 的位置为黑色，否则为白色。<br>我们发现由于有<strong>额外保证</strong>，所以不会出现黑色谷地，也就是说白点形成的面一定为 $(i,j),(i,j+1),(i+1,j),(i+1,j+1)$ 这样的四个位置。</p>
-<p>我们发现还有一个问题 —— add 操作，那么我们考虑图上不同结构出现的条件：</p>
-<ul>
-<li>点：这个点为白点。</li>
-<li>边: 边点两个端点都已经是白点。</li>
-<li>面: 面的四个点都是白点。</li>
-</ul>
-<p>所以对于每一个结构，我们可以找到一个 $add$ 的临界值。我们只需要线段树上大于临界值的位置加上对应的贡献就行。<br>查询的时候直接查询线段树上当前 $add$ 值对应的节点就好。</p>
-<p>具体实现上可以使用树状数组。</p>
-<h2 id="P3776-APIO2017-斑斓之地"><a href="#P3776-APIO2017-斑斓之地" class="headerlink" title="P3776 [APIO2017] 斑斓之地"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3776">P3776 [APIO2017] 斑斓之地</a></h2><p>不难啊，也是模版题。</p>
-<p>发现首先填充水内部的点，边，面都要减掉。<br>用一个 map 不难维护。<br>接下来对于点，边，面分别开一个线段树来扫描线就好，不难。</p>
-<h2 id="平面图最小链覆盖"><a href="#平面图最小链覆盖" class="headerlink" title="平面图最小链覆盖"></a>平面图最小链覆盖</h2><h2 id="P8857-POI-2000-R1-POI-2002-R3-滑雪者"><a href="#P8857-POI-2000-R1-POI-2002-R3-滑雪者" class="headerlink" title="P8857 [POI 2000 R1 &#x2F; POI 2002 R3] 滑雪者"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P8857">P8857 [POI 2000 R1 &#x2F; POI 2002 R3] 滑雪者</a></h2><p>感觉类似模版题，想不出来很正常。</p>
-<p>这个题目有几个难点。</p>
-<p>首先发现平面图这个性质不太会用。考虑我们实际上要求最小链覆盖，可以转化为最长反链长度。</p>
-<p>这里有一个不知道是否经典的结论：对于最长反链中相邻两条链，它们一定分别是一个面的左右界的一条边。</p>
-<p>想一想这是显然正确的。</p>
-<p>接下来考虑如何 dp，发现输入是从西到东给入的。而且根据结论，我们只需要关注一个面左右（东西）两边的边之间进行转移，具体实现上和耳分解类似。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/09/01/%E8%80%B3%E5%88%86%E8%A7%A3%E4%B8%8E%E5%8F%8C%E6%9E%81%E5%AE%9A%E5%90%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wdwsy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wdwsy's Blog">
-      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | wdwsy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/09/01/%E8%80%B3%E5%88%86%E8%A7%A3%E4%B8%8E%E5%8F%8C%E6%9E%81%E5%AE%9A%E5%90%91/" class="post-title-link" itemprop="url">耳分解与双极定向</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2026-09-01 12:17:08 / Modified: 14:09:00" itemprop="dateCreated datePublished" datetime="2026-09-01T12:17:08+08:00">2026-09-01</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="耳分解"><a href="#耳分解" class="headerlink" title="耳分解"></a>耳分解</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>这是用来刻画双连通性的另一种方法。</p>
-<p>耳分解定义如下：首先在无向图中找到任意一个环，对环上的点标记，然后每次找到一个序列 $A&#x3D;{a_1,a_2,a_3,\dots,a_t}$，满足 $a_i\rightarrow a_{i+1}$ 有边，并且 $a_1,a_t$ 均已被标记，把这样一个序列标记，就像是给标记点构成的图中贴上了一个耳朵。</p>
-<p>特殊的，如果任意一个序列 $A$ 均满足 $a_1 \not&#x3D; a_t$，那么这个分解称为开耳分解。</p>
-<p><img src="/images/%E8%80%B3%E5%88%86%E8%A7%A3.png" alt="耳分解示意图"></p>
-<p>图中黑的为初始找到的一个环，蓝色、红色是依次贴上去的开耳，而绿色的是一个闭耳。<br>当前的图是一个耳分解，如果不存在绿色的点，那么就是一个开耳分解。</p>
-<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><p>$\text{一个图有耳分解} \iff \text{这个图是边双}$<br>$\text{一个图有开耳分解} \iff \text{这个图是点双}$</p>
-<p>考虑证明。</p>
-<h4 id="充分性"><a href="#充分性" class="headerlink" title="充分性"></a>充分性</h4><p>使用归纳法证明，一开始是一个环，显然没有割边&#x2F;点，每次加入耳不会导致有割边，加入开耳不会导致有割点。</p>
-<h4 id="必要性"><a href="#必要性" class="headerlink" title="必要性"></a>必要性</h4><p>首先，我们肯定能找到一个环。<br>我们考虑每次加入一个耳的时候，随便选一个一端被标记，一端没有被标记的边作为起始，然后不断拓展成为一个耳。如果最后无法回到环上，那么一定存在割边&#x2F;点。</p>
-<div class="note info"><p>💡 这也启示我们，如果一个图是点双，那么我们任意找初始环，并且任意找一个可行的耳贴上去，都是能够把图划分完毕的。</p>
-</div>
-
-<h2 id="双极定向"><a href="#双极定向" class="headerlink" title="双极定向"></a>双极定向</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>双集定向的定义如下：给定一张无向图和两个点 $s,t$，要求给每一条边定向，保证整张图是一个 DAG，并且 $s$ 为唯一源点，$t$ 为唯一汇点。</p>
-<h3 id="判定"><a href="#判定" class="headerlink" title="判定"></a>判定</h3><p>如果在加入 $(s,t)$ 的边之后，这个图为一个点双则有合法定向方案，否则无解。</p>
-<h3 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h3><p>考虑这样一个做法。</p>
-<p>先以 $s$ 为根拉出一棵生成树，并定义 $s\rightarrow t$ 的方向为向下。</p>
-<ul>
-<li>初始把 $(t,\downarrow)$ 压入队列。<ul>
-<li>取出队首元素 $(u,o)$ （1）</li>
-<li>如果 $(u,fa_u)$ 没有被定向<ul>
-<li>把 $(u,fa_u)$ 按照 $o$ 定向。</li>
-<li>找到 $(fa_u,v)$ 并且满足 $v\in sub_u$ 的边，按照 $o$ 定向 $(fa_u,v)$，并且把 $(v,\neg o)$（$\neg o$ 表示把箭头方向取反，上变下，下变上）</li>
-</ul>
-</li>
-<li>否则回到（1）</li>
-</ul>
-</li>
-</ul>
-<p>就这要一直做就到队列为空，可以把整个图都定向。<br>原因是我们每次操作本质上就是在加入开耳。</p>
-<p><img src="/images/%E5%8F%8C%E6%9E%81%E5%AE%9A%E5%90%91.png" alt="双极定向示意图"></p>
-<p>模版题：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF730K">CF730K Roads Orientation Problem</a></p>
-<details>
-<summary>点击展开：$\mathcal{O}(n)$ 双极定向代码</summary>
-
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">400005</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, m, s, t;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; e[N], g[N];</span><br><span class="line"><span class="type">int</span> fa[N], tc, son[N], dep[N];</span><br><span class="line"><span class="type">bool</span> tag[N], vis[N]; <span class="comment">// 记录 i-&gt;fa_i 是否被定向了 是否访问过节点i</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> f)</span> </span>&#123;</span><br><span class="line">    vis[u] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> v : e[u]) <span class="keyword">if</span> (v != f) &#123;</span><br><span class="line">        <span class="keyword">if</span> (vis[v]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (dep[v] &lt; dep[u]) g[son[v]].<span class="built_in">push_back</span>(u);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            son[u] = v, fa[v] = u, dep[v] = dep[u] + <span class="number">1</span>;</span><br><span class="line">            <span class="built_in">dfs</span>(v, u);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">work</span><span class="params">(<span class="type">int</span> O)</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m &gt;&gt; s &gt;&gt; t;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) e[i].<span class="built_in">clear</span>(), g[i].<span class="built_in">clear</span>(), vis[i] = tag[i] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">        <span class="type">int</span> a, b;</span><br><span class="line">        cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">        e[a].<span class="built_in">push_back</span>(b);</span><br><span class="line">        e[b].<span class="built_in">push_back</span>(a);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fa[s] = <span class="number">0</span>, dep[s] = <span class="number">0</span>, <span class="built_in">dfs</span>(s, <span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    vector&lt;pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; &gt; ans;</span><br><span class="line">    queue&lt;pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; &gt; q;</span><br><span class="line">    tag[s] = <span class="number">1</span>;</span><br><span class="line">    q.<span class="built_in">push</span>(&#123;t, <span class="number">1</span>&#125;);</span><br><span class="line">    <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        <span class="keyword">auto</span> [u, o] = q.<span class="built_in">front</span>();</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">while</span> (!tag[u]) &#123;</span><br><span class="line">            tag[u] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (o) ans.<span class="built_in">push_back</span>(&#123;fa[u], u&#125;);</span><br><span class="line">            <span class="keyword">else</span> ans.<span class="built_in">push_back</span>(&#123;u, fa[u]&#125;);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> v : g[u]) &#123;</span><br><span class="line">                <span class="keyword">if</span> (o) ans.<span class="built_in">push_back</span>(&#123;fa[u], v&#125;);</span><br><span class="line">                <span class="keyword">else</span> ans.<span class="built_in">push_back</span>(&#123;v, fa[u]&#125;);</span><br><span class="line">                q.<span class="built_in">push</span>(&#123;v, o ^ <span class="number">1</span>&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">            u = fa[u];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (ans.<span class="built_in">size</span>() != m) cout &lt;&lt; <span class="string">&quot;No\n&quot;</span>;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Yes\n&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> [x, y] : ans) cout &lt;&lt; x &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; y &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin &gt;&gt; T;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= T; i++) <span class="built_in">work</span>(i);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</details>
       
     </div>
 
