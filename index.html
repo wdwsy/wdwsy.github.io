@@ -178,7 +178,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -188,7 +188,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -210,6 +210,99 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/10/29/OIFC2026-10-11NOIP%E6%A8%A1%E6%8B%9F%E4%BA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/10/29/OIFC2026-10-11NOIP%E6%A8%A1%E6%8B%9F%E4%BA%8C/" class="post-title-link" itemprop="url">OIFC2026.10-11NOIP模拟二</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-10-29 21:42:36 / Modified: 21:43:19" itemprop="dateCreated datePublished" datetime="2026-10-29T21:42:36+08:00">2026-10-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="OIFC2026-10-11NOIP模拟二"><a href="#OIFC2026-10-11NOIP模拟二" class="headerlink" title="OIFC2026.10-11NOIP模拟二"></a>OIFC2026.10-11NOIP模拟二</h1><p>这个比赛质量还是不错的，后面三题都比较有难度。但是 T1 太烂了，$10^10$ 你敢写就敢过。</p>
+<h2 id="2-百年孤独"><a href="#2-百年孤独" class="headerlink" title="2. 百年孤独"></a><a target="_blank" rel="noopener" href="https://xinyoudui.com/ac/contest/747015A17000D5F09E5C22/problem/48454">2. 百年孤独</a></h2><h3 id="形式化题面"><a href="#形式化题面" class="headerlink" title="形式化题面"></a>形式化题面</h3><p>给定一个简单无向图 $G&#x3D;(V,E)$，包含 $n$ 个点和 $m$ 条边。</p>
+<p>求最少删除多少条边，使得剩余图满足：</p>
+<ol>
+<li>图连通。</li>
+<li>每条边至多属于一个简单环。</li>
+</ol>
+<p>如果不存在满足条件的方案，输出 $-1$。</p>
+<p><strong>数据范围：</strong> $1\le t\le 3$，$1\le n\le 20$，$1\le m\le \frac{n(n-1)}{2}$。图不一定连通，保证无重边、无自环。</p>
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>首先一个直接的思路，设置 $f_s$ 表示集合 $s$ 中的点已经选择，最多能拼出来几个多少个环。每次转移就是拼上一个环。可以做到 $O(3^n)$。</p>
+<p>然后考虑调整转移，$f_{s,i,j}$ 表示已经选择的点的集合为 $s$，还没有拼起来的环两端为 $i,j$ 最多能拼成多少个环。<br>转移就是每次拼上一个环上的一条边。<br>时间复杂度 $O(2^nn^3)$。</p>
+<p>我们考虑优化掉一个 $n$，由于我们每次拼接的时候，其实可以按照 $i$ 向后拼接，然后最终绕回 $j$。<br>所以我们可以设 $f_{s,i}$，然后其值是 $(v,T)$，$v$ 表示终点为 $i$，集合为 $s$ 的时候最多拼上多少个环，$T$ 代表可行的 $j$ 集合。 </p>
+<p>这样相当于省略了 $s,i$ 一定，$v$ 更小的方式。<br>思考一下发现是正确的。因为如果 ${v_1,T_1},f_{v_2,T_2}$，其中 $v_2&lt;v_1$ 那么在 $v_2$ 拼完一个环之后，仍然有 $v_2\leq v_1$，但是有 $s_1\subset s_2$ 可以发现，此时 $f_{v_2,T_2}$ 不优。</p>
+<h1 id="3-树的复合"><a href="#3-树的复合" class="headerlink" title="3.  树的复合"></a><a target="_blank" rel="noopener" href="https://xinyoudui.com/ac/contest/747015A17000D5F09E5C22/problem/48455">3.  树的复合</a></h1><p>考虑用$2\times 2$ 矩阵压缩一个树，发现是不困难的，代表选没有选。可以再匹配意义和独立集意义下做，都可以。<br>但是我们转移的时候发现其实可以直接推出最多有 $6$ 种不同的矩阵。<br>然后我们枚举 $6$ 种矩阵，在每一棵树上对于每一个矩阵都跑一遍树上 dp，看看会转移到哪个矩阵就好。</p>
+<h1 id="4-记忆"><a href="#4-记忆" class="headerlink" title="4.  记忆"></a><a target="_blank" rel="noopener" href="https://xinyoudui.com/ac/contest/747015A17000D5F09E5C22/problem/48456">4.  记忆</a></h1><p>对于 $m&gt;3$ 的可以直接容斥，然后二项式反演 $O(1)$ 回答询问。</p>
+<p>那么就只剩下 $m&#x3D;2$ 的情况。<br>这样我们可以把 $1$ 看成 $($，$2$ 看成 $)$。<br>我们考虑枚举一个位置，删除它和它之前的左括号，和它之后的右括号。<br>那么答案就是 $min(sufr_{i+1}+prel_{i})$<br>也就是 $cntr+prel_i-prer_i$。<br>我们定义 $h_i&#x3D;prel_i-prer_i$。</p>
+<p>我们发现 $min_{i&#x3D;1}^{n} h_i$ 就是剩余多少个右括号没有匹配！！！</p>
+<p>那么 $cntr-min_{i&#x3D;1}^{n} h_i$ 就是匹配的括号个数！！！</p>
+<p>那么我们记录所有匹配上的右括号位置集合为 $P&#x3D;{x_1,x_2,x_3,\dots}$，所有匹配上的左括号位置可以计算出来，就是挨着右括号的第一个空余位置，为了有空余位置，需要满足 $x_i\geq 2\times i$。</p>
+<p>那么我们填入完左右括号之后，剩下的位置一定形如<br>$$<br>))))(((((x)))((((x))))((((<br>$$<br>$x$ 表示大于等于 $2$ 的数字。定义这个序列为 $s$</p>
+<p>所以我们确定一个括号序列，其实只需要确定 $P$ 和 $s$ 就好。</p>
+<p>系数为：<br>$P$: ${n\choose i} \times {n\times i-1}$。<br>$s$: dp 求出。设置为 $f_i$。</p>
+<p>$f_0&#x3D;1,f_1&#x3D;k,f_i&#x3D;f_{i-1}\times k - f_{i-2}$。<br>我们正常转移就是直接 $\times k$，但是不能出现 $12$，而最后一位为 $1$ 的长度为 $i$ 的序列方案数就是 $f_{i-1}$。</p>
+<p>最后还是做一下前缀和，然后直接 $O(1)$ 回答。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1073,229 +1166,6 @@
 <p>所以我们就得到了上下界，每次输入 $d$ 的时候判断 $L&lt;d&lt;R$ 就输出 <code>Yes</code> 就好。</p>
 <p>具体实现上有一些好写（常数小）的方式。</p>
 <p>在遍历笛卡尔树的时候，可以按照值域扫，这样不用写 dfs。<br>这里我们需要是由只有删除操作的set（初始是所有右部点，然后每一次匹配成功就会删除一个点）。我们可以用链表+路径压缩实现。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/09/08/%E8%AE%A1%E6%95%B0%E9%A2%98%E5%8D%95%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wdwsy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wdwsy's Blog">
-      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | wdwsy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/09/08/%E8%AE%A1%E6%95%B0%E9%A2%98%E5%8D%95%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">计数题单总结</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2026-09-08 22:08:09" itemprop="dateCreated datePublished" datetime="2026-09-08T22:08:09+08:00">2026-09-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-10-09 09:07:36" itemprop="dateModified" datetime="2026-10-09T09:07:36+08:00">2026-10-09</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="https-www-luogu-com-cn-problem-P16433"><a href="#https-www-luogu-com-cn-problem-P16433" class="headerlink" title="https://www.luogu.com.cn/problem/P16433"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P16433">https://www.luogu.com.cn/problem/P16433</a></h1><p>感觉这个题目 dp 状态基本想到了，但是由于转移能力比较差，没有看出这个状态可以简单转移。</p>
-<h2 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h2><p>给你一个残缺的序列 $p$，已知的位置中是升序的。你需要计算所有可能的 $p$ 的价值和。<br>一个序列的<strong>价值</strong> 为 $f(q) &#x3D; \prod_{i \in S(q)} w_i$。特别地，若 $S(q) &#x3D; \varnothing$，则 $f(q) &#x3D; 1$。</p>
-<p>其中 $w_i$ 是给定的权值序列。</p>
-<h2 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h2><p>发现特殊性质中，如果序列 $p$ 中所有位置都是未知的，那么这个题目是好做的。<br>所以我们考虑两个一直位置之间，连续一段的未知位置。<br>首先，显然我们不能记录绝对位置，要使用插入式 dp。<br>所以我们就直接设计状态 $f_{i,j}$ 表示到了位置 $i$，当前最后一个填入的数字，在前缀所有数字中排第 $j$ 大。<br>发现这个状态的问题在于，由于我们没有给每一个位置分配具体数字，所以我们在切换到另外一个 $0$ 连续段就会无法转移。因为这个时候，我们需要知道最后一个数字和 $p_i$ 的关系，所以我们必须把 $&lt;p_i$ 的数字的位置固定下来，或者记录有多少个在前缀中。</p>
-<p>所以我们正确的状态就不难发现了。</p>
-<h1 id="AT-agc055-c-AGC055C-Weird-LIS"><a href="#AT-agc055-c-AGC055C-Weird-LIS" class="headerlink" title="AT_agc055_c [AGC055C] Weird LIS"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/AT_agc055_c">AT_agc055_c [AGC055C] Weird LIS</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定整数 $N,\ M$。请计算满足以下条件的长度为 $N$ 的序列 $A&#x3D;[A_1,\ A_2,\ \ldots,\ A_N]$ 的个数。</p>
-<ul>
-<li>$2 \leq A_i \leq M$（$1 \leq i \leq N$）。</li>
-<li>存在一个 $1$ 到 $N$ 的整数的排列 $P&#x3D;[P_1,P_2,\ldots,P_N]$，使得对于 $1$ 到 $N$ 的每个 $i$，$A_i$ 等于序列 $[P_1,\ P_2,\ \ldots,\ P_{i-1},\ P_{i+1},\ \ldots,\ P_N]$ 的最长上升子序列的长度。</li>
-</ul>
-<p>由于答案可能非常大，请输出其对素数 $Q$ 取模的结果。</p>
-<h2 id="做法-1"><a href="#做法-1" class="headerlink" title="做法"></a>做法</h2><p>这种对可行序列计数的问题，我们还是考虑判定一个序列 $A$ 是否合法。<br>考虑其实 $A$ 中最多只有两种数字 $x,x-1$，其中 $x&#x3D;|LIS|$。<br>考虑如何去贪心对一个 $A$ 构造出合法的原序列 $P$。<br>对于 $P$ 中的每一个位置，本质上只有一下几种决策：</p>
-<ul>
-<li>作为 LIS 中的点。</li>
-<li>和前面一个点配对（前面一个点是在 LIS 中的点）。这样删除前面一个点之后，这也点就会进入 LIS 中，保证删除这两个点中的任意一个，LIS 长度不变。</li>
-<li>作为一个废点。</li>
-</ul>
-<p>最后没有被配对的 LIS 中的点表现在 $A$ 中就是 $x$，否则就是 $x+1$。</p>
-<p>但是我们这样还是不能唯一刻画出一个贪心过程。所以考虑什么时候进行配对操作。<br>可以发现，永远选择一段前缀进行配对，不仅唯一，而且不劣。（也就是说，在前缀中出现两个相邻的 $x$，那么就配对）。</p>
-<p>所以我们 dp，状态就记录一下 $f_{i,j,0&#x2F;1,0&#x2F;1}$ 表示到了 $i$，当前 $|LIS|&#x3D;j$，最后一个位置是否能够配对，当前是不是在贪心去配对的前缀中。<br>每次配对之后，枚举一下是否到切换最后一维的 $0&#x2F;1$ 状态即可。</p>
-<h1 id="P7483-50-年后的我们"><a href="#P7483-50-年后的我们" class="headerlink" title="P7483 50 年后的我们"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P7483">P7483 50 年后的我们</a></h1><h2 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h2><p>YSGH 给一场比赛出了 $n$ 道题，第 $i$ 道题的难度为 $d_i$，价值为 $c_i$。</p>
-<p>有 $m$ 个可能参赛的选手。第 $i$ 个选手有 $p_i$ 的概率会参加比赛。若第 $i$ 个选手参加比赛，则该选手会恰好通过难度在 $l_i$ 到 $r_i$ 之间（包括 $l_i$ 和 $r_i$）的所有题目。</p>
-<p>比赛组委会最终给 YSGH 的奖金为所有题中，有选手通过的题的价值之和的 $k$ 次幂。特别地，我们定义 $0$ 的 $0$ 次幂等于 $1$。</p>
-<p>YSGH 想让你帮他求出奖金的期望。</p>
-<p>令 $P&#x3D;998244353$，设一个有理数 $x$ 表示成最简分数的形式为 $\frac{a}{b}$，若 $\gcd(b,P)&#x3D;1$，则存在唯一的整数 $c$（$0 \le c &lt; P$）满足 $b c \equiv a \pmod{P}$，我们称 $x$ 在模 $P$ 意义下的值为 $c$。</p>
-<p>可以证明，在仅给出 $p_i$ 模 $P$ 意义下的值时，答案仍然在模 $P$ 意义下唯一存在。</p>
-<p>对于 $100%$ 的数据，$1\le n\le 400$，$0\le k\le 400$，$1\le m\le 10^5$，$1\le d_i\le 10^9$，$1\le l_i\le r_i\le 10^9$，$0\le c_i,p_i &lt; 998244353$。</p>
-<h2 id="做法-2"><a href="#做法-2" class="headerlink" title="做法"></a>做法</h2><p>首先把题目按照 $d_i$ 排序，重定义 $l_i,r_i$ 表示这个人能通过 $[l_i,r_i]$ 范围内的题目。</p>
-<p>首先我们想到 $k$ 次幂可以使用其组合意义来解决，于是我们得到了一个 $O(n^4)$ 做法。</p>
-<div class="note warning"><p>⚠️  注意：组合意义不能直接用完全背包来递推，需要乘组合数！不然会向我一样认为直接暴力就是 $O(n^3)$ 的。</p>
-</div>
-
-<p>考虑优化，我们发现可以容斥，一个常见的方式就是把所有满足条件，变成任意一个不满足，通常会好做。但是这题这样没有用。</p>
-<p>设 $f_{i,j,k}$ 表示做到第 $i$ 道题目，钦定有 $j$ 个题目选择了但是没有通过，$k$ 选择了 $k$ 个题目的方案数。</p>
-<p>这样我们每次做完 $i$ 之后，就把 $f_{i,i-1,<em>}$ 的值全部压到 $f_{i,i,</em>}$，这样我们每次转移到时候只需要对 $f_{i,i-1,*}$ 做卷积就好，这部分复杂度就 $O(n^3)$ 了。</p>
-<p>对于 $f_{i,j,k}$ 满足 $j\geq i$ 的部分，我们显然不能 $m$ 个人都枚举，简单处理一下就好，听说这玩意叫 $\max$ 卷积，。</p>
-<h1 id="AT-arc132-e-ARC132E-Paw"><a href="#AT-arc132-e-ARC132E-Paw" class="headerlink" title="AT_arc132_e [ARC132E] Paw"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/AT_arc132_e">AT_arc132_e [ARC132E] Paw</a></h1><h2 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h2><p>有 $n$ 个格子排成一行。每个格子要么有一个向右的脚印，要么有一个向左的脚印，要么是一个洞。每个格子的初始状态由一个只包含 <code>.</code>、<code>&lt;</code>、<code>&gt;</code> 的字符串 $s$ 表示，$s$ 的第 $i$ 个字符为 <code>.</code> 时，表示从左起第 $i$ 个格子是一个洞；为 <code>&lt;</code> 时，表示该格子有一个向左的脚印；为 <code>&gt;</code> 时，表示该格子有一个向右的脚印。</p>
-<p>猫“すぬけくん”会不断重复以下操作，直到所有洞都被填满：</p>
-<ul>
-<li>Step $1$：从所有有洞的格子中，等概率随机选择一个格子。</li>
-<li>Step $2$：填上选中的洞，并站在该格子上，等概率随机选择面向左或右。</li>
-<li>Step $3$：朝着所面向的方向一直行走，直到走到下一个有洞的格子或走出格子范围。</li>
-</ul>
-<p>注意，格子的选择和朝向的选择是相互独立的。</p>
-<p>当すぬけくん走过一个没有洞的格子时，该格子会留下他行走方向的脚印。如果该格子原本就有脚印，则原有的脚印会被覆盖为新的脚印。</p>
-<p>请你求出所有洞都被填满后，最终留下向左脚印的格子数的期望值，并对 $998244353$ 取模输出。</p>
-<h2 id="做法-3"><a href="#做法-3" class="headerlink" title="做法"></a>做法</h2><p>观察最终序列会变成什么样。</p>
-<p>考虑一个例子，假设一开始是这样的 </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.??????.?????.????.?</span><br></pre></td></tr></table></figure>
-<p>问号表示还没有走到的位置。<br>操作一次：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.??????.&lt;&lt;&lt;&lt;&lt;&lt;???.?</span><br></pre></td></tr></table></figure>
-
-<p>假设我们下一次操作第二个点，那么有两种不同的情况</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.??????&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;.?</span><br><span class="line">.&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;???.?</span><br></pre></td></tr></table></figure>
-<p>我们总是能发现，这两个操作，变成了连续的一段右，或左。</p>
-<p>不妨进一步思考，发现最后一定会形如这样：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;????&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
-<p>中间的问号可能会退化。<br>如果存在问号的话，一定是原来相邻两个 <code>.</code> 之间的一段。</p>
-<div class="note default"><p>📌 wtz：把每次操作起始和终止的 <code>.</code> 之间连边，所有的 <code>.</code> 构成一棵树，可以借用这个树来分析。</p>
-</div>
-
-
-<p>所以我们对于每一段考虑它不会被影响的概率。可以发现如果有 $x$ 个点，那么它不被影响的概率为：<br>$$<br>\sum_{i&#x3D;1}^{x} (1-\frac{1}{2i})<br>$$</p>
-<p>这是因为，每次选到最右边的 <code>.</code> 的概率为 $\frac{1}{i}$，它向右的概率是 $\frac{1}{2}$。<br>可以用一个 $f$ 数组递推得到。</p>
-<p>从右往左是对称的，直接也用 $f$。</p>
-<h1 id="AT-agc041-f-AGC041F-Histogram-Rooks"><a href="#AT-agc041-f-AGC041F-Histogram-Rooks" class="headerlink" title="AT_agc041_f [AGC041F] Histogram Rooks"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/AT_agc041_f">AT_agc041_f [AGC041F] Histogram Rooks</a></h1><div class="note success"><p>✅ 划分状物，且互不影响即为树。</p>
-</div>
-
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/article/cp86ltz7">参考题解</a></p>
-<h2 id="题目描述-3"><a href="#题目描述-3" class="headerlink" title="题目描述"></a>题目描述</h2><p>我们考虑一个有 $N$ 行 $N$ 列的方格网。Arbok 剪掉了网格的一部分，使得对于每个 $i &#x3D; 1, 2, \ldots, N$，从左往右第 $i$ 列的最底部剩下 $h_i$ 个方格。现在，他想在剩下的某些方格中放置车。</p>
-<p>我们称一个格子被覆盖，当且仅当它本身有车，或者有车能一步移动到该格子。</p>
-<p>请你计算有多少种方式可以在剩下的格子中放置车，使得每一个剩下的格子都被覆盖。答案对 $998244353$ 取模。</p>
-<h2 id="做法-4"><a href="#做法-4" class="headerlink" title="做法"></a>做法</h2><p>首先，一个简单的观察就是我们考虑一行一行从上往下做。<br>因为不难发现从上往下，这一行的格子逐渐趋向联通，可以建出笛卡尔树，在上面 dp。</p>
-<p>显然我们难以统计到底有多少个位置没有被车覆盖。</p>
-<p>所以考虑容斥，放置车的方案中钦定 $c$ 个位置没有被覆盖（其他位置随便有没有被覆盖）的方案数为 $p$，那么可以对答案加上 $p\times(-1)^c$。</p>
-<p>当然，我们显然不能直接枚举每一个没有被覆盖的点集。<br>但是如果想要优化，有一个巨大的问题：由于车是一行一列进行攻击的，但是我们是一行一行推的，那么我们不知道这一列中后续或者之前会不会填入车。</p>
-<p>我们考虑由于点集钦定，对每一列是否能放车这件事情的影响：</p>
-<ul>
-<li>这一列存在钦定不能被覆盖的点，那么这一列肯定一个车都不能有。</li>
-<li>那么这一列随便有没有车。</li>
-</ul>
-<p>所以我们就要提前确定好，每一列是否存在被钦定的点。<br>假设当前枚举存在被钦定点的集合为 $S$，对每一行就可以分两种情况进行转移（注意我们现在只枚举了哪些列，并不知道具体哪些钦定不能被覆盖的点集），具体的，我们首先把这一行中连续存在的位置称为一段，记为 $[l_i,r_i]$：</p>
-<ol>
-<li>这一段中不存在被钦定的位置：那么这一段中不存在钦定点的列对应的格子就可以任意选择是否填入车，方案数为 $2^{|[l_i,r_i]|-|[l_i,r_i]\cap S|}$。</li>
-<li>这一段中存在被钦定的位置：那么这一段中不能放车，同时要选择至少一个点加入钦定点集，方案数为 $\sum\limits_{\emptyset \not &#x3D; N \subseteq ([l_i,r_i])\cap S} (-1)^{N}&#x3D;-1+\sum\limits_{N \subseteq ([l_i,r_i]\cap S)} (-1)^{N}&#x3D;-1+[([l_i,r_i]\cap S)&#x3D; \emptyset]&#x3D;-[([l_i,r_i]\cap S) &#x3D; \emptyset]$。</li>
-</ol>
-<div class="note primary"><p>🔷 钦定和枚举的区别：<br>钦定：被钦定的位置满足条件，不被钦定的任意。<br>枚举：被枚举的位置满足条件，不被枚举的不满足条件。</p>
-</div>
-
-
-<p>但是其实我们并没有满足枚举的要求，具体的，枚举有以下两个要求：</p>
-<ol>
-<li>对于所有 $S$ 中的列，必须要有被钦定的点。</li>
-<li>对于所有不在 $S$ 中的列，必须没有被钦定的点。</li>
-</ol>
-<p>显然，上面的过程满足了 $2$（因为我们只给 $S$ 中的列塞了钦定点），但是不一定满足 $1$ 。</p>
-<p>但是满足对于所有在 $S$ 中的列，被钦定的点所在的列并起来所构成的集合，一定是 $S$ 的子集。</p>
-<p>所以我们考虑再上一次容斥，钦定 $T\subseteq S$，满足 $T$ 集合中的列，都不能存在被钦定的点，$S\setminus T$ 中的列随便是否存在被钦定的点。当然要带上 $(-1)^{|T|}$ 的系数。</p>
-<p>接下来考虑在笛卡尔树上 dp，在叶子处计算 $(-1)^{|T|}$ 的容斥系数，然后每次合并子树的时候按照如下方式计算贡献：</p>
-<ol>
-<li>这一段中不存在被钦定的位置：那么这一段中不存在钦定点的列对应的格子就可以任意选择是否填入车，方案数为 $2^{|[l_i,r_i]|-|[l_i,r_i]\cap S|}$。</li>
-<li>这一段中存在被钦定的位置：那么这一段中不能放车，同时要选择至少一个点加入钦定点集，方案数为 $-[([l_i,r_i]\cap (S\setminus T)) &#x3D; \emptyset]$。</li>
-</ol>
-<p>最后设 $f_{i,j,0&#x2F;1}$ 表示在节点 $i,|S|&#x3D;j,\text{|T| 是否等于 |S|}$。<br>注意笛卡尔树上的节点有 $2n$。<br>时间复杂度 $\mathcal{O}(n^2 \log n)$，可以预处理做到 $\mathcal{O}(n^2)$。</p>
-<details>
-<summary>点击展开：$\mathcal{O}(n^2 \log n)$ 代码</summary>
-
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">405</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> mod = <span class="number">998244353</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> idx, n;</span><br><span class="line"><span class="type">int</span> a[N], f[N &lt;&lt; <span class="number">1</span>][N][<span class="number">2</span>], sz[N &lt;&lt; <span class="number">1</span>], mn[N &lt;&lt; <span class="number">1</span>], len[N &lt;&lt; <span class="number">1</span>], g[N][<span class="number">2</span>], pw[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> &amp;x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ((x += y) &gt;= mod) x -= mod;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">ksm</span><span class="params">(ll a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">    ll res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (b) &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &amp; <span class="number">1</span>) res = res * a % mod;</span><br><span class="line">        a = a * a % mod;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> u, <span class="type">int</span> fa)</span> </span>&#123;</span><br><span class="line">    mn[u] = *<span class="built_in">min_element</span>(a + l, a + r + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">        len[u] = <span class="number">1</span>;</span><br><span class="line">        f[u][<span class="number">0</span>][<span class="number">1</span>] = f[u][<span class="number">1</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        f[u][<span class="number">1</span>][<span class="number">1</span>] = mod - <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        f[u][<span class="number">0</span>][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> lst = l - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = l; i &lt;= r; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[i] == mn[u]) &#123;</span><br><span class="line">                <span class="keyword">if</span> (lst != i - <span class="number">1</span>) <span class="built_in">dfs</span>(lst + <span class="number">1</span>, i - <span class="number">1</span>, ++idx, u);</span><br><span class="line">                <span class="built_in">dfs</span>(i, i, ++idx, u);</span><br><span class="line">                lst = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (lst != r) <span class="built_in">dfs</span>(lst + <span class="number">1</span>, r, ++idx, u);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> det = mn[u] - mn[fa];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= len[fa]; j++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> y : &#123;<span class="number">0</span>, <span class="number">1</span>&#125;)</span><br><span class="line">            g[j][y] = f[fa][j][y], f[fa][j][y] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= len[u]; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> x : &#123;<span class="number">0</span>, <span class="number">1</span>&#125;) &#123;</span><br><span class="line">            <span class="keyword">if</span> (det) f[u][i][x] = f[u][i][x] * <span class="built_in">ksm</span>((pw[len[u] - i] + mod - !x) % mod, det) % mod;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= len[fa]; j++)</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> y : &#123;<span class="number">0</span>, <span class="number">1</span>&#125;)</span><br><span class="line">                    <span class="built_in">add</span>(f[fa][i + j][x &amp; y], <span class="number">1ll</span> * f[u][i][x] * g[j][y] % mod);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    len[fa] += len[u];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    pw[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) pw[i] = pw[i - <span class="number">1</span>] * <span class="number">2</span> % mod;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) cin &gt;&gt; a[i];</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">1</span>, n, ++idx, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> x : &#123;<span class="number">0</span>, <span class="number">1</span>&#125;) &#123;</span><br><span class="line">            <span class="built_in">add</span>(ans, f[<span class="number">1</span>][i][x]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</details>
-
-<h1 id="AT-agc053-f-AGC053F-ESPers"><a href="#AT-agc053-f-AGC053F-ESPers" class="headerlink" title="AT_agc053_f [AGC053F] ESPers"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/AT_agc053_f">AT_agc053_f [AGC053F] ESPers</a></h1><p>问号题，太困难了。</p>
-<h2 id="题意概述"><a href="#题意概述" class="headerlink" title="题意概述"></a>题意概述</h2><p>有 $2n+1$ 个人按照随机顺序进行投票，每个人只有 $A,B$ 两个选项，投票给票数多的选项的人获胜。<br>其中有 $k$ 个人可以知道前面的人的投票情况，其他人只能随机从 $A,B$ 中选择一项。</p>
-<p>询问随机选择一个知道前面投票情况的人 $R$ 可以获胜的概率。</p>
-<h2 id="做法-5"><a href="#做法-5" class="headerlink" title="做法"></a>做法</h2><p>假设我们选择的位置为 $x$（$x$ 知道前面人的投票情况）。那么他投票之后，$A,B$ 的票数一定不相同，假设现在$A&gt;B$，如果一直保持 $A&gt;B$，那么他将会获胜，否则一定会出现 $A&#x3D;B$ 的位置，而从这个时刻开始，他获胜的概率就变成了 $\frac{1}{2}$。假设后面出现相等的概率为 $p$，那么获胜的概率就是 $1-\frac{p}{2}$。<br>接下来考虑计算出 $p$。</p>
-<p>考虑刻画这个问题，显然我们关心的是 $abs(A-B)$，也就是较大数和较小数的差，那么可以把选择较大数看作 $1$，否则看作 $-1$，但是我们发现，这个刻画会在 $A,B$ 之间反超的时候会不对。</p>
-<ul>
-<li>假设原来 $A&gt;B$。</li>
-<li>现在 $A&#x3D;B$ 但是仍然选择 $B$，即 $B$ 反超了 $A$，那么这个时候选择了 $-1$，但实际上他们的差值应该是 $1$。</li>
-</ul>
-<p>所以我们可以把这个出现反超的位置单独那出来，同时用括号形象化描述这个问题（$1$ 为左括号），那么可以描述为这样：（$x$ 个 <code>)</code>，$y$ 个 <code>(</code>）<br>$$S_1)S_2)S_3)\dots S_x)S_{x+1}(S_{x+2}(S_{x+3}\dots(S_{x+y+1}$$<br>其中 $S_i$ 为一段合法的括号序列。<br>同时发现每两个右括号（不包含 $S_i$ 中的）就会出现一次前缀和为 $0$。而 $S_{x+1}$ 之后，$A,B$ 中领先的那个总是会保持领先优势。</p>
-<p>由于我们需要知道后面会不会出现相等，所以考虑去枚举每一个位置 $1&#x2F;-1$，这样我们只需要计算<br>$$<br>p&#x3D;\sum\text{固定局面且 $R$ 后面出现前缀和为 $0$ 的概率}\times \text{当前局面出现的概率}<br>$$</p>
-<h3 id="计算固定局面胜率"><a href="#计算固定局面胜率" class="headerlink" title="计算固定局面胜率"></a>计算固定局面胜率</h3><p>固定局面中计算其对 $p$ 的贡献。<br>我们关心以下两件事情：</p>
-<ul>
-<li>最后出现前缀和为 $0$ 的位置。</li>
-<li>$R$ 的位置。</li>
-</ul>
-<p>还是看这个<br>$$S_1)S_2)S_3)\dots S_x)S_{x+1}(S_{x+2}(S_{x+3}\dots(S_{x+y+1}$$<br>不难发现如果 $2\mid x$，那么最后依次前缀和为 $0$ 的位置为 $S_{x+1}$ 的末尾。否则在 $S_x$ 的末尾。即最后一个前缀和为 $0$ 的位置前面有 $x+[2\mid x]$ 段。</p>
-<p>设 $t&#x3D;\frac{2n+1-x-y}{2}$，表示 $S_1,S_2\dots,S_{x+y+1}$ 中的左括号数量，同时也是其右括号数量。</p>
-<p>而我们的  $p$ 需要统计在 $R$ 后面出现前缀和为 $0$ 的概率。而一个 $S_i$ 中期望出现 $\frac{t}{x+y+1}$ 个左括号。所以对于 $R$ 期望合法的位置有 $\frac{t(x+[2\mid x])}{x+y+1}$ 个，而一共有 $y+t$ 个 $1$，所以 $R$ 合法的概率为 $\frac{t(x+[2\mid x])}{(x+y+1)(y+t)}$</p>
-<p>最后我们还要分配 $k$ 个人的位置，所以为 $y+t\choose k$</p>
-<p>所以<br>$$<br>\text{固定局面且 $R$ 后面出现前缀和为 $0$ 的概率}&#x3D;{y+t\choose k}\frac{t(x+[2\mid x])}{(x+y+1)(y+t)}<br>$$</p>
-<h3 id="计数一种局面的方案数"><a href="#计数一种局面的方案数" class="headerlink" title="计数一种局面的方案数"></a>计数一种局面的方案数</h3><p>这个部分需要建立映射，即<br>$$S_1)S_2)S_3)\dots S_x)S_{x+1}(S_{x+2}(S_{x+3}\dots(S_{x+y+1}$$<br>与<br>$$(((((((S_1)S_2)S_3)\dots S_x)S_{x+1})S_{x+2})S_{x+3}\dots)S_{x+y+1}$$<br>建立双射，下面简单用格路计数即可，相当于从 $(x+y,0)$ 走到 $(x+y+t,x+y+t)$，不能经过 $y&#x3D;x+1$ 的方案数。式子为<br>$$<br>{2n+1\choose t}-{2n+1\choose t-1}<br>$$</p>
-<h3 id="计算答案"><a href="#计算答案" class="headerlink" title="计算答案"></a>计算答案</h3><p>那么就可以计算 $p$ 就是<br>$$<br>\sum_{x&#x3D;0}^{2n+1}\sum_{y&#x3D;0}^{2n+1-x}[2\nmid x+y]{y+t\choose k}\frac{t(x+[2\mid x])}{(x+y+1)(y+t)}\left( {2n+1\choose t}-{2n+1\choose t-1}\right)<br>$$</p>
-<p>发现 $t$ 以及大量式子都可以通过 $x+y$ 来计算得到，所以我们可以设置 $s&#x3D;x+y$，并且改为第一层枚举 $s$ 把之和 $s$ 有关的项提出来，优化不难。</p>
-<h1 id="AT-agc035-f-AGC035F-Two-Histograms"><a href="#AT-agc035-f-AGC035F-Two-Histograms" class="headerlink" title="AT_agc035_f [AGC035F] Two Histograms"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/AT_agc035_f">AT_agc035_f [AGC035F] Two Histograms</a></h1><p>首先，考虑对不同的 $k,l$ 计数。<br>发现如果出现 $k_i&#x3D;j,l_j&#x3D;i-1$ 或者 $k_i&#x3D;j-1,l_j&#x3D;i$ 那么这个方案可能会被计算重复，所以考虑在每次所有重复的局面中找到一个代表。</p>
-<p><strong>一个简单的方式就是直接选取满足不违反其中第一个条件的为代表</strong>。<br>不难发现这是唯一的；</p>
-<p>关于这个方案是唯一的证明：<br>如果 $k,l$ 和 $k^\prime,l^\prime$ 对应了同一个方案。<br>我们假设一个位置满足 $l_i&lt;l^\prime_i&#x3D;r$<br>那么一定满足 $k_r&gt;k^\prime_r$，那么发现在 $k^\prime,l^\prime$ 这个方案中就会不满足不出现第一个条件。</p>
-<p>接下来进行容斥：<br>$$<br>\sum_{k&#x3D;1}^{\min(n,m)}{n\choose k}{m\choose k}(-1)^{k}k!(n+1)^{m-k}(m+1)^{n-k}<br>$$</p>
-<p>这个式子成立，基于本质上不满足条件的位置在 $k,l$ 中类似匹配；即如果 $k_x$ 和 $l_y$ 不满足条件，那么不会出现 $k_x$ 和 $l^\prime_y$ 不满足条件或者 $k^\prime_x$ 和 $l_y$ 不满足条件。发现这不可能，因为 $k_x,l_y$ 只有一个固定值，所以他们只能指向一个单一的位置。</p>
-<p>所以可以直接计算了。</p>
-<h1 id="AT-arc186-d-ARC186D-Polish-Mania"><a href="#AT-arc186-d-ARC186D-Polish-Mania" class="headerlink" title="AT_arc186_d [ARC186D] Polish Mania"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/AT_arc186_d">AT_arc186_d [ARC186D] Polish Mania</a></h1><p>首先模拟一下发现只要满足两个条件就行：</p>
-<ul>
-<li>$S_n&#x3D;n-1$</li>
-<li>$\forall n\in [1,n-1],S_i\geq i$</li>
-</ul>
-<p>发现这个条件其实不困难，考虑去 check 一个序列，本质上其实就是从前往后扫，然后把每一个数字压入栈中，新加入的数字会让栈顶元素 $-1$，然后去除所有为 $0$ 的就好。不难发现只要最后栈为空（对应 $S_n$ 的限制），而且不会出现栈为空还要弹（对应 $S_i$ 的限制）。</p>
-<p>接下来考虑格路计数，不难。</p>
 
       
     </div>

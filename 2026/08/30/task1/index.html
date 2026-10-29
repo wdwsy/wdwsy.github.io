@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wdwsy.github.io/images/20260825cutpoint.png">
 <meta property="article:published_time" content="2026-08-30T15:22:35.000Z">
-<meta property="article:modified_time" content="2026-10-22T15:28:57.779Z">
+<meta property="article:modified_time" content="2026-10-29T13:41:31.728Z">
 <meta property="article:author" content="wdwsy">
 <meta property="article:tag" content="算法,OIC++,NOI,信息学竞赛">
 <meta name="twitter:card" content="summary">
@@ -168,7 +168,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#P17334-%E3%80%8CTPOI-2D%E3%80%8DStill-Shining"><span class="nav-number">1.</span> <span class="nav-text">P17334 「TPOI-2D」Still Shining</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%BB%E7%94%BB%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">刻画问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E6%82%94%E8%B4%AA%E5%BF%83"><span class="nav-number">1.3.</span> <span class="nav-text">反悔贪心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E7%A1%AE%E6%80%A7%E8%AF%81%E6%98%8E"><span class="nav-number">1.4.</span> <span class="nav-text">正确性证明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%BD%AC%E5%8C%96%E4%B8%BA%E8%B5%84%E6%BA%90%E5%88%86%E9%85%8D%E9%97%AE%E9%A2%98"><span class="nav-number">1.4.1.</span> <span class="nav-text">1. 转化为资源分配问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%94%A8%E8%B4%B9%E7%94%A8%E6%B5%81%E5%BB%BA%E6%A8%A1"><span class="nav-number">1.4.2.</span> <span class="nav-text">2. 用费用流建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%8F%8D%E6%82%94%E8%B4%AA%E5%BF%83%E5%AF%B9%E5%BA%94%E8%B4%B9%E7%94%A8%E6%B5%81%E7%9A%84%E8%BF%9E%E7%BB%AD%E6%9C%80%E7%9F%AD%E8%B7%AF"><span class="nav-number">1.4.3.</span> <span class="nav-text">3. 反悔贪心对应费用流的连续最短路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AF%E4%BB%A5%E4%BF%9D%E6%8C%81%E5%89%8D%E7%BC%80%E5%92%8C%E6%81%B0%E5%A5%BD%E4%B8%BA-1"><span class="nav-number">1.4.4.</span> <span class="nav-text">4. 为什么可以保持前缀和恰好为 $-1$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.5.</span> <span class="nav-text">5. 总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#slope-trick-%E5%81%9A%E6%B3%95"><span class="nav-number">1.5.</span> <span class="nav-text">slope trick 做法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P12480-%E9%9B%86%E8%AE%AD%E9%98%9F%E4%BA%92%E6%B5%8B-2024-Classical-Counting-Problem"><span class="nav-number">2.</span> <span class="nav-text">P12480 [集训队互测 2024] Classical Counting Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-1"><span class="nav-number">2.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3"><span class="nav-number">2.2.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P14929-%E5%8C%97%E5%A4%A7%E9%9B%86%E8%AE%AD-2025-%E5%B0%8F%E4%B8%91%E5%A4%A7%E5%B8%88%E7%9A%84%E8%8D%A3%E8%80%80"><span class="nav-number">3.</span> <span class="nav-text">P14929 [北大集训 2025] 小丑大师的荣耀</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%A6%82%E8%BF%B0"><span class="nav-number">3.1.</span> <span class="nav-text">题目概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3-1"><span class="nav-number">3.2.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82"><span class="nav-number">3.3.</span> <span class="nav-text">实现细节</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P9075-WC-CTS2023-%E6%A0%91%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">4.</span> <span class="nav-text">P9075 [WC&#x2F;CTS2023] 树据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE"><span class="nav-number">4.1.</span> <span class="nav-text">链</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%B2%BB-O-n-log-n-%E5%81%9A%E6%B3%95"><span class="nav-number">4.1.1.</span> <span class="nav-text">分治 $O(n\log n)$ 做法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E9%87%8F-O-n-log-n-%E5%81%9A%E6%B3%95"><span class="nav-number">4.1.2.</span> <span class="nav-text">增量 $O(n\log n)$ 做法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E9%87%8F-O-n-%E5%81%9A%E6%B3%95"><span class="nav-number">4.1.3.</span> <span class="nav-text">增量 $O(n)$ 做法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91"><span class="nav-number">4.2.</span> <span class="nav-text">树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P3179-HAOI2015-%E6%95%B0%E7%BB%84%E6%B8%B8%E6%88%8F"><span class="nav-number">5.</span> <span class="nav-text">P3179 [HAOI2015] 数组游戏</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-%E6%B8%B8%E6%88%8F"><span class="nav-number">5.1.</span> <span class="nav-text">Nim 游戏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E9%A2%98"><span class="nav-number">5.2.</span> <span class="nav-text">本题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97-SG-%E5%87%BD%E6%95%B0"><span class="nav-number">5.3.</span> <span class="nav-text">计算 SG 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82-1"><span class="nav-number">5.4.</span> <span class="nav-text">实现细节</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5480-%E2%80%93-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="nav-number">6.</span> <span class="nav-text">5480 – 最小生成树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%8C%E6%A0%88%E6%A8%A1%E6%8B%9F%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97%EF%BC%9A%E4%BB%8E%E4%B8%AD%E9%97%B4%E5%89%96%E5%BC%80%E4%B8%8E%E5%9D%87%E6%91%8A-O-1-%E8%AF%81%E6%98%8E"><span class="nav-number">7.</span> <span class="nav-text">双栈模拟双端队列：从中间剖开与均摊 $O(1)$ 证明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">7.1.</span> <span class="nav-text">1. 数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%87%8D%E6%9E%84%E7%AD%96%E7%95%A5%EF%BC%9A%E4%BB%8E%E4%B8%AD%E9%97%B4%E5%89%96%E5%BC%80"><span class="nav-number">7.2.</span> <span class="nav-text">2. 重构策略：从中间剖开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%8A%BF%E8%83%BD%E5%87%BD%E6%95%B0"><span class="nav-number">7.3.</span> <span class="nav-text">3. 势能函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%91%8A%E8%BF%98%E4%BB%A3%E4%BB%B7%E5%88%86%E6%9E%90"><span class="nav-number">7.4.</span> <span class="nav-text">4. 摊还代价分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E4%B8%8D%E8%A7%A6%E5%8F%91%E9%87%8D%E6%9E%84%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">7.4.1.</span> <span class="nav-text">4.1 不触发重构的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E8%A7%A6%E5%8F%91%E9%87%8D%E6%9E%84%E7%9A%84-pop-front"><span class="nav-number">7.4.2.</span> <span class="nav-text">4.2 触发重构的 pop_front</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E8%A7%A6%E5%8F%91%E9%87%8D%E6%9E%84%E7%9A%84-pop-back"><span class="nav-number">7.4.3.</span> <span class="nav-text">4.3 触发重构的 pop_back</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E7%BB%93%E8%AE%BA"><span class="nav-number">7.5.</span> <span class="nav-text">5. 结论</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P7214-JOISC-2020-%E6%B2%BB%E7%99%82%E8%A8%88%E7%94%BB"><span class="nav-number">8.</span> <span class="nav-text">P7214 [JOISC 2020] 治療計画</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P11094-ROI-2021-%E7%A0%8D%E6%A0%91-Day-2"><span class="nav-number">9.</span> <span class="nav-text">P11094 [ROI 2021] 砍树 (Day 2)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P14786-NERC-2025-Elevator-Against-Humanity"><span class="nav-number">10.</span> <span class="nav-text">P14786 [NERC 2025] Elevator Against Humanity</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E7%9A%84%E6%96%B0%E6%B1%82%E6%B3%95-Boruvka"><span class="nav-number">11.</span> <span class="nav-text">最小生成树的新求法 Boruvka</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5907-%E2%80%93-%E5%BA%8F%E5%88%97%E8%AE%A1%E6%95%B0"><span class="nav-number">12.</span> <span class="nav-text">5907 – 序列计数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5908-%E2%80%93-%E5%BA%86%E5%85%B8"><span class="nav-number">13.</span> <span class="nav-text">5908 – 庆典</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5912-%E2%80%93-%E8%83%BD%E9%87%8F%E8%8A%82%E7%82%B9"><span class="nav-number">14.</span> <span class="nav-text">5912 – 能量节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5919-%E2%80%93-%E8%BF%B7%E8%B7%AF%E7%9A%84%E9%80%81%E8%B4%A7%E8%BD%A6"><span class="nav-number">15.</span> <span class="nav-text">5919 – 迷路的送货车</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5511-%E2%80%93-%E5%B9%B3%E6%96%B9%E6%93%8D%E4%BD%9C"><span class="nav-number">16.</span> <span class="nav-text">5511 – 平方操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P6168-IOI-2016-railroad"><span class="nav-number">17.</span> <span class="nav-text">P6168 [IOI 2016] railroad</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%BB%BA%E5%9B%BE"><span class="nav-number">17.1.</span> <span class="nav-text">一、建图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%B9%B3%E8%A1%A1%E6%AF%8F%E6%9D%A1%E8%BE%B9%E7%9A%84%E6%AD%A3%E5%8F%8D%E5%90%91%E6%AC%A1%E6%95%B0"><span class="nav-number">17.2.</span> <span class="nav-text">二、平衡每条边的正反向次数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%90%88%E5%B9%B6%E8%BF%9E%E9%80%9A%E5%9D%97"><span class="nav-number">17.3.</span> <span class="nav-text">三、合并连通块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-1"><span class="nav-number">17.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P11428-%E6%B8%85%E5%8D%8E%E9%9B%86%E8%AE%AD-2024-%E5%89%8D%E5%BE%80%E4%BD%95%E6%96%B9"><span class="nav-number">18.</span> <span class="nav-text">P11428 [清华集训 2024] 前往何方</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P9781-HUSTFC-2023-%E8%BF%91%E4%BC%BC%E9%80%92%E5%A2%9E%E5%BA%8F%E5%88%97"><span class="nav-number">19.</span> <span class="nav-text">P9781 [HUSTFC 2023] 近似递增序列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P13538-IOI-2025-%E8%8A%82%E6%97%A5%E6%B8%B8%E6%88%8F"><span class="nav-number">20.</span> <span class="nav-text">P13538 [IOI 2025] 节日游戏</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CF2096G-Wonderful-Guessing-Game"><span class="nav-number">21.</span> <span class="nav-text">CF2096G Wonderful Guessing Game</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P6844-CEOI-2019-Building-Skyscrapers"><span class="nav-number">22.</span> <span class="nav-text">P6844 [CEOI 2019] Building Skyscrapers</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P3542-POI-2012-PEN-Salaries"><span class="nav-number">23.</span> <span class="nav-text">P3542 [POI 2012] PEN-Salaries</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#P17334-%E3%80%8CTPOI-2D%E3%80%8DStill-Shining"><span class="nav-number">1.</span> <span class="nav-text">P17334 「TPOI-2D」Still Shining</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%BB%E7%94%BB%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">刻画问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E6%82%94%E8%B4%AA%E5%BF%83"><span class="nav-number">1.3.</span> <span class="nav-text">反悔贪心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E7%A1%AE%E6%80%A7%E8%AF%81%E6%98%8E"><span class="nav-number">1.4.</span> <span class="nav-text">正确性证明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%BD%AC%E5%8C%96%E4%B8%BA%E8%B5%84%E6%BA%90%E5%88%86%E9%85%8D%E9%97%AE%E9%A2%98"><span class="nav-number">1.4.1.</span> <span class="nav-text">1. 转化为资源分配问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%94%A8%E8%B4%B9%E7%94%A8%E6%B5%81%E5%BB%BA%E6%A8%A1"><span class="nav-number">1.4.2.</span> <span class="nav-text">2. 用费用流建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%8F%8D%E6%82%94%E8%B4%AA%E5%BF%83%E5%AF%B9%E5%BA%94%E8%B4%B9%E7%94%A8%E6%B5%81%E7%9A%84%E8%BF%9E%E7%BB%AD%E6%9C%80%E7%9F%AD%E8%B7%AF"><span class="nav-number">1.4.3.</span> <span class="nav-text">3. 反悔贪心对应费用流的连续最短路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AF%E4%BB%A5%E4%BF%9D%E6%8C%81%E5%89%8D%E7%BC%80%E5%92%8C%E6%81%B0%E5%A5%BD%E4%B8%BA-1"><span class="nav-number">1.4.4.</span> <span class="nav-text">4. 为什么可以保持前缀和恰好为 $-1$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.5.</span> <span class="nav-text">5. 总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#slope-trick-%E5%81%9A%E6%B3%95"><span class="nav-number">1.5.</span> <span class="nav-text">slope trick 做法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P12480-%E9%9B%86%E8%AE%AD%E9%98%9F%E4%BA%92%E6%B5%8B-2024-Classical-Counting-Problem"><span class="nav-number">2.</span> <span class="nav-text">P12480 [集训队互测 2024] Classical Counting Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-1"><span class="nav-number">2.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3"><span class="nav-number">2.2.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P14929-%E5%8C%97%E5%A4%A7%E9%9B%86%E8%AE%AD-2025-%E5%B0%8F%E4%B8%91%E5%A4%A7%E5%B8%88%E7%9A%84%E8%8D%A3%E8%80%80"><span class="nav-number">3.</span> <span class="nav-text">P14929 [北大集训 2025] 小丑大师的荣耀</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%A6%82%E8%BF%B0"><span class="nav-number">3.1.</span> <span class="nav-text">题目概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3-1"><span class="nav-number">3.2.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82"><span class="nav-number">3.3.</span> <span class="nav-text">实现细节</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P9075-WC-CTS2023-%E6%A0%91%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">4.</span> <span class="nav-text">P9075 [WC&#x2F;CTS2023] 树据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE"><span class="nav-number">4.1.</span> <span class="nav-text">链</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%B2%BB-O-n-log-n-%E5%81%9A%E6%B3%95"><span class="nav-number">4.1.1.</span> <span class="nav-text">分治 $O(n\log n)$ 做法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E9%87%8F-O-n-log-n-%E5%81%9A%E6%B3%95"><span class="nav-number">4.1.2.</span> <span class="nav-text">增量 $O(n\log n)$ 做法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E9%87%8F-O-n-%E5%81%9A%E6%B3%95"><span class="nav-number">4.1.3.</span> <span class="nav-text">增量 $O(n)$ 做法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91"><span class="nav-number">4.2.</span> <span class="nav-text">树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P3179-HAOI2015-%E6%95%B0%E7%BB%84%E6%B8%B8%E6%88%8F"><span class="nav-number">5.</span> <span class="nav-text">P3179 [HAOI2015] 数组游戏</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-%E6%B8%B8%E6%88%8F"><span class="nav-number">5.1.</span> <span class="nav-text">Nim 游戏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E9%A2%98"><span class="nav-number">5.2.</span> <span class="nav-text">本题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97-SG-%E5%87%BD%E6%95%B0"><span class="nav-number">5.3.</span> <span class="nav-text">计算 SG 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82-1"><span class="nav-number">5.4.</span> <span class="nav-text">实现细节</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5480-%E2%80%93-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="nav-number">6.</span> <span class="nav-text">5480 – 最小生成树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%8C%E6%A0%88%E6%A8%A1%E6%8B%9F%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97%EF%BC%9A%E4%BB%8E%E4%B8%AD%E9%97%B4%E5%89%96%E5%BC%80%E4%B8%8E%E5%9D%87%E6%91%8A-O-1-%E8%AF%81%E6%98%8E"><span class="nav-number">7.</span> <span class="nav-text">双栈模拟双端队列：从中间剖开与均摊 $O(1)$ 证明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">7.1.</span> <span class="nav-text">1. 数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%87%8D%E6%9E%84%E7%AD%96%E7%95%A5%EF%BC%9A%E4%BB%8E%E4%B8%AD%E9%97%B4%E5%89%96%E5%BC%80"><span class="nav-number">7.2.</span> <span class="nav-text">2. 重构策略：从中间剖开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%8A%BF%E8%83%BD%E5%87%BD%E6%95%B0"><span class="nav-number">7.3.</span> <span class="nav-text">3. 势能函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%91%8A%E8%BF%98%E4%BB%A3%E4%BB%B7%E5%88%86%E6%9E%90"><span class="nav-number">7.4.</span> <span class="nav-text">4. 摊还代价分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E4%B8%8D%E8%A7%A6%E5%8F%91%E9%87%8D%E6%9E%84%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">7.4.1.</span> <span class="nav-text">4.1 不触发重构的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E8%A7%A6%E5%8F%91%E9%87%8D%E6%9E%84%E7%9A%84-pop-front"><span class="nav-number">7.4.2.</span> <span class="nav-text">4.2 触发重构的 pop_front</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E8%A7%A6%E5%8F%91%E9%87%8D%E6%9E%84%E7%9A%84-pop-back"><span class="nav-number">7.4.3.</span> <span class="nav-text">4.3 触发重构的 pop_back</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E7%BB%93%E8%AE%BA"><span class="nav-number">7.5.</span> <span class="nav-text">5. 结论</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P7214-JOISC-2020-%E6%B2%BB%E7%99%82%E8%A8%88%E7%94%BB"><span class="nav-number">8.</span> <span class="nav-text">P7214 [JOISC 2020] 治療計画</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P11094-ROI-2021-%E7%A0%8D%E6%A0%91-Day-2"><span class="nav-number">9.</span> <span class="nav-text">P11094 [ROI 2021] 砍树 (Day 2)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P14786-NERC-2025-Elevator-Against-Humanity"><span class="nav-number">10.</span> <span class="nav-text">P14786 [NERC 2025] Elevator Against Humanity</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E7%9A%84%E6%96%B0%E6%B1%82%E6%B3%95-Boruvka"><span class="nav-number">11.</span> <span class="nav-text">最小生成树的新求法 Boruvka</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5907-%E2%80%93-%E5%BA%8F%E5%88%97%E8%AE%A1%E6%95%B0"><span class="nav-number">12.</span> <span class="nav-text">5907 – 序列计数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5908-%E2%80%93-%E5%BA%86%E5%85%B8"><span class="nav-number">13.</span> <span class="nav-text">5908 – 庆典</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5912-%E2%80%93-%E8%83%BD%E9%87%8F%E8%8A%82%E7%82%B9"><span class="nav-number">14.</span> <span class="nav-text">5912 – 能量节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5919-%E2%80%93-%E8%BF%B7%E8%B7%AF%E7%9A%84%E9%80%81%E8%B4%A7%E8%BD%A6"><span class="nav-number">15.</span> <span class="nav-text">5919 – 迷路的送货车</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5511-%E2%80%93-%E5%B9%B3%E6%96%B9%E6%93%8D%E4%BD%9C"><span class="nav-number">16.</span> <span class="nav-text">5511 – 平方操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P6168-IOI-2016-railroad"><span class="nav-number">17.</span> <span class="nav-text">P6168 [IOI 2016] railroad</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%BB%BA%E5%9B%BE"><span class="nav-number">17.1.</span> <span class="nav-text">一、建图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%B9%B3%E8%A1%A1%E6%AF%8F%E6%9D%A1%E8%BE%B9%E7%9A%84%E6%AD%A3%E5%8F%8D%E5%90%91%E6%AC%A1%E6%95%B0"><span class="nav-number">17.2.</span> <span class="nav-text">二、平衡每条边的正反向次数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%90%88%E5%B9%B6%E8%BF%9E%E9%80%9A%E5%9D%97"><span class="nav-number">17.3.</span> <span class="nav-text">三、合并连通块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-1"><span class="nav-number">17.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P11428-%E6%B8%85%E5%8D%8E%E9%9B%86%E8%AE%AD-2024-%E5%89%8D%E5%BE%80%E4%BD%95%E6%96%B9"><span class="nav-number">18.</span> <span class="nav-text">P11428 [清华集训 2024] 前往何方</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P9781-HUSTFC-2023-%E8%BF%91%E4%BC%BC%E9%80%92%E5%A2%9E%E5%BA%8F%E5%88%97"><span class="nav-number">19.</span> <span class="nav-text">P9781 [HUSTFC 2023] 近似递增序列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P13538-IOI-2025-%E8%8A%82%E6%97%A5%E6%B8%B8%E6%88%8F"><span class="nav-number">20.</span> <span class="nav-text">P13538 [IOI 2025] 节日游戏</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CF2096G-Wonderful-Guessing-Game"><span class="nav-number">21.</span> <span class="nav-text">CF2096G Wonderful Guessing Game</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P6844-CEOI-2019-Building-Skyscrapers"><span class="nav-number">22.</span> <span class="nav-text">P6844 [CEOI 2019] Building Skyscrapers</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P3542-POI-2012-PEN-Salaries"><span class="nav-number">23.</span> <span class="nav-text">P3542 [POI 2012] PEN-Salaries</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P5665-CSP-S-2019-%E5%88%92%E5%88%86"><span class="nav-number">24.</span> <span class="nav-text">P5665 [CSP-S 2019] 划分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P9601-IOI-2023-%E6%9C%80%E9%95%BF%E8%B7%AF%E7%A8%8B"><span class="nav-number">25.</span> <span class="nav-text">P9601 [IOI 2023] 最长路程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5929-%E2%80%93-axisym"><span class="nav-number">26.</span> <span class="nav-text">5929 – axisym</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DP-%E8%AE%BE%E8%AE%A1"><span class="nav-number">26.1.</span> <span class="nav-text">DP 设计</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P10028-Ynoi2000-pri-%E9%A2%98%E8%A7%A3%EF%BC%9A%E6%93%8D%E4%BD%9C%E5%88%86%E5%9D%97%E3%80%81%E5%80%BC%E5%9F%9F%E5%88%86%E5%9D%97%E4%B8%8E%E7%AD%89%E4%BB%B7%E7%B1%BB%E5%88%86%E6%B2%BB"><span class="nav-number">27.</span> <span class="nav-text">P10028 [Ynoi2000] pri 题解：操作分块、值域分块与等价类分治</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%A2%98%E6%84%8F%E8%BD%AC%E5%8C%96"><span class="nav-number">27.1.</span> <span class="nav-text">一、题意转化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%93%8D%E4%BD%9C%E5%88%86%E5%9D%97%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BA%8F%E5%88%97%E5%8F%AF%E4%BB%A5%E5%88%92%E5%88%86%E4%B8%BA%E5%B0%91%E9%87%8F%E8%BF%9E%E7%BB%AD%E6%AE%B5%EF%BC%9F"><span class="nav-number">27.2.</span> <span class="nav-text">二、操作分块：为什么序列可以划分为少量连续段？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%8A%8A%E9%80%86%E5%BA%8F%E5%AF%B9%E8%B4%A1%E7%8C%AE%E6%8B%86%E6%88%90%E4%B8%A4%E9%83%A8%E5%88%86"><span class="nav-number">27.3.</span> <span class="nav-text">三、把逆序对贡献拆成两部分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%80%BC%E5%9F%9F%E5%88%86%E5%9D%97%EF%BC%9A%E6%8A%8A%E6%AE%B5%E9%97%B4%E8%B4%A1%E7%8C%AE%E5%88%86%E6%88%90%E4%B8%A4%E9%83%A8%E5%88%86"><span class="nav-number">27.4.</span> <span class="nav-text">四、值域分块：把段间贡献分成两部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E4%B8%8D%E5%90%8C%E5%80%BC%E5%9F%9F%E5%9D%97%E4%B9%8B%E9%97%B4%E7%9A%84%E8%B4%A1%E7%8C%AE"><span class="nav-number">27.4.1.</span> <span class="nav-text">4.1 不同值域块之间的贡献</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E5%90%8C%E4%B8%80%E4%B8%AA%E5%80%BC%E5%9F%9F%E5%9D%97%E5%86%85%E9%83%A8%E7%9A%84%E8%B4%A1%E7%8C%AE"><span class="nav-number">27.4.2.</span> <span class="nav-text">4.2 同一个值域块内部的贡献</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E7%AD%89%E4%BB%B7%E7%B1%BB%E5%88%86%E6%B2%BB%EF%BC%9A%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E9%87%8D%E5%A4%8D%E8%AE%A1%E7%AE%97%E6%AE%B5%E5%AF%B9%EF%BC%9F"><span class="nav-number">27.5.</span> <span class="nav-text">五、等价类分治：如何避免重复计算段对？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E7%AD%89%E4%BB%B7%E7%B1%BB%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="nav-number">27.5.1.</span> <span class="nav-text">5.1 等价类的本质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%88%86%E6%B2%BB%EF%BC%9F"><span class="nav-number">27.5.2.</span> <span class="nav-text">5.2 为什么需要分治？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-%E7%B1%BB%E5%86%85%E8%B4%A1%E7%8C%AE%E5%A6%82%E4%BD%95%E5%90%88%E5%B9%B6%EF%BC%9F"><span class="nav-number">27.5.3.</span> <span class="nav-text">5.3 类内贡献如何合并？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%88%86%E6%B2%BB%E5%90%8E%E4%B8%8D%E4%BC%9A%E9%87%8D%E5%A4%8D%E5%81%9A%E5%B9%B3%E6%96%B9%E7%BB%9F%E8%AE%A1%EF%BC%9F"><span class="nav-number">27.5.4.</span> <span class="nav-text">5.4 为什么分治后不会重复做平方统计？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90%E4%B8%8E%E5%8F%82%E6%95%B0%E9%80%89%E6%8B%A9"><span class="nav-number">27.6.</span> <span class="nav-text">六、复杂度分析与参数选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E5%AE%9E%E7%8E%B0%E6%97%B6%E9%9C%80%E8%A6%81%E7%BB%B4%E6%8A%A4%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="nav-number">27.7.</span> <span class="nav-text">七、实现时需要维护的信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-number">27.8.</span> <span class="nav-text">八、总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P9069-Ynoi-Easy-Round-2022-%E5%A0%95%E5%A4%A9%E4%BD%9C%E6%88%98-TEST-98"><span class="nav-number">28.</span> <span class="nav-text">P9069 [Ynoi Easy Round 2022] 堕天作战 TEST_98</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -183,7 +183,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -193,7 +193,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -261,7 +261,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-10-22 23:28:57" itemprop="dateModified" datetime="2026-10-22T23:28:57+08:00">2026-10-22</time>
+      <time title="Modified: 2026-10-29 21:41:31" itemprop="dateModified" datetime="2026-10-29T21:41:31+08:00">2026-10-29</time>
     </span>
 
   
@@ -695,6 +695,251 @@ $$
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1000005</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> rt, n, lst;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; e[N];</span><br><span class="line"><span class="type">int</span> a[N], fa[N], sz[N], tag[N], sum[N], pos[N], tp[N];</span><br><span class="line"><span class="type">int</span> b[N], tot;</span><br><span class="line"><span class="type">bool</span> vis[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Insert</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> v)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span> (v &gt; <span class="number">0</span> &amp;&amp; pos[v]) &#123;</span><br><span class="line">            v--;</span><br><span class="line">            <span class="keyword">if</span> (v &lt;= lst) <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (sum[v] != sz[u] || v &lt;= lst) <span class="keyword">return</span>;</span><br><span class="line">        a[u] = v;</span><br><span class="line">        <span class="keyword">if</span> (e[u].<span class="built_in">size</span>() == <span class="number">1</span>) &#123;</span><br><span class="line">            u = e[u][<span class="number">0</span>], --v;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) sum[i] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="type">int</span> p, z;</span><br><span class="line">        cin &gt;&gt; p &gt;&gt; z;</span><br><span class="line">        <span class="keyword">if</span> (p == i) rt = i, fa[i] = n + <span class="number">1</span>, z = n;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            fa[i] = p;</span><br><span class="line">            e[p].<span class="built_in">push_back</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">        a[i] = z;</span><br><span class="line">        <span class="keyword">if</span> (z) pos[z] = i, sum[z]--, vis[z] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    a[n + <span class="number">1</span>] = n + <span class="number">1</span>, pos[n + <span class="number">1</span>] = n + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    b[tot = <span class="number">1</span>] = rt;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= tot; i++) &#123;</span><br><span class="line">        <span class="type">int</span> u = b[i];</span><br><span class="line">        <span class="keyword">if</span> (a[u]) tp[u] = u;</span><br><span class="line">        <span class="keyword">else</span> sum[a[tp[u]]]--;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> v : e[u]) &#123;</span><br><span class="line">            b[++tot] = v;</span><br><span class="line">            tp[v] = tp[u];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = tot; i &gt;= <span class="number">1</span>; i--) &#123;</span><br><span class="line">        <span class="type">int</span> u = b[i];</span><br><span class="line">        sz[u] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> v : e[u]) &#123;</span><br><span class="line">            sz[u] += sz[v];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (((i == rt &amp;&amp; !a[i]) || (!a[i] &amp;&amp; a[fa[i]]))) &#123;</span><br><span class="line">            <span class="keyword">if</span> (tag[fa[i]] != <span class="number">-1</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (tag[fa[i]] &gt; <span class="number">0</span>) tag[fa[i]] = <span class="number">-1</span>;</span><br><span class="line">                <span class="keyword">else</span> tag[fa[i]] = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) sum[i] += sum[i - <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n + <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (tag[pos[i]] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="type">int</span> u = tag[pos[i]];</span><br><span class="line">            <span class="built_in">Insert</span>(u, i - <span class="number">1</span>);</span><br><span class="line">            lst = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        cout &lt;&lt; a[i] &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </details>
+
+<h1 id="P5665-CSP-S-2019-划分"><a href="#P5665-CSP-S-2019-划分" class="headerlink" title="P5665 [CSP-S 2019] 划分"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5665">P5665 [CSP-S 2019] 划分</a></h1><p>这个题目题面很简单。</p>
+<p>主要就是去寻找单调性。<br>发现我们总是希望每一段小。而且后面段会更大。</p>
+<p>所以我们猜测，每次为了让最后一段小，所以我们选择可以转移的最大位置来转移，转移条件是 $s_j-s_{p_j}\leq s_i-s_j$。其中 $p_j$ 表示 $j$ 的前一个决策点。</p>
+<p>考虑证明这个是正确的。<br>首先根据决策单调性，或者调整不难论证，肯定不会出现 $i&lt;j$ 并且 $p_i&gt;p_j$ 的情况。</p>
+<p>接下来考虑两个决策点 $j,k$，满足 $j&lt;k$。<br>考虑证明 $j$ 一定不优。<br>我们考虑调整 $j$ 的决策位置，使得每一次调整都是更加优秀的，但是最后仍然比不上 $k$。<br>具体的，我们可以县调整 $j\rightarrow k$，然后如果出现了中间不满足转移条件的情况，就类似调整前面的段向后拓展，比如调整 $p_j$ 向右挪动。这样一直调整，每一次都让总和更小，但是发现还是比不上 $k$ 因为 $p_k$ 的决策是 $k$ 位置最好的决策，但是 $j$ 经过调整后不可能超过这个值。</p>
+<p>最后还有一个卡空间的问题。我们发现其实我们不需要记录每一个位置的 dp 值，只需要用 $p$ 数组从 $n$ 位置倒推就可以知道每一段是如何划分的，依据划分计算答案就行。</p>
+<h1 id="P9601-IOI-2023-最长路程"><a href="#P9601-IOI-2023-最长路程" class="headerlink" title="P9601 [IOI 2023] 最长路程"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P9601">P9601 [IOI 2023] 最长路程</a></h1><p>首先，发现可以一个一个加入节点。</p>
+<p>具体的，我们维护两条链 $A,B$。<br>将当前要加入的节点命名为 $u$。</p>
+<ul>
+<li>如果 $u$ 和 $A$ 的末尾节点有连边，那么把 $u$ 追加到 $A$ 末尾。</li>
+<li>如果 $u$ 和 $B$ 的末尾节点有连边，那么把 $u$ 追加到 $B$ 末尾。</li>
+<li>否则，根据题意，$A$ 的末尾和 $B$ 的末尾一定有连边。所以合并 $A,B$，并且让 $u$ 单独成为第二条链。</li>
+</ul>
+<p>对于剩余两条链，可以先来判断以下四种情况是否有连边：</p>
+<ul>
+<li>$A$ 链首，$B$ 链尾。</li>
+<li>$A$ 链首，$B$ 链首。</li>
+<li>$A$ 链尾，$B$ 链尾。</li>
+<li>$A$ 链尾，$B$ 链首。</li>
+</ul>
+<p>如果都不满足，一定满足 $A$ 首尾有边，$B$ 首尾有边。</p>
+<p>那么可以二分出一个可行的 $a\in A,b\in B$，容易构造出长度为 $n$ 的解。</p>
+<p>发现询问次数有点超过限制。<br>这里有一个经典的方式优化，也可以经过计算发现。<br>我们把连续四次加入 $2$ 个点，做到 $3$ 次加入两个点。</p>
+<p>自己分类讨论一下不难。</p>
+<p>如果超了一次，可以发现，我们的这四个判断：</p>
+<ul>
+<li>$A$ 链首，$B$ 链尾。</li>
+<li>$A$ 链首，$B$ 链首。</li>
+<li>$A$ 链尾，$B$ 链尾。</li>
+<li>$A$ 链尾，$B$ 链首。</li>
+</ul>
+<p>少一个也没有关系，仍然满足两条链首尾有边。</p>
+<h1 id="5929-–-axisym"><a href="#5929-–-axisym" class="headerlink" title="5929 – axisym"></a><a target="_blank" rel="noopener" href="http://172.17.226.198/OnlineJudge/contestproblem.php?id=16195929">5929 – axisym</a></h1><p>本题有三个关键思想。</p>
+<ol>
+<li><p><strong>将置换环问题转化为链的拼接问题。</strong></p>
+<p>对于置换环问题，我们不一定要一次性构造出完整的环。可以按照标号从小到大的顺序逐个加入元素，并将已经确定的部分看作若干条链，记录当前还有多少条链没有闭合成环。</p>
+<p>每次加入一个新元素时，只需要考虑它的入边和出边如何与已有的链连接。根据两条边的连接情况，可以分为五种转移，从而用 DP 维护当前的链数和差异度。</p>
+</li>
+<li><p><strong>将逆序对转化为弧的相交。</strong></p>
+<p>将排列画成上下两排点：上排表示下标，下排表示值。对于每个位置 $i$，连接上排的 $i$ 和下排的 $p_i$，得到一条弧。</p>
+<p>对于 $i&lt;j$，两条弧 $i\rightarrow p_i$ 和 $j\rightarrow p_j$ 相交，当且仅当 $p_i&gt;p_j$，也就是 $(i,j)$ 构成一个逆序对。</p>
+<p>因此，排列的逆序对个数就等于所有相交的弧对数。</p>
+</li>
+<li><p><strong>按列逐步结算弧的交叉。</strong></p>
+<p>我们很难直接计算一条弧与多少条其他弧相交，但可以将交叉分摊到构造过程中的各个时刻：按照标号从小到大扫描，每当一条弧闭合时，就统计它与当前开放弧产生的交叉。</p>
+<p>这样，每个交叉都可以在构造过程中被计算一次。进一步对同一类转移的所有选择求和，可以得到只与当前链数有关的逆序对增量，从而在统计方案数的同时维护逆序对总数。</p>
+</li>
+</ol>
+<h2 id="DP-设计"><a href="#DP-设计" class="headerlink" title="DP 设计"></a>DP 设计</h2><p>设 $f_{i,j,k}$ 表示考虑前 $i$ 个元素，差异度为 $j$、当前有 $k$ 条链的方案数；设 $g_{i,j,k}$ 表示这些方案的逆序对总数。</p>
+<p>其中，$f$ 负责统计方案数，$g$ 负责统计所有方案的逆序对数之和。两者使用相同的五类转移，但在维护 $g$ 时，除了要计算新产生的逆序对，还要将旧方案的逆序对总数乘以对应的转移方案数。</p>
+<p>最终，所有满足差异度不超过 $k$ 且链数为 $0$ 的状态之和，分别给出合法排列个数和逆序对总数。</p>
+<h1 id="P10028-Ynoi2000-pri-题解：操作分块、值域分块与等价类分治"><a href="#P10028-Ynoi2000-pri-题解：操作分块、值域分块与等价类分治" class="headerlink" title="P10028 [Ynoi2000] pri 题解：操作分块、值域分块与等价类分治"></a>P10028 [Ynoi2000] pri 题解：操作分块、值域分块与等价类分治</h1><h2 id="一、题意转化"><a href="#一、题意转化" class="headerlink" title="一、题意转化"></a>一、题意转化</h2><p>给定一个 $1,\ldots,n$ 的排列，进行 $m$ 次操作。每次给出 $x$，先翻转前缀 $[1,x]$，再统计翻转后的前缀中满足 $i&lt;j$ 且 $a_i&lt;a_j$ 的数对数量。</p>
+<p>数据范围：</p>
+<ul>
+<li>$n\le 2\times 10^5$</li>
+<li>$m\le 5\times 10^4$</li>
+</ul>
+<p>注意，题目要求的是<strong>翻转之后的递增对数量</strong>。</p>
+<p>翻转前，设前缀 $[1,x]$ 内部的逆序对数量为 $I(x)$。由于排列中没有相等元素，翻转前的每一对元素在翻转后都会交换相对顺序。</p>
+<p>因此，翻转后的递增对恰好对应翻转前的逆序对：</p>
+<p>$$<br>\boxed{\operatorname{ans}(x)&#x3D;I(x)}<br>$$</p>
+<p>于是，问题转化为：</p>
+<blockquote>
+<p>支持多次前缀翻转，并在每次翻转时求出翻转前对应前缀的逆序对数量。</p>
+</blockquote>
+<p>直接使用树状数组或归并排序重新计算，每次需要 $O(n\log n)$，总复杂度为 $O(mn\log n)$，无法通过。</p>
+<p>本题的关键不是寻找一种普通的动态序列数据结构，而是利用<strong>操作分块、值域分块与等价类分治</strong>，避免重复计算逆序对贡献。</p>
+<h2 id="二、操作分块：为什么序列可以划分为少量连续段？"><a href="#二、操作分块：为什么序列可以划分为少量连续段？" class="headerlink" title="二、操作分块：为什么序列可以划分为少量连续段？"></a>二、操作分块：为什么序列可以划分为少量连续段？</h2><p>设操作块长为 $C$，将连续的 $C$ 次操作放在同一个块中处理。</p>
+<p>考虑这个操作块中的所有前缀翻转边界。</p>
+<p>初始序列可以看成一个完整的连续段。每次前缀翻转时：</p>
+<ol>
+<li>若翻转边界落在某个连续段内部，就将这个段拆成两个段。</li>
+<li>将前缀中的所有段整体倒序排列。</li>
+<li>每个被翻转的段内部方向取反。</li>
+</ol>
+<p>一次操作至多新增一个分割边界，因此，处理完 $C$ 次操作后，整个序列可以划分成至多 $C+1$ 个连续段。</p>
+<p>每个段对应原数组的一个连续区间，并记录其方向：</p>
+<ul>
+<li>正向：按照原数组下标递增的顺序排列。</li>
+<li>反向：按照原数组下标递减的顺序排列。</li>
+</ul>
+<p>例如，某个时刻的序列可以表示为：</p>
+<p>$$<br>[6,5,4]\ [1,2]\ [8,7]\ [3]<br>$$</p>
+<p>不必真的移动每个元素，只需记录各段对应的原数组区间、方向以及段的排列顺序。</p>
+<p>由于操作块中的所有查询边界都参与了分割，所以每个查询前缀都恰好由若干个完整段组成。</p>
+<p>这就把一个长度为 $n$ 的动态序列，转化成了最多 $O(C)$ 个连续段的动态排列问题。</p>
+<p>但需要注意：<strong>分段只解决了序列顺序的维护，并没有直接解决段与段之间的逆序对统计。</strong></p>
+<h2 id="三、把逆序对贡献拆成两部分"><a href="#三、把逆序对贡献拆成两部分" class="headerlink" title="三、把逆序对贡献拆成两部分"></a>三、把逆序对贡献拆成两部分</h2><p>设当前序列由若干段组成。对于两个段 $A,B$，定义：</p>
+<p>$$<br>w(A,B)&#x3D;<br>#{(u,v):u\in A,\ v\in B,\ u&gt;v}<br>$$</p>
+<p>这里约定 $A$ 位于 $B$ 的左边，因此 $w(A,B)$ 就是这两个段之间的逆序对数量。</p>
+<p>对一个查询前缀，其逆序对总数可以拆成：</p>
+<p>$$<br>I&#x3D;<br>\sum_i h_i+<br>\sum_{i&lt;j}w(S_i,S_j)<br>$$</p>
+<p>其中：</p>
+<ul>
+<li>$h_i$：第 $i$ 个段内部的逆序对数量。</li>
+<li>$w(S_i,S_j)$：第 $i$ 个段与第 $j$ 个段之间的逆序对数量。</li>
+</ul>
+<p>第一部分比较容易处理。一个段对应原数组中的连续区间 $[l,r]$，长度为 $s&#x3D;r-l+1$。</p>
+<p>若该段正向排列，其内部逆序对数为 $h$；若该段反向排列，因为元素互不相同，其内部逆序对数为：</p>
+<p>$$<br>h’&#x3D;\binom{s}{2}-h<br>$$</p>
+<p>因此，段内部的贡献只需预处理一次，就能根据方向快速转换。</p>
+<p>真正的困难在第二部分：如果每次都枚举所有段对，需要 $O(C^2)$ 的时间；如果在每个操作块内反复这么做，总复杂度仍然太高。</p>
+<p>为了降低段对统计的成本，还需要引入值域分块。</p>
+<h2 id="四、值域分块：把段间贡献分成两部分"><a href="#四、值域分块：把段间贡献分成两部分" class="headerlink" title="四、值域分块：把段间贡献分成两部分"></a>四、值域分块：把段间贡献分成两部分</h2><p>设值域块长为 $V$，将值域划分为若干个连续块：</p>
+<p>$$<br>[1,V],\ [V+1,2V],\ [2V+1,3V],\ldots<br>$$</p>
+<p>对于两个段 $A,B$ 之间的逆序对，分成两类：</p>
+<ol>
+<li>两个元素属于不同的值域块。</li>
+<li>两个元素属于同一个值域块。</li>
+</ol>
+<p>这两部分的处理方式不同。</p>
+<h3 id="4-1-不同值域块之间的贡献"><a href="#4-1-不同值域块之间的贡献" class="headerlink" title="4.1 不同值域块之间的贡献"></a>4.1 不同值域块之间的贡献</h3><p>设段 $A$ 中属于第 $p$ 个值域块的元素数量为 $g_A[p]$，段 $B$ 中属于第 $q$ 个值域块的元素数量为 $g_B[q]$。</p>
+<p>如果 $p&gt;q$，那么第 $p$ 个值域块中的任何元素都大于第 $q$ 个值域块中的任何元素。</p>
+<p>所以这两组元素产生的逆序对数量为：</p>
+<p>$$<br>g_A[p]\cdot g_B[q]<br>$$</p>
+<p>因此，不同值域块之间的贡献只需要维护每个段在各个值域块中的元素数量，不需要枚举具体的元素对。</p>
+<p>通过前缀和，可以把所有跨值域块的贡献合并计算。</p>
+<p>一个段有 $O(n&#x2F;V)$ 个值域块计数，所以合并一个段的信息需要 $O(n&#x2F;V)$ 的时间。</p>
+<p>如果在操作块的分治过程中，所有层的段数总计为 $O(C\log C)$，那么单个操作块的跨值域块统计复杂度为：</p>
+<p>$$<br>O\left(\frac{nC\log C}{V}\right)<br>$$</p>
+<p>整个过程中共有 $O(n&#x2F;C)$ 个操作块，因此总复杂度为：</p>
+<p>$$<br>O\left(\frac{n^2\log C}{V}\right)<br>$$</p>
+<h3 id="4-2-同一个值域块内部的贡献"><a href="#4-2-同一个值域块内部的贡献" class="headerlink" title="4.2 同一个值域块内部的贡献"></a>4.2 同一个值域块内部的贡献</h3><p>如果两个元素属于同一个值域块，就不能仅凭块编号判断它们的大小关系。</p>
+<p>一种直接的想法是每次查询时枚举块内元素，但这样会重复做大量工作。</p>
+<p>另一种想法是预处理所有段对之间的贡献。因为一个值域块内最多有 $V$ 个不同的值，所以所有值域块内部涉及的值对总数为：</p>
+<p>$$<br>O\left(\frac{n}{V}\cdot V^2\right)&#x3D;O(nV)<br>$$</p>
+<p>因此，在一个操作块内，可以预处理同一值域块中各个值对对段间逆序对的贡献。</p>
+<p>将操作块中的所有段对贡献预处理后，后续合并段时就不必重新枚举具体的元素值，只需查询并合并对应的统计结果。</p>
+<p>但如果每次操作都重新遍历所有段对，这一部分仍然会退化为平方复杂度。</p>
+<p>所以，值域分块虽然减少了单个段对的统计成本，却没有完全解决重复计算的问题。</p>
+<p>这正是等价类分治要解决的难点。</p>
+<h2 id="五、等价类分治：如何避免重复计算段对？"><a href="#五、等价类分治：如何避免重复计算段对？" class="headerlink" title="五、等价类分治：如何避免重复计算段对？"></a>五、等价类分治：如何避免重复计算段对？</h2><h3 id="5-1-等价类的本质"><a href="#5-1-等价类的本质" class="headerlink" title="5.1 等价类的本质"></a>5.1 等价类的本质</h3><p>在一个包含 $C$ 次操作的操作块中，全部操作的分割边界确定后，序列被划分为至多 $C+1$ 个连续段。</p>
+<p>考虑操作块的某个子区间 $[l,r]$。</p>
+<p>如果只考虑这个子区间中的操作，那么原来为了其他操作而产生的部分分割边界就不再必要。相邻的一些小段可以重新合并成更大的段。</p>
+<p>因此，子问题的段划分可以由父问题的段划分合并得到。</p>
+<p>这里的等价类，就是在当前操作范围内始终作为一个整体移动、不会再被该范围内的操作拆开的连续段。</p>
+<p>随着分治区间缩小，需要维护的等价类数量也随之减少。</p>
+<h3 id="5-2-为什么需要分治？"><a href="#5-2-为什么需要分治？" class="headerlink" title="5.2 为什么需要分治？"></a>5.2 为什么需要分治？</h3><p>假设一个操作块包含 $C$ 次操作。</p>
+<p>如果直接计算所有段对贡献，单个操作块可能需要 $O(C^2)$ 的时间。对全部操作块而言，这一部分的总复杂度就是：</p>
+<p>$$<br>O\left(\frac{n}{C}\cdot C^2\right)&#x3D;O(nC)<br>$$</p>
+<p>乍看之下，这个复杂度并不一定太差。但若同时还需要为每个查询重复合并跨值域块的信息，整体复杂度就会过高。</p>
+<p>等价类分治的思路是：将操作区间不断二分，在父问题中完成必要的贡献统计，然后把统计信息映射到左右子问题的等价类中。</p>
+<p>设当前处理的操作区间为 $[l,r]$，中点为：</p>
+<p>$$<br>mid&#x3D;\left\lfloor\frac{l+r}{2}\right\rfloor<br>$$</p>
+<p>接下来分别处理左子问题 $[l,mid]$ 和右子问题 $[mid+1,r]$。</p>
+<p>分治过程中主要完成三件事：</p>
+<ol>
+<li>建立当前子问题的等价类划分。</li>
+<li>将父问题的段间贡献合并到子问题的等价类中。</li>
+<li>将序列方向、段的排列顺序以及值域计数同步映射到子问题。</li>
+</ol>
+<p>这里的关键并不是每次重新计算所有元素对，而是让已经预处理的段对贡献能够被重复利用。</p>
+<h3 id="5-3-类内贡献如何合并？"><a href="#5-3-类内贡献如何合并？" class="headerlink" title="5.3 类内贡献如何合并？"></a>5.3 类内贡献如何合并？</h3><p>假设两个相邻的等价类 $A,B$ 被合并成一个新类：</p>
+<p>$$<br>S&#x3D;A+B<br>$$</p>
+<p>那么新类的内部逆序对数量为：</p>
+<p>$$<br>h_S&#x3D;h_A+h_B+w(A,B)<br>$$</p>
+<p>如果合并三个类：</p>
+<p>$$<br>S&#x3D;A+B+C<br>$$</p>
+<p>则有：</p>
+<p>$$<br>\begin{aligned}<br>h_S&#x3D;{}&amp;h_A+h_B+h_C\<br>&amp;+w(A,B)+w(A,C)+w(B,C)<br>\end{aligned}<br>$$</p>
+<p>因此，合并等价类的本质是：把原来不同小类之间的贡献，汇总成大类内部的贡献。</p>
+<p>对于同一个值域块内的贡献，可以使用预处理好的段对统计；对于不同值域块之间的贡献，则使用值域计数和前缀和。</p>
+<p>这样就能在合并等价类时，同时维护类内和类间的逆序对信息。</p>
+<h3 id="5-4-为什么分治后不会重复做平方统计？"><a href="#5-4-为什么分治后不会重复做平方统计？" class="headerlink" title="5.4 为什么分治后不会重复做平方统计？"></a>5.4 为什么分治后不会重复做平方统计？</h3><p>设分治节点的操作区间长度为 $k$，该节点最多有 $O(k)$ 个等价类。</p>
+<p>在该节点中，直接合并所有类对的贡献需要 $O(k^2)$ 的时间。</p>
+<p>但分治树每一层的节点数量与节点规模成反比。若一层中每个节点的规模为 $k$，那么这一层有 $O(C&#x2F;k)$ 个节点，所有节点的平方项之和为：</p>
+<p>$$<br>O\left(\frac{C}{k}\cdot k^2\right)&#x3D;O(Ck)<br>$$</p>
+<p>当 $k$ 逐层减半时，所有层的平方项构成几何级数，其总和仍然为：</p>
+<p>$$<br>O(C^2)<br>$$</p>
+<p>因此，单个操作块中等价类合并的总复杂度是 $O(C^2)$，所有操作块合计为：</p>
+<p>$$<br>O\left(\frac{n}{C}\cdot C^2\right)&#x3D;O(nC)<br>$$</p>
+<p>这就是等价类分治的关键作用：<strong>它允许在分治节点内部进行局部的平方合并，但避免每次操作都重新计算全部段对贡献。</strong></p>
+<p>需要注意，分治本身并不会自动降低所有平方项。只有当父子问题之间能够复用类间贡献、并且子问题的类划分能够由父问题的类合并得到时，这个复杂度分析才成立。</p>
+<h2 id="六、复杂度分析与参数选择"><a href="#六、复杂度分析与参数选择" class="headerlink" title="六、复杂度分析与参数选择"></a>六、复杂度分析与参数选择</h2><p>综合前面的三部分开销：</p>
+<ol>
+<li>同一值域块内的段对贡献预处理。</li>
+<li>不同值域块之间的计数合并。</li>
+<li>等价类分治中的段对合并。</li>
+</ol>
+<p>总复杂度可以写成：</p>
+<p>$$<br>T(n)&#x3D;O\left(<br>\frac{n^2V}{C}<br>+\frac{n^2\log C}{V}<br>+nC<br>\right)<br>$$</p>
+<p>其中：</p>
+<ul>
+<li>$C$ 是操作块长。</li>
+<li>$V$ 是值域块长。</li>
+</ul>
+<p>下面平衡这些参数。</p>
+<p>首先令第一项与第三项同阶：</p>
+<p>$$<br>\frac{n^2V}{C}&#x3D;nC<br>$$</p>
+<p>得到：</p>
+<p>$$<br>C&#x3D;\sqrt{nV}<br>$$</p>
+<p>再令第二项与第三项同阶：</p>
+<p>$$<br>\frac{n^2\log n}{V}&#x3D;nC<br>$$</p>
+<p>得到：</p>
+<p>$$<br>C&#x3D;\frac{n\log n}{V}<br>$$</p>
+<p>联立两式：</p>
+<p>$$<br>\sqrt{nV}&#x3D;\frac{n\log n}{V}<br>$$</p>
+<p>所以：</p>
+<p>$$<br>V^3&#x3D;n(\log n)^2<br>$$</p>
+<p>得到：</p>
+<p>$$<br>V&#x3D;n^{1&#x2F;3}\log^{2&#x2F;3}n<br>$$</p>
+<p>进一步有：</p>
+<p>$$<br>C&#x3D;n^{2&#x2F;3}\log^{1&#x2F;3}n<br>$$</p>
+<p>代回总复杂度：</p>
+<p>$$<br>\boxed{T(n)&#x3D;O\left(n^{5&#x2F;3}\log^{1&#x2F;3}n\right)}<br>$$</p>
+<p>空间复杂度主要由段对贡献矩阵和值域计数矩阵决定，使用紧凑的整数类型保存计数，并合理复用数组，可以将空间控制在可接受的范围内。</p>
+<p>本题的实现常数较大，实际代码通常还需要根据评测环境调整操作块长和值域块长。</p>
+<h2 id="七、实现时需要维护的信息"><a href="#七、实现时需要维护的信息" class="headerlink" title="七、实现时需要维护的信息"></a>七、实现时需要维护的信息</h2><p>结合以上思路，一个操作块内需要维护以下几类信息：</p>
+<ul>
+<li><code>segment</code>：每个连续段对应的原数组区间及其方向。</li>
+<li><code>h[i]</code>：每个段内部的逆序对数量。</li>
+<li><code>f[i][j]</code>：同一值域块内，段对之间的细粒度贡献。</li>
+<li><code>g[i][b]</code>：第 $i$ 个段在第 $b$ 个值域块中的元素数量。</li>
+<li><code>F</code>、<code>G</code>：分治过程中合并后的段对贡献和值域计数。</li>
+</ul>
+<p>其中，<code>f</code> 用于处理同一值域块内部的具体大小关系，<code>g</code> 用于处理不同值域块之间的贡献。</p>
+<p>每个操作块处理完毕后，再将各段按照记录的方向拼接回真实序列，作为下一个操作块的初始序列。</p>
+<p>整个实现最容易出错的地方是：</p>
+<ol>
+<li>翻转前缀时，段的顺序与段内方向都需要改变。</li>
+<li>逆序对是有方向的，计算 $w(A,B)$ 时必须保证 $A$ 在 $B$ 左侧。</li>
+<li>父子问题的等价类映射必须同步更新 <code>f</code>、<code>g</code> 和 <code>h</code>。</li>
+<li>查询答案对应翻转前的前缀逆序对，不能误把翻转后的递增对与翻转前的递增对混淆。</li>
+</ol>
+<h2 id="八、总结"><a href="#八、总结" class="headerlink" title="八、总结"></a>八、总结</h2><p>这道题最值得记录的不是某一个具体的数据结构，而是三层优化如何配合：</p>
+<ul>
+<li><strong>操作分块</strong>：将动态序列压缩为少量连续段。</li>
+<li><strong>值域分块</strong>：将段间逆序对拆成块间计数和块内细粒度贡献。</li>
+<li><strong>等价类分治</strong>：让父问题的贡献信息在子问题中复用，避免每次查询都重新枚举所有段对。</li>
+</ul>
+<p>最终复杂度为：</p>
+<p>$$<br>O\left(n^{5&#x2F;3}\log^{1&#x2F;3}n\right)<br>$$</p>
+<p>这是一个典型的离线分块与等价类分治结合的优化问题。理解它的关键，是始终明确每一层究竟在减少哪一种重复计算：操作分块减少动态维护的对象数量，值域分块降低统计单个段对的成本，而等价类分治则负责复用父子问题之间的贡献信息。</p>
+<h1 id="P9069-Ynoi-Easy-Round-2022-堕天作战-TEST-98"><a href="#P9069-Ynoi-Easy-Round-2022-堕天作战-TEST-98" class="headerlink" title="P9069 [Ynoi Easy Round 2022] 堕天作战 TEST_98"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P9069">P9069 [Ynoi Easy Round 2022] 堕天作战 TEST_98</a></h1><p>倍增分块模板。</p>
+<p>考虑值域倍增分块，设 $B$ 为进制，那么 $(B^{i-1}, B^i]$ 分为一块。</p>
+<p>对于每一个块，开一个线段树来维护。</p>
+<p>操作 $x$ 的时候，假设 $x$ 所在的块为 $p$。</p>
+<ul>
+<li>$&lt;p$ 的块都会减成负数，直接暴力做。</li>
+<li>$p$ 这一块 $&lt;x$ 的直接变成负数，$&#x3D;x$ 跳过 $&gt;x$ 的如果需要降块那么就暴力，否则直接在线段树上打 tag。</li>
+<li>$&gt;p$ 的块，如果可以降块那么就暴力下放，否则直接在线段树上打 tag。</li>
+</ul>
+<p>发现所有下放都可以暴力，每个数组最多被下放 $\log V$ 次。<br>所以总复杂度为 $O(n\log n \log V)$。</p>
+
     </div>
 
     
