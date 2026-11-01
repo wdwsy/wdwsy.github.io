@@ -994,7 +994,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-10-29 21:41:31" itemprop="dateModified" datetime="2026-10-29T21:41:31+08:00">2026-10-29</time>
+      <time title="Modified: 2026-11-01 19:10:16" itemprop="dateModified" datetime="2026-11-01T19:10:16+08:00">2026-11-01</time>
     </span>
 
   
@@ -1666,6 +1666,13 @@ $$
 <li>$&gt;p$ 的块，如果可以降块那么就暴力下放，否则直接在线段树上打 tag。</li>
 </ul>
 <p>发现所有下放都可以暴力，每个数组最多被下放 $\log V$ 次。<br>所以总复杂度为 $O(n\log n \log V)$。</p>
+<h1 id="5933-–-黑白染色"><a href="#5933-–-黑白染色" class="headerlink" title="5933 – 黑白染色"></a><a target="_blank" rel="noopener" href="http://218.22.67.60:30808/OnlineJudge/contestproblem.php?id=16205933">5933 – 黑白染色</a></h1><p>非常好的题目，值得复习。</p>
+<p>主要学习两个东西。</p>
+<p>首先这个东西不能说是学到了，应该说是忘记了。</p>
+<p>$$<br>\sum_{i&#x3D;0}^{+ \infty} {a \choose i}{b\choose i}&#x3D; {a+b \choose a}<br>$$</p>
+<p>属于范德蒙德卷积变形。</p>
+<p>然后就是如何推出容斥系数。<br>我们想要推出容斥系数 $f$，满足：<br>$\sum_{j&#x3D;1}^{L}(L-j+1)\times f_{j}&#x3D;(c+1)^{n-1-L}$。</p>
+<p>我们可以从小到大递归去推得。<br>首先令 $L&#x3D;i$ 那么有：<br>$\sum_{j&#x3D;1}^{j}(i-j+1)\times f_{j}&#x3D;(c+1)^{n-1-L}$<br>然后简单移向可以得到：<br>$$<br>f_{i}&#x3D;(c+1)^{n-1-i}-(i+1)\sum_{j&#x3D;1}^{i-1} f_{j}+\sum_{j&#x3D;1}^{i-1} j\times f_{j}<br>$$</p>
 
       
     </div>
