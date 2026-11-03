@@ -178,7 +178,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -219,6 +219,207 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/11/03/CSR-%E7%B4%A7%E5%AF%86%E5%AD%98%E5%82%A8%E6%A0%91%E7%9A%84%E6%96%B9%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/11/03/CSR-%E7%B4%A7%E5%AF%86%E5%AD%98%E5%82%A8%E6%A0%91%E7%9A%84%E6%96%B9%E5%BC%8F/" class="post-title-link" itemprop="url">CSR--紧密存储树的方式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-11-03 13:46:56 / Modified: 13:47:18" itemprop="dateCreated datePublished" datetime="2026-11-03T13:46:56+08:00">2026-11-03</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>CSR 和链式前向星都是竞赛中常用的图存储方式。对于树而言，两者的时间复杂度都是 $O(n)$，但在<strong>空间占用、内存连续性、建图方式和遍历效率</strong>上存在区别。</p>
+<p>可以先给出一个结论：</p>
+<p><strong>CSR 可以理解为一种更加紧凑的前向星存储方式。它省去了每条边的 <code>nxt</code> 指针，将同一个点的所有出边连续存储。</strong></p>
+<h2 id="1-链式前向星"><a href="#1-链式前向星" class="headerlink" title="1. 链式前向星"></a>1. 链式前向星</h2><p>链式前向星使用三个数组：</p>
+<ul>
+<li><code>head[u]</code>：点 $u$ 的第一条出边编号。</li>
+<li><code>to[i]</code>：第 $i$ 条边指向的点。</li>
+<li><code>nxt[i]</code>：第 $i$ 条边的下一条出边编号。</li>
+</ul>
+<p>例如，建一棵树：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100005</span>, M = <span class="number">200005</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> head[N], to[M], nxt[M], cnt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> v)</span> </span>&#123;</span><br><span class="line">    to[++cnt] = v;</span><br><span class="line">    nxt[cnt] = head[u];</span><br><span class="line">    head[u] = cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add_edge</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> v)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">add</span>(u, v);</span><br><span class="line">    <span class="built_in">add</span>(v, u);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>遍历点 $u$ 的所有邻边：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = head[u]; i; i = nxt[i]) &#123;</span><br><span class="line">    <span class="type">int</span> v = to[i];</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>它的特点是：</p>
+<p>每条边通过 <code>nxt</code> 指针连接到下一条边，同一个点的邻边不一定在内存中连续。</p>
+<h2 id="2-CSR"><a href="#2-CSR" class="headerlink" title="2. CSR"></a>2. CSR</h2><p>CSR（Compressed Sparse Row）采用完全不同的存储方式。</p>
+<p>它使用两个核心数组：</p>
+<ul>
+<li><code>start[u]</code>：点 $u$ 的邻边在数组中的起始位置。</li>
+<li><code>to[i]</code>：按照点的编号，将所有邻边连续存储。</li>
+</ul>
+<p>对于每个点 $u$，它的所有邻边恰好位于：</p>
+<p>$$<br>to[start[u]],\ldots,to[start[u+1]-1]<br>$$</p>
+<p>例如，有如下邻接关系：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1: 2, 3</span><br><span class="line">2: 1, 4, 5</span><br><span class="line">3: 1</span><br><span class="line">4: 2</span><br><span class="line">5: 2</span><br></pre></td></tr></table></figure>
+
+<p>那么 CSR 可以存储为：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">start: 0 2 5 6 7 8</span><br><span class="line"></span><br><span class="line">to:    2 3 | 1 4 5 | 1 | 2 | 2</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li>点 1 的邻边是 <code>to[0...1]</code>。</li>
+<li>点 2 的邻边是 <code>to[2...4]</code>。</li>
+<li>点 3 的邻边是 <code>to[5...5]</code>。</li>
+<li>点 4 的邻边是 <code>to[6...6]</code>。</li>
+<li>点 5 的邻边是 <code>to[7...7]</code>。</li>
+</ul>
+<p>遍历邻边非常简单：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = start[u]; i &lt; start[u + <span class="number">1</span>]; i++) &#123;</span><br><span class="line">    <span class="type">int</span> v = to[i];</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，这里的 <code>start</code> 长度为 $n+1$。</p>
+<h3 id="如何建-CSR？"><a href="#如何建-CSR？" class="headerlink" title="如何建 CSR？"></a>如何建 CSR？</h3><p>一般分为三个步骤。</p>
+<p><strong>第一步：统计每个点的度数。</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">deg</span><span class="params">(n + <span class="number">1</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> [u, v] : edges) &#123;</span><br><span class="line">    deg[u]++;</span><br><span class="line">    deg[v]++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>第二步：计算前缀和。</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">start</span><span class="params">(n + <span class="number">2</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    start[i + <span class="number">1</span>] = start[i] + deg[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时，点 $u$ 的邻边应该存放在：</p>
+<p>$$<br>[start[u],start[u+1])<br>$$</p>
+<p><strong>第三步：填充邻接表。</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; cur = start;</span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">to</span><span class="params">(<span class="number">2</span> * (n - <span class="number">1</span>))</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> [u, v] : edges) &#123;</span><br><span class="line">    to[cur[u]++] = v;</span><br><span class="line">    to[cur[v]++] = u;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>至此建图完成。</p>
+<h2 id="3-两者的区别"><a href="#3-两者的区别" class="headerlink" title="3. 两者的区别"></a>3. 两者的区别</h2><table>
+<thead>
+<tr>
+<th>比较项目</th>
+<th>链式前向星</th>
+<th>CSR</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>存储数组</td>
+<td><code>head, to, nxt</code></td>
+<td><code>start, to</code></td>
+</tr>
+<tr>
+<td>空间复杂度</td>
+<td>$O(n+m)$</td>
+<td>$O(n+m)$</td>
+</tr>
+<tr>
+<td>是否连续存储邻边</td>
+<td>不保证</td>
+<td>是</td>
+</tr>
+<tr>
+<td>建图方式</td>
+<td>直接插入</td>
+<td>统计度数、前缀和、填充</td>
+</tr>
+<tr>
+<td>动态加边</td>
+<td>支持 $O(1)$</td>
+<td>不方便</td>
+</tr>
+<tr>
+<td>遍历邻边</td>
+<td>沿 <code>nxt</code> 跳转</td>
+<td>连续遍历</td>
+</tr>
+<tr>
+<td>内存局部性</td>
+<td>相对较差</td>
+<td>较好</td>
+</tr>
+</tbody></table>
+<h3 id="空间占用"><a href="#空间占用" class="headerlink" title="空间占用"></a>空间占用</h3><p>这是一个比较重要的区别。</p>
+<p>假设使用 <code>int</code> 存储，且是无向树，那么共有 $2(n-1)$ 条有向边。</p>
+<p>链式前向星需要：</p>
+<ul>
+<li><code>head</code>：$n$ 个整数。</li>
+<li><code>to</code>：$2(n-1)$ 个整数。</li>
+<li><code>nxt</code>：$2(n-1)$ 个整数。</li>
+</ul>
+<p>总计约 $5n$ 个整数。</p>
+<p>CSR 需要：</p>
+<ul>
+<li><code>start</code>：$n+1$ 个整数。</li>
+<li><code>to</code>：$2(n-1)$ 个整数。</li>
+</ul>
+<p>总计约 $3n$ 个整数。</p>
+<p>因此，CSR 的空间占用明显更小，尤其是在大规模图上。</p>
+<h3 id="遍历效率"><a href="#遍历效率" class="headerlink" title="遍历效率"></a>遍历效率</h3><p>CSR 通常具有更好的缓存局部性。</p>
+<p>链式前向星遍历邻边时，需要不断读取 <code>nxt[i]</code>，再跳转到下一条边。</p>
+<p>而 CSR 中，同一个点的邻边连续存储，遍历时基本上就是顺序访问内存。</p>
+<p>因此，在大量 DFS、BFS 或者反复遍历邻接表的场景中，CSR 通常具有一定的性能优势。</p>
+<hr>
+<h2 id="4-竞赛中应该怎么选择？"><a href="#4-竞赛中应该怎么选择？" class="headerlink" title="4. 竞赛中应该怎么选择？"></a>4. 竞赛中应该怎么选择？</h2><p>我的建议是：</p>
+<ul>
+<li><strong>普通图论题</strong>：链式前向星足够，写起来简单。</li>
+<li><strong>大规模静态树</strong>：优先考虑 CSR，尤其是空间和常数比较敏感时。</li>
+<li><strong>需要动态加边</strong>：使用链式前向星。</li>
+<li><strong>需要反复遍历整棵树</strong>：CSR 通常更有优势。</li>
+</ul>
+<p>特别值得注意的是：</p>
+<p>CSR 并不是什么新的图论算法，它只是改变了邻接表的内存布局。</p>
+<p>两者的遍历复杂度完全相同，都是 $O(n+m)$。CSR 的优势主要来自于减少存储空间，以及提高内存访问的连续性。</p>
+<p><strong>如果你在做 IOI、CEOI 等大规模静态树题，我认为值得养成使用 CSR 的习惯。</strong></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/11/01/CSP-S2026%E9%A2%98%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -247,9 +448,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2026-11-01 23:25:07 / Modified: 23:41:22" itemprop="dateCreated datePublished" datetime="2026-11-01T23:25:07+08:00">2026-11-01</time>
+      <time title="Created: 2026-11-01 23:25:07" itemprop="dateCreated datePublished" datetime="2026-11-01T23:25:07+08:00">2026-11-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-11-03 13:45:38" itemprop="dateModified" datetime="2026-11-03T13:45:38+08:00">2026-11-03</time>
     </span>
 
   
@@ -280,6 +487,22 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2000005</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line">ll nxt[N], lst[N], tmp[N], a[N];</span><br><span class="line">ll f[N], g[N];</span><br><span class="line">vector&lt;ll&gt; vec[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    ll d;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; d;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) cin &gt;&gt; a[i];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = n, j = n; i &gt;= <span class="number">1</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">while</span> (a[j] - a[i] &gt; d) j--;</span><br><span class="line">        nxt[i] = j;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>, j = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">while</span> (a[i] - a[j] &gt; d) j++;</span><br><span class="line">        lst[i] = j;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        f[nxt[i]]++;</span><br><span class="line">        <span class="keyword">if</span> (lst[i] != i &amp;&amp; nxt[lst[i]] == i) &#123;</span><br><span class="line">            f[i] += f[lst[i]];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = n; i &gt;= <span class="number">1</span>; i--) &#123;</span><br><span class="line">        g[lst[i]]++;</span><br><span class="line">        <span class="keyword">if</span> (nxt[i] != i &amp;&amp; lst[nxt[i]] == i) &#123;</span><br><span class="line">            g[i] += g[nxt[i]];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ll ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="comment">// 这里实现稍微有点区别，我们枚举了左边的拼接点</span></span><br><span class="line">        <span class="keyword">if</span> (nxt[i] - i &lt;= <span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span> (nxt[nxt[i]] == nxt[i]) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="comment">// 中间的差异点为 nxt[i] - 1 和 nxt[i]</span></span><br><span class="line">        ll A = (lst[nxt[i] - <span class="number">1</span>] == i ? f[i] + <span class="number">1</span> : <span class="number">1</span>); <span class="comment">// 左边拼接的方案数</span></span><br><span class="line">        ll B = nxt[nxt[i] - <span class="number">1</span>] - nxt[nxt[i] - <span class="number">2</span>]; <span class="comment">// 右边拼接的方案数</span></span><br><span class="line">        <span class="keyword">if</span> (nxt[nxt[i]] == nxt[nxt[i] - <span class="number">1</span>] &amp;&amp; nxt[nxt[i]] != nxt[nxt[i] - <span class="number">2</span>]) B += g[nxt[nxt[i]]];</span><br><span class="line">        ans += A * B;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= n; i++) f[i] = g[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> c, T;</span><br><span class="line">    cin &gt;&gt; c &gt;&gt; T;</span><br><span class="line">    <span class="keyword">while</span> (T--) &#123;</span><br><span class="line">        <span class="built_in">work</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </details>
+
+<h1 id="P17834-CSP-S-2026-研发基地-hub"><a href="#P17834-CSP-S-2026-研发基地-hub" class="headerlink" title="P17834 [CSP-S 2026] 研发基地 &#x2F; hub"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P17834">P17834 [CSP-S 2026] 研发基地 &#x2F; hub</a></h1><p>这个题目启示我们一定要尽量把问题简化为最简形式。</p>
+<p>首先想到二分。</p>
+<p>在二分一个答案之后，我们发现，我们选择叶子好像不太优。<br>不如选择它的父亲，不仅对其他点的贡献会更好，而且也同样能覆盖叶子。<br>但是我们真的只能不考虑叶子么。</p>
+<p>假设我们现在二分的答案是 $mid$。<br>我们发现，我们可能选择的点一定在剥掉 $mid$ 轮叶子之后的剩下的树。<br>我们称这个树为核心树。</p>
+<p>考虑挖掘核心树更多的性质。</p>
+<ol>
+<li>已经说过了，就是所有选择的点，一定在核心树中。</li>
+<li>核心树的叶子一定选。因为叶子肯定有一个点距离他已经是 $mid$ 了。</li>
+</ol>
+<p>所以发现其实核心树中大部分的点都是要选择的。</p>
+<p>设核心树的节点个数为 $C$。</p>
+<p>首先特判 $C \leq k$ 的情况，我们直接全部选择就好。</p>
+<p>我们不妨看看不选择的位置有什么性质。<br>不难发现不选择的点一定不能有三度点。这样就会导致裂解成 $\geq 3$ 个连通块。<br>那么如果全部选择二度点，就会构成链。<br>而且我们发现，不可能选择两条链。否则也会裂解成至少 $3$ 个连通块。</p>
+<p>所以我们就只需要在每一个链上判断能否删除 $R&#x3D;C-k$ 个位置。<br>我们考虑每一个节点，即使不是叶子，也会导致这个链上增加限制，限制就形如从当前点开始，$x$ 步内必须有点没有被删除。<br>我们因为已经知道了要删除 $R$ 个位置，所以可以把这个限制变成关于起点的限制。这部分可以看看题解，说起来比较绕。</p>
+<p>感觉主要就是不知道可以找到核心树，也不知道所有叶子必须选择这个性质，其他容易去推得。</p>
 
       
     </div>
@@ -1066,101 +1289,6 @@
 <p>$$<br>f(m)&#x3D;\sum_{h&#x3D;1}^{H}\sum_{w&#x3D;1}^{W}<br>\binom{H}{h}\binom{W}{w}(-1)^{h+w}<br>m^{h(W-w)}(M+1-m)^{(H-h)w}M^{(H-h)(W-w)}<br>$$<br>利用二项式定理，我们可以将其改写为<br>$$<br>\begin{aligned}<br>f(m)<br>&amp;&#x3D;\sum_{h&#x3D;1}^{H}\binom{H}{h}(-1)^h<br>\sum_{w&#x3D;1}^{W}\binom{W}{w}<br>\left(-(M+1-m)^{H-h}\right)^w<br>\left(m^h M^{H-h}\right)^{W-w}\\<br>&amp;&#x3D;\sum_{h&#x3D;1}^{H}\binom{H}{h}(-1)^h<br>\left[<br>\left(-(M+1-m)^{H-h}+m^h M^{H-h}\right)^W<br>-\left(m^h M^{H-h}\right)^W<br>\right]<br>\end{aligned}<br>$$<br>因此，对于给定的 $m$，我们可以在例如 $O(H\log(HW))$ 时间内计算 $f(m)$。</p>
 <p>答案是<br>$$<br>F(M)&#x3D;\sum_{m&#x3D;1}^{M}f(m),<br>$$<br>我们将其视为 $M$ 的多项式。一旦我们有了 $F(0),F(1),\dots,F(HW)$，就可以使用拉格朗日插值计算 $F(M)$。计算这些值最终归结为计算 $f(1),f(2),\dots,f(HW)$。（注意，如果 $f$ 依赖于这里的 $M$，这个论证就不成立了。）在预先计算好合适的阶乘表之后，拉格朗日插值本身可以在与多项式次数成线性关系的时间内完成。</p>
 <p>这样得到的算法运行时间为例如<br>$$<br>O(H^2W\log(HW)).<br>$$</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/09/13/Min-Max%E5%AE%B9%E6%96%A5%E6%8B%93%E5%B1%95%E5%BD%A2%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wdwsy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wdwsy's Blog">
-      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | wdwsy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/09/13/Min-Max%E5%AE%B9%E6%96%A5%E6%8B%93%E5%B1%95%E5%BD%A2%E5%BC%8F/" class="post-title-link" itemprop="url">Min-Max容斥拓展形式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2026-09-13 22:47:59" itemprop="dateCreated datePublished" datetime="2026-09-13T22:47:59+08:00">2026-09-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-10-12 22:44:30" itemprop="dateModified" datetime="2026-10-12T22:44:30+08:00">2026-10-12</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="Min-Max-扩展形式"><a href="#Min-Max-扩展形式" class="headerlink" title="Min - Max 扩展形式"></a>Min - Max 扩展形式</h2><p>Min - Max 容斥得扩展形式可以解决第 $k$ 大（小）类问题。</p>
-<p>$$<br>\text{kmax}(S)&#x3D;\displaystyle\sum\limits_{T \subset S,|T| \ge k} (-1)^{|T|-k} \begin{pmatrix} |T|-1 \\ k-1 \end{pmatrix} \min(T)\\<br>\text{kmin}(S)&#x3D;\displaystyle\sum\limits_{T \subset S,|T| \ge k} (-1)^{|T|-k} \begin{pmatrix} |T|-1 \\ k-1 \end{pmatrix} \max(T)<br>$$</p>
-<p>同样地，这个形式在期望下也成立。</p>
-<h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><ul>
-<li>考虑构造一个容斥系数数组 $g$，满足 $\text{kmax}(S)&#x3D;\displaystyle\sum\limits_{T \subset S} g_{|T|} \min(T)$。</li>
-<li>记 $S$ 中元素从大到小分别为 $x_1,…,x_m$，那么对于 $x_i$，其在等式左侧的贡献为 $[i&#x3D;k]$，在右侧的贡献为 $\displaystyle\sum\limits_{j&#x3D;0}^{i-1} \begin{pmatrix} i-1 \ j \end{pmatrix} g_{j+1}$，转化为 $[i&#x3D;k]&#x3D;\displaystyle\sum\limits_{j&#x3D;0}^{i-1} \begin{pmatrix} i-1 \ j \end{pmatrix} g_{j+1}$。</li>
-<li>记 $F_i &#x3D; [i+1&#x3D;k],G_i&#x3D;g_{i+1}$，则 $F_i&#x3D;\displaystyle\sum\limits_{j&#x3D;0}^{i} \begin{pmatrix} i \ j \end{pmatrix} G_j$。</li>
-<li>二项式反演，得到 $G_i&#x3D;\displaystyle\sum\limits_{j&#x3D;0}^{i}(-1)^{i-j} \begin{pmatrix} i \ j \end{pmatrix} F_j &#x3D; (-1)^{i-k+1} \begin{pmatrix} i \ k-1 \end{pmatrix}$。</li>
-<li>所以 $g_i&#x3D;G_{i-1}&#x3D;(-1)^{i-k} \begin{pmatrix} i-1 \ k-1 \end{pmatrix}$。</li>
-</ul>
-<h3 id="「Luogu-P4707」重返现世"><a href="#「Luogu-P4707」重返现世" class="headerlink" title="「Luogu P4707」重返现世"></a>「Luogu P4707」重返现世</h3><p>首先注意到 $n-k$ 很小，考虑把前 $k$ 小改为求前 $k$ 大，下文的 $k$ 代指 $n-k$。</p>
-<p>Min - Max 容斥，问题转化为求 $\displaystyle\sum\limits_{T \subset S,|T| \ge k} (-1)^{|T|-k} \begin{pmatrix} |T|-1 \ k-1 \end{pmatrix} \min(T)$。</p>
-<p>考虑设计 dp 来计算容斥系数。</p>
-<p>观察到 $m$ 并不大，考虑枚举集合 $T$ 的选中概率 $P_T$。</p>
-<p>具体来说，我们定义 $f_{i,j,k}$ 代表考虑到前 $i$ 个物品，$P_T&#x3D;j$，容斥系数的总和。</p>
-<p>考虑转移：</p>
-<ul>
-<li>不选第 $i$ 个物品：$f_{i-1,j,k} \to f_{i,j,k}$。</li>
-<li>选第 $i$ 个物品，注意到 $\begin{pmatrix} |T|-1 \ k-1 \end{pmatrix}$ 可以拆成 $\begin{pmatrix} |T|-2 \ k-1 \end{pmatrix}+\begin{pmatrix} |T|-2 \ k-2 \end{pmatrix}$，那么转移就是 $f_{i-1,j-p_i,k-1} - f_{i-1,j-p_i,k} \to f_{i,j,k}$。</li>
-</ul>
 
       
     </div>

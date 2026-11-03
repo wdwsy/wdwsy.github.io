@@ -28,7 +28,7 @@
 <meta property="og:description" content="P17833 [CSP-S 2026] 迁徙 &#x2F; migrate场上想的做法太难写了，场下重构 $&lt;40$ 分钟过了。 考虑判定一个点对 $(x,y)$ 满足 $x&lt;y$ 是否可行。 我们考虑处理出两个序列 $a,b$：  从 $x$ 开始向右跳，每次跳到最右能够跳到的点，最后跳到 $y$，记录这个序列为 $a$。 从 $y$ 开始向左跳，每次跳到最左能够跳到的点，最后跳到">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-11-01T15:25:07.000Z">
-<meta property="article:modified_time" content="2026-11-01T15:41:22.722Z">
+<meta property="article:modified_time" content="2026-11-03T05:45:38.538Z">
 <meta property="article:author" content="wdwsy">
 <meta property="article:tag" content="DP">
 <meta property="article:tag" content="树">
@@ -167,7 +167,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#P17833-CSP-S-2026-%E8%BF%81%E5%BE%99-migrate"><span class="nav-number">1.</span> <span class="nav-text">P17833 [CSP-S 2026] 迁徙 &#x2F; migrate</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#P17833-CSP-S-2026-%E8%BF%81%E5%BE%99-migrate"><span class="nav-number">1.</span> <span class="nav-text">P17833 [CSP-S 2026] 迁徙 &#x2F; migrate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P17834-CSP-S-2026-%E7%A0%94%E5%8F%91%E5%9F%BA%E5%9C%B0-hub"><span class="nav-number">2.</span> <span class="nav-text">P17834 [CSP-S 2026] 研发基地 &#x2F; hub</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -182,7 +182,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -252,9 +252,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2026-11-01 23:25:07 / Modified: 23:41:22" itemprop="dateCreated datePublished" datetime="2026-11-01T23:25:07+08:00">2026-11-01</time>
+      <time title="Created: 2026-11-01 23:25:07" itemprop="dateCreated datePublished" datetime="2026-11-01T23:25:07+08:00">2026-11-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-11-03 13:45:38" itemprop="dateModified" datetime="2026-11-03T13:45:38+08:00">2026-11-03</time>
     </span>
 
   
@@ -292,6 +298,22 @@
 
 </details>
 
+<h1 id="P17834-CSP-S-2026-研发基地-hub"><a href="#P17834-CSP-S-2026-研发基地-hub" class="headerlink" title="P17834 [CSP-S 2026] 研发基地 &#x2F; hub"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P17834">P17834 [CSP-S 2026] 研发基地 &#x2F; hub</a></h1><p>这个题目启示我们一定要尽量把问题简化为最简形式。</p>
+<p>首先想到二分。</p>
+<p>在二分一个答案之后，我们发现，我们选择叶子好像不太优。<br>不如选择它的父亲，不仅对其他点的贡献会更好，而且也同样能覆盖叶子。<br>但是我们真的只能不考虑叶子么。</p>
+<p>假设我们现在二分的答案是 $mid$。<br>我们发现，我们可能选择的点一定在剥掉 $mid$ 轮叶子之后的剩下的树。<br>我们称这个树为核心树。</p>
+<p>考虑挖掘核心树更多的性质。</p>
+<ol>
+<li>已经说过了，就是所有选择的点，一定在核心树中。</li>
+<li>核心树的叶子一定选。因为叶子肯定有一个点距离他已经是 $mid$ 了。</li>
+</ol>
+<p>所以发现其实核心树中大部分的点都是要选择的。</p>
+<p>设核心树的节点个数为 $C$。</p>
+<p>首先特判 $C \leq k$ 的情况，我们直接全部选择就好。</p>
+<p>我们不妨看看不选择的位置有什么性质。<br>不难发现不选择的点一定不能有三度点。这样就会导致裂解成 $\geq 3$ 个连通块。<br>那么如果全部选择二度点，就会构成链。<br>而且我们发现，不可能选择两条链。否则也会裂解成至少 $3$ 个连通块。</p>
+<p>所以我们就只需要在每一个链上判断能否删除 $R&#x3D;C-k$ 个位置。<br>我们考虑每一个节点，即使不是叶子，也会导致这个链上增加限制，限制就形如从当前点开始，$x$ 步内必须有点没有被删除。<br>我们因为已经知道了要删除 $R$ 个位置，所以可以把这个限制变成关于起点的限制。这部分可以看看题解，说起来比较绕。</p>
+<p>感觉主要就是不知道可以找到核心树，也不知道所有叶子必须选择这个性质，其他容易去推得。</p>
+
     </div>
 
     
@@ -313,6 +335,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2026/11/03/CSR-%E7%B4%A7%E5%AF%86%E5%AD%98%E5%82%A8%E6%A0%91%E7%9A%84%E6%96%B9%E5%BC%8F/" rel="next" title="CSR--紧密存储树的方式">
+                  CSR--紧密存储树的方式 <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>
