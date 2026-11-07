@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"wdwsy.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":240},"hljswrap":true,"codeblock":{"theme":{"light":"github-dark","dark":"github-dark-dimmed"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat","show_result":true},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":true,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wdwsy.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":240},"hljswrap":true,"codeblock":{"theme":{"light":"github-dark","dark":"github-dark-dimmed"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":true,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
 
     <meta name="description" content="为了方便，所有的链接都是用洛谷链接。 P12479 [集训队互测 2024] 长野原龙势流星群题意每个点有点权，对于每一个子树，求出一个平均点权最大的包含子树的根的联通块，输出这个平均值。 做法0有一个类 01 on Tree 的做法，挺简单的，但是索然无味。 做法1对于每个子树，以联通块中点的个数为横坐标，联通块中的权值和为纵坐标，发现答案一定在这样一个凸包上，合并的时候进行闵可夫斯基和，查询的">
 <meta property="og:type" content="article">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="为了方便，所有的链接都是用洛谷链接。 P12479 [集训队互测 2024] 长野原龙势流星群题意每个点有点权，对于每一个子树，求出一个平均点权最大的包含子树的根的联通块，输出这个平均值。 做法0有一个类 01 on Tree 的做法，挺简单的，但是索然无味。 做法1对于每个子树，以联通块中点的个数为横坐标，联通块中的权值和为纵坐标，发现答案一定在这样一个凸包上，合并的时候进行闵可夫斯基和，查询的">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-07-26T08:11:31.000Z">
-<meta property="article:modified_time" content="2026-09-04T12:45:49.810Z">
+<meta property="article:modified_time" content="2026-11-07T13:22:47.039Z">
 <meta property="article:author" content="wdwsy">
 <meta property="article:tag" content="DP">
 <meta property="article:tag" content="凸包">
@@ -167,7 +167,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#P12479-%E9%9B%86%E8%AE%AD%E9%98%9F%E4%BA%92%E6%B5%8B-2024-%E9%95%BF%E9%87%8E%E5%8E%9F%E9%BE%99%E5%8A%BF%E6%B5%81%E6%98%9F%E7%BE%A4"><span class="nav-number">1.</span> <span class="nav-text">P12479 [集训队互测 2024] 长野原龙势流星群</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E6%84%8F"><span class="nav-number">1.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%950"><span class="nav-number">1.2.</span> <span class="nav-text">做法0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%951"><span class="nav-number">1.3.</span> <span class="nav-text">做法1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%952"><span class="nav-number">1.4.</span> <span class="nav-text">做法2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.5.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P11149-THUWC-2018-%E5%9F%8E%E5%B8%82%E8%A7%84%E5%88%92"><span class="nav-number">2.</span> <span class="nav-text">P11149 [THUWC 2018] 城市规划</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AGC069A-Schedule-Optimization"><span class="nav-number">3.</span> <span class="nav-text">[AGC069A] Schedule Optimization</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P10790-NOI2024-%E6%A0%91%E5%BD%A2%E5%9B%BE"><span class="nav-number">4.</span> <span class="nav-text">P10790 [NOI2024] 树形图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%E5%87%BA%E6%89%80%E6%9C%89-1-%E7%B1%BB%E7%82%B9"><span class="nav-number">4.1.</span> <span class="nav-text">拓展出所有 $1$ 类点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%E5%87%BA%E6%89%80%E6%9C%89-2-%E7%B1%BB%E7%82%B9"><span class="nav-number">4.2.</span> <span class="nav-text">拓展出所有 $2$ 类点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%89%BE%E4%B8%80%E4%B8%AA-1-%E7%B1%BB%E7%82%B9"><span class="nav-number">4.3.</span> <span class="nav-text">如何找一个 $1$ 类点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="nav-number">4.4.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AGC058F-Authentic-Tree-DP"><span class="nav-number">5.</span> <span class="nav-text">[AGC058F] Authentic Tree DP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#P10218-%E7%9C%81%E9%80%89%E8%81%94%E8%80%83-2024-%E9%AD%94%E6%B3%95%E6%89%8B%E6%9D%96"><span class="nav-number">5.1.</span> <span class="nav-text">P10218 [省选联考 2024] 魔法手杖</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P9111-%E7%A6%8F%E5%BB%BA%E7%9C%81%E9%98%9F%E9%9B%86%E8%AE%AD2019-%E6%9C%80%E5%A4%A7%E6%9D%83%E7%8B%AC%E7%AB%8B%E9%9B%86%E9%97%AE%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">P9111 [福建省队集训2019] 最大权独立集问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P8258-CTS2022-%E7%8B%AC%E7%AB%8B%E9%9B%86%E9%97%AE%E9%A2%98"><span class="nav-number">7.</span> <span class="nav-text">P8258 [CTS2022] 独立集问题</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#P12479-%E9%9B%86%E8%AE%AD%E9%98%9F%E4%BA%92%E6%B5%8B-2024-%E9%95%BF%E9%87%8E%E5%8E%9F%E9%BE%99%E5%8A%BF%E6%B5%81%E6%98%9F%E7%BE%A4"><span class="nav-number">1.</span> <span class="nav-text">P12479 [集训队互测 2024] 长野原龙势流星群</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E6%84%8F"><span class="nav-number">1.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%950"><span class="nav-number">1.2.</span> <span class="nav-text">做法0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%951"><span class="nav-number">1.3.</span> <span class="nav-text">做法1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%952"><span class="nav-number">1.4.</span> <span class="nav-text">做法2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.5.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P11149-THUWC-2018-%E5%9F%8E%E5%B8%82%E8%A7%84%E5%88%92"><span class="nav-number">2.</span> <span class="nav-text">P11149 [THUWC 2018] 城市规划</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AGC069A-Schedule-Optimization"><span class="nav-number">3.</span> <span class="nav-text">[AGC069A] Schedule Optimization</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P10790-NOI2024-%E6%A0%91%E5%BD%A2%E5%9B%BE"><span class="nav-number">4.</span> <span class="nav-text">P10790 [NOI2024] 树形图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%E5%87%BA%E6%89%80%E6%9C%89-1-%E7%B1%BB%E7%82%B9"><span class="nav-number">4.1.</span> <span class="nav-text">拓展出所有 \(1\) 类点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%E5%87%BA%E6%89%80%E6%9C%89-2-%E7%B1%BB%E7%82%B9"><span class="nav-number">4.2.</span> <span class="nav-text">拓展出所有 \(2\) 类点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%89%BE%E4%B8%80%E4%B8%AA-1-%E7%B1%BB%E7%82%B9"><span class="nav-number">4.3.</span> <span class="nav-text">如何找一个 \(1\) 类点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="nav-number">4.4.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AGC058F-Authentic-Tree-DP"><span class="nav-number">5.</span> <span class="nav-text">[AGC058F] Authentic Tree DP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#P10218-%E7%9C%81%E9%80%89%E8%81%94%E8%80%83-2024-%E9%AD%94%E6%B3%95%E6%89%8B%E6%9D%96"><span class="nav-number">5.1.</span> <span class="nav-text">P10218 [省选联考 2024] 魔法手杖</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P9111-%E7%A6%8F%E5%BB%BA%E7%9C%81%E9%98%9F%E9%9B%86%E8%AE%AD2019-%E6%9C%80%E5%A4%A7%E6%9D%83%E7%8B%AC%E7%AB%8B%E9%9B%86%E9%97%AE%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">P9111 [福建省队集训2019] 最大权独立集问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#P8258-CTS2022-%E7%8B%AC%E7%AB%8B%E9%9B%86%E9%97%AE%E9%A2%98"><span class="nav-number">7.</span> <span class="nav-text">P8258 [CTS2022] 独立集问题</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -182,7 +182,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -260,7 +260,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-09-04 20:45:49" itemprop="dateModified" datetime="2026-09-04T20:45:49+08:00">2026-09-04</time>
+      <time title="Modified: 2026-11-07 21:22:47" itemprop="dateModified" datetime="2026-11-07T21:22:47+08:00">2026-11-07</time>
     </span>
 
   
@@ -282,11 +282,11 @@
     <div class="post-body" itemprop="articleBody"><p>为了方便，所有的链接都是用洛谷链接。</p>
 <h1 id="P12479-集训队互测-2024-长野原龙势流星群"><a href="#P12479-集训队互测-2024-长野原龙势流星群" class="headerlink" title="P12479 [集训队互测 2024] 长野原龙势流星群"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P12479">P12479 [集训队互测 2024] 长野原龙势流星群</a></h1><h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>每个点有点权，对于每一个子树，求出一个平均点权最大的包含子树的根的联通块，输出这个平均值。</p>
 <h2 id="做法0"><a href="#做法0" class="headerlink" title="做法0"></a>做法0</h2><p>有一个类 01 on Tree 的做法，挺简单的，但是索然无味。</p>
-<h2 id="做法1"><a href="#做法1" class="headerlink" title="做法1"></a>做法1</h2><p>对于每个子树，以联通块中点的个数为横坐标，联通块中的权值和为纵坐标，发现答案一定在这样一个凸包上，合并的时候进行闵可夫斯基和，查询的时候二分，期望得分 $60$。</p>
-<h2 id="做法2"><a href="#做法2" class="headerlink" title="做法2"></a>做法2</h2><p>slope trick，我们考虑避免二分的过程，利用分数规划，设 $sum$ 表示联通块中的权值和，$cnt$ 表示联通块中节点个数，$f_u(i)$ 表示 u 子树中 $sum-i\times cnt$ 的最大值，$f(i)$ 显然是一个下凸的函数，它和横轴的交点横坐标就是答案，我们考虑维护这个函数，维护横坐标和斜率变化量（斜率的差分值），我们考虑用可合并堆维护，不难发现我们只有以下两个操作：</p>
+<h2 id="做法1"><a href="#做法1" class="headerlink" title="做法1"></a>做法1</h2><p>对于每个子树，以联通块中点的个数为横坐标，联通块中的权值和为纵坐标，发现答案一定在这样一个凸包上，合并的时候进行闵可夫斯基和，查询的时候二分，期望得分 <span class="math-inline">\(60\)</span>。</p>
+<h2 id="做法2"><a href="#做法2" class="headerlink" title="做法2"></a>做法2</h2><p>slope trick，我们考虑避免二分的过程，利用分数规划，设 <span class="math-inline">\(sum\)</span> 表示联通块中的权值和，<span class="math-inline">\(cnt\)</span> 表示联通块中节点个数，<span class="math-inline">\(f_u(i)\)</span> 表示 u 子树中 <span class="math-inline">\(sum-i\times cnt\)</span> 的最大值，<span class="math-inline">\(f(i)\)</span> 显然是一个下凸的函数，它和横轴的交点横坐标就是答案，我们考虑维护这个函数，维护横坐标和斜率变化量（斜率的差分值），我们考虑用可合并堆维护，不难发现我们只有以下两个操作：</p>
 <ul>
-<li>合并子树：$f_u(i)&#x3D;\sum f_v(i)$，相当于直接合并堆。</li>
-<li>加入根：$f_u(i)&#x3D;f_u(i)+w_u-x$ 相当于在无穷远处增加一个点，具体实现上可以加入一个位于 $(10^9+w_u,-10^9)$ 的点，然后不断弹出在x轴以下的值，保证队首的纵坐标为 $0$ 即可。</li>
+<li>合并子树：<span class="math-inline">\(f_u(i)&#x3D;\sum f_v(i)\)</span>，相当于直接合并堆。</li>
+<li>加入根：<span class="math-inline">\(f_u(i)&#x3D;f_u(i)+w_u-x\)</span> 相当于在无穷远处增加一个点，具体实现上可以加入一个位于 <span class="math-inline">\((10^9+w_u,-10^9)\)</span> 的点，然后不断弹出在x轴以下的值，保证队首的纵坐标为 <span class="math-inline">\(0\)</span> 即可。</li>
 </ul>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><details>
 <summary>点击展开：完整代码</summary>
@@ -297,26 +297,26 @@
 
 
 <h1 id="P11149-THUWC-2018-城市规划"><a href="#P11149-THUWC-2018-城市规划" class="headerlink" title="P11149 [THUWC 2018] 城市规划"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P11149">P11149 [THUWC 2018] 城市规划</a></h1><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/article/lkmzdfi4">题解链接</a><br>线段树合并，整体 dp。</p>
-<p>令 $f_{u,i}$ 表示结点 $u$ 为顶部结点的连通块，块内除了 $a_u$ 这个颜色，另一种颜色是 $i$ 的方案数；特别地，$i&#x3D;a_u$ 时只有 $a_u$ 这一种颜色。dp 一个点 $u$ 时，依次加入每一个儿子 $v$，并计算贡献：</p>
+<p>令 <span class="math-inline">\(f_{u,i}\)</span> 表示结点 <span class="math-inline">\(u\)</span> 为顶部结点的连通块，块内除了 <span class="math-inline">\(a_u\)</span> 这个颜色，另一种颜色是 <span class="math-inline">\(i\)</span> 的方案数；特别地，<span class="math-inline">\(i&#x3D;a_u\)</span> 时只有 <span class="math-inline">\(a_u\)</span> 这一种颜色。dp 一个点 <span class="math-inline">\(u\)</span> 时，依次加入每一个儿子 <span class="math-inline">\(v\)</span>，并计算贡献：</p>
 <ul>
-<li>当 $a_u&#x3D;a_v$ 时：</li>
+<li>当 <span class="math-inline">\(a_u&#x3D;a_v\)</span> 时：</li>
 </ul>
 
 
    $$f_{u,i}=\begin{cases}
-    f'_{u,i}\times(f_{v,i}+f_{v,a_v}+1)+f'_{u,a_u}\times f_{v,i}&(i\neq a_u) \\\\
+    f'_{u,i}\times(f_{v,i}+f_{v,a_v}+1)+f'_{u,a_u}\times f_{v,i}&(i\neq a_u) \\
     f'_{u,i}\times(f_{v,a_v}+1)&(i=a_u)
     \end{cases}$$
 
 
 
 <ul>
-<li>当 $a_u\neq a_v$ 时：</li>
+<li>当 <span class="math-inline">\(a_u\neq a_v\)</span> 时：</li>
 </ul>
 
 
    $$f_{u,i}=\begin{cases}
-    f'_{u,i}&(i\neq a_v) \\\\
+    f'_{u,i}&(i\neq a_v) \\
     f'_{u,i}\times(f_{v,a_u}+f_{v,i}+1)+f'_{u,a_u}\times(f_{v,a_u}+f_{v,i})&(i=a_v)
     \end{cases}$$
 
@@ -335,15 +335,15 @@
 <h1 id="AGC069A-Schedule-Optimization"><a href="#AGC069A-Schedule-Optimization" class="headerlink" title="[AGC069A] Schedule Optimization"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/AT_agc069_a">[AGC069A] Schedule Optimization</a></h1><p>感觉是一个自己很难想到的题目，我没有想到。</p>
 <p>考虑贪心，我们为了能够进行比赛，一定是把左端点向左移动，右端点向右移动。<br>这样在合并两个子树的时候，我们希望三件事：</p>
 <ol>
-<li>这场比赛的开始时间尽可能早。（合并后 $l$ 尽可能小）。</li>
-<li>合并后 $r$ 尽可能大。</li>
+<li>这场比赛的开始时间尽可能早。（合并后 <span class="math-inline">\(l\)</span> 尽可能小）。</li>
+<li>合并后 <span class="math-inline">\(r\)</span> 尽可能大。</li>
 <li>移动端点的代价尽可能小。</li>
 </ol>
-<p>不难发现，2 其实是容易满足的，我们总是选择 $r$ 比较大的孩子就是最优的。</p>
-<p>对于 1,3 就比较困难了，我们考虑合并的时候怎样造成代价。<br>如果两个孩子的区间 $[l_1,r_1],[l_2,r_2],r_1&lt;r_2$ 有交，那么显然代价是 $0$，否则代价是不好决策的，原因在于移动左端点一步的代价总是 $\geq 1$，而移动右端点代价总是为 $1$，所以此时，我们如果想要比赛开始更早，代价就会更高，1,3 的需求在此矛盾，这显然是不能贪心了。</p>
-<p>这样也不难发现，当前答案的大头是移动左端点的代价。由于后续移动左端点时，我们难以计算移动一步的代价是多少，所以不妨在叶子处直接钦定其最终左端点的位置，可以发现位置 $i$ 代价是 $|i-l_i|$，我们实时维护左端点位置为 $i$ 时的最小代价（右端点总是子树中的最大右端点）记作 $f_u(i)$，显然 $f_u(i)$ 是一个凸包。<br>假设左、右子树的最大右端点分别为 $r1,r2$，每次合并的时候其实是两个孩子的凸包的对应位置的值相加（表现在 slope trick 中就是把两个堆直接合并），然后加入两个区间不交的代价（相当于在 $\min(r1,r2)$ 的位置插入一个点）。</p>
-<p>这样已经可以写了，但是其实可以简单一些。<br>我们发现其实最优答案总是在斜率为 $0$ 和 $1$ 的分界点处取到，而且这个分界点随着合并单调不增，所以我们可以只维护斜率 $&gt;0$ 的凸包，那么队首（$i$ 最大的位置）就是我们的最优位置。</p>
-<div class="note default"><p>📌 如果不理解为什么队首就是最优的，可以这样想，首先我们维护了不考虑当前<strong>两个区间不交的代价</strong>的答案，而<strong>两个区间不交的代价</strong>只会带来斜率为 $1$ 的变化量，而队首和任意一个位置的斜率都 $\geq 1$ 所以不会影响队首成为最优解。 </p>
+<p>不难发现，2 其实是容易满足的，我们总是选择 <span class="math-inline">\(r\)</span> 比较大的孩子就是最优的。</p>
+<p>对于 1,3 就比较困难了，我们考虑合并的时候怎样造成代价。<br>如果两个孩子的区间 <span class="math-inline">\([l_1,r_1],[l_2,r_2],r_1&lt;r_2\)</span> 有交，那么显然代价是 <span class="math-inline">\(0\)</span>，否则代价是不好决策的，原因在于移动左端点一步的代价总是 <span class="math-inline">\(\geq 1\)</span>，而移动右端点代价总是为 <span class="math-inline">\(1\)</span>，所以此时，我们如果想要比赛开始更早，代价就会更高，1,3 的需求在此矛盾，这显然是不能贪心了。</p>
+<p>这样也不难发现，当前答案的大头是移动左端点的代价。由于后续移动左端点时，我们难以计算移动一步的代价是多少，所以不妨在叶子处直接钦定其最终左端点的位置，可以发现位置 <span class="math-inline">\(i\)</span> 代价是 <span class="math-inline">\(|i-l_i|\)</span>，我们实时维护左端点位置为 <span class="math-inline">\(i\)</span> 时的最小代价（右端点总是子树中的最大右端点）记作 <span class="math-inline">\(f_u(i)\)</span>，显然 <span class="math-inline">\(f_u(i)\)</span> 是一个凸包。<br>假设左、右子树的最大右端点分别为 <span class="math-inline">\(r1,r2\)</span>，每次合并的时候其实是两个孩子的凸包的对应位置的值相加（表现在 slope trick 中就是把两个堆直接合并），然后加入两个区间不交的代价（相当于在 <span class="math-inline">\(\min(r1,r2)\)</span> 的位置插入一个点）。</p>
+<p>这样已经可以写了，但是其实可以简单一些。<br>我们发现其实最优答案总是在斜率为 <span class="math-inline">\(0\)</span> 和 <span class="math-inline">\(1\)</span> 的分界点处取到，而且这个分界点随着合并单调不增，所以我们可以只维护斜率 <span class="math-inline">\(&gt;0\)</span> 的凸包，那么队首（<span class="math-inline">\(i\)</span> 最大的位置）就是我们的最优位置。</p>
+<div class="note default"><p>📌 如果不理解为什么队首就是最优的，可以这样想，首先我们维护了不考虑当前<strong>两个区间不交的代价</strong>的答案，而<strong>两个区间不交的代价</strong>只会带来斜率为 <span class="math-inline">\(1\)</span> 的变化量，而队首和任意一个位置的斜率都 <span class="math-inline">\(\geq 1\)</span> 所以不会影响队首成为最优解。 </p>
 </div>
 
 <details>
@@ -354,31 +354,31 @@
 </details>
 
 
-<h1 id="P10790-NOI2024-树形图"><a href="#P10790-NOI2024-树形图" class="headerlink" title="P10790 [NOI2024] 树形图"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P10790">P10790 [NOI2024] 树形图</a></h1><p>首先进行强联通分量缩点。<br>容易发现，答案为 $1&#x2F;2$ 的位置只有可能在唯一一个入度为 $0$ 的强联通分量中，如果这样的强联通分量不唯一，那么答案全部为 $3$。我们称这样一个唯一的入度为 $0$ 的强联通分量为<strong>特殊分量</strong>。特殊分量以外的点均为 $3$ 类点。</p>
-<p>如果不存在 $1$ 类点，那么所有特殊分量中的点都是 $2$ 类点。</p>
-<h2 id="拓展出所有-1-类点"><a href="#拓展出所有-1-类点" class="headerlink" title="拓展出所有 $1$ 类点"></a>拓展出所有 $1$ 类点</h2><p>我们在找到一个 $1$ 类点的基础上，以它为根拉一颗生成树出来，容易发现，这棵树中没有前向边和横叉边。（只有树边和回溯边）<br>接下来分类讨论某一条边 $fa_u \rightarrow u$：</p>
+<h1 id="P10790-NOI2024-树形图"><a href="#P10790-NOI2024-树形图" class="headerlink" title="P10790 [NOI2024] 树形图"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P10790">P10790 [NOI2024] 树形图</a></h1><p>首先进行强联通分量缩点。<br>容易发现，答案为 <span class="math-inline">\(1&#x2F;2\)</span> 的位置只有可能在唯一一个入度为 <span class="math-inline">\(0\)</span> 的强联通分量中，如果这样的强联通分量不唯一，那么答案全部为 <span class="math-inline">\(3\)</span>。我们称这样一个唯一的入度为 <span class="math-inline">\(0\)</span> 的强联通分量为<strong>特殊分量</strong>。特殊分量以外的点均为 <span class="math-inline">\(3\)</span> 类点。</p>
+<p>如果不存在 <span class="math-inline">\(1\)</span> 类点，那么所有特殊分量中的点都是 <span class="math-inline">\(2\)</span> 类点。</p>
+<h2 id="拓展出所有-1-类点"><a href="#拓展出所有-1-类点" class="headerlink" title="拓展出所有 \(1\) 类点"></a>拓展出所有 <span class="math-inline">\(1\)</span> 类点</h2><p>我们在找到一个 <span class="math-inline">\(1\)</span> 类点的基础上，以它为根拉一颗生成树出来，容易发现，这棵树中没有前向边和横叉边。（只有树边和回溯边）<br>接下来分类讨论某一条边 <span class="math-inline">\(fa_u \rightarrow u\)</span>：</p>
 <ol>
-<li>被 $1$ 条回溯边覆盖，设这条边为 $x\rightarrow y$，那么如果想要走到 $x$ 的子树之外的位置，必须要经过 $y$，所以 $x$ 是否为 $1$ 类点与 $y$ 是否为 $1$ 类点等价。</li>
-<li>被 $&gt; 1$ 条回溯边覆盖，那么 $u\rightarrow fa_u$ 有至少两种走法。</li>
-<li>由于在入度为 $0$ 的强联通分量中，所以至少被一条回溯边覆盖。</li>
+<li>被 <span class="math-inline">\(1\)</span> 条回溯边覆盖，设这条边为 <span class="math-inline">\(x\rightarrow y\)</span>，那么如果想要走到 <span class="math-inline">\(x\)</span> 的子树之外的位置，必须要经过 <span class="math-inline">\(y\)</span>，所以 <span class="math-inline">\(x\)</span> 是否为 <span class="math-inline">\(1\)</span> 类点与 <span class="math-inline">\(y\)</span> 是否为 <span class="math-inline">\(1\)</span> 类点等价。</li>
+<li>被 <span class="math-inline">\(&gt; 1\)</span> 条回溯边覆盖，那么 <span class="math-inline">\(u\rightarrow fa_u\)</span> 有至少两种走法。</li>
+<li>由于在入度为 <span class="math-inline">\(0\)</span> 的强联通分量中，所以至少被一条回溯边覆盖。</li>
 </ol>
-<p>于是可以从上到下递推出所有 $1$ 类点。</p>
-<h2 id="拓展出所有-2-类点"><a href="#拓展出所有-2-类点" class="headerlink" title="拓展出所有 $2$ 类点"></a>拓展出所有 $2$ 类点</h2><p>仍然在这棵 dfs 树的基础上求出 $2$ 类点。</p>
-<p>如果一个 $u$ 为 $1$ 类点，那么一定有恰好一条返祖边 $x\to y$ 覆盖了 $fa_u\to u$，并且这条返祖边<strong>不能删除</strong>，否则 $x$ 的子树就会脱离这个强连通分量，从而不再是 $1$ 类点。</p>
+<p>于是可以从上到下递推出所有 <span class="math-inline">\(1\)</span> 类点。</p>
+<h2 id="拓展出所有-2-类点"><a href="#拓展出所有-2-类点" class="headerlink" title="拓展出所有 \(2\) 类点"></a>拓展出所有 <span class="math-inline">\(2\)</span> 类点</h2><p>仍然在这棵 dfs 树的基础上求出 <span class="math-inline">\(2\)</span> 类点。</p>
+<p>如果一个 <span class="math-inline">\(u\)</span> 为 <span class="math-inline">\(1\)</span> 类点，那么一定有恰好一条返祖边 <span class="math-inline">\(x\to y\)</span> 覆盖了 <span class="math-inline">\(fa_u\to u\)</span>，并且这条返祖边<strong>不能删除</strong>，否则 <span class="math-inline">\(x\)</span> 的子树就会脱离这个强连通分量，从而不再是 <span class="math-inline">\(1\)</span> 类点。</p>
 <p>于是我们得到了若干条返祖边不能删除的限制。</p>
-<p>假设我们想判定 $u$，也就是删去若干条边把 $u$ 变为 $1$ 类点，则我们想删去覆盖了 $fa_u\to u$ 的若干条返祖边，使得只剩下一条 $(x,y)$ 覆盖了 $fa_u\to u$，并且 $y$ 也是 $1&#x2F;2$ 类点，那么 $u$ 就可以成为 $2$ 类点了。</p>
-<p>对于一个点 $u$，仍然考虑 $u\to fa_u$ 这条边：</p>
+<p>假设我们想判定 <span class="math-inline">\(u\)</span>，也就是删去若干条边把 <span class="math-inline">\(u\)</span> 变为 <span class="math-inline">\(1\)</span> 类点，则我们想删去覆盖了 <span class="math-inline">\(fa_u\to u\)</span> 的若干条返祖边，使得只剩下一条 <span class="math-inline">\((x,y)\)</span> 覆盖了 <span class="math-inline">\(fa_u\to u\)</span>，并且 <span class="math-inline">\(y\)</span> 也是 <span class="math-inline">\(1&#x2F;2\)</span> 类点，那么 <span class="math-inline">\(u\)</span> 就可以成为 <span class="math-inline">\(2\)</span> 类点了。</p>
+<p>对于一个点 <span class="math-inline">\(u\)</span>，仍然考虑 <span class="math-inline">\(u\to fa_u\)</span> 这条边：</p>
 <ul>
-<li>若被两条不能删除的返祖边覆盖，则 $u$ 一定不可行。</li>
-<li>若被一条不能删除的返祖边覆盖：设这条边为 $x\to y$，则 $u$ 是否为 $2$ 类点等价于 $y$ 是否为 $1&#x2F;2$ 类点。</li>
-<li>若被零条不能删除的返祖边覆盖：那么 $u$ 子树中有若干条<strong>能删除</strong>的返祖边。若能找到一条能删除的返祖边 $x\to y$，使得 $y$ 为 $1&#x2F;2$ 类点，则 $u$ 就可以为 $2$ 类点。</li>
+<li>若被两条不能删除的返祖边覆盖，则 <span class="math-inline">\(u\)</span> 一定不可行。</li>
+<li>若被一条不能删除的返祖边覆盖：设这条边为 <span class="math-inline">\(x\to y\)</span>，则 <span class="math-inline">\(u\)</span> 是否为 <span class="math-inline">\(2\)</span> 类点等价于 <span class="math-inline">\(y\)</span> 是否为 <span class="math-inline">\(1&#x2F;2\)</span> 类点。</li>
+<li>若被零条不能删除的返祖边覆盖：那么 <span class="math-inline">\(u\)</span> 子树中有若干条<strong>能删除</strong>的返祖边。若能找到一条能删除的返祖边 <span class="math-inline">\(x\to y\)</span>，使得 <span class="math-inline">\(y\)</span> 为 <span class="math-inline">\(1&#x2F;2\)</span> 类点，则 <span class="math-inline">\(u\)</span> 就可以为 <span class="math-inline">\(2\)</span> 类点。</li>
 </ul>
-<h2 id="如何找一个-1-类点"><a href="#如何找一个-1-类点" class="headerlink" title="如何找一个 $1$ 类点"></a>如何找一个 $1$ 类点</h2><p>考虑以 $1$ 类点为根构成的 dfs 树的性质。观察其叶子，由于没有横叉边，所有叶子必然满足入度为 $1$。</p>
-<p>对于所有入度为 $1$ 的点 $u$，假设有边 $v\to u$，则可以把 $u$ 向 $v$ 合并。具体来说，把 $u$ 的出边并到 $v$ 的出边里（所有 $u\to x$ 改为 $v\to x$，<strong>不需要去除重边</strong>，但要删去自环），然后删除点 $u$。也就是在 dfs 树上不断缩叶子的过程。</p>
-<p>BFS 不断执行这个过程，并把新出现的入度为 $1$ 的点加入队列里。</p>
-<p>在若干轮删除之后，若只剩下 $1$ 个点，则这个点即可作为 $1$ 类点；否则若某个时刻每个点入度都 $\ge 2$，则不存在 $1$ 类点。</p>
-<p>使用启发式合并维护边集，时间复杂度 $\mathcal{O}((n+m)\log n)$。</p>
-<p>可以用 vector 存下每个点的入边和出边，合并时按两个 size 的和加权，取更小的点的所有边合并到大的点上，这样在合并时就可以计算有多少条 $u-v$ 的边。</p>
+<h2 id="如何找一个-1-类点"><a href="#如何找一个-1-类点" class="headerlink" title="如何找一个 \(1\) 类点"></a>如何找一个 <span class="math-inline">\(1\)</span> 类点</h2><p>考虑以 <span class="math-inline">\(1\)</span> 类点为根构成的 dfs 树的性质。观察其叶子，由于没有横叉边，所有叶子必然满足入度为 <span class="math-inline">\(1\)</span>。</p>
+<p>对于所有入度为 <span class="math-inline">\(1\)</span> 的点 <span class="math-inline">\(u\)</span>，假设有边 <span class="math-inline">\(v\to u\)</span>，则可以把 <span class="math-inline">\(u\)</span> 向 <span class="math-inline">\(v\)</span> 合并。具体来说，把 <span class="math-inline">\(u\)</span> 的出边并到 <span class="math-inline">\(v\)</span> 的出边里（所有 <span class="math-inline">\(u\to x\)</span> 改为 <span class="math-inline">\(v\to x\)</span>，<strong>不需要去除重边</strong>，但要删去自环），然后删除点 <span class="math-inline">\(u\)</span>。也就是在 dfs 树上不断缩叶子的过程。</p>
+<p>BFS 不断执行这个过程，并把新出现的入度为 <span class="math-inline">\(1\)</span> 的点加入队列里。</p>
+<p>在若干轮删除之后，若只剩下 <span class="math-inline">\(1\)</span> 个点，则这个点即可作为 <span class="math-inline">\(1\)</span> 类点；否则若某个时刻每个点入度都 <span class="math-inline">\(\ge 2\)</span>，则不存在 <span class="math-inline">\(1\)</span> 类点。</p>
+<p>使用启发式合并维护边集，时间复杂度 <span class="math-inline">\(\mathcal{O}((n+m)\log n)\)</span>。</p>
+<p>可以用 vector 存下每个点的入边和出边，合并时按两个 size 的和加权，取更小的点的所有边合并到大的点上，这样在合并时就可以计算有多少条 <span class="math-inline">\(u-v\)</span> 的边。</p>
 <h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><details>
 <summary>点击展开：完整代码</summary>
 
@@ -388,9 +388,10 @@
 
 <h1 id="AGC058F-Authentic-Tree-DP"><a href="#AGC058F-Authentic-Tree-DP" class="headerlink" title="[AGC058F] Authentic Tree DP"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/AT_agc058_f">[AGC058F] Authentic Tree DP</a></h1><p>感觉应该算不上难题。</p>
 <p>我们考虑用一个合理的方式来拟合这个函数。</p>
-<p>首先，我们删边没有好的计算方式，所以我们考虑把每个边中间加一个点，叫做边点。<br>（现在有 $n$ 个原来的点和 $n-1$ 个边点）</p>
-<p>接下来，为了模拟原来树的删边结构，其实我们不希望删除原来的点造成影响。<br>因此可以只给边点加上限制，要求它必须大于它邻域中的所有点。<br>对于这棵有限制的树，我们考虑从大到小填入数字，那么前 $n-1$ 个数字都应该填在边点上，剩下的数字随便填。<br>考虑这种序列合法的概率，其实就是把从大到小每一个点填入之后合法的概率乘起来，不难发现是<br>$$<br>f(t) &#x3D; \left( \sum_{e \in t} f(t_x(e)) \times f(t_y(e)) \right) &#x2F; (2n-1)<br>$$</p>
-<p>发现后面的分母不正确，那么我们再在每个边点上连接一个大小为 $-1$ 的叶子（在模意义下可以看作挂了 $p-1$ 个叶子）。这样分母在模意义下就是 $n$ 了，然后我们把树上的边容斥成外向树进行 dp 就可以了。</p>
+<p>首先，我们删边没有好的计算方式，所以我们考虑把每个边中间加一个点，叫做边点。<br>（现在有 <span class="math-inline">\(n\)</span> 个原来的点和 <span class="math-inline">\(n-1\)</span> 个边点）</p>
+<p>接下来，为了模拟原来树的删边结构，其实我们不希望删除原来的点造成影响。<br>因此可以只给边点加上限制，要求它必须大于它邻域中的所有点。<br>对于这棵有限制的树，我们考虑从大到小填入数字，那么前 <span class="math-inline">\(n-1\)</span> 个数字都应该填在边点上，剩下的数字随便填。<br>考虑这种序列合法的概率，其实就是把从大到小每一个点填入之后合法的概率乘起来，不难发现是</p>
+<div class="math-display">\[f(t) &#x3D; \left( \sum_{e \in t} f(t_x(e)) \times f(t_y(e)) \right) &#x2F; (2n-1)\]</div>
+<p>发现后面的分母不正确，那么我们再在每个边点上连接一个大小为 <span class="math-inline">\(-1\)</span> 的叶子（在模意义下可以看作挂了 <span class="math-inline">\(p-1\)</span> 个叶子）。这样分母在模意义下就是 <span class="math-inline">\(n\)</span> 了，然后我们把树上的边容斥成外向树进行 dp 就可以了。</p>
 <details>
 <summary>点击展开：完整代码</summary>
 
@@ -400,24 +401,24 @@
 
 
 <h2 id="P10218-省选联考-2024-魔法手杖"><a href="#P10218-省选联考-2024-魔法手杖" class="headerlink" title="P10218 [省选联考 2024] 魔法手杖"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P10218">P10218 [省选联考 2024] 魔法手杖</a></h2><p>我们可以发现，使用加法总是优于异或，所以我们先假设所有位置都是亦或操作，然后把一些位置变成加法，来增大答案。</p>
-<p>首先我们判断特殊情况，$\sum b_i \leq m$，那么答案就是 $\min {a_i} + 2^k - 1$。</p>
-<p>我们直接考虑从高到低按位贪心，用 $a_i$ 建立 trie 树。</p>
-<p>我们设计这样一个函数 $\text{dfs}(idx,dep,amin,bsum,x,ans)$ 表示节点为 $idx$，$dep$ 为当前位，$amin$ 表示按加法计算的 $a$ 的最小值，$bsum$ 表示花费的代价，即按加法计算的 $b$ 的值，$x$ 和 $ans$ 是需要贪心求出的答案。</p>
+<p>首先我们判断特殊情况，<span class="math-inline">\(\sum b_i \leq m\)</span>，那么答案就是 <span class="math-inline">\(\min \{a_i\} + 2^k - 1\)</span>。</p>
+<p>我们直接考虑从高到低按位贪心，用 <span class="math-inline">\(a_i\)</span> 建立 trie 树。</p>
+<p>我们设计这样一个函数 <span class="math-inline">\(\text{dfs}(idx,dep,amin,bsum,x,ans)\)</span> 表示节点为 <span class="math-inline">\(idx\)</span>，<span class="math-inline">\(dep\)</span> 为当前位，<span class="math-inline">\(amin\)</span> 表示按加法计算的 <span class="math-inline">\(a\)</span> 的最小值，<span class="math-inline">\(bsum\)</span> 表示花费的代价，即按加法计算的 <span class="math-inline">\(b\)</span> 的值，<span class="math-inline">\(x\)</span> 和 <span class="math-inline">\(ans\)</span> 是需要贪心求出的答案。</p>
 <p>贪心分为以下几种情况：</p>
 <ul>
-<li>因为要求最大的答案，所以首先判断 $ans$ 的第 $dep$ 位是否能为 $1$，如果则一定要为 $1$。如果为 $1$，则左右子树必须有一个为加法运算，否则异或无法使得二者的第 $dep$ 位均为 $1$。<ul>
-<li>假设左子树是加法运算，首先需要保证代价在范围内，即 $bsum+sumb_{ls}\le m$。接下来判断是否能满足 $a_i+x\ge ans$ 的条件，因为优先保证条件满足，所以对于这个式子我们需要让 $x$ 尽量大，$ans$ 尽量小。那么 $x$ 的小于 $dep$ 的非确定位则全部置为 $1$，$ans$ 的非确定位置为 $0$。判断条件即为 $\min{amin,mina_{ls}}+(x\mid (2^k-1))\ge(ans\mid 2^k)$。那么 $amin$ 更新为 $\min{amin,mina_{ls}}$，$ans$ 变为 $ans\mid2^k$。</li>
-<li>假设右子树是加法运算，则条件与上述类似，需要注意的是 $x$ 的第 $dep$ 位需要是 1，因为要使得左子树的异或值大于 $ans$。判断条件变为 $\min{amin,mina_{ls}}+(x\mid2^k\mid (2^k-1))\ge(ans\mid 2^k)$。</li>
+<li>因为要求最大的答案，所以首先判断 <span class="math-inline">\(ans\)</span> 的第 <span class="math-inline">\(dep\)</span> 位是否能为 <span class="math-inline">\(1\)</span>，如果则一定要为 <span class="math-inline">\(1\)</span>。如果为 <span class="math-inline">\(1\)</span>，则左右子树必须有一个为加法运算，否则异或无法使得二者的第 <span class="math-inline">\(dep\)</span> 位均为 <span class="math-inline">\(1\)</span>。<ul>
+<li>假设左子树是加法运算，首先需要保证代价在范围内，即 <span class="math-inline">\(bsum+sumb_{ls}\le m\)</span>。接下来判断是否能满足 <span class="math-inline">\(a_i+x\ge ans\)</span> 的条件，因为优先保证条件满足，所以对于这个式子我们需要让 <span class="math-inline">\(x\)</span> 尽量大，<span class="math-inline">\(ans\)</span> 尽量小。那么 <span class="math-inline">\(x\)</span> 的小于 <span class="math-inline">\(dep\)</span> 的非确定位则全部置为 <span class="math-inline">\(1\)</span>，<span class="math-inline">\(ans\)</span> 的非确定位置为 <span class="math-inline">\(0\)</span>。判断条件即为 <span class="math-inline">\(\min\{amin,mina_{ls}\}+(x\mid (2^k-1))\ge(ans\mid 2^k)\)</span>。那么 <span class="math-inline">\(amin\)</span> 更新为 <span class="math-inline">\(\min\{amin,mina_{ls}\}\)</span>，<span class="math-inline">\(ans\)</span> 变为 <span class="math-inline">\(ans\mid2^k\)</span>。</li>
+<li>假设右子树是加法运算，则条件与上述类似，需要注意的是 <span class="math-inline">\(x\)</span> 的第 <span class="math-inline">\(dep\)</span> 位需要是 1，因为要使得左子树的异或值大于 <span class="math-inline">\(ans\)</span>。判断条件变为 <span class="math-inline">\(\min\{amin,mina_{ls}\}+(x\mid2^k\mid (2^k-1))\ge(ans\mid 2^k)\)</span>。</li>
 </ul>
 </li>
-<li>否则确定了 $ans$ 这位为 $0$，直接对左右子树分别考虑。<ul>
-<li>$x$ 的第 $dep$ 位为 $0$，此时右子树这一位均为 $1$，均大于等于 $ans$，对答案没有贡献。只需调用 $\text{dfs}(ls,dep-1,amin,bsum,x,ans)$。</li>
-<li>否则同理，左子树对答案没有贡献，调用 $\text{dfs}(rs,dep-1,amin,bsum,x\mid2^k,ans)$，注意 $x$ 的值有发生变化。</li>
+<li>否则确定了 <span class="math-inline">\(ans\)</span> 这位为 <span class="math-inline">\(0\)</span>，直接对左右子树分别考虑。<ul>
+<li><span class="math-inline">\(x\)</span> 的第 <span class="math-inline">\(dep\)</span> 位为 <span class="math-inline">\(0\)</span>，此时右子树这一位均为 <span class="math-inline">\(1\)</span>，均大于等于 <span class="math-inline">\(ans\)</span>，对答案没有贡献。只需调用 <span class="math-inline">\(\text{dfs}(ls,dep-1,amin,bsum,x,ans)\)</span>。</li>
+<li>否则同理，左子树对答案没有贡献，调用 <span class="math-inline">\(\text{dfs}(rs,dep-1,amin,bsum,x\mid2^k,ans)\)</span>，注意 <span class="math-inline">\(x\)</span> 的值有发生变化。</li>
 </ul>
 </li>
 </ul>
-<p>时间复杂度是 $O(\sum nk)$，具体细节可以见代码。</p>
-<div class="note danger"><p>🔥 千万不要特判左右孩子为空的情况，直接改成，如果当前访问的位置为空，那么直接返回当前的最优答案即可，不然容易漏掉可行解，导致答案偏小。具体见代码 $!u$ 的特判。</p>
+<p>时间复杂度是 <span class="math-inline">\(O(\sum nk)\)</span>，具体细节可以见代码。</p>
+<div class="note danger"><p>🔥 千万不要特判左右孩子为空的情况，直接改成，如果当前访问的位置为空，那么直接返回当前的最优答案即可，不然容易漏掉可行解，导致答案偏小。具体见代码 <span class="math-inline">\(!u\)</span> 的特判。</p>
 </div>
 
 <details>
@@ -427,14 +428,14 @@
 
 </details>
 
-<h1 id="P9111-福建省队集训2019-最大权独立集问题"><a href="#P9111-福建省队集训2019-最大权独立集问题" class="headerlink" title="P9111 [福建省队集训2019] 最大权独立集问题"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P9111">P9111 [福建省队集训2019] 最大权独立集问题</a></h1><p>首先观察数据范围，发现 $n \leq 400$，所以大概我们的复杂度是 $\mathcal{O}(n^4)$ 的。</p>
-<p>考虑计算一个点上的值 $a_i$ 造成了多少次贡献，具体的，我们给树上的每一条边定向，从先操作的边，指向后操作的边。那么 $a_i$ 造成的贡献次数就是从 $i$ 出发能到达的节点个数（包括它自己）。</p>
-<p>发现如果直接树形dp，难以处理的就是如果我的父亲比我先操作怎么办，这样会导致转移方向不确定，难以按照先孩子后父亲的常见dp顺序转移。<br>这里我们用一个常见的 trick 提前钦定。<br>考虑 $f_{u,i,j}$ 表示节点 $u$ 子树内能到达 $i$ 个点，在整个树内可以到达 $j$ 个点，转移是简单的，我们分讨每条边的定向的方向即可。</p>
+<h1 id="P9111-福建省队集训2019-最大权独立集问题"><a href="#P9111-福建省队集训2019-最大权独立集问题" class="headerlink" title="P9111 [福建省队集训2019] 最大权独立集问题"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P9111">P9111 [福建省队集训2019] 最大权独立集问题</a></h1><p>首先观察数据范围，发现 <span class="math-inline">\(n \leq 400\)</span>，所以大概我们的复杂度是 <span class="math-inline">\(\mathcal{O}(n^4)\)</span> 的。</p>
+<p>考虑计算一个点上的值 <span class="math-inline">\(a_i\)</span> 造成了多少次贡献，具体的，我们给树上的每一条边定向，从先操作的边，指向后操作的边。那么 <span class="math-inline">\(a_i\)</span> 造成的贡献次数就是从 <span class="math-inline">\(i\)</span> 出发能到达的节点个数（包括它自己）。</p>
+<p>发现如果直接树形dp，难以处理的就是如果我的父亲比我先操作怎么办，这样会导致转移方向不确定，难以按照先孩子后父亲的常见dp顺序转移。<br>这里我们用一个常见的 trick 提前钦定。<br>考虑 <span class="math-inline">\(f_{u,i,j}\)</span> 表示节点 <span class="math-inline">\(u\)</span> 子树内能到达 <span class="math-inline">\(i\)</span> 个点，在整个树内可以到达 <span class="math-inline">\(j\)</span> 个点，转移是简单的，我们分讨每条边的定向的方向即可。</p>
 <ul>
-<li>$u\rightarrow son_u$：$f_{u,i,j} + f_{v,k,k}\rightarrow f^\prime_{u,i+k,j}$</li>
-<li>$u\leftarrow son_u$：$f_{u,i,j} + f_{v,k,k+j}\rightarrow f^\prime_{u,i,j}$</li>
+<li><span class="math-inline">\(u\rightarrow son_u\)</span>：<span class="math-inline">\(f_{u,i,j} + f_{v,k,k}\rightarrow f^\prime_{u,i+k,j}\)</span></li>
+<li><span class="math-inline">\(u\leftarrow son_u\)</span>：<span class="math-inline">\(f_{u,i,j} + f_{v,k,k+j}\rightarrow f^\prime_{u,i,j}\)</span></li>
 </ul>
-<p>初始值：$f_{u,i,j}&#x3D;j\times a_u$</p>
+<p>初始值：<span class="math-inline">\(f_{u,i,j}&#x3D;j\times a_u\)</span></p>
 <details>
 <summary>点击展开：完整代码</summary>
 
@@ -443,21 +444,21 @@
 </details>
 
 <h1 id="P8258-CTS2022-独立集问题"><a href="#P8258-CTS2022-独立集问题" class="headerlink" title="P8258 [CTS2022] 独立集问题"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P8258">P8258 [CTS2022] 独立集问题</a></h1><p>和上一个题目类似的题目，其实 dp 过程也是类似的，但是更加复杂一些。</p>
-<p>考虑如果位置 $i$ 操作了一次之后，那么其邻域位置题目的难度都会清 $0$，同时 $i$ 的难度值变成 $a_i^\prime$，这个时候我们可以随意控制当前是否在位置 $i$ 再操作一次，就可以控制 $a_i^\prime$ 的正负，也就是说答案总是会加上 $|a_i^\prime|$。</p>
-<p>有了这个基础结论之后，我们考虑 dp。<br>发现一个位置 $u$ 的情况有以下三种：</p>
+<p>考虑如果位置 <span class="math-inline">\(i\)</span> 操作了一次之后，那么其邻域位置题目的难度都会清 <span class="math-inline">\(0\)</span>，同时 <span class="math-inline">\(i\)</span> 的难度值变成 <span class="math-inline">\(a_i^\prime\)</span>，这个时候我们可以随意控制当前是否在位置 <span class="math-inline">\(i\)</span> 再操作一次，就可以控制 <span class="math-inline">\(a_i^\prime\)</span> 的正负，也就是说答案总是会加上 <span class="math-inline">\(|a_i^\prime|\)</span>。</p>
+<p>有了这个基础结论之后，我们考虑 dp。<br>发现一个位置 <span class="math-inline">\(u\)</span> 的情况有以下三种：</p>
 <ol>
-<li>它的孩子 $son_u$ 操作了，把它的值吸过去了。</li>
-<li>在 $u$ 操作。</li>
-<li>在 $fa_u$ 操作，把它的值吸过去了。</li>
+<li>它的孩子 <span class="math-inline">\(son_u\)</span> 操作了，把它的值吸过去了。</li>
+<li>在 <span class="math-inline">\(u\)</span> 操作。</li>
+<li>在 <span class="math-inline">\(fa_u\)</span> 操作，把它的值吸过去了。</li>
 </ol>
-<p>我们设 $f_{u,0&#x2F;1},g_{u,0&#x2F;1},h_{u,0&#x2F;1}$ 依次表示上面三种情况。<br>其中每个数组第二维的 $0&#x2F;1$ 均表示当前 $u$ 选择 $a_u$ 的正负，$0$ 为 $-a_u$，$1$ 为 $a_u$。</p>
+<p>我们设 <span class="math-inline">\(f_{u,0&#x2F;1},g_{u,0&#x2F;1},h_{u,0&#x2F;1}\)</span> 依次表示上面三种情况。<br>其中每个数组第二维的 <span class="math-inline">\(0&#x2F;1\)</span> 均表示当前 <span class="math-inline">\(u\)</span> 选择 <span class="math-inline">\(a_u\)</span> 的正负，<span class="math-inline">\(0\)</span> 为 <span class="math-inline">\(-a_u\)</span>，<span class="math-inline">\(1\)</span> 为 <span class="math-inline">\(a_u\)</span>。</p>
 <p>我们依次考虑每一个数组的转移。</p>
-<p>对于 $f$，我们发现它可以从 $f_v,g_v,h_v$ 转移过来，但是因为在 $f$ 处进行了操作，所以需要保证它的所有被它吸的孩子的正负情况相同，即 $f_v$ 的正负相同。<br>设 </p>
+<p>对于 <span class="math-inline">\(f\)</span>，我们发现它可以从 <span class="math-inline">\(f_v,g_v,h_v\)</span> 转移过来，但是因为在 <span class="math-inline">\(f\)</span> 处进行了操作，所以需要保证它的所有被它吸的孩子的正负情况相同，即 <span class="math-inline">\(f_v\)</span> 的正负相同。<br>设 </p>
 
 
 $$
 \begin{aligned}
-s_0=\max\{f_{v,0},g_{v,0},g_{v,1},h_{v,0},h_{v,1}\} \\\\
+s_0=\max\{f_{v,0},g_{v,0},g_{v,1},h_{v,0},h_{v,1}\} \\
 s_1=\max\{f_{v,1},g_{v,0},g_{v,1},h_{v,0},h_{v,1}\}
 \end{aligned}
 $$
@@ -469,28 +470,28 @@ $$
 
 $$
 \begin{aligned}
-f_{u,0}=\max\{s_0,s_1\}-a_u \\\\
+f_{u,0}=\max\{s_0,s_1\}-a_u \\
 f_{u,1}=\max\{s_0,s_1\}+a_u
 \end{aligned}
 $$
 
 
 
-<p>对于 $g$，我们发现两个进行吸取的位置一定不相邻，所以不能从 $g_v$ 转移，同时需要保证和 $f_v$ 的异号（正负性相反）</p>
+<p>对于 <span class="math-inline">\(g\)</span>，我们发现两个进行吸取的位置一定不相邻，所以不能从 <span class="math-inline">\(g_v\)</span> 转移，同时需要保证和 <span class="math-inline">\(f_v\)</span> 的异号（正负性相反）</p>
 
 
 $$
 \begin{aligned}
-g_{u,0}=-a_u+\sum_{v\in son_u}\max\{f_{v,1},h_{v,0},h_{v,1}\} \\\\
+g_{u,0}=-a_u+\sum_{v\in son_u}\max\{f_{v,1},h_{v,0},h_{v,1}\} \\
 g_{u,1}=a_u+\sum_{v\in son_u}\max\{f_{v,0},h_{v,0},h_{v,1}\}
 \end{aligned}
 $$
 
 
 
-<p>对于 $h$，显然不能从 $f_v$ 转移，如果从 $g_v$ 转移，那么需要保证异号，但是如果从 $h_v$ 转移，需要保证其和所有被 $h_v$ 吸取的位置同号，所以我们重新设置 $h_{v,0&#x2F;1,0&#x2F;1}$，多加的一维表示 $h_v$ 的孩子的正负性。</p>
-<p>$$<br>h_{u,p,q}\gets\max(h_{u,p,q},val_q+\max{g_{v,\lnot p},h_{v,0,p},h_{v,1,p}})\pm a_u\ (p,q\in{0,1})<br>$$</p>
-<p>时间复杂度 $\mathcal{O}(n)$。</p>
+<p>对于 <span class="math-inline">\(h\)</span>，显然不能从 <span class="math-inline">\(f_v\)</span> 转移，如果从 <span class="math-inline">\(g_v\)</span> 转移，那么需要保证异号，但是如果从 <span class="math-inline">\(h_v\)</span> 转移，需要保证其和所有被 <span class="math-inline">\(h_v\)</span> 吸取的位置同号，所以我们重新设置 <span class="math-inline">\(h_{v,0&#x2F;1,0&#x2F;1}\)</span>，多加的一维表示 <span class="math-inline">\(h_v\)</span> 的孩子的正负性。</p>
+<div class="math-display">\[h_{u,p,q}\gets\max(h_{u,p,q},val_q+\max\{g_{v,\lnot p},h_{v,0,p},h_{v,1,p}\})\pm a_u\ (p,q\in\{0,1\})\]</div>
+<p>时间复杂度 <span class="math-inline">\(\mathcal{O}(n)\)</span>。</p>
 <details>
 <summary>点击展开：完整代码</summary>
 
@@ -586,6 +587,7 @@ $$
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
+<script defer src="/js/blog-code.js"></script>
 
 </body>
 </html>

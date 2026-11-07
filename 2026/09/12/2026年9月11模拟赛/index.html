@@ -18,17 +18,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"wdwsy.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":240},"hljswrap":true,"codeblock":{"theme":{"light":"github-dark","dark":"github-dark-dimmed"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat","show_result":true},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":true,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wdwsy.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":240},"hljswrap":true,"codeblock":{"theme":{"light":"github-dark","dark":"github-dark-dimmed"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":true,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="T2做红温了。其实是一个 trick。我们可以转换成差分，区间修改就成了两次单点修改。 T3题目概述给你一个长度为 $k$ 的可重集 $S$，你需要构造一个长度为 $n$ 的可重集 $a$，满足可以把 $a$ 划分为 $k$ 部分，每一个部分的中位数的中位数构成的可重集就是 $S$。求满足 $a_i\in [1,m]$ 的满足条件的 $a$ 有多少种。 做法首先排序 $S$由于每个 $S$ 中的数">
+    <meta name="description" content="T2做红温了。其实是一个 trick。我们可以转换成差分，区间修改就成了两次单点修改。 T3题目概述给你一个长度为 \(k\) 的可重集 \(S\)，你需要构造一个长度为 \(n\) 的可重集 \(a\)，满足可以把 \(a\) 划分为 \(k\) 部分，每一个部分的中位数的中位数构成的可重集就是 \(S\)。求满足 \(a_i\in [1,m]\) 的满足条件的 \(a\) 有多少种。 做法首先">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2026年9月11模拟赛">
 <meta property="og:url" content="https://wdwsy.github.io/2026/09/12/2026%E5%B9%B49%E6%9C%8811%E6%A8%A1%E6%8B%9F%E8%B5%9B/index.html">
 <meta property="og:site_name" content="wdwsy&#39;s Blog">
-<meta property="og:description" content="T2做红温了。其实是一个 trick。我们可以转换成差分，区间修改就成了两次单点修改。 T3题目概述给你一个长度为 $k$ 的可重集 $S$，你需要构造一个长度为 $n$ 的可重集 $a$，满足可以把 $a$ 划分为 $k$ 部分，每一个部分的中位数的中位数构成的可重集就是 $S$。求满足 $a_i\in [1,m]$ 的满足条件的 $a$ 有多少种。 做法首先排序 $S$由于每个 $S$ 中的数">
+<meta property="og:description" content="T2做红温了。其实是一个 trick。我们可以转换成差分，区间修改就成了两次单点修改。 T3题目概述给你一个长度为 \(k\) 的可重集 \(S\)，你需要构造一个长度为 \(n\) 的可重集 \(a\)，满足可以把 \(a\) 划分为 \(k\) 部分，每一个部分的中位数的中位数构成的可重集就是 \(S\)。求满足 \(a_i\in [1,m]\) 的满足条件的 \(a\) 有多少种。 做法首先">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-09-12T04:13:41.000Z">
-<meta property="article:modified_time" content="2026-10-12T14:44:30.718Z">
+<meta property="article:modified_time" content="2026-11-07T13:22:47.036Z">
 <meta property="article:author" content="wdwsy">
 <meta property="article:tag" content="算法,OIC++,NOI,信息学竞赛">
 <meta name="twitter:card" content="summary">
@@ -166,7 +166,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#T2"><span class="nav-number">1.</span> <span class="nav-text">T2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T3"><span class="nav-number">2.</span> <span class="nav-text">T3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">题目概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%9A%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">做法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T4"><span class="nav-number">3.</span> <span class="nav-text">T4</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E5%87%BA%E4%B8%8A%E7%95%8C-R"><span class="nav-number">3.1.</span> <span class="nav-text">算出上界 $R$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E5%87%BA%E4%B8%8B%E7%95%8C-L"><span class="nav-number">3.2.</span> <span class="nav-text">算出下界 $L$</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#T2"><span class="nav-number">1.</span> <span class="nav-text">T2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T3"><span class="nav-number">2.</span> <span class="nav-text">T3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">题目概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%9A%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">做法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T4"><span class="nav-number">3.</span> <span class="nav-text">T4</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E5%87%BA%E4%B8%8A%E7%95%8C-R"><span class="nav-number">3.1.</span> <span class="nav-text">算出上界 \(R\)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E5%87%BA%E4%B8%8B%E7%95%8C-L"><span class="nav-number">3.2.</span> <span class="nav-text">算出下界 \(L\)</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -181,7 +181,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -259,7 +259,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-10-12 22:44:30" itemprop="dateModified" datetime="2026-10-12T22:44:30+08:00">2026-10-12</time>
+      <time title="Modified: 2026-11-07 21:22:47" itemprop="dateModified" datetime="2026-11-07T21:22:47+08:00">2026-11-07</time>
     </span>
 
   
@@ -279,20 +279,29 @@
     
     
     <div class="post-body" itemprop="articleBody"><h2 id="T2"><a href="#T2" class="headerlink" title="T2"></a>T2</h2><p>做红温了。<br>其实是一个 trick。<br>我们可以转换成差分，区间修改就成了两次单点修改。</p>
-<h2 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h2><h3 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h3><p>给你一个长度为 $k$ 的可重集 $S$，你需要构造一个长度为 $n$ 的可重集 $a$，满足可以把 $a$ 划分为 $k$ 部分，每一个部分的中位数的中位数构成的可重集就是 $S$。<br>求满足 $a_i\in [1,m]$ 的满足条件的 $a$ 有多少种。</p>
-<h3 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h3><p>首先排序 $S$<br>由于每个 $S$ 中的数字都要出现一次，所以定义 $n\leftarrow n-k$<br>首先考虑判定，找到充要条件：<br>假定 $a_{n+1}&#x3D;m+1$<br>$\forall x\in[1,n+1]$ 设 $a$ 中在区间 $(a_{x-1},a_x)$ 的数字有 $y$ 个，那么剩下的数字有 $n-y$ 个，需要满足 $y-(n-y)\leq x$<br>而且这个条件只有在绝对众数的位置才可能不满足，所以我们考虑容斥，计算</p>
-<p>$\text{总方案数}-\text{不合法的方案数}$</p>
-<p>我们考虑计算后者为：<br>$$\begin{aligned}<br>\sum_{x&#x3D;0}^{k}\sum_{y&#x3D;\lceil \frac{x+n+1}{2} \rceil}^{m} {l+y-1 \choose l-1}{m-l+n-y-1\choose m-l-1} \\<br>\text{其中}\ l&#x3D;a_{x+1}-a_{x}<br>\end{aligned}$$</p>
-<p>考虑这个式子的组合意义，需要把 $n$ 个球放在 $m$ 个盒子，就是在前 $l$ 个盒子中至少选择 $\lceil \frac{x+n+1}{2} \rceil$ 个球的方案数。<br>做法上可以枚举第 $l$ 个球所在的位置来计算：<br>$$\begin{aligned}<br>\sum_{x&#x3D;0}^{k}\sum_{t&#x3D;1}^{l} {t+y-2 \choose t-1}{m-t+n-y\choose m-t} \\<br>\text{其中}\ l&#x3D;a_{x+1}-a_{x},y&#x3D;\lceil \frac{x+n+1}{2} \rceil<br>\end{aligned}$$<br>这样时间复杂度为 $\sum_{x&#x3D;0}^{k} O(l)&#x3D;O(m)$。</p>
-<h2 id="T4"><a href="#T4" class="headerlink" title="T4"></a>T4</h2><p>题目要求的大小关系相同，等价于两个序列的笛卡尔树相同。<br>建立大根笛卡尔树，容易发现，每一个笛卡尔树上的待填点，都有一个 $(l,r)$ 的值域区间要求，其中 $l$ 是祖先的 $\min$，$r$ 自子树中的 $\max$。</p>
+<h2 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h2><h3 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h3><p>给你一个长度为 <span class="math-inline">\(k\)</span> 的可重集 <span class="math-inline">\(S\)</span>，你需要构造一个长度为 <span class="math-inline">\(n\)</span> 的可重集 <span class="math-inline">\(a\)</span>，满足可以把 <span class="math-inline">\(a\)</span> 划分为 <span class="math-inline">\(k\)</span> 部分，每一个部分的中位数的中位数构成的可重集就是 <span class="math-inline">\(S\)</span>。<br>求满足 <span class="math-inline">\(a_i\in [1,m]\)</span> 的满足条件的 <span class="math-inline">\(a\)</span> 有多少种。</p>
+<h3 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h3><p>首先排序 <span class="math-inline">\(S\)</span><br>由于每个 <span class="math-inline">\(S\)</span> 中的数字都要出现一次，所以定义 <span class="math-inline">\(n\leftarrow n-k\)</span><br>首先考虑判定，找到充要条件：<br>假定 <span class="math-inline">\(a_{n+1}&#x3D;m+1\)</span><br><span class="math-inline">\(\forall x\in[1,n+1]\)</span> 设 <span class="math-inline">\(a\)</span> 中在区间 <span class="math-inline">\((a_{x-1},a_x)\)</span> 的数字有 <span class="math-inline">\(y\)</span> 个，那么剩下的数字有 <span class="math-inline">\(n-y\)</span> 个，需要满足 <span class="math-inline">\(y-(n-y)\leq x\)</span><br>而且这个条件只有在绝对众数的位置才可能不满足，所以我们考虑容斥，计算</p>
+<p><span class="math-inline">\(\text{总方案数}-\text{不合法的方案数}\)</span></p>
+<p>我们考虑计算后者为：</p>
+<div class="math-display">\[\begin{aligned}
+\sum_{x&#x3D;0}^{k}\sum_{y&#x3D;\lceil \frac{x+n+1}{2} \rceil}^{m} {l+y-1 \choose l-1}{m-l+n-y-1\choose m-l-1} \\
+\text{其中}\ l&#x3D;a_{x+1}-a_{x}
+\end{aligned}\]</div>
+<p>考虑这个式子的组合意义，需要把 <span class="math-inline">\(n\)</span> 个球放在 <span class="math-inline">\(m\)</span> 个盒子，就是在前 <span class="math-inline">\(l\)</span> 个盒子中至少选择 <span class="math-inline">\(\lceil \frac{x+n+1}{2} \rceil\)</span> 个球的方案数。<br>做法上可以枚举第 <span class="math-inline">\(l\)</span> 个球所在的位置来计算：</p>
+<div class="math-display">\[\begin{aligned}
+\sum_{x&#x3D;0}^{k}\sum_{t&#x3D;1}^{l} {t+y-2 \choose t-1}{m-t+n-y\choose m-t} \\
+\text{其中}\ l&#x3D;a_{x+1}-a_{x},y&#x3D;\lceil \frac{x+n+1}{2} \rceil
+\end{aligned}\]</div>
+<p>这样时间复杂度为 <span class="math-inline">\(\sum_{x&#x3D;0}^{k} O(l)&#x3D;O(m)\)</span>。</p>
+<h2 id="T4"><a href="#T4" class="headerlink" title="T4"></a>T4</h2><p>题目要求的大小关系相同，等价于两个序列的笛卡尔树相同。<br>建立大根笛卡尔树，容易发现，每一个笛卡尔树上的待填点，都有一个 <span class="math-inline">\((l,r)\)</span> 的值域区间要求，其中 <span class="math-inline">\(l\)</span> 是祖先的 <span class="math-inline">\(\min\)</span>，<span class="math-inline">\(r\)</span> 自子树中的 <span class="math-inline">\(\max\)</span>。</p>
 <p>考虑用 hall 定理刻画有解条件。<br>一种暴力的做法就是直接用扫描线，不难。</p>
 <p>但是我们有一个好的方式，可以直接贪心。</p>
 <p>为了文章的可读性，我们先来描述一下这个问题。<br>二分图匹配问题，每一个左部点向右部点的一个区间连边，求删掉每一个左部点之后，有没有完全匹配。</p>
-<p>结论：最后可以加入的点一定在一个区间 $(L,R)$ 中。<br>证明：我们本质上，其实是要求出所有不合法的区间，即 $[l,r]$ 中所有被包含的线段（即左部点），线段个数大于 $[l,r]$ 中右部点的个数，那么显然这里没有完全匹配，也就是说，加入的点，一定要在这个区间内，不然根据 Hall 定理，这个二分图将仍然没有完全匹配。那么其实我们就是要把这样的不合法区间 $[l,r]$ 去取交。那么只需要找到所有不合法区间中的 $r_{min}$ 和 $l_{max}$ 即可。</p>
-<p>tip：如果一个区间 $[l,r]$ 中，点的个数比线段个数少了 $\geq 2$，那么补一个点也无法解决这个区间的问题，那么就全部输出 <code>No</code> ，这个在后续的算法流程中有所体现。</p>
-<h3 id="算出上界-R"><a href="#算出上界-R" class="headerlink" title="算出上界 $R$"></a>算出上界 $R$</h3><p>$R&#x3D;r_{min}$<br>我们记录每一个左部点的区间是 $(l_i,r_i)$（开区间），以 $r_i$ 升序为第一关键字，$l_i$ 为升序为第二关键字排序。然后考虑贪心去填入，也就是我们要给每一区间找一个匹配点，每次填入在 $(l_i,r_i)$ 中距离 $l_i$ 最近的点，如果没有这样的点，就说明这个区间无法找到匹配点，那么上界就是 $r_i$，注意：如果有两个区间都找不到位置插入，那么加入一个点后，仍然不可能同时满足这两个区间，直接都输出 <code>No</code>。</p>
-<h3 id="算出下界-L"><a href="#算出下界-L" class="headerlink" title="算出下界 $L$"></a>算出下界 $L$</h3><p>$L&#x3D;l_{max}$<br>同理，但是以 $l_i$ 降序为第一关键字，$r_i$ 为降序为第二关键字排序。</p>
-<p>所以我们就得到了上下界，每次输入 $d$ 的时候判断 $L&lt;d&lt;R$ 就输出 <code>Yes</code> 就好。</p>
+<p>结论：最后可以加入的点一定在一个区间 <span class="math-inline">\((L,R)\)</span> 中。<br>证明：我们本质上，其实是要求出所有不合法的区间，即 <span class="math-inline">\([l,r]\)</span> 中所有被包含的线段（即左部点），线段个数大于 <span class="math-inline">\([l,r]\)</span> 中右部点的个数，那么显然这里没有完全匹配，也就是说，加入的点，一定要在这个区间内，不然根据 Hall 定理，这个二分图将仍然没有完全匹配。那么其实我们就是要把这样的不合法区间 <span class="math-inline">\([l,r]\)</span> 去取交。那么只需要找到所有不合法区间中的 <span class="math-inline">\(r_{min}\)</span> 和 <span class="math-inline">\(l_{max}\)</span> 即可。</p>
+<p>tip：如果一个区间 <span class="math-inline">\([l,r]\)</span> 中，点的个数比线段个数少了 <span class="math-inline">\(\geq 2\)</span>，那么补一个点也无法解决这个区间的问题，那么就全部输出 <code>No</code> ，这个在后续的算法流程中有所体现。</p>
+<h3 id="算出上界-R"><a href="#算出上界-R" class="headerlink" title="算出上界 \(R\)"></a>算出上界 <span class="math-inline">\(R\)</span></h3><p><span class="math-inline">\(R&#x3D;r_{min}\)</span><br>我们记录每一个左部点的区间是 <span class="math-inline">\((l_i,r_i)\)</span>（开区间），以 <span class="math-inline">\(r_i\)</span> 升序为第一关键字，<span class="math-inline">\(l_i\)</span> 为升序为第二关键字排序。然后考虑贪心去填入，也就是我们要给每一区间找一个匹配点，每次填入在 <span class="math-inline">\((l_i,r_i)\)</span> 中距离 <span class="math-inline">\(l_i\)</span> 最近的点，如果没有这样的点，就说明这个区间无法找到匹配点，那么上界就是 <span class="math-inline">\(r_i\)</span>，注意：如果有两个区间都找不到位置插入，那么加入一个点后，仍然不可能同时满足这两个区间，直接都输出 <code>No</code>。</p>
+<h3 id="算出下界-L"><a href="#算出下界-L" class="headerlink" title="算出下界 \(L\)"></a>算出下界 <span class="math-inline">\(L\)</span></h3><p><span class="math-inline">\(L&#x3D;l_{max}\)</span><br>同理，但是以 <span class="math-inline">\(l_i\)</span> 降序为第一关键字，<span class="math-inline">\(r_i\)</span> 为降序为第二关键字排序。</p>
+<p>所以我们就得到了上下界，每次输入 <span class="math-inline">\(d\)</span> 的时候判断 <span class="math-inline">\(L&lt;d&lt;R\)</span> 就输出 <code>Yes</code> 就好。</p>
 <p>具体实现上有一些好写（常数小）的方式。</p>
 <p>在遍历笛卡尔树的时候，可以按照值域扫，这样不用写 dfs。<br>这里我们需要是由只有删除操作的set（初始是所有右部点，然后每一次匹配成功就会删除一个点）。我们可以用链表+路径压缩实现。</p>
 
@@ -381,6 +390,7 @@
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
+<script defer src="/js/blog-code.js"></script>
 
 </body>
 </html>
