@@ -1385,7 +1385,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #ffcd49;
+  background: #2563b0;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2950,7 +2950,28 @@ header.header {
   outline-offset: -3px;
 }
 .blog-code-body {
+  --blog-code-scrollbar-thumb: #58616d;
+  --blog-code-scrollbar-track: #0d1117;
   position: relative;
+  scrollbar-color: var(--blog-code-scrollbar-thumb) var(--blog-code-scrollbar-track);
+}
+@supports not (scrollbar-color: auto) {
+  .blog-code-body figure.highlight::-webkit-scrollbar,
+  .blog-code-body .table-container::-webkit-scrollbar,
+  .blog-code-body pre::-webkit-scrollbar,
+  .blog-code-body figure.highlight::-webkit-scrollbar-track,
+  .blog-code-body .table-container::-webkit-scrollbar-track,
+  .blog-code-body pre::-webkit-scrollbar-track,
+  .blog-code-body figure.highlight::-webkit-scrollbar-corner,
+  .blog-code-body .table-container::-webkit-scrollbar-corner,
+  .blog-code-body pre::-webkit-scrollbar-corner {
+    background-color: var(--blog-code-scrollbar-track);
+  }
+  .blog-code-body figure.highlight::-webkit-scrollbar-thumb,
+  .blog-code-body .table-container::-webkit-scrollbar-thumb,
+  .blog-code-body pre::-webkit-scrollbar-thumb {
+    background-color: var(--blog-code-scrollbar-thumb);
+  }
 }
 .post-body .blog-code-body > figure.highlight,
 .post-body .blog-code-body > pre {
