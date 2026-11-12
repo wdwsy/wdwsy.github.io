@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wdwsy.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":240},"hljswrap":true,"codeblock":{"theme":{"light":"github-dark","dark":"github-dark-dimmed"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":true,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="维护每个位置的当前值 \(a_i\)，并在指定时刻执行 \(h_i\leftarrow h_i+a_i\)。之后 \(a_i\) 的修改不改变已经累计的 \(h_i\)。 结点维护当前和 \(\mathrm{cur}&#x3D;\sum a_i\) 与历史和 \(\mathrm{hist}&#x3D;\sum h_i\)。以下各版本均取模，代码中的参数先归一化到 \([0,\mathrm{mod}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="历史和写法总结">
+<meta property="og:url" content="https://wdwsy.github.io/2026/11/12/%E5%8E%86%E5%8F%B2%E5%92%8C%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="wdwsy&#39;s Blog">
+<meta property="og:description" content="维护每个位置的当前值 \(a_i\)，并在指定时刻执行 \(h_i\leftarrow h_i+a_i\)。之后 \(a_i\) 的修改不改变已经累计的 \(h_i\)。 结点维护当前和 \(\mathrm{cur}&#x3D;\sum a_i\) 与历史和 \(\mathrm{hist}&#x3D;\sum h_i\)。以下各版本均取模，代码中的参数先归一化到 \([0,\mathrm{mod}">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-11-12T12:09:29.000Z">
+<meta property="article:modified_time" content="2026-11-12T12:09:29.935Z">
+<meta property="article:author" content="wdwsy">
+<meta property="article:tag" content="算法,OIC++,NOI,信息学竞赛">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://wdwsy.github.io/2026/11/12/%E5%8E%86%E5%8F%B2%E5%92%8C%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://wdwsy.github.io/2026/11/12/%E5%8E%86%E5%8F%B2%E5%92%8C%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/","path":"2026/11/12/历史和写法总结/","title":"历史和写法总结"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>历史和写法总结 | wdwsy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">wdwsy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">算法的世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%8F%AA%E6%9C%89%E5%8C%BA%E9%97%B4%E4%B9%98"><span class="nav-number">1.</span> <span class="nav-text">1. 只有区间乘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E6%93%8D%E4%BD%9C%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 操作形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E6%87%92%E6%A0%87%E8%AE%B0%E5%90%88%E5%B9%B6"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 懒标记合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 核心代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%8F%AA%E6%9C%89%E5%8C%BA%E9%97%B4%E5%8A%A0"><span class="nav-number">2.</span> <span class="nav-text">2. 只有区间加</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E4%B8%89%E4%B8%AA%E6%A0%87%E8%AE%B0"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 为什么需要三个标记</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%A0%87%E8%AE%B0%E5%90%88%E5%B9%B6"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 标记合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 核心代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%8C%BA%E9%97%B4%E5%8A%A0%E3%80%81%E4%B9%98%E6%B7%B7%E5%90%88%EF%BC%9A%E7%BB%9F%E4%B8%80%E5%9B%9B%E6%A0%87%E8%AE%B0"><span class="nav-number">3.</span> <span class="nav-text">3. 区间加、乘混合：统一四标记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%A0%87%E8%AE%B0%E5%90%88%E5%B9%B6"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 标记合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E6%93%8D%E4%BD%9C%E5%8F%82%E6%95%B0%E9%80%9F%E6%9F%A5"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 操作参数速查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 核心代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%9C%A8-Destr0yer-%E4%B8%AD%E5%A6%82%E4%BD%95%E8%B0%83%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">4. 在 Destr0yer 中如何调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%AE%9E%E7%8E%B0%E6%97%B6%E6%A3%80%E6%9F%A5"><span class="nav-number">5.</span> <span class="nav-text">5. 实现时检查</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wdwsy"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">wdwsy</p>
+  <div class="site-description" itemprop="description">算法竞赛、C++、OI 技术分享</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wdwsy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wdwsy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/11/12/%E5%8E%86%E5%8F%B2%E5%92%8C%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="历史和写法总结 | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          历史和写法总结
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-11-12 20:09:29" itemprop="dateCreated datePublished" datetime="2026-11-12T20:09:29+08:00">2026-11-12</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>维护每个位置的当前值 <span class="math-inline">\(a_i\)</span>，并在指定时刻执行 <span class="math-inline">\(h_i\leftarrow h_i+a_i\)</span>。之后 <span class="math-inline">\(a_i\)</span> 的修改不改变已经累计的 <span class="math-inline">\(h_i\)</span>。</p>
+<p>结点维护当前和 <span class="math-inline">\(\mathrm{cur}&#x3D;\sum a_i\)</span> 与历史和 <span class="math-inline">\(\mathrm{hist}&#x3D;\sum h_i\)</span>。以下各版本均取模，代码中的参数先归一化到 <span class="math-inline">\([0,\mathrm{mod})\)</span>；<code>len</code> 表示结点覆盖的元素个数。</p>
+<p><strong>先明确累计时刻。</strong> 区间修改与记录历史是两个独立动作。若题目要求“每次修改后，把整个数组记入历史”，应先只修改目标区间，再对根结点记录一次；不能只在修改区间内累计。初始状态是否计入历史，也由题意决定。</p>
+<h2 id="1-只有区间乘"><a href="#1-只有区间乘" class="headerlink" title="1. 只有区间乘"></a>1. 只有区间乘</h2><h3 id="1-1-操作形式"><a href="#1-1-操作形式" class="headerlink" title="1.1 操作形式"></a>1.1 操作形式</h3><p>将操作写成</p>
+<div class="math-display">\[(a,h)\longmapsto (ma,\ h+ka),\]</div>
+<p>右边的 <span class="math-inline">\(a\)</span> 均为操作前的值。</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th><span class="math-inline">\(m\)</span></th>
+<th><span class="math-inline">\(k\)</span></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>当前值乘 <span class="math-inline">\(v\)</span></td>
+<td><span class="math-inline">\(v\)</span></td>
+<td><span class="math-inline">\(0\)</span></td>
+</tr>
+<tr>
+<td>把当前值记入历史</td>
+<td><span class="math-inline">\(1\)</span></td>
+<td><span class="math-inline">\(1\)</span></td>
+</tr>
+<tr>
+<td>先乘 <span class="math-inline">\(v\)</span>，再记入历史</td>
+<td><span class="math-inline">\(v\)</span></td>
+<td><span class="math-inline">\(v\)</span></td>
+</tr>
+<tr>
+<td>先记入历史，再乘 <span class="math-inline">\(v\)</span></td>
+<td><span class="math-inline">\(v\)</span></td>
+<td><span class="math-inline">\(1\)</span></td>
+</tr>
+</tbody></table>
+<p>结点维护</p>
+<div class="math-display">\[\mathrm{cur}&#x3D;\sum a_i,\qquad \mathrm{hist}&#x3D;\sum h_i.\]</div>
+<p>区间和也满足同一个变换，因此更新时无需额外乘区间长度。</p>
+<h3 id="1-2-懒标记合并"><a href="#1-2-懒标记合并" class="headerlink" title="1.2 懒标记合并"></a>1.2 懒标记合并</h3><p>旧标记 <span class="math-inline">\((M,K)\)</span> 表示尚未下传的操作</p>
+<div class="math-display">\[(a,h)\longmapsto (Ma,\ h+Ka).\]</div>
+<p>再执行新操作 <span class="math-inline">\((m,k)\)</span> 后，历史值变为</p>
+<div class="math-display">\[h+Ka+k(Ma)&#x3D;h+(K+Mk)a.\]</div>
+<p>所以先旧后新的合并公式为</p>
+<div class="math-display">\[\boxed{(M,K)\leftarrow(Mm,\ K+M_{\text{旧}}k)}.\]</div>
+<p>例如连续两次“除以 <span class="math-inline">\(2\)</span> 后记入历史”，当前值变成 <span class="math-inline">\(a&#x2F;4\)</span>，历史增加 <span class="math-inline">\(a&#x2F;2+a&#x2F;4&#x3D;3a&#x2F;4\)</span>，最终标记就是 <span class="math-inline">\((1&#x2F;4,3&#x2F;4)\)</span>。</p>
+<h3 id="1-3-核心代码"><a href="#1-3-核心代码" class="headerlink" title="1.3 核心代码"></a>1.3 核心代码</h3><p>以下代码放在线段树结构体内；<span class="math-inline">\(\mathrm{mod}&#x3D;998244353\)</span>，<code>t</code> 是全局线段树对象的结点数组。区间修改、单点赋值和区间查询沿用普通线段树的递归结构，查询返回 <code>hist</code>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">    <span class="type">int</span> cur, hist;</span><br><span class="line">    <span class="type">int</span> mul, acc;</span><br><span class="line">&#125; t[N &lt;&lt; <span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;v : t) v = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// hist += acc * cur_old; cur *= mul.</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">oper</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> mul, <span class="type">int</span> acc)</span> </span>&#123;</span><br><span class="line">    t[u].hist = (t[u].hist + <span class="number">1LL</span> * acc * t[u].cur) % mod;</span><br><span class="line">    t[u].cur = <span class="number">1LL</span> * t[u].cur * mul % mod;</span><br><span class="line"></span><br><span class="line">    t[u].acc = (t[u].acc + <span class="number">1LL</span> * t[u].mul * acc) % mod;</span><br><span class="line">    t[u].mul = <span class="number">1LL</span> * t[u].mul * mul % mod;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">pushdown</span><span class="params">(<span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (t[u].mul == <span class="number">1</span> &amp;&amp; t[u].acc == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">oper</span>(u &lt;&lt; <span class="number">1</span>, t[u].mul, t[u].acc);</span><br><span class="line">    <span class="built_in">oper</span>(u &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, t[u].mul, t[u].acc);</span><br><span class="line">    t[u].mul = <span class="number">1</span>;</span><br><span class="line">    t[u].acc = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">pushup</span><span class="params">(<span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">    t[u].cur = (t[u &lt;&lt; <span class="number">1</span>].cur + t[u &lt;&lt; <span class="number">1</span> | <span class="number">1</span>].cur) % mod;</span><br><span class="line">    t[u].hist = (t[u &lt;&lt; <span class="number">1</span>].hist + t[u &lt;&lt; <span class="number">1</span> | <span class="number">1</span>].hist) % mod;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>oper</code> 中有两处顺序必须保证：更新 <code>hist</code> 时使用旧 <code>cur</code>，更新 <code>acc</code> 时使用旧 <code>mul</code>。不对已有的 <code>hist</code> 做乘法。</p>
+<p>每次区间修改、区间查询的复杂度均为 <span class="math-inline">\(O(\log n)\)</span>；若对整棵树累计一次当前值，直接执行 <code>oper(1, 1, 1)</code>，复杂度为 <span class="math-inline">\(O(1)\)</span>。</p>
+<h2 id="2-只有区间加"><a href="#2-只有区间加" class="headerlink" title="2. 只有区间加"></a>2. 只有区间加</h2><h3 id="2-1-为什么需要三个标记"><a href="#2-1-为什么需要三个标记" class="headerlink" title="2.1 为什么需要三个标记"></a>2.1 为什么需要三个标记</h3><p>统一写成</p>
+<div class="math-display">\[(a,h)\longmapsto(a+b,\ h+ka+d).\]</div>
+<p>历史新增量既包含“原值被累计了多少次”，也包含“之前的区间加对后续累计产生的贡献”，所以需要常数项 <span class="math-inline">\(d\)</span>。</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th><span class="math-inline">\(b\)</span></th>
+<th><span class="math-inline">\(k\)</span></th>
+<th><span class="math-inline">\(d\)</span></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>当前值加 <span class="math-inline">\(v\)</span></td>
+<td><span class="math-inline">\(v\)</span></td>
+<td><span class="math-inline">\(0\)</span></td>
+<td><span class="math-inline">\(0\)</span></td>
+</tr>
+<tr>
+<td>记录当前值</td>
+<td><span class="math-inline">\(0\)</span></td>
+<td><span class="math-inline">\(1\)</span></td>
+<td><span class="math-inline">\(0\)</span></td>
+</tr>
+<tr>
+<td>先加 <span class="math-inline">\(v\)</span>，再记录</td>
+<td><span class="math-inline">\(v\)</span></td>
+<td><span class="math-inline">\(1\)</span></td>
+<td><span class="math-inline">\(v\)</span></td>
+</tr>
+<tr>
+<td>先记录，再加 <span class="math-inline">\(v\)</span></td>
+<td><span class="math-inline">\(v\)</span></td>
+<td><span class="math-inline">\(1\)</span></td>
+<td><span class="math-inline">\(0\)</span></td>
+</tr>
+</tbody></table>
+<p>区间和满足</p>
+<div class="math-display">\[\mathrm{cur}&#39;&#x3D;\mathrm{cur}+b\cdot\mathrm{len},\]</div>
+<div class="math-display">\[\mathrm{hist}&#39;&#x3D;\mathrm{hist}+k\cdot\mathrm{cur}_{\text{旧}}+d\cdot\mathrm{len}.\]</div>
+<p><strong>只有常数项 <span class="math-inline">\(b,d\)</span> 乘区间长度；<span class="math-inline">\(k\cdot\mathrm{cur}\)</span> 不再乘长度。</strong></p>
+<h3 id="2-2-标记合并"><a href="#2-2-标记合并" class="headerlink" title="2.2 标记合并"></a>2.2 标记合并</h3><p>旧标记 <span class="math-inline">\((B,K,D)\)</span> 表示</p>
+<div class="math-display">\[a&#39;&#x3D;a+B,\qquad h&#39;&#x3D;h+Ka+D.\]</div>
+<p>再执行新操作 <span class="math-inline">\((b,k,d)\)</span>：</p>
+<div class="math-display">\[h&#39;&#39;&#x3D;h+Ka+D+k(a+B)+d.\]</div>
+<p>因此</p>
+<div class="math-display">\[\boxed{(B,K,D)\leftarrow(B+b,\ K+k,\ D+kB_{\text{旧}}+d)}.\]</div>
+<p>单位元为 <span class="math-inline">\((0,0,0)\)</span>。例如“加 <span class="math-inline">\(3\)</span>、记录、加 <span class="math-inline">\(2\)</span>、记录”后，当前值为 <span class="math-inline">\(a+5\)</span>，历史增加 <span class="math-inline">\((a+3)+(a+5)&#x3D;2a+8\)</span>，最终标记为 <span class="math-inline">\((5,2,8)\)</span>。</p>
+<h3 id="2-3-核心代码"><a href="#2-3-核心代码" class="headerlink" title="2.3 核心代码"></a>2.3 核心代码</h3><p>这个版本的结点与标记都初始化为 <span class="math-inline">\(0\)</span>。<code>add</code> 对应 <span class="math-inline">\(B\)</span>，<code>cnt</code> 对应 <span class="math-inline">\(K\)</span>，<code>acc</code> 对应 <span class="math-inline">\(D\)</span>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">    <span class="type">int</span> cur, hist;</span><br><span class="line">    <span class="type">int</span> add, cnt, acc;</span><br><span class="line">&#125; t[N &lt;&lt; <span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">oper</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> len, <span class="type">int</span> b, <span class="type">int</span> k, <span class="type">int</span> d)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> &amp;v = t[u];</span><br><span class="line">    v.hist = (v.hist + <span class="number">1LL</span> * k * v.cur + <span class="number">1LL</span> * d * len) % mod;</span><br><span class="line">    v.cur = (v.cur + <span class="number">1LL</span> * b * len) % mod;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// acc 使用旧 add，因此必须先更新 acc。</span></span><br><span class="line">    v.acc = (v.acc + <span class="number">1LL</span> * k * v.add + d) % mod;</span><br><span class="line">    v.cnt = (v.cnt + k) % mod;</span><br><span class="line">    v.add = (v.add + b) % mod;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下传时，分别按左右儿子的长度调用</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">oper</span>(child, child_len, t[u].add, t[u].cnt, t[u].acc);</span><br></pre></td></tr></table></figure>
+
+<p>随后清空父结点的 <code>add, cnt, acc</code>。<code>pushup</code> 仍分别合并左右儿子的 <code>cur</code> 和 <code>hist</code>。</p>
+<h2 id="3-区间加、乘混合：统一四标记"><a href="#3-区间加、乘混合：统一四标记" class="headerlink" title="3. 区间加、乘混合：统一四标记"></a>3. 区间加、乘混合：统一四标记</h2><p>两种操作混合时，统一使用</p>
+<div class="math-display">\[\boxed{(a,h)\longmapsto(ma+b,\ h+ka+d)}.\]</div>
+<h3 id="3-1-标记合并"><a href="#3-1-标记合并" class="headerlink" title="3.1 标记合并"></a>3.1 标记合并</h3><p>旧标记为 <span class="math-inline">\((M,B,K,D)\)</span>，随后执行新操作 <span class="math-inline">\((m,b,k,d)\)</span>：</p>
+<div class="math-display">\[a&#39;&#39;&#x3D;m(Ma+B)+b,\]</div>
+<div class="math-display">\[h&#39;&#39;&#x3D;h+Ka+D+k(Ma+B)+d.\]</div>
+<p>所以</p>
+<div class="math-display">\[\boxed{
+\begin{aligned}
+M&#39;&amp;&#x3D;mM,\\
+B&#39;&amp;&#x3D;mB+b,\\
+K&#39;&amp;&#x3D;K+kM,\\
+D&#39;&amp;&#x3D;D+kB+d.
+\end{aligned}}\]</div>
+<p>右侧全部使用旧标记。单位元为 <span class="math-inline">\((1,0,0,0)\)</span>；令 <span class="math-inline">\(b&#x3D;d&#x3D;0\)</span>，就得到区间乘版本；始终令 <span class="math-inline">\(m&#x3D;1\)</span>，就得到区间加版本。</p>
+<h3 id="3-2-操作参数速查"><a href="#3-2-操作参数速查" class="headerlink" title="3.2 操作参数速查"></a>3.2 操作参数速查</h3><table>
+<thead>
+<tr>
+<th>操作</th>
+<th><span class="math-inline">\(m\)</span></th>
+<th><span class="math-inline">\(b\)</span></th>
+<th><span class="math-inline">\(k\)</span></th>
+<th><span class="math-inline">\(d\)</span></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>乘 <span class="math-inline">\(v\)</span></td>
+<td><span class="math-inline">\(v\)</span></td>
+<td><span class="math-inline">\(0\)</span></td>
+<td><span class="math-inline">\(0\)</span></td>
+<td><span class="math-inline">\(0\)</span></td>
+</tr>
+<tr>
+<td>加 <span class="math-inline">\(v\)</span></td>
+<td><span class="math-inline">\(1\)</span></td>
+<td><span class="math-inline">\(v\)</span></td>
+<td><span class="math-inline">\(0\)</span></td>
+<td><span class="math-inline">\(0\)</span></td>
+</tr>
+<tr>
+<td>记录当前值</td>
+<td><span class="math-inline">\(1\)</span></td>
+<td><span class="math-inline">\(0\)</span></td>
+<td><span class="math-inline">\(1\)</span></td>
+<td><span class="math-inline">\(0\)</span></td>
+</tr>
+<tr>
+<td>先乘 <span class="math-inline">\(v\)</span>，再记录</td>
+<td><span class="math-inline">\(v\)</span></td>
+<td><span class="math-inline">\(0\)</span></td>
+<td><span class="math-inline">\(v\)</span></td>
+<td><span class="math-inline">\(0\)</span></td>
+</tr>
+<tr>
+<td>先加 <span class="math-inline">\(v\)</span>，再记录</td>
+<td><span class="math-inline">\(1\)</span></td>
+<td><span class="math-inline">\(v\)</span></td>
+<td><span class="math-inline">\(1\)</span></td>
+<td><span class="math-inline">\(v\)</span></td>
+</tr>
+<tr>
+<td>先记录，再乘 <span class="math-inline">\(v\)</span></td>
+<td><span class="math-inline">\(v\)</span></td>
+<td><span class="math-inline">\(0\)</span></td>
+<td><span class="math-inline">\(1\)</span></td>
+<td><span class="math-inline">\(0\)</span></td>
+</tr>
+<tr>
+<td>先记录，再加 <span class="math-inline">\(v\)</span></td>
+<td><span class="math-inline">\(1\)</span></td>
+<td><span class="math-inline">\(v\)</span></td>
+<td><span class="math-inline">\(1\)</span></td>
+<td><span class="math-inline">\(0\)</span></td>
+</tr>
+</tbody></table>
+<p>更一般地，先执行 <span class="math-inline">\(a\leftarrow ma+b\)</span> 再记录，参数为 <span class="math-inline">\((m,b,m,b)\)</span>。</p>
+<h3 id="3-3-核心代码"><a href="#3-3-核心代码" class="headerlink" title="3.3 核心代码"></a>3.3 核心代码</h3><p>以下代码与前面两个专用版本择一使用，放在线段树结构体内。外层递归携带 <span class="math-inline">\([l,r]\)</span>，全覆盖时调用 <code>oper(u, r-l+1, m, b, k, d)</code>；部分覆盖时先下传、递归、再合并。查询历史和时返回 <code>hist</code>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">    <span class="type">int</span> cur, hist;</span><br><span class="line">    <span class="type">int</span> mul, add, cnt, acc;</span><br><span class="line">&#125; t[N &lt;&lt; <span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;v : t) v = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">oper</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> len, <span class="type">int</span> m, <span class="type">int</span> b, <span class="type">int</span> k, <span class="type">int</span> d)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> &amp;v = t[u];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 先保存旧量，避免更新顺序混淆。</span></span><br><span class="line">    <span class="type">int</span> S = v.cur;</span><br><span class="line">    <span class="type">int</span> M = v.mul, B = v.add;</span><br><span class="line"></span><br><span class="line">    v.hist = (v.hist + <span class="number">1LL</span> * k * S + <span class="number">1LL</span> * d * len) % mod;</span><br><span class="line">    v.cur = (<span class="number">1LL</span> * m * S + <span class="number">1LL</span> * b * len) % mod;</span><br><span class="line"></span><br><span class="line">    v.cnt = (v.cnt + <span class="number">1LL</span> * k * M) % mod;</span><br><span class="line">    v.acc = (v.acc + <span class="number">1LL</span> * k * B + d) % mod;</span><br><span class="line">    v.mul = <span class="number">1LL</span> * m * M % mod;</span><br><span class="line">    v.add = (<span class="number">1LL</span> * m * B + b) % mod;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">pushdown</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> &amp;v = t[u];</span><br><span class="line">    <span class="keyword">if</span> (l == r || (v.mul == <span class="number">1</span> &amp;&amp; v.add == <span class="number">0</span> &amp;&amp;</span><br><span class="line">                   v.cnt == <span class="number">0</span> &amp;&amp; v.acc == <span class="number">0</span>)) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">oper</span>(u &lt;&lt; <span class="number">1</span>, mid - l + <span class="number">1</span>, v.mul, v.add, v.cnt, v.acc);</span><br><span class="line">    <span class="built_in">oper</span>(u &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, r - mid, v.mul, v.add, v.cnt, v.acc);</span><br><span class="line"></span><br><span class="line">    v.mul = <span class="number">1</span>;</span><br><span class="line">    v.add = v.cnt = v.acc = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">pushup</span><span class="params">(<span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">    t[u].cur = (t[u &lt;&lt; <span class="number">1</span>].cur + t[u &lt;&lt; <span class="number">1</span> | <span class="number">1</span>].cur) % mod;</span><br><span class="line">    t[u].hist = (t[u &lt;&lt; <span class="number">1</span>].hist + t[u &lt;&lt; <span class="number">1</span> | <span class="number">1</span>].hist) % mod;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>初始化后，若有初始数组，建树时给叶子的 <code>cur</code> 赋值并合并，<code>hist</code> 默认从 <span class="math-inline">\(0\)</span> 开始。若初始状态也需要计入历史，再记录一次。</p>
+<p>本版本同样支持 <span class="math-inline">\(O(\log n)\)</span> 的区间修改、区间历史和查询；记录整个数组时执行 <code>oper(1, n, 1, 0, 1, 0)</code>，为 <span class="math-inline">\(O(1)\)</span>。</p>
+<h2 id="4-在-Destr0yer-中如何调用"><a href="#4-在-Destr0yer-中如何调用" class="headerlink" title="4. 在 Destr0yer 中如何调用"></a>4. 在 Destr0yer 中如何调用</h2><p>把全部 <span class="math-inline">\(2n\)</span> 个端点分别编号，同坐标时左端点在前，不合并重复端点。设 <span class="math-inline">\(c(i,t)\)</span> 为端点序列 <span class="math-inline">\([i,t]\)</span> 中出现过的不同区间数。</p>
+<p>右端点 <span class="math-inline">\(i\)</span> 启用后，维护</p>
+<div class="math-display">\[a_i(t)&#x3D;2^{-c(i,t)},\qquad
+h_i(t)&#x3D;\sum_{\substack{i&lt;j\le t\\j\text{ 为左端点}}}2^{-c(i,j)}.\]</div>
+<p>其余位置初始为 <span class="math-inline">\(0\)</span>。所有 <span class="math-inline">\(1&#x2F;2\)</span> 均使用模意义下的 <code>inv2</code>。</p>
+<p>使用第 1 节的区间乘专用版本。扫描到左端点位置 <span class="math-inline">\(j\)</span>，先将此前所有权值除以 <span class="math-inline">\(2\)</span>，再记入历史：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">update</span>(<span class="number">1</span>, j, inv2, inv2);</span><br></pre></td></tr></table></figure>
+
+<p>扫描到右端点位置 <span class="math-inline">\(r\)</span>，设对应左端点的位置为 <span class="math-inline">\(l\)</span>。对 <span class="math-inline">\(l&lt;i&lt;r\)</span>，该区间第一次出现在 <span class="math-inline">\([i,r]\)</span> 中，因此权值除以 <span class="math-inline">\(2\)</span>；新位置自身的权值为 <span class="math-inline">\(1&#x2F;2\)</span>：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (l + <span class="number">1</span> &lt;= r - <span class="number">1</span>) <span class="built_in">update</span>(l + <span class="number">1</span>, r - <span class="number">1</span>, inv2, <span class="number">0</span>);</span><br><span class="line"><span class="built_in">modify</span>(r, inv2);</span><br></pre></td></tr></table></figure>
+
+<p><strong>只在左端点处累计历史。</strong> 单点启用前必须沿途下传旧标记，让过去的操作作用于该位置原来的 <span class="math-inline">\(0\)</span>；新位置的历史值为 <span class="math-inline">\(0\)</span>。</p>
+<p>对于询问 <span class="math-inline">\([x,y]\)</span>，先扫描完所有坐标不超过 <span class="math-inline">\(y\)</span> 的端点，再查询坐标落在 <span class="math-inline">\([x,y]\)</span> 内的位置的历史和 <span class="math-inline">\(A\)</span>。因为 <span class="math-inline">\(h_i\)</span> 只累计 <span class="math-inline">\(j&gt;i\)</span> 的配对，限制 <span class="math-inline">\(i\)</span> 不早于 <span class="math-inline">\(x\)</span>，就自动排除了 <span class="math-inline">\(x\)</span> 之前的配对。</p>
+<p>存活区间数为</p>
+<div class="math-display">\[m&#x3D;\#\{l_i\le y\}-\#\{r_i&lt;x\}.\]</div>
+<p>非空子集的固定贡献为 <span class="math-inline">\(2^m-1\)</span>，配对贡献为 <span class="math-inline">\(2^mA\)</span>，所以</p>
+<div class="math-display">\[\boxed{\mathrm{ans}&#x3D;2^m(A+1)-1}.\]</div>
+<p>若使用第 3 节统一版本，左端点处的变换参数改为 <code>(inv2, 0, inv2, 0)</code>，右端点处的区间乘参数为 <code>(inv2, 0, 0, 0)</code>，其余逻辑不变。</p>
+<h2 id="5-实现时检查"><a href="#5-实现时检查" class="headerlink" title="5. 实现时检查"></a>5. 实现时检查</h2><ul>
+<li><strong>各版本标记单位元不同</strong>：乘法版 <span class="math-inline">\((1,0)\)</span>，加法版 <span class="math-inline">\((0,0,0)\)</span>，统一版 <span class="math-inline">\((1,0,0,0)\)</span>。大静态数组在运行时初始化，避免非零默认值使可执行文件体积过大。</li>
+<li><strong>当前值与历史值分开更新</strong>：区间乘使用 <code>(v,0)</code>，不会缩放过去的历史贡献。</li>
+<li><strong>常数项乘长度，当前和不再乘长度</strong>：例如 <span class="math-inline">\(\mathrm{hist}\leftarrow\mathrm{hist}+k\cdot\mathrm{cur}+d\cdot\mathrm{len}\)</span>。</li>
+<li><strong>记录范围、时刻按题意决定</strong>：区间更新后记录全数组，需要额外对根记录一次，不能漏掉未修改的位置。</li>
+<li><strong>负数参数先归一化</strong>：可用 <code>(x % mod + mod) % mod</code>；所有乘法先转 <code>long long</code>。这里按模意义维护总和，若题目不取模，应另行估计数值范围。</li>
+<li><strong>Destr0yer 的新位置先下传、再赋值</strong>：该位置启用前一直为 <span class="math-inline">\(0\)</span>，避免让旧记录补算到新权值。一般新增位置若不应包含旧历史，还需按题意显式清零其历史值。</li>
+<li><strong>坐标、端点序号、区间编号分清</strong>：<code>posl[id] + 1</code> 是序号加一；带符号的事件编号先取正再访问数组。</li>
+<li><strong>归一化保持一致</strong>：初始化为 <code>inv2</code>，最终历史贡献乘 <span class="math-inline">\(2^m\)</span>；空端点区间查询返回 <span class="math-inline">\(0\)</span>。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/11/04/2026%E5%B9%B411%E6%9C%884%E6%97%A5hsyfz%E5%A5%BD%E9%A2%98%E5%88%86%E4%BA%AB/" rel="prev" title="2026年11月4日hsyfz好题分享">
+                  <i class="fa fa-angle-left"></i> 2026年11月4日hsyfz好题分享
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class=""></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">wdwsy</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script defer src="/js/blog-code.js"></script>
+
+</body>
+</html>

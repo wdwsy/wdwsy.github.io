@@ -178,7 +178,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -210,6 +210,110 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/05/26/cnblogs-2026%E5%B9%B45%E6%9C%8822%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/05/26/cnblogs-2026%E5%B9%B45%E6%9C%8822%E6%97%A5%E8%AE%B2%E9%A2%98%E9%A2%98%E5%8D%95/" class="post-title-link" itemprop="url">2026年5月22日讲题题单</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-05-26 20:00:00" itemprop="dateCreated datePublished" datetime="2026-05-26T20:00:00+08:00">2026-05-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-11-07 21:22:47" itemprop="dateModified" datetime="2026-11-07T21:22:47+08:00">2026-11-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">算法竞赛</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="D-帽子-Sesiri"><a href="#D-帽子-Sesiri" class="headerlink" title="D - 帽子 Šeširi"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P10873">D - 帽子 Šeširi</a></h1><p>神秘构造题，我们考虑最后的帽子集合是怎么样情况的时候第 <span class="math-inline">\(i\)</span> 个人无法分辨自己的帽子，发现当且仅当他看到别人的帽子相同的时候。</p>
+<p>于是我们想到，可以建立双射。 集合 <span class="math-inline">\(S\)</span> 和 集合 <span class="math-inline">\(S \cup {i}\)</span> 之间建立双射，发现这两种情况只能满足一个猜对，所以我们就把这两个点连接一条无向边。</p>
+<p>我们对这个图跑一个欧拉回路按照我们跑出来的回路的方向定向每条边，永远满足出边的那个集合可以猜对就好。</p>
+<p>（trick：如果有一些点的度数为奇数，我们可以把这个点连接向一个边到虚拟点 n+1，这样可以满足所有点的度数为偶数）。<br>这个题目根据写法不同会需要二进制反转，太毒瘤了！</p>
+<h1 id="E-Permutation-Counting-2"><a href="#E-Permutation-Counting-2" class="headerlink" title="E - Permutation Counting 2"></a><a target="_blank" rel="noopener" href="https://qoj.ac/problem/7759">E - Permutation Counting 2</a></h1><p>直接计数很困难，考虑转化这个问题。其实个人觉得本质就是如何在一个好用的形式来描述这个问题。</p>
+<p>首先我们发现直接算 <span class="math-inline">\(k\)</span> 个上升段不好算，于是我们进行容斥，改成钦定 <span class="math-inline">\(k\)</span> 个上升段。</p>
+<p>这题，我们对于每一个连续段考虑整体转移。如果我们按照下标从小到大填了 <span class="math-inline">\(p\)</span> 每一个连续段，那么也就相当于每次在 <span class="math-inline">\(p^{-1}\)</span> 中填上了前几小的数字（而且这几个数组的下标就是我在 <span class="math-inline">\(p\)</span> 中的值）。</p>
+<p>不难发现，我们用一个矩阵 <span class="math-inline">\(a_{i,j}\)</span> 表示在填 <span class="math-inline">\(p\)</span> 的第 <span class="math-inline">\(i\)</span> 个连续段的同时，<span class="math-inline">\(p^{-1}\)</span> 中第 <span class="math-inline">\(j\)</span> 个连续段多填了多少个。</p>
+<p>这样我们就很好计算了，我们只要满足一下条件即可。</p>
+<ul>
+<li>每一行不全部为 <span class="math-inline">\(0\)</span>。</li>
+<li>每一列不全部为 <span class="math-inline">\(0\)</span>。</li>
+<li>矩阵内所有数字的和为 <span class="math-inline">\(n\)</span>。</li>
+</ul>
+<p>这个我们需要再来一次容斥，把前两个条件先去掉，最后再用二维二项式反演回去就行。</p>
+<p>一共要反演 <span class="math-inline">\(4\)</span> 次。</p>
+<h1 id="P-Quantifier"><a href="#P-Quantifier" class="headerlink" title="P - Quantifier"></a><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/2081/E">P - Quantifier</a></h1><p>巨大的推式子题，先考虑每次把所有芯片尽量下放，然后再向上归并。</p>
+<p>设 <span class="math-inline">\(f_{u,i,j}\)</span> 表示在节点 <span class="math-inline">\(u\)</span>，颜色为 <span class="math-inline">\(i\)</span> 的芯片开头，连续开头长度为 <span class="math-inline">\(j\)</span>。</p>
+<p>式子太长了，不如放一下关键函数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">merge</span><span class="params">(<span class="type">int</span> g[<span class="number">2</span>][N], <span class="type">int</span> f[<span class="number">2</span>][N], <span class="type">int</span> m, <span class="type">int</span> n)</span> </span>&#123; <span class="comment">// g 的长度为 m，f 的长度为 n 合并这两个兄弟</span></span><br><span class="line">    <span class="comment">// 清空</span></span><br><span class="line"></span><br><span class="line">    sg[<span class="number">0</span>][m + <span class="number">1</span>] = sg[<span class="number">1</span>][m + <span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = m; i &gt;= <span class="number">1</span>; i--) &#123;</span><br><span class="line">        sg[<span class="number">0</span>][i] = (sg[<span class="number">0</span>][i + <span class="number">1</span>] + g[<span class="number">0</span>][i]);</span><br><span class="line">        sg[<span class="number">1</span>][i] = (sg[<span class="number">1</span>][i + <span class="number">1</span>] + g[<span class="number">1</span>][i]);</span><br><span class="line">    &#125;</span><br><span class="line">    sf[<span class="number">0</span>][n + <span class="number">1</span>] = sf[<span class="number">1</span>][n + <span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = n; i &gt;= <span class="number">1</span>; i--) &#123;</span><br><span class="line">        sf[<span class="number">0</span>][i] = (sf[<span class="number">0</span>][i + <span class="number">1</span>] + f[<span class="number">0</span>][i]);</span><br><span class="line">        sf[<span class="number">1</span>][i] = (sf[<span class="number">1</span>][i + <span class="number">1</span>] + f[<span class="number">1</span>][i]);</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 省略取 mod</span></span><br><span class="line">    <span class="comment">// 下面每个 for 中第一行为颜色相同的开头合并，其他为不同颜色合并</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; m; k++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> t = <span class="number">1</span>; t &lt;= n; t++) &#123;</span><br><span class="line">                <span class="built_in">add</span>(tmp[i][k + t], (ll)sg[i][k + <span class="number">1</span>] * f[i][t] * C[k + t][t] * C[m - k + n - t - <span class="number">1</span>][m - k]);</span><br><span class="line">                <span class="keyword">if</span> (k) <span class="built_in">add</span>(tmp[i][k], (ll)sg[i][k + <span class="number">1</span>] * f[i ^ <span class="number">1</span>][t] * C[m - k + n - <span class="number">1</span>][m - k]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; n; k++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++) &#123;</span><br><span class="line">                <span class="built_in">add</span>(tmp[i][k + j], (ll)g[i][j] * sf[i][k + <span class="number">1</span>] * C[k + j][j] * C[m - j - <span class="number">1</span> + n - k][n - k]);</span><br><span class="line">                <span class="keyword">if</span> (k) <span class="built_in">add</span>(tmp[i][k], (ll)g[i ^ <span class="number">1</span>][j] * sf[i][k + <span class="number">1</span>] * C[m - <span class="number">1</span> + n - k][n - k]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> t = <span class="number">1</span>; t &lt;= n; t++) &#123;</span><br><span class="line">                <span class="built_in">add</span>(tmp[i][j + t], (ll)g[i][j] * f[i][t] * C[j + t][t] * C[m - j + n - t][m - j]);</span><br><span class="line">                <span class="built_in">add</span>(tmp[i][j], (ll)g[i][j] * f[i ^ <span class="number">1</span>][t] * C[m - j + n][n]);</span><br><span class="line">                <span class="built_in">add</span>(tmp[i][t], (ll)g[i ^ <span class="number">1</span>][j] * f[i][t] * C[m + n - t][m]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= <span class="number">1</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt;= n + m; k++) &#123;</span><br><span class="line">            g[j][k] = tmp[j][k];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 

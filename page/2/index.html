@@ -178,7 +178,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -210,6 +210,134 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/09/27/%E8%B5%8C%E5%BE%92%E9%97%AE%E9%A2%98%E5%88%BB%E7%94%BB%E9%9A%8F%E6%9C%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%87%BA%E7%8E%B0%E6%8C%87%E5%AE%9A%E4%B8%B2%E7%9A%84%E6%9C%9F%E6%9C%9B%E9%95%BF%E5%BA%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/09/27/%E8%B5%8C%E5%BE%92%E9%97%AE%E9%A2%98%E5%88%BB%E7%94%BB%E9%9A%8F%E6%9C%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%87%BA%E7%8E%B0%E6%8C%87%E5%AE%9A%E4%B8%B2%E7%9A%84%E6%9C%9F%E6%9C%9B%E9%95%BF%E5%BA%A6/" class="post-title-link" itemprop="url">赌徒问题刻画随机字符串中第一次出现指定串的期望长度</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-09-27 22:29:06 / Modified: 22:29:46" itemprop="dateCreated datePublished" datetime="2026-09-27T22:29:06+08:00">2026-09-27</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="P4548-CTSC2006-歌唱王国-题解总结"><a href="#P4548-CTSC2006-歌唱王国-题解总结" class="headerlink" title="P4548 [CTSC2006] 歌唱王国 题解总结"></a>P4548 [CTSC2006] 歌唱王国 题解总结</h1><h2 id="核心结论"><a href="#核心结论" class="headerlink" title="核心结论"></a>核心结论</h2><p>在 $n$ 个字符均匀随机的序列中，模式 $A$ 首次出现的期望时间为：</p>
+<p>$$<br>\boxed{\mathbb E[T]&#x3D;\sum_{c\in B(A)} n^c}<br>$$</p>
+<p>其中 $B(A)$ 是 $A$ 的所有 border 长度，包括全长。</p>
+<hr>
+<h2 id="1-怎么想到的：公平赌博-鞅"><a href="#1-怎么想到的：公平赌博-鞅" class="headerlink" title="1. 怎么想到的：公平赌博 &#x2F; 鞅"></a>1. 怎么想到的：公平赌博 &#x2F; 鞅</h2><p>这个“赌徒法”可以这样记：</p>
+<ul>
+<li>每单位时间，赌场旁边来一个新赌徒，带 $1$ 铜币。</li>
+<li>他押下一秒会唱出模式第一个字符 $a_1$。</li>
+<li>猜对了，资金变成 $n$ 倍；继续全押 $a_2$。</li>
+<li>再猜对，继续全押 $a_3$，资金继续乘 $n$。</li>
+<li>猜错就空手离场。</li>
+</ul>
+<p>单次下注：成功概率 $1&#x2F;n$，赔率 $n$，期望收益为 $0$，所以是公平赌博。</p>
+<p>赌场每单位时间收到一个新赌徒的 $1$ 铜币，所以到停止时刻 $T$，总投入是 $T$。</p>
+<p>关门时，哪些赌徒还活着并且手里有钱？</p>
+<p>只有那些“从进入时刻到关门时刻”唱出的串，恰好等于模式前缀，并且这段又恰好是模式后缀的赌徒。<br>也就是说，这段长度 $c$ 必须满足：</p>
+<p>$$<br>A[1..c]&#x3D;A[L-c+1..L],<br>$$</p>
+<p>即 $c$ 是 border。</p>
+<p>这个赌徒连续押中 $c$ 次，资金变成：</p>
+<p>$$<br>n^c.<br>$$</p>
+<p>所以赌场总支出是：</p>
+<p>$$<br>\sum_{c\in B(A)} n^c.<br>$$</p>
+<p>公平赌博意味着期望总投入 &#x3D; 期望总支出：</p>
+<p>$$<br>\mathbb E[T]&#x3D;\sum_{c\in B(A)} n^c.<br>$$</p>
+<p>这就是这个题的全部直觉。</p>
+<p>记忆口诀：</p>
+<blockquote>
+<p><strong>每时刻一个赌徒，押中翻 $n$ 倍；关门时前缀&#x3D;后缀的活着；活着的奖金是 $n^{\text{border长度}}$；公平所以期望时间等于总奖金。</strong></p>
+</blockquote>
+<hr>
+<h2 id="2-必须记住的定理-公式"><a href="#2-必须记住的定理-公式" class="headerlink" title="2. 必须记住的定理 &#x2F; 公式"></a>2. 必须记住的定理 &#x2F; 公式</h2><h3 id="核心定理"><a href="#核心定理" class="headerlink" title="核心定理"></a>核心定理</h3><p>在 $n$ 个字符均匀随机的序列中，模式 $A$ 首次出现的期望时间为：</p>
+<p>$$<br>\boxed{\mathbb E[T]&#x3D;\sum_{c\in B(A)} n^c}<br>$$</p>
+<p>其中 $B(A)$ 是 $A$ 的所有 border 长度，包括全长。</p>
+<hr>
+<h2 id="3-几个有用的推论"><a href="#3-几个有用的推论" class="headerlink" title="3. 几个有用的推论"></a>3. 几个有用的推论</h2><ol>
+<li><strong>如果模式没有自重叠</strong>，除了全长没有其他 border：</li>
+</ol>
+<p>$$<br>\mathbb E[T]&#x3D;n^L.<br>$$</p>
+<ol start="2">
+<li><strong>如果模式是全同串</strong> $a^L$，所有长度 $1,2,\dots,L$ 都是 border：</li>
+</ol>
+<p>$$<br>\mathbb E[T]&#x3D;n+n^2+\cdots+n^L.<br>$$</p>
+<ol start="3">
+<li><p><strong>border 越多，期望越大</strong>。因为每次重叠都会让某些赌徒在关门时还活着，赌场要赔付更多，所以平均等待时间更长。</p>
+</li>
+<li><p>border 长度 $c$ 对应周期 $L-c$。所以也可以理解为：模式自重叠越强，首次出现越慢。</p>
+</li>
+</ol>
+<hr>
+<h2 id="6-最容易忘的点"><a href="#6-最容易忘的点" class="headerlink" title="6. 最容易忘的点"></a>6. 最容易忘的点</h2><ol>
+<li><strong>包括全长 border。</strong></li>
+<li><strong>不包括空 border $0$。</strong></li>
+</ol>
+<hr>
+<h2 id="7-最终记忆卡片"><a href="#7-最终记忆卡片" class="headerlink" title="7. 最终记忆卡片"></a>7. 最终记忆卡片</h2><blockquote>
+<p>均匀 $n$ 字母表，模式 $A$ 首次出现期望：</p>
+<p>$$<br>\mathbb E[T]&#x3D;\sum_{c\in B(A)} n^c.<br>$$</p>
+<p>$B(A)$ 是所有 border 长度，包括全长。<br>border 用 KMP fail 链求。<br>赌徒故事：每时刻来一个人，押中翻 $n$ 倍；关门时只有前缀&#x3D;后缀的赌徒活着，奖金 $n^c$；公平所以期望时间等于总奖金。z</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -2204,98 +2332,6 @@ z(u,c)\ge z(v,c),\]</div>
 <p>全绿链对应 <span class="math-inline">\(r&#x3D;0\)</span>，没有红绿交接边，需要在初始向量中直接给相应绿点赋值 <span class="math-inline">\(C_0\)</span>。图中的虚线表示初始赋值，不消耗步数。压缩后的点数只有约 <span class="math-inline">\(n+\lceil n&#x2F;2\rceil\)</span> 个，便可以做矩阵快速幂。</p>
 <h2 id="奇数长度的中心"><a href="#奇数长度的中心" class="headerlink" title="奇数长度的中心"></a>奇数长度的中心</h2><p>最后考虑 <span class="math-inline">\(n+m\)</span> 为奇数。先按 <span class="math-inline">\(\lceil(n+m)&#x2F;2\rceil\)</span> 步计算，但最后一步实际上只放入<strong>中心的一个字符</strong>。如果此时还剩两个相等的原串字符，就不能靠这一个中心字符同时匹配它们。</p>
 <p>因此，重新统计那些以「剩两个字符的绿点」作为最后一个非终点状态的链，并在扣除用的矩阵中去掉终点自环。这样到达终点的路径恰好是在<strong>最后一步</strong>才进入终点的非法路径，从先前算出的总数中减去它们即可。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/08/30/%E6%9E%84%E9%80%A0%E9%A2%98%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wdwsy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wdwsy's Blog">
-      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | wdwsy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/08/30/%E6%9E%84%E9%80%A0%E9%A2%98%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">构造题总结</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2026-08-30 23:22:29 / Modified: 23:58:59" itemprop="dateCreated datePublished" datetime="2026-08-30T23:22:29+08:00">2026-08-30</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="P13356-GDCPC-2024-图"><a href="#P13356-GDCPC-2024-图" class="headerlink" title="P13356 [GDCPC 2024] 图"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P13356">P13356 [GDCPC 2024] 图</a></h1><p>递归子结构问题。</p>
-<p>小巧思：只要拉出 k 个生成树（森林），而且每一条边只属于一个树，那么这个题目就做完了。</p>
-<p>正确性在于，如果我们考虑每次拉一个生成树出来，然后把这用过的边都删掉，如此往复。<br>我们发现最后一定能拉出这 $k$ 个树，而且最后肯定还有至少一条边。<br>而最后剩下的这个边所连接的两个点，一定在前面都是连接的（不然之前的树中就应该选这个边了）。<br>那么我们就找到了这 $k$ 条边不相交的路径。</p>
-<p>在实现细节上这题有些意思：<br>在 GD省队集训上，大佬们提出了把重复的边压缩到一起，然后直接用 dfs 拉生成树，这样的一次 dfs 的复杂度是 $O(\min(n^2,m))$，那么总共是时间复杂度为 $O(k\times\min(n^2,m))$，可以分析到 $O(n^{\frac{3}{2}})$。</p>
-<p>当然，由于两个点连通的图，是这 $k$ 个森林中的一个前缀，所以我们可以在每次加入一条边的时候进行二分。$O(n\log n)$ 就可以解决。</p>
-<h1 id="CF1267H-Help-BerLine"><a href="#CF1267H-Help-BerLine" class="headerlink" title="CF1267H Help BerLine"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF1267H">CF1267H Help BerLine</a></h1><div class="note info"><p>💡 一些废话：额，我原来做的时候一直在对这个题目建笛卡尔树，最后红温自尽了。。</p>
-</div>
-
-<p>递归子结构问题。<br>首先观察次数是 $24$ 这样一个诡异的数字，$\frac{3}{2}^24$ 刚好超过 $n$ 于是我们猜想每次一个数字把问题规模减小到原来的 $\frac{2}{3}$ 即可。</p>
-<p>正难则反，我们考虑子结构是什么。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-----x----x-----x--</span><br></pre></td></tr></table></figure>
-<p>其中 x 表示新填的数字，而原来在没有 x 的时候，已经满足了题目中任意时刻的任意子区间存在唯一数字的要求，那么只要现在不出现 xx 相邻的情况那么仍然满足题目要求。<br>于是我们考虑就这样添入数字。<br>具体实现上可以每次把 x 添入一个位置之后，就把它左右两边的位置都标记上，之后每次都在没有标记的也没有填过的位置上添入 x，不难发现这样每次就可以把问题的规模缩小到原来的 $\frac{2}{3}$。</p>
-<h1 id="P6892-ICPC-2014-WF-Baggage"><a href="#P6892-ICPC-2014-WF-Baggage" class="headerlink" title="P6892 [ICPC 2014 WF] Baggage"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P6892">P6892 [ICPC 2014 WF] Baggage</a></h1><p>递归子结构问题。<br>观察发现 $n&#x3D;4$ 的时候有如下的构造</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--BABA??BABA</span><br><span class="line">ABBABA??B--A</span><br><span class="line">ABBA--??BBAA</span><br><span class="line">A--ABBBBAA</span><br><span class="line">AAAABBBB--</span><br></pre></td></tr></table></figure>
-<p>其中 ?? 是子结构所在的位置。<br>然后特判 $n&#x3D;3$。通过手玩或者暴力找出在 $n&#x3D;4,5,6,7$ 的解法就好，注意这个时候每个前面只能有两个空格（–）才能满足递归性质。</p>
-<h1 id="P12402-COI-2025-贪腐-Korupcija"><a href="#P12402-COI-2025-贪腐-Korupcija" class="headerlink" title="P12402 [COI 2025] 贪腐 &#x2F; Korupcija"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P12402">P12402 [COI 2025] 贪腐 &#x2F; Korupcija</a></h1><p>同样是递归子结构问题，具体可以见 <a href="https://wdwsy.github.io/2026/04/20/4%E6%9C%8820%E6%97%A5-4%E6%9C%8826%E6%97%A5%E8%AE%AD%E7%BB%83%E9%A2%98%E5%8D%95/?highlight=p12402">4月20日-4月26日训练题单</a></p>
-<h1 id="P10871-COTS-2022-皇后-Kraljice"><a href="#P10871-COTS-2022-皇后-Kraljice" class="headerlink" title="P10871 [COTS 2022] 皇后 Kraljice"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P10871">P10871 [COTS 2022] 皇后 Kraljice</a></h1><p>首先我们能猜到答案，发现奇数和偶数形式并不一样，于是我们考虑从 $n$ 的问题，转移到 $n-2$ 的问题。</p>
-<p>本来我考虑的是每次填掉外面一个环</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1111111</span><br><span class="line">1000001</span><br><span class="line">1000001</span><br><span class="line">1000001</span><br><span class="line">1111111</span><br></pre></td></tr></table></figure>
-<p>大概类似这样，但是没有办法递归到子结构。</p>
-<p>于是我们考虑另外一种常见的方式，就是构造一个 L 形来递归到 $n-2$。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">xx xx xx xx xx xx 28 26</span><br><span class="line">xx xx xx xx xx xx 24 25</span><br><span class="line">xx xx xx xx xx xx 23 22</span><br><span class="line">xx xx xx xx xx xx 20 21</span><br><span class="line">xx xx xx xx xx xx 19 18</span><br><span class="line">xx xx xx xx xx xx 16 17</span><br><span class="line">15 12 11 08 07 02 27 04</span><br><span class="line">14 13 10 09 06 03 05 01</span><br></pre></td></tr></table></figure>
-<p>具体构造大概长这样😊<br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/article/2xvkvpzv">题解链接</a></p>
 
       
     </div>
