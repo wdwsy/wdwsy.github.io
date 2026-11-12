@@ -178,7 +178,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-count">51</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -210,6 +210,953 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/08/30/task1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/08/30/task1/" class="post-title-link" itemprop="url">task1</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-08-30 23:22:35" itemprop="dateCreated datePublished" datetime="2026-08-30T23:22:35+08:00">2026-08-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-11-07 21:22:47" itemprop="dateModified" datetime="2026-11-07T21:22:47+08:00">2026-11-07</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="P17334-「TPOI-2D」Still-Shining"><a href="#P17334-「TPOI-2D」Still-Shining" class="headerlink" title="P17334 「TPOI-2D」Still Shining"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P17334">P17334 「TPOI-2D」Still Shining</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定长 <span class="math-inline">\(n\)</span> 的数组 <span class="math-inline">\(a\)</span>。</p>
+<p>对于一个 <span class="math-inline">\(1 \sim n\)</span> 的排列 <span class="math-inline">\(p\)</span>，记 <span class="math-inline">\(t(p)&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}\sum_{j&#x3D;\min(p_i,p_{i-1})}^{\max(p_i,p_{i-1})}a_j\)</span>。<strong>特别的，令 <span class="math-inline">\(p_0&#x3D;p_n\)</span>。</strong></p>
+<p>设 <span class="math-inline">\(S\)</span> 为所有长度为 <span class="math-inline">\(n\)</span> 的排列组成的集合，求 <span class="math-inline">\(g(a)&#x3D;\displaystyle\min_{p \in S}\ t(p)\)</span>。</p>
+<h2 id="刻画问题"><a href="#刻画问题" class="headerlink" title="刻画问题"></a>刻画问题</h2><p>考虑去刻画这个问题。<br>我们的总体思路是用尽量少的变量来依托数学式子描述这个问题。</p>
+<p>设 <span class="math-inline">\(s_i&#x3D;\sum\limits_{i&#x3D;1}^{i} a_i\)</span>。</p>
+<p>那么</p>
+
+$$
+t(p)=\displaystyle\sum_{i=1}^{n}\sum_{j=\min(p_i,p_{i-1})}^{\max(p_i,p_{i-1})}a_j=\displaystyle\sum_{i=1}^{n}s_{\max(p_i,p_{i-1})}-s_{\min(p_i,p_{i-1}) -1}
+$$
+
+
+<p>我们继续拆这个式子，假设 <span class="math-inline">\(d_i\)</span> 与值为 <span class="math-inline">\(i\)</span> 的数字相邻的两个位置中比 <span class="math-inline">\(i\)</span> 小的数字的个数。显然 <span class="math-inline">\(d_i&#x3D;0&#x2F;1&#x2F;2\)</span>。那么有</p>
+<div class="math-display">\[t(p)&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}d_i\times s_i-(2-d_i)\times s_{i-1}\]</div>
+<p>目前这个式子为两项差的形式，还是不是很优美，于是我们考虑继续简化。<br>我们想要合并同类项，于是设 <span class="math-inline">\(t_i&#x3D;d_i-1\)</span>。</p>
+<div class="math-display">\[t(p)&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}(t_i+1)\times s_i-(1-t_i)\times s_{i-1}\]</div>
+<p>化简得到：</p>
+<div class="math-display">\[t(p)&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}a_i+\displaystyle\sum_{i&#x3D;1}^{n}t_i\times (s_i+s_{i-1})\]</div>
+<p>但是我们不难发现此时 <span class="math-inline">\(t_i\)</span> 任意取值不一定总能找到合法的构造方式，于是考虑 <span class="math-inline">\(t_i\)</span> 的实际意义：</p>
+<ul>
+<li><span class="math-inline">\(t_i&#x3D;-1\)</span> 可以看作有两个待匹配的左括号。</li>
+<li><span class="math-inline">\(t_i&#x3D;0\)</span> 可以看作先形成了一个右括号和之前的括号匹配，然后再生成了一个左括号。</li>
+<li><span class="math-inline">\(t_i&#x3D;1\)</span> 可以看作生成了两个右括号。</li>
+</ul>
+<p>我们考虑有合法序列的条件其实就是这个括号序列合法（这个可以给读者自行证明），于是我们就转化为以下问题：</p>
+<p>约束条件：</p>
+<div class="math-display">\[\begin{aligned}
+t_1&amp;&#x3D;-1\\
+t_n&amp;&#x3D;1\\
+\sum\limits_{i&#x3D;1}^{n} t_i &amp;&#x3D; 0 \\
+\forall k,\ \sum\limits_{i&#x3D;1}^{k} t_i &amp;\leq 0
+\end{aligned}\]</div>
+<p>要求最小化 </p>
+<div class="math-display">\[t(p)&#x3D;\displaystyle\sum_{i&#x3D;1}^{n}a_i+\displaystyle\sum_{i&#x3D;1}^{n}t_i\times (s_i+s_{i-1})\]</div>
+<h2 id="反悔贪心"><a href="#反悔贪心" class="headerlink" title="反悔贪心"></a>反悔贪心</h2><p>我们每次加入 <span class="math-inline">\(i\)</span> 位置的时候，保证当前 <span class="math-inline">\(t_i\)</span> 的前缀和为 <span class="math-inline">\(-1\)</span>，先来贪心地假设其 <span class="math-inline">\(t_i&#x3D;1\)</span>，然后在大根堆里面放入两个 <span class="math-inline">\(s_i+s_{i-1}\)</span> 表示可以反悔两次 <span class="math-inline">\(t_i\)</span>，使得其值减 <span class="math-inline">\(1\)</span>。那么此时 <span class="math-inline">\(t_i\)</span> 的前缀和为 <span class="math-inline">\(0\)</span>，我们反悔队首元素即可继续保证 <span class="math-inline">\(t_i\)</span> 的前缀和为 <span class="math-inline">\(-1\)</span>。 </p>
+<h2 id="正确性证明"><a href="#正确性证明" class="headerlink" title="正确性证明"></a>正确性证明</h2><p>我们可以用<strong>模拟费用流</strong>的视角来理解这个反悔贪心的正确性。</p>
+<hr>
+<h3 id="1-转化为资源分配问题"><a href="#1-转化为资源分配问题" class="headerlink" title="1. 转化为资源分配问题"></a>1. 转化为资源分配问题</h3><p>回顾转化后的目标：</p>
+<div class="math-display">\[\min \sum_{i&#x3D;1}^n t_i c_i\]</div>
+<p>约束：</p>
+<div class="math-display">\[t_1&#x3D;-1,\quad t_n&#x3D;1,\quad -1\le t_i\le 1,\quad \sum_{i&#x3D;1}^n t_i&#x3D;0,\quad \forall k,\ \sum_{i&#x3D;1}^k t_i\le 0.\]</div>
+<p>令 <span class="math-inline">\(x_i &#x3D; t_i+1\)</span>，则 <span class="math-inline">\(x_i\in\{0,1,2\}\)</span>，且 <span class="math-inline">\(x_1&#x3D;0,\ x_n&#x3D;2\)</span>。目标变为：</p>
+<div class="math-display">\[\min \sum_{i&#x3D;1}^n x_i c_i - \sum_{i&#x3D;1}^n c_i,\]</div>
+<p>等价于最小化 <span class="math-inline">\(\sum x_i c_i\)</span>。约束：</p>
+<div class="math-display">\[\sum_{i&#x3D;1}^n x_i &#x3D; n,\quad \forall k,\ \sum_{i&#x3D;1}^k x_i \le k.\]</div>
+<p>初始令所有中间位置 <span class="math-inline">\(x_i&#x3D;2\)</span>（即 <span class="math-inline">\(t_i&#x3D;1\)</span>），此时前 <span class="math-inline">\(k\)</span> 个位置的和为 <span class="math-inline">\(1+2(k-1)&#x3D;2k-1\)</span>，显然超过了约束 <span class="math-inline">\(\le k\)</span>。我们需要将某些位置的 <span class="math-inline">\(x_i\)</span> 减小（每个位置最多减 2 次），总共需要减去的总量为</p>
+<div class="math-display">\[\sum_{i&#x3D;2}^{n-1} (2 - x_i) &#x3D; n-2.\]</div>
+<p>每次将某个 <span class="math-inline">\(x_j\)</span> 减小 1，会使 <span class="math-inline">\(\sum x_i c_i\)</span> 减小 <span class="math-inline">\(c_j\)</span>。因此，问题等价于：在满足前缀和约束的前提下，选择 <span class="math-inline">\(n-2\)</span> 次“减 1”操作，使被减位置的 <span class="math-inline">\(c_j\)</span> 之和尽可能大。</p>
+<hr>
+<h3 id="2-用费用流建模"><a href="#2-用费用流建模" class="headerlink" title="2. 用费用流建模"></a>2. 用费用流建模</h3><p>我们可以建立一个费用流模型：</p>
+<ul>
+<li>有 <span class="math-inline">\(n-2\)</span> 个“减操作”需要分配到各个位置 <span class="math-inline">\(i&#x3D;2,\dots,n-1\)</span>。</li>
+<li>每个位置 <span class="math-inline">\(i\)</span> 最多接受 2 次减操作（因为 <span class="math-inline">\(x_i\)</span> 只能从 2 降到 0）。</li>
+<li>前缀和约束要求：对于任意 <span class="math-inline">\(k\)</span>，前 <span class="math-inline">\(k\)</span> 个位置接受的减操作总数至少为 <span class="math-inline">\(k-2\)</span>（即 <span class="math-inline">\(\sum_{i&#x3D;2}^k b_i \ge k-2\)</span>，其中 <span class="math-inline">\(b_i&#x3D;2-x_i\)</span>）。</li>
+<li>目标是最小化 <span class="math-inline">\(\sum x_i c_i\)</span>，即最大化 <span class="math-inline">\(\sum b_i c_i\)</span>。</li>
+</ul>
+<p>这是一个经典的<strong>最小费用流</strong>问题：我们要从源点向每个位置连容量为 2、费用为 <span class="math-inline">\(-c_i\)</span> 的边（因为最大化收益），再通过一些中间节点满足前缀约束。由于费用是线性的，且约束具有区间性，该费用流问题可以用反悔贪心求解。</p>
+<hr>
+<h3 id="3-反悔贪心对应费用流的连续最短路"><a href="#3-反悔贪心对应费用流的连续最短路" class="headerlink" title="3. 反悔贪心对应费用流的连续最短路"></a>3. 反悔贪心对应费用流的连续最短路</h3><p>在费用流中，若我们按照一定的顺序依次发送单位流量，每次选择当前费用最小的增广路，最终得到全局最优解。本题的约束恰好保证每次增广路都非常简单：</p>
+<ul>
+<li>初始时所有位置都未进行减操作，即所有 <span class="math-inline">\(b_i&#x3D;0\)</span>。</li>
+<li>我们依次处理位置 <span class="math-inline">\(i&#x3D;2,\dots,n-1\)</span>。</li>
+<li>当处理到位置 <span class="math-inline">\(i\)</span> 时，为了满足前 <span class="math-inline">\(i\)</span> 个位置的前缀约束（减操作总数至少为 <span class="math-inline">\(i-2\)</span>），我们需要在前 <span class="math-inline">\(i\)</span> 个位置中额外增加一次减操作（因为之前已经保证了前 <span class="math-inline">\(i-1\)</span> 个位置减操作总数为 <span class="math-inline">\(i-2\)</span>，现在前 <span class="math-inline">\(i\)</span> 个位置需要 <span class="math-inline">\(i-1\)</span> 次）。</li>
+<li>选择哪个位置进行这次减操作？显然应选择当前<strong>可减且收益最大</strong>的位置，即 <span class="math-inline">\(c_j\)</span> 最大的位置。用大根堆维护即可。</li>
+</ul>
+<p>因为每次只增加一次减操作，且该操作只影响当前前缀约束，对后续没有后效性，所以这种贪心恰好对应费用流中每一步选择费用最小（收益最大）的增广路。由于费用流存在最优性原理，这样逐步构造的解就是全局最优。</p>
+<hr>
+<h3 id="4-为什么可以保持前缀和恰好为-1"><a href="#4-为什么可以保持前缀和恰好为-1" class="headerlink" title="4. 为什么可以保持前缀和恰好为 \(-1\)"></a>4. 为什么可以保持前缀和恰好为 <span class="math-inline">\(-1\)</span></h3><p>算法保持每个前缀和 <span class="math-inline">\(\sum_{i&#x3D;1}^k t_i &#x3D; -1\)</span>，即前 <span class="math-inline">\(k\)</span> 个位置减操作总数恰好为 <span class="math-inline">\(k-1\)</span>。这是所有可行解中最“紧”的情况：它刚好满足前缀约束 <span class="math-inline">\(\le 0\)</span>，且没有多余的缓冲。</p>
+<p>如果某个最优解在某个前缀处和小于 <span class="math-inline">\(-1\)</span>（即减操作多了），那么我们可以将多出的那次减操作移动到后面某个尚未减两次的位置，只要该位置的 <span class="math-inline">\(c_j\)</span> 不小于原位置，就能使目标函数不增。经过这样的调整，最终可以得到一个前缀和始终为 <span class="math-inline">\(-1\)</span> 的最优解。因此，算法保持 <span class="math-inline">\(-1\)</span> 不会遗漏最优解。</p>
+<hr>
+<h3 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h3><ul>
+<li>反悔贪心的本质是<strong>模拟费用流</strong>：将减操作视为单位流量，每次选择收益最大的位置进行减操作。</li>
+<li>前缀和约束使得每一步需要增加的减操作数量是确定的，且每次只需新增一次，因此可以用堆高效实现。</li>
+<li>算法等价于在费用流网络中沿着最大收益的路径逐次增广，从而得到全局最优。</li>
+</ul>
+<p>因此，该反悔贪心是正确的。</p>
+<h2 id="slope-trick-做法"><a href="#slope-trick-做法" class="headerlink" title="slope trick 做法"></a>slope trick 做法</h2><h1 id="P12480-集训队互测-2024-Classical-Counting-Problem"><a href="#P12480-集训队互测-2024-Classical-Counting-Problem" class="headerlink" title="P12480 [集训队互测 2024] Classical Counting Problem"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P12480">P12480 [集训队互测 2024] Classical Counting Problem</a></h1><h2 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一棵 <span class="math-inline">\(n\)</span> 个节点的无根树，你可以做如下操作若干次：</p>
+<ul>
+<li>选择当前树上编号最大或最小的点，删去它和以它为一个端点的所有边，保留任意一个连通块作为操作后的树。</li>
+</ul>
+<p>令 <span class="math-inline">\(\min\)</span> 为树上所有节点编号的最小值，<span class="math-inline">\(\max\)</span> 为树上所有节点编号的最大值，<span class="math-inline">\(size\)</span> 为树上的节点个数，则一棵树的权值为 <span class="math-inline">\(\min \cdot \max \cdot size\)</span>。求所有能通过上述操作得到的非空的树的权值和，对 <span class="math-inline">\(2^{32}\)</span> 取模。</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>考虑点分治，这样我们只需要统计跨过分界点的连通块的答案。<br>但是我们显然不能对于每一个连通块计数，所以考虑拆贡献，发现 <span class="math-inline">\(size\)</span> 是比较好拆的，注意到选择一个 <span class="math-inline">\(x\)</span>，满足这个 <span class="math-inline">\(x\)</span> 在这个连通块上的方案数刚好是 <span class="math-inline">\(x\)</span>，我们可以统计 <span class="math-inline">\((l,r,x)\)</span> 这样的三元组的贡献和（定义三元组 <span class="math-inline">\((l,r,x)\)</span> 的贡献 为 <span class="math-inline">\(l\times r\)</span>）。</p>
+<p>这样我们统计的时候就不需要关心原来的连通块了，只需要关注 <span class="math-inline">\(l,r,x\)</span> 这三个点所在的位置即可。</p>
+<p>计算的时候，可以用分治中心的答案减掉其各个子树的答案</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ans += <span class="built_in">get</span>(u, u);</span><br><span class="line">ok[u] = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> v : e[u]) <span class="keyword">if</span> (!ok[v]) &#123;</span><br><span class="line">    ans -= <span class="built_in">get</span>(v, u);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以我们现在只需要解决对于一个子树中的所有点对，考虑其三元组的贡献和即可。<br>发现三元组合法的充要条件为：</p>
+<div class="math-display">\[\begin{cases} mn_l&#x3D;l \\ mx_r&#x3D;r \\ mx_l \le r \\ mx_x \le r \\ mn_x \ge l \\ l \le mn_r \end{cases}\]</div>
+<p>其中 <span class="math-inline">\(mn_u\)</span> 表示 <span class="math-inline">\(u\)</span> 到子树根的最小值，<span class="math-inline">\(mx_u\)</span> 表示 <span class="math-inline">\(u\)</span> 到子树的根的最大值。</p>
+<p>前两个条件可以在做的时候直接判断。<br>然后我就被吓到了，四维偏序？？！</p>
+<p>这里处理偏序的方式比较有意思，我们先按照 <span class="math-inline">\(mx_u\)</span> 从小到大排序。这样就满足了中间的两个限制。<br>接下来按照这个顺序扫描线，每次把 <span class="math-inline">\(l\)</span> 加入到线段树下标 <span class="math-inline">\(l\)</span> 的位置，把 <span class="math-inline">\(x\)</span> 加入到线段树下标 <span class="math-inline">\(mn_x\)</span> 的位置，然后按照倒数第二个限制进行贡献。<br>最后一个限制在查询的时候控制一端前缀即可。</p>
+<p>之所以可以这样处理是因为扫描线之后，只有 <span class="math-inline">\(mn_x,l,mn_r\)</span> 这些量了，虽然等式看起来比较多。<br>所以线段树需要维护以下三个变量</p>
+<ul>
+<li><span class="math-inline">\(sum: \sum l\)</span>。</li>
+<li><span class="math-inline">\(cnt:\)</span> 当前位置 <span class="math-inline">\(x\)</span> 的个数。</li>
+<li><span class="math-inline">\(val:\)</span> 所有三元组的贡献和。</li>
+</ul>
+<h1 id="P14929-北大集训-2025-小丑大师的荣耀"><a href="#P14929-北大集训-2025-小丑大师的荣耀" class="headerlink" title="P14929 [北大集训 2025] 小丑大师的荣耀"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P14929">P14929 [北大集训 2025] 小丑大师的荣耀</a></h1><h2 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h2><p>你现在要玩一个纸牌游戏，初始时牌堆为空，即 <span class="math-inline">\(n &#x3D; 0\)</span>，接下来进行 <span class="math-inline">\(q\)</span> 次操作，每次操作是以下三种类型之一：  </p>
+<ol>
+<li>插入卡牌：给定正整数 <span class="math-inline">\(x, y\)</span> (<span class="math-inline">\(1 \le x, y \le m\)</span>)，令 <span class="math-inline">\(n \leftarrow n + 1\)</span>，然后向牌堆中插入一张编号为 <span class="math-inline">\(n\)</span>，正面为 <span class="math-inline">\(x\)</span>，反面为 <span class="math-inline">\(y\)</span> 的卡牌；  </li>
+<li>移除卡牌：给定正整数 <span class="math-inline">\(p\)</span> (<span class="math-inline">\(1 \le p \le n\)</span>)，满足编号为 <span class="math-inline">\(p\)</span> 的卡牌当前仍在牌堆中，然后从牌堆中移除该卡牌；  </li>
+<li>询问：给定正整数 <span class="math-inline">\(s, t, u, v\)</span> (<span class="math-inline">\(1 \le s \le t \le m\)</span>, <span class="math-inline">\(1 \le u \le v \le m\)</span>)，你需要求出有多少个区间 <span class="math-inline">\([l, r]\)</span> 满足 <span class="math-inline">\(s \le l \le t\)</span>, <span class="math-inline">\(u \le r \le v\)</span> 且 <span class="math-inline">\([l, r]\)</span> 是可覆盖的。</li>
+</ol>
+<p>可以通过控制每一张牌的正反，满足 <span class="math-inline">\([l,r]\)</span> 中的每一个数字都出现了至少一次，那么说明 <span class="math-inline">\([l,r]\)</span> 是可覆盖的。</p>
+<h2 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h2><p>首先考虑一个固定局面判断一个 <span class="math-inline">\([l,r]\)</span> 是否可行。<br>我们考虑贪心，如果一个纸牌的两个数字，一个是我们不需要的（出现过了，或者根本不在 <span class="math-inline">\([l,r]\)</span> 中），那么我们一定选另外一个数字。（1）<br>接下来剩下的纸牌，一定是两端数字我们都想要的，发现这个时候如果把每一张牌正反两个数字之间连边，那么一定形成若干个环，而具有环的连通图中出现过的数字都是可以被覆盖的。<br>所以我们只需要看在做完（1）之后，有没有 <span class="math-inline">\([l,r]\)</span> 中的数字，其所在的连通图中没有环。</p>
+<p>但是现在不是要判断一个 <span class="math-inline">\([l,r]\)</span>，现在重新假设固定纸牌，计数有多少 <span class="math-inline">\([l,r]\)</span> 可行。<br>那么对于所有没有环的连通图，如果其被完整包含，即 <span class="math-inline">\(l\leq \text{连通图中的最小值}\)</span> 并且 <span class="math-inline">\(r\geq \text{连通图中的最大值}\)</span>，那么一定不行。<br>同时我们容易证明这个条件是充要的。<br>这样就成了二维矩形覆盖问题。每次操作相当于把一个左上角覆盖为 <span class="math-inline">\(0\)</span>。（初始是 <span class="math-inline">\(1\)</span>）</p>
+<p>但是这样不好拓展，我们假设连通块中最小值为 <span class="math-inline">\(x_i\)</span>，最大值是 <span class="math-inline">\(y_i\)</span>，那么我们对于所有 <span class="math-inline">\(x_i\)</span> 相同的 <span class="math-inline">\(x_i\)</span>，把他们的 <span class="math-inline">\(y_i\)</span> 取一个 <span class="math-inline">\(\min\)</span>，这个值记为 <span class="math-inline">\(a_{x_i}\)</span>。<br>我们假设 <span class="math-inline">\(a\)</span> 数组的后缀 <span class="math-inline">\(\min\)</span> 为 <span class="math-inline">\(b_i\)</span>，那么查询 <span class="math-inline">\(s,t,u,v\)</span> 的时候，答案就是 </p>
+
+$$
+\sum_{i=s}^{t} \max\{0,\min\{b_i,v+1\}-\max\{u,i\}\}
+$$
+
+
+<p>于是我们考虑用线段树去维护这个式子。<br>为了后面可以拼上修改操作，我们不能实时维护 <span class="math-inline">\(b\)</span>，转而维护 <span class="math-inline">\(a\)</span>，并用楼房重建线段树。</p>
+<p>对于修改操作我们直接上线段树分治，但是如果直接同时维护线段树会导致复杂度为 <span class="math-inline">\(\mathcal{O}(n \log^3 n)\)</span> 不是很好。<br>但是我们发现由于相邻两个操作之间，只有 <span class="math-inline">\(\mathcal{O}(1)\)</span> 个 <span class="math-inline">\(x_i,y_i\)</span> 发生变化，所以在线段树分治的时候，记录相邻两个叶子变化的位置，并在线段树上修改即可。</p>
+<h2 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h2><p>这个题目并不是很好实现，笔者经过致死量的红温之后选择了重构。<br>原因是在查询的时候，我的处理太麻烦。</p>
+<p>建议定义函数 <code>due(l,r,v)</code>, <span class="math-inline">\(y&#x3D;max(x,v)\)</span> 和 <span class="math-inline">\(x&#x3D;l,x&#x3D;r,y&#x3D;0\)</span> 这四条线围成的面积。</p>
+<p>建议配合代码食用。</p>
+<details>
+<summary>点击展开：完整代码</summary>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ls u &lt;&lt; 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> rs u &lt;&lt; 1 | 1</span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">200005</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, m, q, cnt, top;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">SegmentTree</span> &#123;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">        <span class="type">int</span> mn;</span><br><span class="line">        ll s;</span><br><span class="line">    &#125;t[N &lt;&lt; <span class="number">2</span>];</span><br><span class="line">    ll ans;</span><br><span class="line">    <span class="type">int</span> cur;</span><br><span class="line"></span><br><span class="line">    <span class="function">ll <span class="title">get</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> u, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l == r) <span class="keyword">return</span> <span class="built_in">min</span>(k, t[u].mn);</span><br><span class="line">        <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (t[rs].mn &gt;= k) <span class="keyword">return</span> (ll)(r - mid) * k + <span class="built_in">get</span>(l, mid, ls, k);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="built_in">get</span>(mid + <span class="number">1</span>, r, rs, k) + t[u].s - t[rs].s;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">pushup</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        t[u].s = t[rs].s + <span class="built_in">get</span>(l, mid, ls, t[rs].mn);</span><br><span class="line">        t[u].mn = <span class="built_in">min</span>(t[ls].mn, t[rs].mn);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">modify</span><span class="params">(<span class="type">int</span> p, <span class="type">int</span> x, <span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">            t[u].mn = t[u].s = x;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (p &lt;= mid) <span class="built_in">modify</span>(p, x, l, mid, ls);</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">modify</span>(p, x, mid + <span class="number">1</span>, r, rs);</span><br><span class="line">        <span class="built_in">pushup</span>(l, r, u);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">build</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">            t[u].s = t[u].mn = l;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">build</span>(l, mid, ls);</span><br><span class="line">        <span class="built_in">build</span>(mid + <span class="number">1</span>, r, rs);</span><br><span class="line">        <span class="built_in">pushup</span>(l, r, u);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">ll <span class="title">due</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> v)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (v &lt;= l) <span class="keyword">return</span> <span class="number">1ll</span> * (l + r) * (r - l + <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (v &gt; r) <span class="keyword">return</span> <span class="number">1ll</span> * v * (r - l + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1ll</span> * v * (v - l) + <span class="number">1ll</span> * (v + r) * (r - v + <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">query</span><span class="params">(<span class="type">int</span> L, <span class="type">int</span> R, <span class="type">int</span> U, <span class="type">int</span> V, <span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l &gt; R) &#123; cur = <span class="built_in">min</span>(cur, t[u].mn); <span class="keyword">return</span>; &#125;</span><br><span class="line">        <span class="keyword">if</span> (r &lt; L) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">            ans += <span class="built_in">max</span>(<span class="number">0</span>, <span class="built_in">min</span>(&#123;t[u].mn, V, cur&#125;) - <span class="built_in">max</span>(l, U));</span><br><span class="line">            cur = <span class="built_in">min</span>(cur, t[u].mn);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (L &lt;= l &amp;&amp; r &lt;= R) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">min</span>(cur, t[u].mn) &gt;= V) &#123;</span><br><span class="line">                ans += <span class="built_in">due</span>(l, r, V) - <span class="built_in">due</span>(l, r, U);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (cur &lt; U) &#123;</span><br><span class="line">                cur = <span class="built_in">min</span>(cur, t[u].mn);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (U &lt;= <span class="built_in">min</span>(t[u].mn, cur) &amp;&amp; cur &lt;= V) &#123;</span><br><span class="line">                ans += <span class="built_in">get</span>(l, r, u, cur) - <span class="built_in">due</span>(l, r, U);</span><br><span class="line">                cur = <span class="built_in">min</span>(cur, t[u].mn);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">query</span>(L, R, U, V, mid + <span class="number">1</span>, r, rs);</span><br><span class="line">        <span class="built_in">query</span>(L, R, U, V, l, mid, ls);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function">ll <span class="title">ask</span><span class="params">(<span class="type">int</span> s, <span class="type">int</span> t, <span class="type">int</span> u, <span class="type">int</span> v)</span> </span>&#123;</span><br><span class="line">        cur = m + <span class="number">1</span>, ans = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">query</span>(s, t, u, v + <span class="number">1</span>, <span class="number">1</span>, m, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;smt;</span><br><span class="line"></span><br><span class="line">ll ans[N];</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Query</span> &#123;</span><br><span class="line">    <span class="type">int</span> s, t, u, v;</span><br><span class="line">&#125;Q[N];</span><br><span class="line"><span class="type">int</span> st[N], ed[N], a[N];</span><br><span class="line">pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; edge[N];</span><br><span class="line">vector&lt;pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; &gt; lis[N &lt;&lt; <span class="number">2</span>];</span><br><span class="line">multiset&lt;<span class="type">int</span>&gt; s[N];</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; buf;</span><br><span class="line"><span class="type">int</span> f[N], tag[N], mn[N], mx[N], sz[N];</span><br><span class="line">tuple&lt;<span class="type">int</span>, <span class="type">int</span>, <span class="type">int</span>&gt; stk[N &lt;&lt; <span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> L, <span class="type">int</span> R, pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; e, <span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (L &lt;= l &amp;&amp; r &lt;= R) &#123;</span><br><span class="line">        lis[u].<span class="built_in">push_back</span>(e);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (L &lt;= mid) <span class="built_in">add</span>(L, R, e, l, mid, ls);</span><br><span class="line">    <span class="keyword">if</span> (R &gt; mid) <span class="built_in">add</span>(L, R, e, mid + <span class="number">1</span>, r, rs);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123; <span class="keyword">return</span> f[x] == x ? x : <span class="built_in">find</span>(f[x]); &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> lst = top;</span><br><span class="line">    <span class="keyword">auto</span> Erase = [&amp;](<span class="type">int</span> x, <span class="type">int</span> y) &#123;</span><br><span class="line">        s[x].<span class="built_in">erase</span>(s[x].<span class="built_in">find</span>(y));</span><br><span class="line">        stk[++top] = &#123;<span class="number">-1</span>, x, y&#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">auto</span> Insert = [&amp;](<span class="type">int</span> x, <span class="type">int</span> y) &#123;</span><br><span class="line">        s[x].<span class="built_in">insert</span>(y);</span><br><span class="line">        stk[++top] = &#123;<span class="number">-2</span>, x, y&#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> [x, y] : lis[u]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (sz[<span class="built_in">find</span>(x)] &gt; sz[<span class="built_in">find</span>(y)]) <span class="built_in">swap</span>(x, y);</span><br><span class="line">        <span class="type">int</span> fx = <span class="built_in">find</span>(x), fy = <span class="built_in">find</span>(y);</span><br><span class="line">        buf.<span class="built_in">push_back</span>(mn[fx]), buf.<span class="built_in">push_back</span>(mn[fy]);</span><br><span class="line">        <span class="keyword">if</span> (fx != fy) &#123;</span><br><span class="line">            f[fx] = fy, sz[fy] += sz[fx];</span><br><span class="line">            stk[++top] = &#123;fx, mn[fy], mx[fy]&#125;;</span><br><span class="line">            <span class="keyword">if</span> (!tag[fx]) <span class="built_in">Erase</span>(mn[fx], mx[fx]);</span><br><span class="line">            <span class="keyword">if</span> (!tag[fy]) <span class="built_in">Erase</span>(mn[fy], mx[fy]);</span><br><span class="line">            mn[fy] = <span class="built_in">min</span>(mn[fy], mn[fx]);</span><br><span class="line">            mx[fy] = <span class="built_in">max</span>(mx[fy], mx[fx]);</span><br><span class="line">            <span class="keyword">if</span> (!tag[fx] &amp;&amp; !tag[fy]) <span class="built_in">Insert</span>(mn[fy], mx[fy]);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (!tag[fy]) &#123;</span><br><span class="line">                tag[fy] = <span class="number">1</span>;</span><br><span class="line">                stk[++top] = &#123;<span class="number">-3</span>, fy, <span class="number">0</span>&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!tag[fx]) &#123;</span><br><span class="line">            tag[fx] = <span class="number">1</span>;</span><br><span class="line">            stk[++top] = &#123;<span class="number">-3</span>, fx, <span class="number">0</span>&#125;;</span><br><span class="line">            <span class="built_in">Erase</span>(mn[fx], mx[fx]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> p : buf) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[p] != *s[p].<span class="built_in">begin</span>()) &#123;</span><br><span class="line">                a[p] = *s[p].<span class="built_in">begin</span>();</span><br><span class="line">                smt.<span class="built_in">modify</span>(p, a[p], <span class="number">1</span>, m, <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        buf.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="keyword">auto</span> [s, t, u, v] = Q[l];</span><br><span class="line">        ans[l] = smt.<span class="built_in">ask</span>(s, t, u, v);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">dfs</span>(l, mid, ls);</span><br><span class="line">        <span class="built_in">dfs</span>(mid + <span class="number">1</span>, r, rs);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (top != lst) &#123;</span><br><span class="line">        <span class="keyword">auto</span> [x, y, z] = stk[top--];</span><br><span class="line">        <span class="keyword">if</span> (x == <span class="number">-1</span>) &#123;</span><br><span class="line">            s[y].<span class="built_in">insert</span>(z);</span><br><span class="line">            buf.<span class="built_in">push_back</span>(y);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (x == <span class="number">-2</span>) &#123;</span><br><span class="line">            s[y].<span class="built_in">erase</span>(s[y].<span class="built_in">find</span>(z));</span><br><span class="line">            buf.<span class="built_in">push_back</span>(y);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (x == <span class="number">-3</span>) &#123;</span><br><span class="line">            tag[y] = <span class="number">0</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            mn[f[x]] = y, mx[f[x]] = z, sz[f[x]] -= sz[x], f[x] = x;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    cin &gt;&gt; m &gt;&gt; q;</span><br><span class="line">    <span class="built_in">memset</span>(ed, <span class="number">-1</span>, <span class="built_in">sizeof</span>(ed));</span><br><span class="line">    <span class="keyword">while</span> (q--) &#123;</span><br><span class="line">        <span class="type">int</span> o;</span><br><span class="line">        cin &gt;&gt; o;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="type">int</span> x, y;</span><br><span class="line">            cin &gt;&gt; x &gt;&gt; y;</span><br><span class="line">            st[++n] = cnt + <span class="number">1</span>;</span><br><span class="line">            edge[n] = &#123;x, y&#125;;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (o == <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="type">int</span> p;</span><br><span class="line">            cin &gt;&gt; p;</span><br><span class="line">            ed[p] = cnt;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">int</span> s, t, u, v;</span><br><span class="line">            cin &gt;&gt; s &gt;&gt; t &gt;&gt; u &gt;&gt; v;</span><br><span class="line">            Q[++cnt] = &#123;s, t, u, v&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (ed[i] == <span class="number">-1</span>) ed[i] = cnt;</span><br><span class="line">        <span class="keyword">if</span> (st[i] &lt;= ed[i]) &#123;</span><br><span class="line">            <span class="built_in">add</span>(st[i], ed[i], edge[i], <span class="number">1</span>, cnt, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++) s[i].<span class="built_in">insert</span>(m + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++) f[i] = i, mn[i] = mx[i] = i, s[i].<span class="built_in">insert</span>(i), a[i] = i, sz[i] = <span class="number">1</span>;</span><br><span class="line">    smt.<span class="built_in">build</span>(<span class="number">1</span>, m, <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">1</span>, cnt, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= cnt; i++) &#123;</span><br><span class="line">        cout &lt;&lt; ans[i] &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<h1 id="P9075-WC-CTS2023-树据结构"><a href="#P9075-WC-CTS2023-树据结构" class="headerlink" title="P9075 [WC&#x2F;CTS2023] 树据结构"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P9075">P9075 [WC&#x2F;CTS2023] 树据结构</a></h1><p>致力于写一个短且信息密度大的题解。</p>
+<h2 id="链"><a href="#链" class="headerlink" title="链"></a>链</h2><p>我们把链放倒，靠近根的地方为左。<br>考虑困扰的地方，即一个靠左的位置出现了一个较大值，那么大量查询的返回值都是一样的。<br>所以总体思路就是把靠左的较大值逐渐远离根，这样才能便于我区分不同的边权。</p>
+<h3 id="分治-O-n-log-n-做法"><a href="#分治-O-n-log-n-做法" class="headerlink" title="分治 \(O(n\log n)\) 做法"></a>分治 <span class="math-inline">\(O(n\log n)\)</span> 做法</h3><p>看到询问次数为 <span class="math-inline">\(O(n\log n)\)</span>，所以考虑分治做法，随机一个点，期望位置为正中间。<br>考虑什么时候可以递归到子问题，那么要求点左边的所有边小于右边的边。<br>首先我们可以根据左边区间长度，计算出左边值域，查询一次当前分治点，如果返回值超出左边值域，那么就交换一个还没有交换过的最小值过去，直到满足递归要求。</p>
+<h3 id="增量-O-n-log-n-做法"><a href="#增量-O-n-log-n-做法" class="headerlink" title="增量 \(O(n\log n)\) 做法"></a>增量 <span class="math-inline">\(O(n\log n)\)</span> 做法</h3><p>还有一个增量的方式，每次加入一个点，注意到加入 <span class="math-inline">\(i\)</span> 个点后，相邻两个点的距离期望为 <span class="math-inline">\(\frac{n}{i}\)</span>。<br>实时维护前 <span class="math-inline">\(i\)</span> 个点之间的相对位置，同时保证从左到右的每个区间的值域不交且递增，接下来加入第 <span class="math-inline">\(i+1\)</span> 个点，通过一次查询，可以确定 <span class="math-inline">\(i+1\)</span> 在前 <span class="math-inline">\(i\)</span> 个点的某两个点之间，然后通过 <span class="math-inline">\(O(\text{段长})\)</span> 的复杂度可以把这一段中分成值域不交且递增的两段。期望 <span class="math-inline">\(O(n\log n)\)</span> 次询问。</p>
+<h3 id="增量-O-n-做法"><a href="#增量-O-n-做法" class="headerlink" title="增量 \(O(n)\) 做法"></a>增量 <span class="math-inline">\(O(n)\)</span> 做法</h3><p>我们可以把增量法优化到 <span class="math-inline">\(O(n)\)</span>，具体方式是我们每次不要只加入一个点，而是考虑每次加入 <span class="math-inline">\(c_0&#x3D;1,c_1&#x3D;2,c_2&#x3D;4,c_3&#x3D;8,\dots\)</span> 个点，然后也不要考虑所有边，只考虑与点数等量的边。算法流程如下：</p>
+<ol>
+<li>把新一批点加入集合，查询它们的 <code>query</code> 值。</li>
+<li>把当前所有已加入的点（共 <code>lim = c_&#123;k+1&#125;</code> 个）按 <code>query</code> 值从小到大排序。</li>
+<li>从左到右遍历这些点，对于每个点：<ul>
+<li>找到它前面第一个 <code>query</code> 值比它小的点，目标值 <code>y</code> 设为那个点的 <code>query</code> 值 +1；如果前面没有更小的，则 <code>y</code> 初始为 <code>n - lim</code>。</li>
+<li>如果当前点的 <code>query</code> 值 <code>x &gt; y</code>，就反复 <code>exchange(x, y)</code>，把当前路径上的最大边权逐步换成更小的权值，直到 <code>x &lt;= y</code>。每次交换后 <code>y</code> 递增，保证把较大的边权“挤”到后面去。</li>
+<li>调整完后，把当前点插入到正确的位置，并重新查询它后面几个点的 <code>query</code> 值（因为相等的点排序可能是错误的），直到稳定。</li>
+</ul>
+</li>
+</ol>
+<p>这个做法期望是 <span class="math-inline">\(O(n)\)</span> 的，原因是每次加入的点是原来的两倍，所以期望落在原来 <span class="math-inline">\(c_i\)</span> 个点之间每一段上的只有一个点，所以调整次数均为 <span class="math-inline">\(O(1)\)</span>，但是有常数。</p>
+<h2 id="树"><a href="#树" class="headerlink" title="树"></a>树</h2><p>想把链拓展到树上，可以使用链剖分。<br>仍然考虑每次加入一个点，如果这个点已经在之前的链上了，就跳过，否则就以这个点为底，断出一条新链。</p>
+<p>具体的，设 <span class="math-inline">\(S_i\)</span> 表示前 <span class="math-inline">\(i\)</span> 个点的到根链的并集的边数，如果 <span class="math-inline">\(query(i+1)\leq S_i\)</span>，那么就已经在一条链上了；否则执行如下流程：</p>
+<ul>
+<li>初始 <span class="math-inline">\(S_{i+1} &#x3D; S_{i}+1\)</span>。</li>
+<li>如果 <span class="math-inline">\(query(i+1)\leq S_{i+1}\)</span> 则结束流程。</li>
+<li>否则 <span class="math-inline">\(exchange(i+1,S_{i+1})\)</span>，然后  <span class="math-inline">\(S_{i+1}\)</span> 自增 <span class="math-inline">\(1\)</span>。</li>
+</ul>
+<p>可以发现，流程结束后，断出的新链的边权值刚好是 <span class="math-inline">\([S_{i}+1,S_{i+1}]\)</span>。</p>
+<p>然后直接调用链的算法就好。</p>
+<p>剖分这部分询问次数是 <span class="math-inline">\(O(n)\)</span> 的，根据选用链做法的不同会有 <span class="math-inline">\(O(n)\sim O(n\log n)\)</span> 次询问。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>对于这种有关到根链上最大值的问题，我们考虑让某两部分值域不相交，那么就可以划分成独立的两部分，找到子问题。</p>
+<h1 id="P3179-HAOI2015-数组游戏"><a href="#P3179-HAOI2015-数组游戏" class="headerlink" title="P3179 [HAOI2015] 数组游戏"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3179">P3179 [HAOI2015] 数组游戏</a></h1><h2 id="Nim-游戏"><a href="#Nim-游戏" class="headerlink" title="Nim 游戏"></a>Nim 游戏</h2><p>问题描述：有 <span class="math-inline">\(n\)</span> 堆石子，每一堆有 <span class="math-inline">\(a_i\)</span> 个。两个人，每次选择一堆取走<strong>任意</strong>多个石子，不能取的人输。</p>
+<p>结论：<span class="math-inline">\(\bigoplus_{i&#x3D;1}^{n} a_i&#x3D;0\)</span> 则后手赢。</p>
+<p>证明：考虑让后手每次操作后都使异或和为 <span class="math-inline">\(0\)</span>。</p>
+<p>先手操作一次之后显然异或和不为 <span class="math-inline">\(0\)</span>。设当前异或和为 <span class="math-inline">\(x\)</span>，<span class="math-inline">\(x\)</span> 的二进制最高位为第 <span class="math-inline">\(p\)</span> 位，显然存在一堆石子，其第 <span class="math-inline">\(p\)</span> 位为 <span class="math-inline">\(1\)</span>。令这堆石子数量为 <span class="math-inline">\(a_i\)</span>，将其变为</p>
+<div class="math-display">\[a_i&#39; &#x3D; a_i \oplus x.\]</div>
+<p>由于 <span class="math-inline">\(a_i&#39; &lt; a_i\)</span>，可以从这堆中取走 <span class="math-inline">\(a_i - a_i&#39;\)</span> 个石子，此时异或和变为 <span class="math-inline">\(0\)</span>。验证：</p>
+<div class="math-display">\[x \oplus a_i \oplus a_i&#39; &#x3D; x \oplus a_i \oplus (a_i \oplus x)&#x3D;0.\]</div>
+<p>先手必胜时的策略同理。</p>
+<h2 id="本题"><a href="#本题" class="headerlink" title="本题"></a>本题</h2><p>公平博弈基本结论 1：如果两个选择完全相同，那么同时删除或同时增加这两个选择不会影响博弈结果。</p>
+<p>公平博弈基本结论 2：一个游戏可以拆分成若干子游戏，当且仅当每一步只能选择某个子游戏进行操作，且不能影响其余子游戏的状态。</p>
+<p>首先我们把原题的黑色格子看作 <span class="math-inline">\(0\)</span>，白色格子看作 <span class="math-inline">\(1\)</span>。那么每次操作就是反转 <span class="math-inline">\(0&#x2F;1\)</span>。</p>
+<p>借助结论 1，在只关心奇偶性时，我们可以把异或看作模 <span class="math-inline">\(2\)</span> 加法，这样不会改变博弈结果。借助结论 2，就可以把每一个 <span class="math-inline">\(1\)</span> 看作一个独立的游戏。</p>
+<p>接下来只需要处理每一个独立游戏，也就是只有一个位置 <span class="math-inline">\(x\)</span> 为 <span class="math-inline">\(1\)</span> 的游戏的 <span class="math-inline">\(\operatorname{sg}_x\)</span>，然后就可以快速查询了。</p>
+<h2 id="计算-SG-函数"><a href="#计算-SG-函数" class="headerlink" title="计算 SG 函数"></a>计算 SG 函数</h2><p>如果直接暴力计算，复杂度是 <span class="math-inline">\(O(n\log n)\)</span>，实在太慢了。</p>
+<p>我们通过打表等手段发现，<span class="math-inline">\(\operatorname{sg}\)</span> 函数实际上在很长的连续一段中都是相等的。具体观察可以发现，集合</p>
+<div class="math-display">\[\{x\mid \lfloor n&#x2F;x\rfloor&#x3D;c\}\]</div>
+<p>中的数字 <span class="math-inline">\(x\)</span> 的 <span class="math-inline">\(\operatorname{sg}_x\)</span> 总是一样。下面证明这个结论。</p>
+<p>归纳法：</p>
+<p>起点：对于 <span class="math-inline">\(\{x\mid \lfloor n&#x2F;x\rfloor&#x3D;1\}\)</span> 的位置，<span class="math-inline">\(\operatorname{sg}_x&#x3D;1\)</span>。</p>
+<p>接下来有</p>
+
+
+$$
+\operatorname{sg}_x
+=
+\operatorname{mex}
+\left(
+0,
+\operatorname{sg}_{2x},
+\operatorname{sg}_{2x}\oplus\operatorname{sg}_{3x},
+\operatorname{sg}_{2x}\oplus\operatorname{sg}_{3x}\oplus\operatorname{sg}_{4x},
+\dots
+\right)
+$$
+
+
+
+<p>于是考虑满足 <span class="math-inline">\(\lfloor n&#x2F;x\rfloor&#x3D;\lfloor n&#x2F;y\rfloor\)</span> 的两个位置 <span class="math-inline">\(x,y\)</span>，总是有</p>
+
+
+$$
+\left\lfloor\frac{n}{kx}\right\rfloor
+=
+\left\lfloor\frac{\lfloor n/x\rfloor}{k}\right\rfloor
+=
+\left\lfloor\frac{\lfloor n/y\rfloor}{k}\right\rfloor
+=
+\left\lfloor\frac{n}{ky}\right\rfloor,
+\quad k\ge 1.
+$$
+
+
+
+<p>也就是说 <span class="math-inline">\(\operatorname{mex}\)</span> 内部的每一项都是一样的。</p>
+<p>所以我们用整除分块计算每一块的值。由于计算总是依赖更大的值，所以倒序扫描。</p>
+<p>在计算一块的值时，可以利用每一块中 <span class="math-inline">\(\operatorname{sg}\)</span> 函数值相等的性质，只需要知道这一块中的奇偶性即可。可以发现，<span class="math-inline">\(kx\)</span>（<span class="math-inline">\(k\ge 1\)</span>）落在的不同块的数量不超过 <span class="math-inline">\(O(\sqrt n)\)</span>。当 <span class="math-inline">\(n\le 10^9\)</span> 时可以通过，复杂度可以分析到 <span class="math-inline">\(O(n^{3&#x2F;4})\)</span>。</p>
+<h2 id="实现细节-1"><a href="#实现细节-1" class="headerlink" title="实现细节"></a>实现细节</h2><p>对于任意一个 <span class="math-inline">\(x\)</span>，我们需要 <span class="math-inline">\(O(1)\)</span> 查询 <span class="math-inline">\(\operatorname{sg}_x\)</span>。由于不同段只有 <span class="math-inline">\(2\sqrt n\)</span> 种，可以这样记录：</p>
+<ul>
+<li>对于 <span class="math-inline">\(\lfloor n&#x2F;x\rfloor \le \sqrt n\)</span>，记录 <span class="math-inline">\(p2_{\lfloor n&#x2F;x\rfloor}\)</span> 为当前块编号。</li>
+<li>否则记录 <span class="math-inline">\(p1_x\)</span> 为当前块编号。</li>
+</ul>
+<p>在计算 <span class="math-inline">\(\operatorname{mex}\)</span> 时，我们可以给所有出现过的值在 <span class="math-inline">\(\mathrm{vis}\)</span> 数组的对应位置标记上当前块编号，这样只需要查询 <span class="math-inline">\(\mathrm{vis}\)</span> 数组中第一个不是当前块编号的位置即可。</p>
+<h1 id="5480-–-最小生成树"><a href="#5480-–-最小生成树" class="headerlink" title="5480 – 最小生成树"></a><a target="_blank" rel="noopener" href="http://172.17.226.198/OnlineJudge/contestproblem.php?id=16075480">5480 – 最小生成树</a></h1><p>加入边上的一个点的时候，发现其只和边上的 <span class="math-inline">\(k\)</span> 个点有关。<br>所以我们可以维护这 <span class="math-inline">\(k\)</span> 个点的虚树， 发现仍然可以动态维护这个最小生成树的权值和。</p>
+<p>考虑要两端加点，那么就找到一个位置 <span class="math-inline">\(mid\)</span>，记录 <span class="math-inline">\([l,mid],[mid+1,r]\)</span> 的以两端各 <span class="math-inline">\(k\)</span> 个点的最小生成树。发现这样支持两边加点，并且这两端可以合并，只需要加入跨段的边就好。</p>
+<p><strong>最小生成树可以和虚树配合</strong>。</p>
+<p>接下来，发现如果删除到了分界点 <span class="math-inline">\(mid\)</span> 就不行了，这个时候我们可以暴力重构，并令  <span class="math-inline">\(mid&#x3D;(l+r)&#x2F;2\)</span>。考虑证明复杂度。</p>
+<p>这个问题等价于双栈模拟双端队列的时间复杂度。</p>
+<p>重构一次的复杂度是 <span class="math-inline">\(O(xk\log x)\)</span>，<span class="math-inline">\(x&#x3D;r-l+1\)</span>。<br>接下来看看重构次数，</p>
+<p>下面给出一种<strong>改进的双栈模拟双端队列</strong>方案，并在每次一侧为空时<strong>从中间剖开</strong>进行重构，然后用势能分析证明所有操作均摊 <span class="math-inline">\(O(1)\)</span>。</p>
+<h1 id="双栈模拟双端队列：从中间剖开与均摊-O-1-证明"><a href="#双栈模拟双端队列：从中间剖开与均摊-O-1-证明" class="headerlink" title="双栈模拟双端队列：从中间剖开与均摊 \(O(1)\) 证明"></a>双栈模拟双端队列：从中间剖开与均摊 <span class="math-inline">\(O(1)\)</span> 证明</h1><h2 id="1-数据结构"><a href="#1-数据结构" class="headerlink" title="1. 数据结构"></a>1. 数据结构</h2><p>维护两个栈 <span class="math-inline">\(L\)</span> 和 <span class="math-inline">\(R\)</span>：</p>
+<ul>
+<li><span class="math-inline">\(L\)</span> 的栈顶是队首，栈底靠近中间；</li>
+<li><span class="math-inline">\(R\)</span> 的栈顶是队尾，栈底靠近中间。</li>
+</ul>
+<p>队列中元素的顺序为：</p>
+<div class="math-display">\[\text{队首} \to \cdots \to \text{队尾}
+&#x3D; L \text{ 从栈顶到栈底} + R \text{ 从栈底到栈顶}\]</div>
+<p>基本操作：</p>
+<ul>
+<li><code>push_front(x)</code>：<span class="math-inline">\(L.push(x)\)</span>，<span class="math-inline">\(O(1)\)</span></li>
+<li><code>push_back(x)</code>：<span class="math-inline">\(R.push(x)\)</span>，<span class="math-inline">\(O(1)\)</span></li>
+<li><code>pop_front()</code>：<ul>
+<li>若 <span class="math-inline">\(L\)</span> 非空，直接 <span class="math-inline">\(L.pop()\)</span>，<span class="math-inline">\(O(1)\)</span></li>
+<li>若 <span class="math-inline">\(L\)</span> 为空且 <span class="math-inline">\(R\)</span> 非空，进行<strong>重构</strong>，然后 <span class="math-inline">\(L.pop()\)</span></li>
+</ul>
+</li>
+<li><code>pop_back()</code>：<ul>
+<li>若 <span class="math-inline">\(R\)</span> 非空，直接 <span class="math-inline">\(R.pop()\)</span>，<span class="math-inline">\(O(1)\)</span></li>
+<li>若 <span class="math-inline">\(R\)</span> 为空且 <span class="math-inline">\(L\)</span> 非空，进行<strong>重构</strong>，然后 <span class="math-inline">\(R.pop()\)</span></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="2-重构策略：从中间剖开"><a href="#2-重构策略：从中间剖开" class="headerlink" title="2. 重构策略：从中间剖开"></a>2. 重构策略：从中间剖开</h2><p>以 <code>pop_front()</code> 且 <span class="math-inline">\(L\)</span> 为空为例。设此时 <span class="math-inline">\(R\)</span> 中有 <span class="math-inline">\(m\)</span> 个元素。</p>
+<ol>
+<li>将 <span class="math-inline">\(R\)</span> 中所有元素弹出，得到从队尾到队首的序列。</li>
+<li>将其逆序，得到从队首到队尾的序列 <span class="math-inline">\(q_0, q_1, \dots, q_{m-1}\)</span>。</li>
+<li>取前 <span class="math-inline">\(\lceil m&#x2F;2 \rceil\)</span> 个元素（靠近队首的一半），按从中间到队首的顺序压入 <span class="math-inline">\(L\)</span>，使得 <span class="math-inline">\(q_0\)</span> 最终位于 <span class="math-inline">\(L\)</span> 栈顶。</li>
+<li>剩余元素按从中间到队尾的顺序压入 <span class="math-inline">\(R\)</span>，使得 <span class="math-inline">\(q_{m-1}\)</span> 最终位于 <span class="math-inline">\(R\)</span> 栈顶。</li>
+</ol>
+<p>这样重构后，<span class="math-inline">\(L\)</span> 和 <span class="math-inline">\(R\)</span> 的大小大致相等，差不超过 <span class="math-inline">\(1\)</span>。</p>
+<p><code>pop_back()</code> 且 <span class="math-inline">\(R\)</span> 为空时完全对称。</p>
+<hr>
+<h2 id="3-势能函数"><a href="#3-势能函数" class="headerlink" title="3. 势能函数"></a>3. 势能函数</h2><p>定义势能</p>
+<div class="math-display">\[\Phi &#x3D; 2 \cdot \big| |L| - |R| \big|\]</div>
+<p>其中 <span class="math-inline">\(|L|, |R|\)</span> 分别表示两个栈中元素个数。显然 <span class="math-inline">\(\Phi \ge 0\)</span>。</p>
+<hr>
+<h2 id="4-摊还代价分析"><a href="#4-摊还代价分析" class="headerlink" title="4. 摊还代价分析"></a>4. 摊还代价分析</h2><h3 id="4-1-不触发重构的操作"><a href="#4-1-不触发重构的操作" class="headerlink" title="4.1 不触发重构的操作"></a>4.1 不触发重构的操作</h3><ul>
+<li><code>push_front</code>、<code>push_back</code>：实际代价 <span class="math-inline">\(O(1)\)</span>。一侧大小增加 <span class="math-inline">\(1\)</span>，所以 <span class="math-inline">\(| |L| - |R| |\)</span> 变化至多 <span class="math-inline">\(1\)</span>，势能变化 <span class="math-inline">\(|\Delta \Phi| \le 2\)</span>。摊还代价 <span class="math-inline">\(O(1) + 2 &#x3D; O(1)\)</span>。</li>
+<li><code>pop_front</code>、<code>pop_back</code> 且对应栈非空：实际代价 <span class="math-inline">\(O(1)\)</span>。一侧大小减少 <span class="math-inline">\(1\)</span>，势能变化至多 <span class="math-inline">\(2\)</span>。摊还代价 <span class="math-inline">\(O(1)\)</span>。</li>
+</ul>
+<h3 id="4-2-触发重构的-pop-front"><a href="#4-2-触发重构的-pop-front" class="headerlink" title="4.2 触发重构的 pop_front"></a>4.2 触发重构的 <code>pop_front</code></h3><p>设重构前 <span class="math-inline">\(|L| &#x3D; 0\)</span>，<span class="math-inline">\(|R| &#x3D; m\)</span>。此时</p>
+<div class="math-display">\[\Phi_{\text{before}} &#x3D; 2 \cdot |0 - m| &#x3D; 2m\]</div>
+<p>重构过程：</p>
+<ul>
+<li>弹出 <span class="math-inline">\(R\)</span> 中 <span class="math-inline">\(m\)</span> 个元素：代价 <span class="math-inline">\(m\)</span></li>
+<li>将其中一半压入 <span class="math-inline">\(L\)</span>，一半压入 <span class="math-inline">\(R\)</span>：代价 <span class="math-inline">\(m\)</span></li>
+<li>最后执行一次 <span class="math-inline">\(L.pop()\)</span>：代价 <span class="math-inline">\(1\)</span></li>
+</ul>
+<p>所以实际总代价为</p>
+<div class="math-display">\[2m + 1\]</div>
+<p>重构后，<span class="math-inline">\(L\)</span> 和 <span class="math-inline">\(R\)</span> 的大小分别为 <span class="math-inline">\(\lceil m&#x2F;2 \rceil\)</span> 和 <span class="math-inline">\(\lfloor m&#x2F;2 \rfloor\)</span>（或反之），差不超过 <span class="math-inline">\(1\)</span>。再执行一次弹出后，差至多 <span class="math-inline">\(2\)</span>，因此</p>
+<div class="math-display">\[\Phi_{\text{after}} \le 2 \times 2 &#x3D; 4\]</div>
+<p>势能变化：</p>
+<div class="math-display">\[\Delta \Phi &#x3D; \Phi_{\text{after}} - \Phi_{\text{before}} \le 4 - 2m\]</div>
+<p>摊还代价：</p>
+<div class="math-display">\[\text{摊还代价} &#x3D; \text{实际代价} + \Delta \Phi
+\le (2m + 1) + (4 - 2m) &#x3D; 5 &#x3D; O(1)\]</div>
+<h3 id="4-3-触发重构的-pop-back"><a href="#4-3-触发重构的-pop-back" class="headerlink" title="4.3 触发重构的 pop_back"></a>4.3 触发重构的 <code>pop_back</code></h3><p>与 <code>pop_front</code> 完全对称，摊还代价同样为 <span class="math-inline">\(O(1)\)</span>。</p>
+<hr>
+<h2 id="5-结论"><a href="#5-结论" class="headerlink" title="5. 结论"></a>5. 结论</h2><p>通过“每次重构时从中间剖开”的策略，两个栈模拟双端队列可以达到：</p>
+<ul>
+<li><strong>单次操作最坏</strong>：<span class="math-inline">\(O(n)\)</span>（仅发生在触发重构时）</li>
+<li><strong>均摊时间复杂度</strong>：所有操作均为 <span class="math-inline">\(O(1)\)</span></li>
+</ul>
+<p>势能函数</p>
+<div class="math-display">\[\Phi &#x3D; 2 \cdot \big| |L| - |R| \big|\]</div>
+<p>在重构时大幅下降，释放的势能恰好支付了重构的线性代价。因此，该数据结构是均摊 <span class="math-inline">\(O(1)\)</span> 的。</p>
+<h1 id="P7214-JOISC-2020-治療計画"><a href="#P7214-JOISC-2020-治療計画" class="headerlink" title="P7214 [JOISC 2020] 治療計画"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P7214">P7214 [JOISC 2020] 治療計画</a></h1><p>首先考虑用一个合理的方式去刻画这个题目，发现我们可以，以时间为 <span class="math-inline">\(x\)</span> 轴，序列中的区间为 <span class="math-inline">\(y\)</span> 轴。<br>这样就能用直观的方式去观察这个题目；</p>
+<p>每一个操作就是一个倒着的三角形。</p>
+<p>接下来我们能发现，实际上我们呢就是要求一个从做到右的最小割。其实发现条件很简单。<br>就是：</p>
+<div class="math-display">\[|t_i-t_j|\leq r_i-l_j+1\]</div>
+<p>稍微拆一下式子不难理解。</p>
+<p>看起来可能还是二维偏序，但是我们使用 dijkstra 的方式，可以发现，每个点的所有入边其实都是相等的，而且边权非负，所以我们我们按照权值队列去访问，第一次访问的就是当前点最小的 <span class="math-inline">\(dis\)</span>，所以直接在线段树上删除掉能到达的节点就好，实现很简单。</p>
+<h1 id="P11094-ROI-2021-砍树-Day-2"><a href="#P11094-ROI-2021-砍树-Day-2" class="headerlink" title="P11094 [ROI 2021] 砍树 (Day 2)"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P11094">P11094 [ROI 2021] 砍树 (Day 2)</a></h1><p>感觉这个题目的思路是很经典的，见过了很多次，但是还是不会做。</p>
+<p>首先我们不难想到 <span class="math-inline">\(O(nq)\)</span> 的暴力。<br>具体过程为，从 <span class="math-inline">\(l\rightarrow r\)</span> 遍历，考虑用一个栈来维护。<br>当前的树为 <span class="math-inline">\(i\)</span>，在加入之前，先来检查栈里面的树可不可以向右倒并且不影响树 <span class="math-inline">\(i\)</span>，如果可以就一直弹出栈顶。如果 <span class="math-inline">\(i\)</span> 树可以向左倒，那么它已经被砍伐成功，不加入栈，否则加入栈。可以获得 50pts。</p>
+<p>但是这并不够，发现这个东西不具有任何可以使用的性质，我们既不可以莫队，又不可以上线段树一类的数据结构。这个结构只能支持从左到右顺序扫描，而且不支持合并。</p>
+<p>主要原因就是树之间向多米诺骨牌一样的依赖关系，我们希望能把这些关系“解绑”。<br>具体的，可以设 <span class="math-inline">\(L_i,R_i\)</span> 表示如果让 <span class="math-inline">\(i\)</span> 树向左&#x2F;右倒，那么至少需要依赖的树的位置。（<span class="math-inline">\([L_i,i],[i,R_i]\)</span>）</p>
+<p>其实我们可以用线段树来维护这个东西。<br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/article/hk883yif">关于线段树做法的题解</a></p>
+<p>另一种方式可以用整体二分 + <span class="math-inline">\(O(nq)\)</span> 做法来解决。</p>
+<p>考虑求出 <span class="math-inline">\(L_i\)</span>（<span class="math-inline">\(R_i\)</span> 同理）<br>我们可以二分一个位置 <span class="math-inline">\(l\)</span>，假设当前询问区间为 <span class="math-inline">\([l,+\infty]\)</span> 跑 <span class="math-inline">\(O(nq)\)</span> 做法，每次加入的时候，看看当前能不能向左倒就可以判定 <span class="math-inline">\(L_i\geq l\)</span> 是否满足。</p>
+<p>最后二维数点就好。</p>
+<h1 id="P14786-NERC-2025-Elevator-Against-Humanity"><a href="#P14786-NERC-2025-Elevator-Against-Humanity" class="headerlink" title="P14786 [NERC 2025] Elevator Against Humanity"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P14786">P14786 [NERC 2025] Elevator Against Humanity</a></h1><p>考虑调整法。<br>假设把所有位置排序之后的数组为 <span class="math-inline">\(x_{2n}\)</span><br>首先考虑答案期望是 <span class="math-inline">\(\sum x_{i+n}-x_{i}\)</span></p>
+<p>然后考虑调整。因为实际上边没有 <span class="math-inline">\(2n\)</span> 个。所以重点会少计算一次</p>
+<p>首先如果可以从上到下，那么每一个点都是可以作为终点，枚举一下。</p>
+<p>否则考虑现在只有一种图了，自己分讨一下。</p>
+<h1 id="最小生成树的新求法-Boruvka"><a href="#最小生成树的新求法-Boruvka" class="headerlink" title="最小生成树的新求法 Boruvka"></a>最小生成树的新求法 Boruvka</h1><p>是 pirm 和 kruskal 的结合。</p>
+<p>首先初始是 <span class="math-inline">\(n\)</span> 个独立的孤点。（也可以看作 <span class="math-inline">\(n\)</span> 个连通块）</p>
+<p>然后找到每一个连通块向外的最小&#x2F;大的边。</p>
+<p>合并这些边连接的联通块，可以发现，每次连通块个数至少缩小到原来的一半。</p>
+<p>具体求的时候，可以记录最大值和次大值（最大值和次大值在不同的连通块中）。</p>
+<h1 id="5907-–-序列计数"><a href="#5907-–-序列计数" class="headerlink" title="5907 – 序列计数"></a><a target="_blank" rel="noopener" href="http://172.17.226.198/OnlineJudge/contestproblem.php?id=16125907">5907 – 序列计数</a></h1><p>首先，一定是不考虑因数关系，转换为倒过来考虑倍数问题。<br>然后考虑容斥，钦定 <span class="math-inline">\(x\)</span> 数字之间不满足条件，容斥系数为 <span class="math-inline">\((-1)^x\)</span><br>发现最多连续不满足条件的数字个数只有 <span class="math-inline">\(\log\)</span> 个。<br>所以我们预处理 <span class="math-inline">\(s_i\)</span> 表示连续 <span class="math-inline">\(i\)</span> 个位置都不满足条件的方案数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">200005</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> mod = <span class="number">998244353</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"><span class="type">int</span> f[N], s[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> &amp;x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ((x += y) &gt;= mod) x -= mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">sub</span><span class="params">(<span class="type">int</span> &amp;x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ((x -= y) &lt; <span class="number">0</span>) x += mod;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++) f[i] = <span class="number">1</span>;</span><br><span class="line">    s[<span class="number">1</span>] = m;</span><br><span class="line">    <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (cnt = <span class="number">2</span>; ; cnt++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = m; i &gt;= <span class="number">1</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i + i; j &lt;= m; j += i) &#123;</span><br><span class="line">                <span class="built_in">add</span>(f[j], f[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            f[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">            <span class="built_in">add</span>(s[cnt], f[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!s[cnt]) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">0</span>, <span class="built_in">sizeof</span>(f));</span><br><span class="line">    f[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j =</span><br></pre></td></tr></table></figure>
+
+<h1 id="5908-–-庆典"><a href="#5908-–-庆典" class="headerlink" title="5908 – 庆典"></a><a target="_blank" rel="noopener" href="http://172.17.226.198/OnlineJudge/contestproblem.php?id=16125908">5908 – 庆典</a></h1><p>发现有类似 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P11364">P11364 [NOIP2024] 树上查询</a> 的 trick。</p>
+<div class="math-display">\[\min_{i\not &#x3D;j} dep[lca(a_i,a_j)]&#x3D;\min_{i&#x3D;1} dep[lca(a_i,a_{i+1})]\]</div>
+<p>证明不难，只要访问到 lca 不同子树中的点，就会求出最浅的 lca。</p>
+<p>接下来就类似于优化 </p>
+<div class="math-display">\[f_i&#x3D;f_j+\min_{i&#x3D;j}^{i}(a_i)\]</div>
+<p>这个可以同单调栈优化。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">1</span> &lt;&lt; <span class="number">20</span>;</span><br><span class="line"><span class="type">char</span> in[maxn],out[maxn],*p1=in,*p2=in,*p3=out;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> getchar() (p1==p2&amp;&amp;(p2=(p1=in)+fread(in,1,maxn,stdin),p1==p2)?EOF:*p1++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> flush() (fwrite(out,1,p3-out,stdout))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> putchar(x) (p3==out+maxn&amp;&amp;(flush(),p3=out),*p3++=(x))</span></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> type&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">read</span><span class="params">(type &amp;x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    x = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> f = <span class="number">1</span>;</span><br><span class="line">    <span class="type">char</span> c = <span class="built_in">getchar</span>();</span><br><span class="line">    <span class="keyword">while</span> (c &lt; <span class="number">48</span> || c &gt; <span class="number">57</span>) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="string">&#x27;-&#x27;</span>) f = <span class="number">-1</span>;</span><br><span class="line">        c = <span class="built_in">getchar</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (c &gt;= <span class="number">48</span> &amp;&amp; c &lt;= <span class="number">57</span>)</span><br><span class="line">        x = x * <span class="number">10</span> + c - <span class="number">48</span>, c = <span class="built_in">getchar</span>();</span><br><span class="line">    x *= f;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> type, <span class="keyword">typename</span> ...T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">read</span><span class="params">(type &amp;x, T &amp;...y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">read</span>(x), <span class="built_in">read</span>(y...);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> type&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">write</span><span class="params">(type x,<span class="type">bool</span> mode=<span class="number">1</span>)</span><span class="comment">//0为空格，1为换行</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    x &lt; <span class="number">0</span> ? x =- x, <span class="built_in">putchar</span>(<span class="string">&#x27;-&#x27;</span>) : <span class="number">0</span>;</span><br><span class="line">    <span class="type">static</span> <span class="type">short</span> Stack[<span class="number">50</span>], <span class="built_in">top</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">do</span> Stack[++top]=x%<span class="number">10</span>,x/=<span class="number">10</span>; <span class="keyword">while</span>(x);</span><br><span class="line">    <span class="keyword">while</span>(top) <span class="built_in">putchar</span>(Stack[top--]|<span class="number">48</span>);</span><br><span class="line">    mode?<span class="built_in">putchar</span>(<span class="string">&#x27;\n&#x27;</span>):<span class="built_in">putchar</span>(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1000005</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, m, k;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; e[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Lca</span> &#123;</span><br><span class="line">    <span class="type">int</span> dfn[N], tc, st[<span class="number">20</span>][N], fa[N], dep[N];</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> f)</span> </span>&#123;</span><br><span class="line">        dfn[u] = ++tc;</span><br><span class="line">        st[<span class="number">0</span>][tc] = u;</span><br><span class="line">        dep[u] = dep[f] + <span class="number">1</span>;</span><br><span class="line">        fa[u] = f;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> v : e[u]) <span class="keyword">if</span> (v != f) &#123;</span><br><span class="line">            <span class="built_in">dfs</span>(v, u);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">Mn</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> dep[x] &lt; dep[y] ? x : y;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        dep[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">        <span class="built_in">dfs</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; (<span class="number">1</span> &lt;&lt; i) &lt;= n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j + (<span class="number">1</span> &lt;&lt; i) - <span class="number">1</span> &lt;= n; j++) &#123;</span><br><span class="line">                st[i][j] = <span class="built_in">Mn</span>(st[i - <span class="number">1</span>][j], st[i - <span class="number">1</span>][j + (<span class="number">1</span> &lt;&lt; (i - <span class="number">1</span>))]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">get</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> len = __lg(r - l + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Mn</span>(st[len][l], st[len][r - (<span class="number">1</span> &lt;&lt; len) + <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">lca</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (x == y) <span class="keyword">return</span> x;</span><br><span class="line">        <span class="keyword">if</span> (dfn[x] &gt; dfn[y]) <span class="built_in">swap</span>(x, y);</span><br><span class="line">        <span class="keyword">return</span> fa[<span class="built_in">get</span>(dfn[x] + <span class="number">1</span>, dfn[y])];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;lca;</span><br><span class="line"></span><br><span class="line">pair&lt;ll, <span class="type">int</span>&gt; f[N], v[N];</span><br><span class="line"><span class="type">int</span> q[N], val[N], a[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">(ll mid)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> t = <span class="number">0</span>;</span><br><span class="line">    pair&lt;ll, <span class="type">int</span>&gt; mn = &#123;<span class="number">0x3f3f3f3f3f3f3f3fll</span>, <span class="number">0x3f3f3f3f</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i &gt; <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="type">int</span> nq = lca.dep[lca.<span class="built_in">lca</span>(a[i - <span class="number">1</span>], a[i])];</span><br><span class="line">            pair&lt;ll, <span class="type">int</span>&gt; now = v[t--];</span><br><span class="line">            <span class="keyword">while</span> (t &amp;&amp; q[t] &gt;= nq) &#123;</span><br><span class="line">                now = <span class="built_in">min</span>(now, v[t--]);</span><br><span class="line">            &#125;</span><br><span class="line">            q[++t] = nq;</span><br><span class="line">            v[t] = now;</span><br><span class="line">            mn = <span class="built_in">min</span>(mn, &#123;now.first + nq - mid, now.second + <span class="number">1</span>&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        q[++t] = lca.dep[a[i]];</span><br><span class="line">        v[t] = f[i - <span class="number">1</span>];</span><br><span class="line">        mn = <span class="built_in">min</span>(mn, &#123;f[i - <span class="number">1</span>].first + lca.dep[a[i]] - mid, f[i - <span class="number">1</span>].second + <span class="number">1</span>&#125;);</span><br><span class="line">        f[i] = mn;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f[m].second &lt;= k;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">read</span>(n, m, k);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++) <span class="built_in">read</span>(a[i]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>, a, b; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">read</span>(a, b);</span><br><span class="line">        e[a].<span class="built_in">push_back</span>(b);</span><br><span class="line">        e[b].<span class="built_in">push_back</span>(a);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    lca.<span class="built_in">init</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        val[i] = lca.dep[lca.<span class="built_in">lca</span>(a[i - <span class="number">1</span>], a[i])];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> l = <span class="number">0</span>, r = <span class="number">2</span> * (*<span class="built_in">max_element</span>(lca.dep + <span class="number">1</span>, lca.dep + <span class="number">1</span> + n));</span><br><span class="line">    <span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">        <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">check</span>(mid)) l = mid + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> r = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">check</span>(r);</span><br><span class="line">    ll ans = f[m].first + <span class="number">1ll</span> * r * k;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="5912-–-能量节点"><a href="#5912-–-能量节点" class="headerlink" title="5912 – 能量节点"></a><a target="_blank" rel="noopener" href="http://218.22.67.60:30808/OnlineJudge/contestproblem.php?id=16135912">5912 – 能量节点</a></h1><p>转移方程：</p>
+<div class="math-display">\[f_{x+1}&#x3D;f_{x}+f_{\lfloor \frac{x+1}{2}\rfloor}&#x3D;f_x+f_{\lceil\frac{x}{2}\rceil}\]</div>
+<p>考虑用尽量少的位置去转移状态。<br>考虑从 <span class="math-inline">\(x\rightarrow x+1\)</span> 的转移。看看会依赖哪些位置。</p>
+<ul>
+<li>首先，为了转移 <span class="math-inline">\(x+1\)</span> 我们需要 <span class="math-inline">\(x,\lceil \frac{x}{2}\rceil\)</span></li>
+<li>有可能 <span class="math-inline">\(\lceil \frac{x+1}{2}\rceil&#x3D;\lceil \frac{x}{2}\rceil +1\)</span>，所以我们要更新</li>
+</ul>
+<div class="math-display">\[\lfloor \frac{\lceil x\rceil+1}{2}\rfloor&#x3D;\lceil{x}\rceil\]</div>
+<p><span class="math-inline">\(\forall x\in R\)</span> 都成立。</p>
+<h1 id="5919-–-迷路的送货车"><a href="#5919-–-迷路的送货车" class="headerlink" title="5919 – 迷路的送货车"></a><a target="_blank" rel="noopener" href="http://172.17.226.198/OnlineJudge/contestproblem.php?id=16165919">5919 – 迷路的送货车</a></h1><p>首先，可以发现每一点客观上肯定是有一个到终点的最小代价，假设这个代价为 <span class="math-inline">\(d_i\)</span>。</p>
+<p>假设一条边连接 <span class="math-inline">\((u,v)\)</span>，如果 <span class="math-inline">\(d_u&lt;d_v\)</span> 那么只会从 <span class="math-inline">\(v\rightarrow u\)</span> 进行转移，反之亦然。原因是我们不会花钱让距离终点更远。</p>
+<p>考虑我们现在就是要求出 <span class="math-inline">\(d\)</span>。<br>考虑倒推，<span class="math-inline">\(d_n&#x3D;0\)</span>，接下来考虑直接找到距离最小的点，这里距离定义为屏蔽代价加上通行代价，按照 djkstra 的方式把这个最小点从 priority 中取出来，然后去更新别的点。这样做就是正确的。因为我们每次更新的是最小点，而最小点所有向外转移的边都已经做好了。</p>
+<p>这样思路很简单，但是因为卡空间，维护屏蔽代价的时候需要使用 fhq treap。</p>
+<p>这里介绍一个更加简单的做法，发现代价可以拆成两个部分（屏蔽代价，通行代价），并且这两种代价都非负。考虑把每一条边拆成上再新建一个点，记录 <span class="math-inline">\(dis_u+w\)</span>，<span class="math-inline">\(w\)</span> 表示通行代价。然后我们发现进入点 <span class="math-inline">\(v\)</span> 的每条边，就是按照 <span class="math-inline">\(dis_u+w\)</span> 升序加入的。在计算屏蔽代价的时候，我们只关心每个点 <span class="math-inline">\(dis_u+w\)</span> 的排名，这样我们在边点转移到真实点的代价也能计算了。那么直接 dijkstra 就做完了。</p>
+<p>这个题目很妙，我们在一开始不知道所有边的边权，但是在做 dijkstra 的过程中，可以逐渐知道每一条边的权值。保证我们可以完整正常的 dijkstra 流程。</p>
+<h1 id="5511-–-平方操作"><a href="#5511-–-平方操作" class="headerlink" title="5511 – 平方操作"></a><a target="_blank" rel="noopener" href="http://172.17.226.198/OnlineJudge/contestproblem.php?id=16175511">5511 – 平方操作</a></h1><p>一个重要结论：在 mod 998244353 意义下，如果像本题一样，每次把数字平方，那么将在最多 (23+24) 步之后进入循环，并且循环节最长为 24。</p>
+<p>因为这样的操作相当于指数每次 <span class="math-inline">\(\times 2\)</span>，但是由于 <span class="math-inline">\(998244352&#x3D;119\times 2^23\)</span>，所以前 <span class="math-inline">\(23\)</span> 次乘法可以看作模数处以 <span class="math-inline">\(2\)</span>，所以模数就相当于是 <span class="math-inline">\(119\)</span> 了，那么可以证明循环节最长为 <span class="math-inline">\(119\)</span> 实际打表发现为 <span class="math-inline">\(24\)</span>。</p>
+<h1 id="P6168-IOI-2016-railroad"><a href="#P6168-IOI-2016-railroad" class="headerlink" title="P6168 [IOI 2016] railroad"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P6168">P6168 [IOI 2016] railroad</a></h1><p>首先，发现这个问题很难直接贪心解决，于是考虑一些比较特殊的算法——欧拉回路。</p>
+<p>其实，我们可以从图论的角度来思考这个问题。这里有一个经典的结论：由于图上的点对应的是序列中的位置，因此，对于满足 <span class="math-inline">\(i\leq j\leq k\)</span> 的情况，直接连接 <span class="math-inline">\(i\rightarrow j\)</span> 与经过中间点连接 <span class="math-inline">\(i\rightarrow k\rightarrow j\)</span> 的代价相同。</p>
+<p>但是，后者显然更有利于增强整张图的连通性。例如，如果 <span class="math-inline">\(k\)</span> 原本属于一个独立的连通块，那么采用前一种连接方式，它仍然是独立的；而采用后一种连接方式，就可以将它与 <span class="math-inline">\(i,j\)</span> 所在的部分连接起来。</p>
+<h2 id="一、建图"><a href="#一、建图" class="headerlink" title="一、建图"></a>一、建图</h2><p>首先，我们发现，要求速度不大于 <span class="math-inline">\(s_i\)</span> 这个限制，如果直接建图，会产生过多的边。</p>
+<p>但是注意到，提高速度总是不需要额外代价的，因此，我们可以规定每次进入第 <span class="math-inline">\(i\)</span> 条铁路时，速度必须恰好为 <span class="math-inline">\(s_i\)</span>。这样就可以简化建图。</p>
+<p>然后，再加入一条虚拟边：</p>
+<div class="math-display">\[s&#x3D;\max(V),\qquad t&#x3D;1\]</div>
+<p>这样就可以将欧拉通路转化为欧拉回路。</p>
+<h2 id="二、平衡每条边的正反向次数"><a href="#二、平衡每条边的正反向次数" class="headerlink" title="二、平衡每条边的正反向次数"></a>二、平衡每条边的正反向次数</h2><p>接下来，考虑增加一些边，使得整个图满足欧拉回路的条件。</p>
+<p>对于一条边，假设正向经过 <span class="math-inline">\(x\)</span> 次，反向经过 <span class="math-inline">\(y\)</span> 次。</p>
+<ul>
+<li>如果 <span class="math-inline">\(x&gt;y\)</span>，那么需要增加 <span class="math-inline">\(x-y\)</span> 条反向经过的边。</li>
+<li>如果 <span class="math-inline">\(x&lt;y\)</span>，那么需要增加 <span class="math-inline">\(y-x\)</span> 条正向经过的边。</li>
+<li>如果 <span class="math-inline">\(x&#x3D;y\)</span>，那么不需要增加边。</li>
+</ul>
+<p>也就是说，对于每条边，至少需要补充</p>
+<div class="math-display">\[|x-y|\]</div>
+<p>次使用。</p>
+<p>不难发现，这些补充是必须的，因为正反向经过次数的差额无法通过其他边的调整消除。</p>
+<p>完成这一步之后，每个连通块内部都满足欧拉回路所需的度数平衡条件。</p>
+<h2 id="三、合并连通块"><a href="#三、合并连通块" class="headerlink" title="三、合并连通块"></a>三、合并连通块</h2><p>最后，我们考虑如何用最少的代价，将整张图变成一个连通块。</p>
+<p>显然，这一步可以转化为最小生成树（MST）问题。</p>
+<p>我们只需要将每个连通块看作一个点，根据连接不同连通块所需的代价建立辅助边，然后求出最小生成树即可。</p>
+<p>这样，就能以最小的额外代价将所有连通块连接起来，从而得到最终答案。</p>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>整个算法的核心是：</p>
+<ol>
+<li>利用提高速度不增加代价的性质，简化建图。</li>
+<li>通过平衡每条边的正反向使用次数，满足欧拉回路的度数条件。</li>
+<li>将剩余的连通性问题转化为最小生成树问题。</li>
+</ol>
+<h1 id="P11428-清华集训-2024-前往何方"><a href="#P11428-清华集训-2024-前往何方" class="headerlink" title="P11428 [清华集训 2024] 前往何方"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P11428">P11428 [清华集训 2024] 前往何方</a></h1><p>感觉不会的东西太多了。</p>
+<p>首先考虑给这些位置一个从根到叶子的拓扑序。</p>
+<p>我们可以询问 <span class="math-inline">\(S-\{i\}\)</span>，然后就知道以 <span class="math-inline">\(i\)</span> 为根的时候，最大子树是多少，记为 <span class="math-inline">\(f_i\)</span>。</p>
+<p>同时可以找到重心。我们发现，如果以重心为根，那么 <span class="math-inline">\(f_i\)</span> 从小到大的顺序就是 <span class="math-inline">\(f_i\)</span> 的一个拓扑序。</p>
+<p>接下来考虑划分出来深度为奇数和偶数的两个点集合。直接按照拓扑序试着加入每一个点就好，如果加入之后满足最大连通块的大小仍然为 <span class="math-inline">\(1\)</span> 那么就可以加入独立集。</p>
+<p>然后考虑枚举每一个二进制位，计算其去心邻域的数字编号之和，然后每次剥叶子就好。</p>
+<h1 id="P9781-HUSTFC-2023-近似递增序列"><a href="#P9781-HUSTFC-2023-近似递增序列" class="headerlink" title="P9781 [HUSTFC 2023] 近似递增序列"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P9781">P9781 [HUSTFC 2023] 近似递增序列</a></h1><p>这个题目非常厉害。</p>
+<p>按照位置倒着从填。<br>我们考虑设 <span class="math-inline">\(f_{n,m,0&#x2F;1}\)</span> 表示剩下的乘积上限为 <span class="math-inline">\(n\)</span>，下一个数字最大可以填入 <span class="math-inline">\(m\)</span>，有没有一个对不满足条件的位置。</p>
+<p>接下来考虑在 <span class="math-inline">\(i\times i \leq n\)</span> 的时候，直接暴力转移，否则利用整除分块转移。</p>
+<p>所以总共状态数是 <span class="math-inline">\(O(\sqrt n \times \sqrt n)\)</span>。</p>
+<p>看看转移会不会超时，首先，对于第一种转移，会进行 <span class="math-inline">\(f_{n,m,0&#x2F;1}\rightarrow f_{n&#x2F;i,\min(n&#x2F;i,i-1),0&#x2F;1}\)</span>，发这样对于每一个 <span class="math-inline">\(n\)</span>，转移的复杂度可以表示为 <span class="math-inline">\(n^{1&#x2F;2}+n^{1&#x2F;4}+n^{1&#x2F;8}\)</span> 可以看作 <span class="math-inline">\(O(n)\)</span>。<br>接下来，考虑加入第二种转移之后的复杂度变化，发现加入第二种操作影响十分微弱，因为它能转移到的地方，通过第一种也能转移到，而且它的复杂度和第一种也是一样的，所以时间复杂度不变。</p>
+<p>然后直接暴力转移就好了。</p>
+<p>如果过不了使用<br><code>mp.reserve(2000000);</code><br>提前分配空间<br>或者<br><code>mp.max_load_factor(0.7);</code><br>设置密度，可以有效降低常数。</p>
+<h1 id="P13538-IOI-2025-节日游戏"><a href="#P13538-IOI-2025-节日游戏" class="headerlink" title="P13538 [IOI 2025] 节日游戏"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P13538">P13538 [IOI 2025] 节日游戏</a></h1><p>这个题目主要就是要发现贪心性质。</p>
+<p>首先，容易发现这个满足 exchange argument。<br>那么排序之后，一定满足先选择排在前面的，之后才会选择排在后面的。</p>
+<p>发现直接输出排序之后的序列就可以通过 subtask5，可以获得 27pts。</p>
+<p>那么一个显然的贪心，就是从左到右，一次看看每一个位置能不能选，如果能，一定要选，否则我们需要决策。<br>具体决策的过程不难设计 dp 解决，但是需要设置状态 <span class="math-inline">\(f_{i,j}\)</span> 表示，前 <span class="math-inline">\(i\)</span> 个位置，选择了 <span class="math-inline">\(j\)</span> 的最大剩余钱数。</p>
+<p>但是这样 dp 肯定没有前途。状态都是 2D 的了。</p>
+<p>所以尝试发现更多性质。<br>我们把这个数列分成两段，分别为赚硬币和亏硬币。</p>
+<p>如果我们贪心到一个位置，开始不赚了，那么后面也不可能赚了。<br>因为我们可以证明不会出现位置先亏再赚，这样不如把两个位置交换一下，那么先赚再亏，并且赚的会更多。</p>
+<p>这样，我们考虑去做亏的一段。<br>发现如果把 <span class="math-inline">\(t&#x3D;1\)</span> 的全部剔除，剩下的，由于都是亏的，所以每次亏的数字会因为 <span class="math-inline">\(t\geq 2\)</span> 的乘法而扩大，而且至少是每次 <span class="math-inline">\(\times 2\)</span>。</p>
+<p>所以对于亏的后半段，一定满足 <span class="math-inline">\(j\in[0,\log V]\)</span>。<br>所以直接按照上面的状态 dp 就好。<br>最后对于 <span class="math-inline">\(t&#x3D;1\)</span> 贪心去选尽可能多的。</p>
+<h1 id="CF2096G-Wonderful-Guessing-Game"><a href="#CF2096G-Wonderful-Guessing-Game" class="headerlink" title="CF2096G Wonderful Guessing Game"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF2096G">CF2096G Wonderful Guessing Game</a></h1><p>感觉个人缺少这种题目的训练，所以写一个题解。</p>
+<p>首先，考虑一个能让数据规模降低最快的方式：每次把 <span class="math-inline">\(n\)</span> 个位置分成三份，并询问其中相等的两份。</p>
+<p>这样每次可以把规模降低到原来的 <span class="math-inline">\(\frac{1}{3}\)</span>。<br>称这三个集合为 <span class="math-inline">\(0,1,2\)</span>，其中 <span class="math-inline">\(|0|&#x3D;|1|\)</span>，<span class="math-inline">\(|S|\)</span> 表示 <span class="math-inline">\(S\)</span> 集合的大小。</p>
+<ul>
+<li>但是我们不仅要一把询问所有的。于是观察我们的决策树，每一层的所有 <span class="math-inline">\(0\)</span> 放在一起，<span class="math-inline">\(1\)</span> 放在一起查询即可</li>
+<li>还有可能有一个回答丢失。那么考虑加入一个类似校验码的东西。可以使用每一个叶子到根的路径边权和对 <span class="math-inline">\(3\)</span> 取模的余数，发现一定有两个集合是相等的。</li>
+</ul>
+<p>接下来证明这个一定有两个集合是相等的：<br>将三元组的一次轮换记为 <span class="math-inline">\(\rho(a,b,c)&#x3D;(c,a,b)\)</span></p>
+<p>设 <span class="math-inline">\(F(n)\)</span> 表示 <span class="math-inline">\(n\)</span> 个数字构成的子树形成的三元组。</p>
+<p>设 <span class="math-inline">\(A&#x3D;F(k),B&#x3D;F(k+1)\)</span>。考虑归纳。<br>显然在 <span class="math-inline">\(k\)</span> 比较小的时候可以手玩，发现是正确的。</p>
+<ol>
+<li>那么 <span class="math-inline">\(F(3k)\)</span> 的三元组 <span class="math-inline">\((x_0,x_1,x_2)\)</span> 一定有 <span class="math-inline">\(x_0&#x3D;x_1&#x3D;x_2\)</span> 因为其三个子树都是同构的。</li>
+<li><span class="math-inline">\(F(3k+1)\)</span> 的三元组为 <span class="math-inline">\(A+\rho A+\rho^2 B&#x3D;A+\rho B+\rho^2 A + \rho^2 B-\rho^2 A&#x3D;k(1,1,1)+\rho^2 (B-A)\)</span></li>
+<li><span class="math-inline">\(F(3k+2)\)</span> 的三元组为 <span class="math-inline">\(B+\rho B+\rho^2 A&#x3D;(k+1)(1,1,1)-\rho^2 (B-A)\)</span></li>
+</ol>
+<p>所以我们只需要证明 <span class="math-inline">\(B-A\)</span> 有至少两个位置是相等的就好。</p>
+<p>如果 <span class="math-inline">\(k\)</span> 或者 <span class="math-inline">\(k+1\)</span> 模 <span class="math-inline">\(3\)</span> 余数为 <span class="math-inline">\(0\)</span> 那么根据归纳显然成立。<br>否则一定有 <span class="math-inline">\(k \mod 3&#x3D;1\)</span>，由于 <span class="math-inline">\(F(k)+F(k+1)&#x3D;t(1,1,1)\)</span>（因为后面的 <span class="math-inline">\(-\rho^2 (B-A)\)</span> 和 <span class="math-inline">\(+\rho^2 (B-A)\)</span>）抵消了，同时根据归纳条件，他们两个至少有两个位置相等，所以他们相等的位置相同。命题得证。</p>
+<h1 id="P6844-CEOI-2019-Building-Skyscrapers"><a href="#P6844-CEOI-2019-Building-Skyscrapers" class="headerlink" title="P6844 [CEOI 2019] Building Skyscrapers"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P6844">P6844 [CEOI 2019] Building Skyscrapers</a></h1><p>非常优秀的题目。就是可能不太好写。</p>
+<p>首先，题目要求 <span class="math-inline">\((s_n,s_{n-1},s_{n-2},\dots)\)</span> 这样的倒过来的字典序最大。</p>
+<p>这是一个很强的暗示，告诉我们应该需要倒着做。</p>
+<p>考虑倒着做的时候两个限制变成了什么样子。</p>
+<ul>
+<li>原限制为 <span class="math-inline">\(s_i\)</span> 座楼至少和前面一个八连通，倒过来也就是说删除这个点之后，不会让剩下的楼在八连通意义下割裂成多个部分。</li>
+<li>原限制为 <span class="math-inline">\(s_i\)</span> 座楼在加入之后可以通往边界，那么倒过来一样，就是在删除的时候在四连通下可以通往边界。</li>
+</ul>
+<p>但是在解决任何一个限制之前，我们都应该解决一个问题：现在的点个数过多，导致复杂度过高。</p>
+<p>但是发现这个题目，如果不输出 <code>NO</code>，那么在所有大楼都加入的情况下，一定在八连通意义下是一整个连通块。<br>所以我们发现，所有有用的点，其实是每个大楼以及它们周围的 <span class="math-inline">\(8\)</span> 个点。</p>
+<p>接下来考虑维护连通块，具体用不同的编号来标记不同的连通块。这里我们用 <span class="math-inline">\(-1\)</span> 代表可以连接到边界的连通块。<br>发现，每次拆除一个大楼之后，会让跨过这个大楼的连通块在四连通意义下打通，这个时候我们需要合并这些打通的连通块。<br>看起来需要并查集，但是这题还有特殊性。<br>我们每次打通的时候，由于这个点要满足条件 <span class="math-inline">\(2\)</span>，所以其周围 <span class="math-inline">\(4\)</span> 个点，一定至少有一个可以通往周围，注意到每个空地，最多只会进行一次不是空地到是空地的转变，所以直接暴力维护每个位置所属的集合是不困难的。</p>
+<p>于此同时，我们就顺利解决了条件 <span class="math-inline">\(2\)</span>，每次查询其相邻四个位置有没有 <span class="math-inline">\(-1\)</span> 即可。</p>
+<p>接下来考虑第一个限制，其实有了连通块编号系统之后就都不难了。<br>分类讨论一下本质不同的也就以下两种：</p>
+<p><img src="/images/20260825cutpoint.png"></p>
+<p>具体来说，就是蓝色存在大楼，绿色存在大楼，中间是我们要删除的大楼，还要保证红色和绿色不连通。<br>对于红色和绿色不连通可以重新描述为白色两个格子连通。</p>
+<p>于是我们就解决了这个题目。</p>
+<h1 id="P3542-POI-2012-PEN-Salaries"><a href="#P3542-POI-2012-PEN-Salaries" class="headerlink" title="P3542 [POI 2012] PEN-Salaries"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3542">P3542 [POI 2012] PEN-Salaries</a></h1><p>很精妙的贪心题，自己做出来了。但是好像做法不太一样？</p>
+<p>首先一个重要的性质就是每一个子树其实都是独立的。</p>
+<p>我们可以思考一个事情。<br>如果一个点，他有两个孩子都没有填入具体数值，即 <span class="math-inline">\(z_{son1}&#x3D;b_{son2}&#x3D;0\)</span>。<br>那么我们总是可以交换或者用一些移位的方式让这两个位置点值不唯一。<br>也就意味着着两个位置无法确定。所有最后都输出 <span class="math-inline">\(0\)</span>。</p>
+<p>那么如果在不同的子树，我们也可以看作两个不同的分叉。<br>所以可以把所有 <span class="math-inline">\(z_i\not &#x3D; 0\)</span> 的点按照其 <span class="math-inline">\(z\)</span> 升序排序。<br>然后判断如果一个点，他的父亲的值已经确定，并且小于其父亲的候选值还有 <span class="math-inline">\(x\)</span> 个，这个点的子树大小为 <span class="math-inline">\(y\)</span>，我们总是有 <span class="math-inline">\(x\geq y\)</span>，并且只有 <span class="math-inline">\(x&#x3D;y\)</span> 的时候可以确定这个点的值。<br>于是我们按照这个规则进行依次确定就好。由于子树之间是独立的，所以出现值域相交的时候就直接退出判断就好。</p>
+<details>
+<summary>点击展开：完整代码</summary>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1000005</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> rt, n, lst;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; e[N];</span><br><span class="line"><span class="type">int</span> a[N], fa[N], sz[N], tag[N], sum[N], pos[N], tp[N];</span><br><span class="line"><span class="type">int</span> b[N], tot;</span><br><span class="line"><span class="type">bool</span> vis[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Insert</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> v)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span> (v &gt; <span class="number">0</span> &amp;&amp; pos[v]) &#123;</span><br><span class="line">            v--;</span><br><span class="line">            <span class="keyword">if</span> (v &lt;= lst) <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (sum[v] != sz[u] || v &lt;= lst) <span class="keyword">return</span>;</span><br><span class="line">        a[u] = v;</span><br><span class="line">        <span class="keyword">if</span> (e[u].<span class="built_in">size</span>() == <span class="number">1</span>) &#123;</span><br><span class="line">            u = e[u][<span class="number">0</span>], --v;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) sum[i] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="type">int</span> p, z;</span><br><span class="line">        cin &gt;&gt; p &gt;&gt; z;</span><br><span class="line">        <span class="keyword">if</span> (p == i) rt = i, fa[i] = n + <span class="number">1</span>, z = n;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            fa[i] = p;</span><br><span class="line">            e[p].<span class="built_in">push_back</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">        a[i] = z;</span><br><span class="line">        <span class="keyword">if</span> (z) pos[z] = i, sum[z]--, vis[z] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    a[n + <span class="number">1</span>] = n + <span class="number">1</span>, pos[n + <span class="number">1</span>] = n + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    b[tot = <span class="number">1</span>] = rt;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= tot; i++) &#123;</span><br><span class="line">        <span class="type">int</span> u = b[i];</span><br><span class="line">        <span class="keyword">if</span> (a[u]) tp[u] = u;</span><br><span class="line">        <span class="keyword">else</span> sum[a[tp[u]]]--;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> v : e[u]) &#123;</span><br><span class="line">            b[++tot] = v;</span><br><span class="line">            tp[v] = tp[u];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = tot; i &gt;= <span class="number">1</span>; i--) &#123;</span><br><span class="line">        <span class="type">int</span> u = b[i];</span><br><span class="line">        sz[u] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> v : e[u]) &#123;</span><br><span class="line">            sz[u] += sz[v];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (((i == rt &amp;&amp; !a[i]) || (!a[i] &amp;&amp; a[fa[i]]))) &#123;</span><br><span class="line">            <span class="keyword">if</span> (tag[fa[i]] != <span class="number">-1</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (tag[fa[i]] &gt; <span class="number">0</span>) tag[fa[i]] = <span class="number">-1</span>;</span><br><span class="line">                <span class="keyword">else</span> tag[fa[i]] = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) sum[i] += sum[i - <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n + <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (tag[pos[i]] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="type">int</span> u = tag[pos[i]];</span><br><span class="line">            <span class="built_in">Insert</span>(u, i - <span class="number">1</span>);</span><br><span class="line">            lst = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        cout &lt;&lt; a[i] &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<h1 id="P5665-CSP-S-2019-划分"><a href="#P5665-CSP-S-2019-划分" class="headerlink" title="P5665 [CSP-S 2019] 划分"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5665">P5665 [CSP-S 2019] 划分</a></h1><p>这个题目题面很简单。</p>
+<p>主要就是去寻找单调性。<br>发现我们总是希望每一段小。而且后面段会更大。</p>
+<p>所以我们猜测，每次为了让最后一段小，所以我们选择可以转移的最大位置来转移，转移条件是 <span class="math-inline">\(s_j-s_{p_j}\leq s_i-s_j\)</span>。其中 <span class="math-inline">\(p_j\)</span> 表示 <span class="math-inline">\(j\)</span> 的前一个决策点。</p>
+<p>考虑证明这个是正确的。<br>首先根据决策单调性，或者调整不难论证，肯定不会出现 <span class="math-inline">\(i&lt;j\)</span> 并且 <span class="math-inline">\(p_i&gt;p_j\)</span> 的情况。</p>
+<p>接下来考虑两个决策点 <span class="math-inline">\(j,k\)</span>，满足 <span class="math-inline">\(j&lt;k\)</span>。<br>考虑证明 <span class="math-inline">\(j\)</span> 一定不优。<br>我们考虑调整 <span class="math-inline">\(j\)</span> 的决策位置，使得每一次调整都是更加优秀的，但是最后仍然比不上 <span class="math-inline">\(k\)</span>。<br>具体的，我们可以县调整 <span class="math-inline">\(j\rightarrow k\)</span>，然后如果出现了中间不满足转移条件的情况，就类似调整前面的段向后拓展，比如调整 <span class="math-inline">\(p_j\)</span> 向右挪动。这样一直调整，每一次都让总和更小，但是发现还是比不上 <span class="math-inline">\(k\)</span> 因为 <span class="math-inline">\(p_k\)</span> 的决策是 <span class="math-inline">\(k\)</span> 位置最好的决策，但是 <span class="math-inline">\(j\)</span> 经过调整后不可能超过这个值。</p>
+<p>最后还有一个卡空间的问题。我们发现其实我们不需要记录每一个位置的 dp 值，只需要用 <span class="math-inline">\(p\)</span> 数组从 <span class="math-inline">\(n\)</span> 位置倒推就可以知道每一段是如何划分的，依据划分计算答案就行。</p>
+<h1 id="P9601-IOI-2023-最长路程"><a href="#P9601-IOI-2023-最长路程" class="headerlink" title="P9601 [IOI 2023] 最长路程"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P9601">P9601 [IOI 2023] 最长路程</a></h1><p>首先，发现可以一个一个加入节点。</p>
+<p>具体的，我们维护两条链 <span class="math-inline">\(A,B\)</span>。<br>将当前要加入的节点命名为 <span class="math-inline">\(u\)</span>。</p>
+<ul>
+<li>如果 <span class="math-inline">\(u\)</span> 和 <span class="math-inline">\(A\)</span> 的末尾节点有连边，那么把 <span class="math-inline">\(u\)</span> 追加到 <span class="math-inline">\(A\)</span> 末尾。</li>
+<li>如果 <span class="math-inline">\(u\)</span> 和 <span class="math-inline">\(B\)</span> 的末尾节点有连边，那么把 <span class="math-inline">\(u\)</span> 追加到 <span class="math-inline">\(B\)</span> 末尾。</li>
+<li>否则，根据题意，<span class="math-inline">\(A\)</span> 的末尾和 <span class="math-inline">\(B\)</span> 的末尾一定有连边。所以合并 <span class="math-inline">\(A,B\)</span>，并且让 <span class="math-inline">\(u\)</span> 单独成为第二条链。</li>
+</ul>
+<p>对于剩余两条链，可以先来判断以下四种情况是否有连边：</p>
+<ul>
+<li><span class="math-inline">\(A\)</span> 链首，<span class="math-inline">\(B\)</span> 链尾。</li>
+<li><span class="math-inline">\(A\)</span> 链首，<span class="math-inline">\(B\)</span> 链首。</li>
+<li><span class="math-inline">\(A\)</span> 链尾，<span class="math-inline">\(B\)</span> 链尾。</li>
+<li><span class="math-inline">\(A\)</span> 链尾，<span class="math-inline">\(B\)</span> 链首。</li>
+</ul>
+<p>如果都不满足，一定满足 <span class="math-inline">\(A\)</span> 首尾有边，<span class="math-inline">\(B\)</span> 首尾有边。</p>
+<p>那么可以二分出一个可行的 <span class="math-inline">\(a\in A,b\in B\)</span>，容易构造出长度为 <span class="math-inline">\(n\)</span> 的解。</p>
+<p>发现询问次数有点超过限制。<br>这里有一个经典的方式优化，也可以经过计算发现。<br>我们把连续四次加入 <span class="math-inline">\(2\)</span> 个点，做到 <span class="math-inline">\(3\)</span> 次加入两个点。</p>
+<p>自己分类讨论一下不难。</p>
+<p>如果超了一次，可以发现，我们的这四个判断：</p>
+<ul>
+<li><span class="math-inline">\(A\)</span> 链首，<span class="math-inline">\(B\)</span> 链尾。</li>
+<li><span class="math-inline">\(A\)</span> 链首，<span class="math-inline">\(B\)</span> 链首。</li>
+<li><span class="math-inline">\(A\)</span> 链尾，<span class="math-inline">\(B\)</span> 链尾。</li>
+<li><span class="math-inline">\(A\)</span> 链尾，<span class="math-inline">\(B\)</span> 链首。</li>
+</ul>
+<p>少一个也没有关系，仍然满足两条链首尾有边。</p>
+<h1 id="5929-–-axisym"><a href="#5929-–-axisym" class="headerlink" title="5929 – axisym"></a><a target="_blank" rel="noopener" href="http://172.17.226.198/OnlineJudge/contestproblem.php?id=16195929">5929 – axisym</a></h1><p>本题有三个关键思想。</p>
+<ol>
+<li><p><strong>将置换环问题转化为链的拼接问题。</strong></p>
+<p>对于置换环问题，我们不一定要一次性构造出完整的环。可以按照标号从小到大的顺序逐个加入元素，并将已经确定的部分看作若干条链，记录当前还有多少条链没有闭合成环。</p>
+<p>每次加入一个新元素时，只需要考虑它的入边和出边如何与已有的链连接。根据两条边的连接情况，可以分为五种转移，从而用 DP 维护当前的链数和差异度。</p>
+</li>
+<li><p><strong>将逆序对转化为弧的相交。</strong></p>
+<p>将排列画成上下两排点：上排表示下标，下排表示值。对于每个位置 <span class="math-inline">\(i\)</span>，连接上排的 <span class="math-inline">\(i\)</span> 和下排的 <span class="math-inline">\(p_i\)</span>，得到一条弧。</p>
+<p>对于 <span class="math-inline">\(i&lt;j\)</span>，两条弧 <span class="math-inline">\(i\rightarrow p_i\)</span> 和 <span class="math-inline">\(j\rightarrow p_j\)</span> 相交，当且仅当 <span class="math-inline">\(p_i&gt;p_j\)</span>，也就是 <span class="math-inline">\((i,j)\)</span> 构成一个逆序对。</p>
+<p>因此，排列的逆序对个数就等于所有相交的弧对数。</p>
+</li>
+<li><p><strong>按列逐步结算弧的交叉。</strong></p>
+<p>我们很难直接计算一条弧与多少条其他弧相交，但可以将交叉分摊到构造过程中的各个时刻：按照标号从小到大扫描，每当一条弧闭合时，就统计它与当前开放弧产生的交叉。</p>
+<p>这样，每个交叉都可以在构造过程中被计算一次。进一步对同一类转移的所有选择求和，可以得到只与当前链数有关的逆序对增量，从而在统计方案数的同时维护逆序对总数。</p>
+</li>
+</ol>
+<h2 id="DP-设计"><a href="#DP-设计" class="headerlink" title="DP 设计"></a>DP 设计</h2><p>设 <span class="math-inline">\(f_{i,j,k}\)</span> 表示考虑前 <span class="math-inline">\(i\)</span> 个元素，差异度为 <span class="math-inline">\(j\)</span>、当前有 <span class="math-inline">\(k\)</span> 条链的方案数；设 <span class="math-inline">\(g_{i,j,k}\)</span> 表示这些方案的逆序对总数。</p>
+<p>其中，<span class="math-inline">\(f\)</span> 负责统计方案数，<span class="math-inline">\(g\)</span> 负责统计所有方案的逆序对数之和。两者使用相同的五类转移，但在维护 <span class="math-inline">\(g\)</span> 时，除了要计算新产生的逆序对，还要将旧方案的逆序对总数乘以对应的转移方案数。</p>
+<p>最终，所有满足差异度不超过 <span class="math-inline">\(k\)</span> 且链数为 <span class="math-inline">\(0\)</span> 的状态之和，分别给出合法排列个数和逆序对总数。</p>
+<h1 id="P10028-Ynoi2000-pri-题解：操作分块、值域分块与等价类分治"><a href="#P10028-Ynoi2000-pri-题解：操作分块、值域分块与等价类分治" class="headerlink" title="P10028 [Ynoi2000] pri 题解：操作分块、值域分块与等价类分治"></a>P10028 [Ynoi2000] pri 题解：操作分块、值域分块与等价类分治</h1><h2 id="一、题意转化"><a href="#一、题意转化" class="headerlink" title="一、题意转化"></a>一、题意转化</h2><p>给定一个 <span class="math-inline">\(1,\ldots,n\)</span> 的排列，进行 <span class="math-inline">\(m\)</span> 次操作。每次给出 <span class="math-inline">\(x\)</span>，先翻转前缀 <span class="math-inline">\([1,x]\)</span>，再统计翻转后的前缀中满足 <span class="math-inline">\(i&lt;j\)</span> 且 <span class="math-inline">\(a_i&lt;a_j\)</span> 的数对数量。</p>
+<p>数据范围：</p>
+<ul>
+<li><span class="math-inline">\(n\le 2\times 10^5\)</span></li>
+<li><span class="math-inline">\(m\le 5\times 10^4\)</span></li>
+</ul>
+<p>注意，题目要求的是<strong>翻转之后的递增对数量</strong>。</p>
+<p>翻转前，设前缀 <span class="math-inline">\([1,x]\)</span> 内部的逆序对数量为 <span class="math-inline">\(I(x)\)</span>。由于排列中没有相等元素，翻转前的每一对元素在翻转后都会交换相对顺序。</p>
+<p>因此，翻转后的递增对恰好对应翻转前的逆序对：</p>
+<div class="math-display">\[\boxed{\operatorname{ans}(x)&#x3D;I(x)}\]</div>
+<p>于是，问题转化为：</p>
+<blockquote>
+<p>支持多次前缀翻转，并在每次翻转时求出翻转前对应前缀的逆序对数量。</p>
+</blockquote>
+<p>直接使用树状数组或归并排序重新计算，每次需要 <span class="math-inline">\(O(n\log n)\)</span>，总复杂度为 <span class="math-inline">\(O(mn\log n)\)</span>，无法通过。</p>
+<p>本题的关键不是寻找一种普通的动态序列数据结构，而是利用<strong>操作分块、值域分块与等价类分治</strong>，避免重复计算逆序对贡献。</p>
+<h2 id="二、操作分块：为什么序列可以划分为少量连续段？"><a href="#二、操作分块：为什么序列可以划分为少量连续段？" class="headerlink" title="二、操作分块：为什么序列可以划分为少量连续段？"></a>二、操作分块：为什么序列可以划分为少量连续段？</h2><p>设操作块长为 <span class="math-inline">\(C\)</span>，将连续的 <span class="math-inline">\(C\)</span> 次操作放在同一个块中处理。</p>
+<p>考虑这个操作块中的所有前缀翻转边界。</p>
+<p>初始序列可以看成一个完整的连续段。每次前缀翻转时：</p>
+<ol>
+<li>若翻转边界落在某个连续段内部，就将这个段拆成两个段。</li>
+<li>将前缀中的所有段整体倒序排列。</li>
+<li>每个被翻转的段内部方向取反。</li>
+</ol>
+<p>一次操作至多新增一个分割边界，因此，处理完 <span class="math-inline">\(C\)</span> 次操作后，整个序列可以划分成至多 <span class="math-inline">\(C+1\)</span> 个连续段。</p>
+<p>每个段对应原数组的一个连续区间，并记录其方向：</p>
+<ul>
+<li>正向：按照原数组下标递增的顺序排列。</li>
+<li>反向：按照原数组下标递减的顺序排列。</li>
+</ul>
+<p>例如，某个时刻的序列可以表示为：</p>
+<div class="math-display">\[[6,5,4]\ [1,2]\ [8,7]\ [3]\]</div>
+<p>不必真的移动每个元素，只需记录各段对应的原数组区间、方向以及段的排列顺序。</p>
+<p>由于操作块中的所有查询边界都参与了分割，所以每个查询前缀都恰好由若干个完整段组成。</p>
+<p>这就把一个长度为 <span class="math-inline">\(n\)</span> 的动态序列，转化成了最多 <span class="math-inline">\(O(C)\)</span> 个连续段的动态排列问题。</p>
+<p>但需要注意：<strong>分段只解决了序列顺序的维护，并没有直接解决段与段之间的逆序对统计。</strong></p>
+<h2 id="三、把逆序对贡献拆成两部分"><a href="#三、把逆序对贡献拆成两部分" class="headerlink" title="三、把逆序对贡献拆成两部分"></a>三、把逆序对贡献拆成两部分</h2><p>设当前序列由若干段组成。对于两个段 <span class="math-inline">\(A,B\)</span>，定义：</p>
+<div class="math-display">\[w(A,B)&#x3D;
+\#\{(u,v):u\in A,\ v\in B,\ u&gt;v\}\]</div>
+<p>这里约定 <span class="math-inline">\(A\)</span> 位于 <span class="math-inline">\(B\)</span> 的左边，因此 <span class="math-inline">\(w(A,B)\)</span> 就是这两个段之间的逆序对数量。</p>
+<p>对一个查询前缀，其逆序对总数可以拆成：</p>
+<div class="math-display">\[I&#x3D;
+\sum_i h_i+
+\sum_{i&lt;j}w(S_i,S_j)\]</div>
+<p>其中：</p>
+<ul>
+<li><span class="math-inline">\(h_i\)</span>：第 <span class="math-inline">\(i\)</span> 个段内部的逆序对数量。</li>
+<li><span class="math-inline">\(w(S_i,S_j)\)</span>：第 <span class="math-inline">\(i\)</span> 个段与第 <span class="math-inline">\(j\)</span> 个段之间的逆序对数量。</li>
+</ul>
+<p>第一部分比较容易处理。一个段对应原数组中的连续区间 <span class="math-inline">\([l,r]\)</span>，长度为 <span class="math-inline">\(s&#x3D;r-l+1\)</span>。</p>
+<p>若该段正向排列，其内部逆序对数为 <span class="math-inline">\(h\)</span>；若该段反向排列，因为元素互不相同，其内部逆序对数为：</p>
+<div class="math-display">\[h&#39;&#x3D;\binom{s}{2}-h\]</div>
+<p>因此，段内部的贡献只需预处理一次，就能根据方向快速转换。</p>
+<p>真正的困难在第二部分：如果每次都枚举所有段对，需要 <span class="math-inline">\(O(C^2)\)</span> 的时间；如果在每个操作块内反复这么做，总复杂度仍然太高。</p>
+<p>为了降低段对统计的成本，还需要引入值域分块。</p>
+<h2 id="四、值域分块：把段间贡献分成两部分"><a href="#四、值域分块：把段间贡献分成两部分" class="headerlink" title="四、值域分块：把段间贡献分成两部分"></a>四、值域分块：把段间贡献分成两部分</h2><p>设值域块长为 <span class="math-inline">\(V\)</span>，将值域划分为若干个连续块：</p>
+<div class="math-display">\[[1,V],\ [V+1,2V],\ [2V+1,3V],\ldots\]</div>
+<p>对于两个段 <span class="math-inline">\(A,B\)</span> 之间的逆序对，分成两类：</p>
+<ol>
+<li>两个元素属于不同的值域块。</li>
+<li>两个元素属于同一个值域块。</li>
+</ol>
+<p>这两部分的处理方式不同。</p>
+<h3 id="4-1-不同值域块之间的贡献"><a href="#4-1-不同值域块之间的贡献" class="headerlink" title="4.1 不同值域块之间的贡献"></a>4.1 不同值域块之间的贡献</h3><p>设段 <span class="math-inline">\(A\)</span> 中属于第 <span class="math-inline">\(p\)</span> 个值域块的元素数量为 <span class="math-inline">\(g_A[p]\)</span>，段 <span class="math-inline">\(B\)</span> 中属于第 <span class="math-inline">\(q\)</span> 个值域块的元素数量为 <span class="math-inline">\(g_B[q]\)</span>。</p>
+<p>如果 <span class="math-inline">\(p&gt;q\)</span>，那么第 <span class="math-inline">\(p\)</span> 个值域块中的任何元素都大于第 <span class="math-inline">\(q\)</span> 个值域块中的任何元素。</p>
+<p>所以这两组元素产生的逆序对数量为：</p>
+<div class="math-display">\[g_A[p]\cdot g_B[q]\]</div>
+<p>因此，不同值域块之间的贡献只需要维护每个段在各个值域块中的元素数量，不需要枚举具体的元素对。</p>
+<p>通过前缀和，可以把所有跨值域块的贡献合并计算。</p>
+<p>一个段有 <span class="math-inline">\(O(n&#x2F;V)\)</span> 个值域块计数，所以合并一个段的信息需要 <span class="math-inline">\(O(n&#x2F;V)\)</span> 的时间。</p>
+<p>如果在操作块的分治过程中，所有层的段数总计为 <span class="math-inline">\(O(C\log C)\)</span>，那么单个操作块的跨值域块统计复杂度为：</p>
+<div class="math-display">\[O\left(\frac{nC\log C}{V}\right)\]</div>
+<p>整个过程中共有 <span class="math-inline">\(O(n&#x2F;C)\)</span> 个操作块，因此总复杂度为：</p>
+<div class="math-display">\[O\left(\frac{n^2\log C}{V}\right)\]</div>
+<h3 id="4-2-同一个值域块内部的贡献"><a href="#4-2-同一个值域块内部的贡献" class="headerlink" title="4.2 同一个值域块内部的贡献"></a>4.2 同一个值域块内部的贡献</h3><p>如果两个元素属于同一个值域块，就不能仅凭块编号判断它们的大小关系。</p>
+<p>一种直接的想法是每次查询时枚举块内元素，但这样会重复做大量工作。</p>
+<p>另一种想法是预处理所有段对之间的贡献。因为一个值域块内最多有 <span class="math-inline">\(V\)</span> 个不同的值，所以所有值域块内部涉及的值对总数为：</p>
+<div class="math-display">\[O\left(\frac{n}{V}\cdot V^2\right)&#x3D;O(nV)\]</div>
+<p>因此，在一个操作块内，可以预处理同一值域块中各个值对对段间逆序对的贡献。</p>
+<p>将操作块中的所有段对贡献预处理后，后续合并段时就不必重新枚举具体的元素值，只需查询并合并对应的统计结果。</p>
+<p>但如果每次操作都重新遍历所有段对，这一部分仍然会退化为平方复杂度。</p>
+<p>所以，值域分块虽然减少了单个段对的统计成本，却没有完全解决重复计算的问题。</p>
+<p>这正是等价类分治要解决的难点。</p>
+<h2 id="五、等价类分治：如何避免重复计算段对？"><a href="#五、等价类分治：如何避免重复计算段对？" class="headerlink" title="五、等价类分治：如何避免重复计算段对？"></a>五、等价类分治：如何避免重复计算段对？</h2><h3 id="5-1-等价类的本质"><a href="#5-1-等价类的本质" class="headerlink" title="5.1 等价类的本质"></a>5.1 等价类的本质</h3><p>在一个包含 <span class="math-inline">\(C\)</span> 次操作的操作块中，全部操作的分割边界确定后，序列被划分为至多 <span class="math-inline">\(C+1\)</span> 个连续段。</p>
+<p>考虑操作块的某个子区间 <span class="math-inline">\([l,r]\)</span>。</p>
+<p>如果只考虑这个子区间中的操作，那么原来为了其他操作而产生的部分分割边界就不再必要。相邻的一些小段可以重新合并成更大的段。</p>
+<p>因此，子问题的段划分可以由父问题的段划分合并得到。</p>
+<p>这里的等价类，就是在当前操作范围内始终作为一个整体移动、不会再被该范围内的操作拆开的连续段。</p>
+<p>随着分治区间缩小，需要维护的等价类数量也随之减少。</p>
+<h3 id="5-2-为什么需要分治？"><a href="#5-2-为什么需要分治？" class="headerlink" title="5.2 为什么需要分治？"></a>5.2 为什么需要分治？</h3><p>假设一个操作块包含 <span class="math-inline">\(C\)</span> 次操作。</p>
+<p>如果直接计算所有段对贡献，单个操作块可能需要 <span class="math-inline">\(O(C^2)\)</span> 的时间。对全部操作块而言，这一部分的总复杂度就是：</p>
+<div class="math-display">\[O\left(\frac{n}{C}\cdot C^2\right)&#x3D;O(nC)\]</div>
+<p>乍看之下，这个复杂度并不一定太差。但若同时还需要为每个查询重复合并跨值域块的信息，整体复杂度就会过高。</p>
+<p>等价类分治的思路是：将操作区间不断二分，在父问题中完成必要的贡献统计，然后把统计信息映射到左右子问题的等价类中。</p>
+<p>设当前处理的操作区间为 <span class="math-inline">\([l,r]\)</span>，中点为：</p>
+<div class="math-display">\[mid&#x3D;\left\lfloor\frac{l+r}{2}\right\rfloor\]</div>
+<p>接下来分别处理左子问题 <span class="math-inline">\([l,mid]\)</span> 和右子问题 <span class="math-inline">\([mid+1,r]\)</span>。</p>
+<p>分治过程中主要完成三件事：</p>
+<ol>
+<li>建立当前子问题的等价类划分。</li>
+<li>将父问题的段间贡献合并到子问题的等价类中。</li>
+<li>将序列方向、段的排列顺序以及值域计数同步映射到子问题。</li>
+</ol>
+<p>这里的关键并不是每次重新计算所有元素对，而是让已经预处理的段对贡献能够被重复利用。</p>
+<h3 id="5-3-类内贡献如何合并？"><a href="#5-3-类内贡献如何合并？" class="headerlink" title="5.3 类内贡献如何合并？"></a>5.3 类内贡献如何合并？</h3><p>假设两个相邻的等价类 <span class="math-inline">\(A,B\)</span> 被合并成一个新类：</p>
+<div class="math-display">\[S&#x3D;A+B\]</div>
+<p>那么新类的内部逆序对数量为：</p>
+<div class="math-display">\[h_S&#x3D;h_A+h_B+w(A,B)\]</div>
+<p>如果合并三个类：</p>
+<div class="math-display">\[S&#x3D;A+B+C\]</div>
+<p>则有：</p>
+<div class="math-display">\[\begin{aligned}
+h_S&#x3D;{}&amp;h_A+h_B+h_C\\
+&amp;+w(A,B)+w(A,C)+w(B,C)
+\end{aligned}\]</div>
+<p>因此，合并等价类的本质是：把原来不同小类之间的贡献，汇总成大类内部的贡献。</p>
+<p>对于同一个值域块内的贡献，可以使用预处理好的段对统计；对于不同值域块之间的贡献，则使用值域计数和前缀和。</p>
+<p>这样就能在合并等价类时，同时维护类内和类间的逆序对信息。</p>
+<h3 id="5-4-为什么分治后不会重复做平方统计？"><a href="#5-4-为什么分治后不会重复做平方统计？" class="headerlink" title="5.4 为什么分治后不会重复做平方统计？"></a>5.4 为什么分治后不会重复做平方统计？</h3><p>设分治节点的操作区间长度为 <span class="math-inline">\(k\)</span>，该节点最多有 <span class="math-inline">\(O(k)\)</span> 个等价类。</p>
+<p>在该节点中，直接合并所有类对的贡献需要 <span class="math-inline">\(O(k^2)\)</span> 的时间。</p>
+<p>但分治树每一层的节点数量与节点规模成反比。若一层中每个节点的规模为 <span class="math-inline">\(k\)</span>，那么这一层有 <span class="math-inline">\(O(C&#x2F;k)\)</span> 个节点，所有节点的平方项之和为：</p>
+<div class="math-display">\[O\left(\frac{C}{k}\cdot k^2\right)&#x3D;O(Ck)\]</div>
+<p>当 <span class="math-inline">\(k\)</span> 逐层减半时，所有层的平方项构成几何级数，其总和仍然为：</p>
+<div class="math-display">\[O(C^2)\]</div>
+<p>因此，单个操作块中等价类合并的总复杂度是 <span class="math-inline">\(O(C^2)\)</span>，所有操作块合计为：</p>
+<div class="math-display">\[O\left(\frac{n}{C}\cdot C^2\right)&#x3D;O(nC)\]</div>
+<p>这就是等价类分治的关键作用：<strong>它允许在分治节点内部进行局部的平方合并，但避免每次操作都重新计算全部段对贡献。</strong></p>
+<p>需要注意，分治本身并不会自动降低所有平方项。只有当父子问题之间能够复用类间贡献、并且子问题的类划分能够由父问题的类合并得到时，这个复杂度分析才成立。</p>
+<h2 id="六、复杂度分析与参数选择"><a href="#六、复杂度分析与参数选择" class="headerlink" title="六、复杂度分析与参数选择"></a>六、复杂度分析与参数选择</h2><p>综合前面的三部分开销：</p>
+<ol>
+<li>同一值域块内的段对贡献预处理。</li>
+<li>不同值域块之间的计数合并。</li>
+<li>等价类分治中的段对合并。</li>
+</ol>
+<p>总复杂度可以写成：</p>
+<div class="math-display">\[T(n)&#x3D;O\left(
+\frac{n^2V}{C}
++\frac{n^2\log C}{V}
++nC
+\right)\]</div>
+<p>其中：</p>
+<ul>
+<li><span class="math-inline">\(C\)</span> 是操作块长。</li>
+<li><span class="math-inline">\(V\)</span> 是值域块长。</li>
+</ul>
+<p>下面平衡这些参数。</p>
+<p>首先令第一项与第三项同阶：</p>
+<div class="math-display">\[\frac{n^2V}{C}&#x3D;nC\]</div>
+<p>得到：</p>
+<div class="math-display">\[C&#x3D;\sqrt{nV}\]</div>
+<p>再令第二项与第三项同阶：</p>
+<div class="math-display">\[\frac{n^2\log n}{V}&#x3D;nC\]</div>
+<p>得到：</p>
+<div class="math-display">\[C&#x3D;\frac{n\log n}{V}\]</div>
+<p>联立两式：</p>
+<div class="math-display">\[\sqrt{nV}&#x3D;\frac{n\log n}{V}\]</div>
+<p>所以：</p>
+<div class="math-display">\[V^3&#x3D;n(\log n)^2\]</div>
+<p>得到：</p>
+<div class="math-display">\[V&#x3D;n^{1&#x2F;3}\log^{2&#x2F;3}n\]</div>
+<p>进一步有：</p>
+<div class="math-display">\[C&#x3D;n^{2&#x2F;3}\log^{1&#x2F;3}n\]</div>
+<p>代回总复杂度：</p>
+<div class="math-display">\[\boxed{T(n)&#x3D;O\left(n^{5&#x2F;3}\log^{1&#x2F;3}n\right)}\]</div>
+<p>空间复杂度主要由段对贡献矩阵和值域计数矩阵决定，使用紧凑的整数类型保存计数，并合理复用数组，可以将空间控制在可接受的范围内。</p>
+<p>本题的实现常数较大，实际代码通常还需要根据评测环境调整操作块长和值域块长。</p>
+<h2 id="七、实现时需要维护的信息"><a href="#七、实现时需要维护的信息" class="headerlink" title="七、实现时需要维护的信息"></a>七、实现时需要维护的信息</h2><p>结合以上思路，一个操作块内需要维护以下几类信息：</p>
+<ul>
+<li><code>segment</code>：每个连续段对应的原数组区间及其方向。</li>
+<li><code>h[i]</code>：每个段内部的逆序对数量。</li>
+<li><code>f[i][j]</code>：同一值域块内，段对之间的细粒度贡献。</li>
+<li><code>g[i][b]</code>：第 <span class="math-inline">\(i\)</span> 个段在第 <span class="math-inline">\(b\)</span> 个值域块中的元素数量。</li>
+<li><code>F</code>、<code>G</code>：分治过程中合并后的段对贡献和值域计数。</li>
+</ul>
+<p>其中，<code>f</code> 用于处理同一值域块内部的具体大小关系，<code>g</code> 用于处理不同值域块之间的贡献。</p>
+<p>每个操作块处理完毕后，再将各段按照记录的方向拼接回真实序列，作为下一个操作块的初始序列。</p>
+<p>整个实现最容易出错的地方是：</p>
+<ol>
+<li>翻转前缀时，段的顺序与段内方向都需要改变。</li>
+<li>逆序对是有方向的，计算 <span class="math-inline">\(w(A,B)\)</span> 时必须保证 <span class="math-inline">\(A\)</span> 在 <span class="math-inline">\(B\)</span> 左侧。</li>
+<li>父子问题的等价类映射必须同步更新 <code>f</code>、<code>g</code> 和 <code>h</code>。</li>
+<li>查询答案对应翻转前的前缀逆序对，不能误把翻转后的递增对与翻转前的递增对混淆。</li>
+</ol>
+<h2 id="八、总结"><a href="#八、总结" class="headerlink" title="八、总结"></a>八、总结</h2><p>这道题最值得记录的不是某一个具体的数据结构，而是三层优化如何配合：</p>
+<ul>
+<li><strong>操作分块</strong>：将动态序列压缩为少量连续段。</li>
+<li><strong>值域分块</strong>：将段间逆序对拆成块间计数和块内细粒度贡献。</li>
+<li><strong>等价类分治</strong>：让父问题的贡献信息在子问题中复用，避免每次查询都重新枚举所有段对。</li>
+</ul>
+<p>最终复杂度为：</p>
+<div class="math-display">\[O\left(n^{5&#x2F;3}\log^{1&#x2F;3}n\right)\]</div>
+<p>这是一个典型的离线分块与等价类分治结合的优化问题。理解它的关键，是始终明确每一层究竟在减少哪一种重复计算：操作分块减少动态维护的对象数量，值域分块降低统计单个段对的成本，而等价类分治则负责复用父子问题之间的贡献信息。</p>
+<h1 id="P9069-Ynoi-Easy-Round-2022-堕天作战-TEST-98"><a href="#P9069-Ynoi-Easy-Round-2022-堕天作战-TEST-98" class="headerlink" title="P9069 [Ynoi Easy Round 2022] 堕天作战 TEST_98"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P9069">P9069 [Ynoi Easy Round 2022] 堕天作战 TEST_98</a></h1><p>倍增分块模板。</p>
+<p>考虑值域倍增分块，设 <span class="math-inline">\(B\)</span> 为进制，那么 <span class="math-inline">\((B^{i-1}, B^i]\)</span> 分为一块。</p>
+<p>对于每一个块，开一个线段树来维护。</p>
+<p>操作 <span class="math-inline">\(x\)</span> 的时候，假设 <span class="math-inline">\(x\)</span> 所在的块为 <span class="math-inline">\(p\)</span>。</p>
+<ul>
+<li><span class="math-inline">\(&lt;p\)</span> 的块都会减成负数，直接暴力做。</li>
+<li><span class="math-inline">\(p\)</span> 这一块 <span class="math-inline">\(&lt;x\)</span> 的直接变成负数，<span class="math-inline">\(&#x3D;x\)</span> 跳过 <span class="math-inline">\(&gt;x\)</span> 的如果需要降块那么就暴力，否则直接在线段树上打 tag。</li>
+<li><span class="math-inline">\(&gt;p\)</span> 的块，如果可以降块那么就暴力下放，否则直接在线段树上打 tag。</li>
+</ul>
+<p>发现所有下放都可以暴力，每个数组最多被下放 <span class="math-inline">\(\log V\)</span> 次。<br>所以总复杂度为 <span class="math-inline">\(O(n\log n \log V)\)</span>。</p>
+<h1 id="5933-–-黑白染色"><a href="#5933-–-黑白染色" class="headerlink" title="5933 – 黑白染色"></a><a target="_blank" rel="noopener" href="http://218.22.67.60:30808/OnlineJudge/contestproblem.php?id=16205933">5933 – 黑白染色</a></h1><p>非常好的题目，值得复习。</p>
+<p>主要学习两个东西。</p>
+<p>首先这个东西不能说是学到了，应该说是忘记了。</p>
+<div class="math-display">\[\sum_{i&#x3D;0}^{+ \infty} {a \choose i}{b\choose i}&#x3D; {a+b \choose a}\]</div>
+<p>属于范德蒙德卷积变形。</p>
+<p>然后就是如何推出容斥系数。<br>我们想要推出容斥系数 <span class="math-inline">\(f\)</span>，满足：<br><span class="math-inline">\(\sum_{j&#x3D;1}^{L}(L-j+1)\times f_{j}&#x3D;(c+1)^{n-1-L}\)</span>。</p>
+<p>我们可以从小到大递归去推得。<br>首先令 <span class="math-inline">\(L&#x3D;i\)</span> 那么有：<br><span class="math-inline">\(\sum_{j&#x3D;1}^{j}(i-j+1)\times f_{j}&#x3D;(c+1)^{n-1-L}\)</span><br>然后简单移向可以得到：</p>
+<div class="math-display">\[f_{i}&#x3D;(c+1)^{n-1-i}-(i+1)\sum_{j&#x3D;1}^{i-1} f_{j}+\sum_{j&#x3D;1}^{i-1} j\times f_{j}\]</div>
+<h1 id="P9603-IOI-2023-山毛榉树"><a href="#P9603-IOI-2023-山毛榉树" class="headerlink" title="P9603 [IOI 2023] 山毛榉树"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P9603">P9603 [IOI 2023] 山毛榉树</a></h1><p>提交的部分分代码在 qoj 上。</p>
+<p>本题反复使用归纳法，非常值得一做。</p>
+<p>假定一个点 <span class="math-inline">\(u\)</span> 的所有孩子的颜色构成的集合为 <span class="math-inline">\(S(u)\)</span>。<br>一个点 <span class="math-inline">\(u\)</span> 的子树大小为 <span class="math-inline">\(sz_u\)</span>。</p>
+<p>首先考虑如何判定一个子树是否合法。<br>发现一个必要的条件是，一个节点的所有孩子中不能有颜色相同的。<br>另外一个必要条件是，假设这个序列 <span class="math-inline">\(v\)</span> 有合法构造，那么一定有 <span class="math-inline">\(v_i,v_j,i&lt;j\)</span> 那么 <span class="math-inline">\(S(v_j)\subseteq S(v_i)\)</span>。</p>
+<p>也就是说，每一种颜色，只在 <span class="math-inline">\(v\)</span> 序列中一个前缀的孩子中出现过。</p>
+<p>一个直观的想法就是直接按照 <span class="math-inline">\(deg_i\)</span> 的大小排序，然后暴力判断这个序列是否可行，我也是这么写了。但是最多过 subtask1。</p>
+<p>考虑哪里不对，发现错在 <span class="math-inline">\(deg\)</span> 相等的时候，我们不知道哪个点应该放在前面。</p>
+<p><img src="/images/2026-11-2.png"></p>
+<p>比如这个图，一个合法的序列为 <span class="math-inline">\(0,2,1,5,4,3,6\)</span><br>但是我们会直接构造 <span class="math-inline">\(0,1,2,3,5,4,6\)</span>，然后判断不行。<br>主要原因是我们在 <span class="math-inline">\(deg_1&#x3D;deg_2\)</span> 的时候随便放了一下 <span class="math-inline">\(1,2\)</span> 的位置。</p>
+<p>所以我们考虑换一种方式，使用 <span class="math-inline">\(sz\)</span> 排序。<br>然后就通过了 <span class="math-inline">\(O(n^2 \log n)\)</span> 的部分分？！</p>
+<p>考虑证明这是正确的。<br>考虑把每一种颜色分开考虑。<br>考虑所有颜色为 <span class="math-inline">\(c\)</span> 的位置。发现它们的父亲一定越来越靠右。站在父亲的角度考虑，那么他的唯一颜色为 <span class="math-inline">\(c\)</span> 的孩子一定越来越靠右。</p>
+<p>接下来，考虑归纳证明：从右往左，每个节点颜色为 <span class="math-inline">\(c\)</span> 的孩子的 <span class="math-inline">\(sz\)</span> 单调不降。（没有颜色为 <span class="math-inline">\(c\)</span> 的孩子，看作大小为 <span class="math-inline">\(0\)</span>）<br>前提：<span class="math-inline">\(&gt;p\)</span> 的位置都已经满足。<br>那么我们可以发现，我们由于颜色为 <span class="math-inline">\(c\)</span> 的孩子更加靠左，<span class="math-inline">\(sz\)</span> 肯定更大。</p>
+<p>那么有了这个结论，我们惊讶地发现：<br><span class="math-inline">\(sz_u &gt; sz_v\)</span><br>就等价于<br>任意一种颜色 <span class="math-inline">\(c\)</span> 的孩子都有 <span class="math-inline">\(sz_{son_{u,c}}&gt;sz_{son_{v,c}}\)</span>。</p>
+<p>那么这个时候如果 <span class="math-inline">\(sz\)</span> 相等的两个位置 <span class="math-inline">\(u,v\)</span>，如果有解，那么可以归纳推出 <span class="math-inline">\(u,v\)</span> 两个子树完全相同（<span class="math-inline">\(u,v\)</span> 的每一个颜色孩子大小都相同，他们孩子的孩子每一种颜色的大小也相同……）谁排在前面没有任何影响。</p>
+<p>所以证明了只需要判断这一种序列就好。</p>
+<p>最后考虑优化复杂度。<br>我们证明的过程已经暴露了太多东西了。<br>我们发现，其实我们只需要判断 <span class="math-inline">\(u,v\)</span> 对应颜色的孩子的大小关系就好。其他的可以交给归纳去证明正确。</p>
+<p>所以我们可以从叶子到根启发式合并。<br>用 <span class="math-inline">\(set\)</span> 记录子树中所有点，按照 <span class="math-inline">\(sz\)</span> 大小排序。<br>每次合并的时候，检查新增加的相邻关系是否满足就好。<br>检查相邻两个位置可以直接枚举两个点对应颜色的孩子，检查大小关系是否满足偏序。</p>
+<details>
+<summary>点击展开：ai 题解</summary>
+
+<p>提交的部分分代码在 QOJ 上。</p>
+<p>本题需要反复使用归纳法，性质非常漂亮，值得一做。</p>
+<p>设 <span class="math-inline">\(sz_u\)</span> 表示 <span class="math-inline">\(u\)</span> 的子树大小。对于颜色 <span class="math-inline">\(c\)</span>，定义</p>
+<div class="math-display">\[z(u,c)&#x3D;
+\begin{cases}
+sz_v,&amp;v\text{ 是 }u\text{ 颜色为 }c\text{ 的孩子},\\
+0,&amp;\text{不存在这样的孩子}.
+\end{cases}\]</div>
+<p>首先考虑如何判定一棵子树是否合法。</p>
+<p>一个显然的必要条件是：<strong>同一个节点不能有两个颜色相同的孩子。</strong></p>
+<p>否则假设 <span class="math-inline">\(x&lt;y\)</span> 是同一个节点 <span class="math-inline">\(u\)</span> 的两个同色孩子，根据定义应有</p>
+<div class="math-display">\[f(x)&#x3D;f(y)&#x3D;u,\]</div>
+<p>但同色节点出现得越晚，<span class="math-inline">\(f\)</span> 严格增大，矛盾。</p>
+<hr>
+<h3 id="合法排列的单调性"><a href="#合法排列的单调性" class="headerlink" title="合法排列的单调性"></a>合法排列的单调性</h3><p>假设存在合法排列</p>
+<div class="math-display">\[v_0,v_1,\ldots,v_{k-1}.\]</div>
+<p>先固定一种颜色 <span class="math-inline">\(c\)</span>。</p>
+<p>如果 <span class="math-inline">\(v_j\)</span> 有颜色为 <span class="math-inline">\(c\)</span> 的孩子，那么所有 <span class="math-inline">\(v_i\ (i&lt;j)\)</span> 也一定有颜色为 <span class="math-inline">\(c\)</span> 的孩子。因为颜色为 <span class="math-inline">\(c\)</span> 的第 <span class="math-inline">\(j\)</span> 个节点的父亲恰好是 <span class="math-inline">\(v_j\)</span>，那么前面的第 <span class="math-inline">\(0,1,\ldots,j-1\)</span> 个同色节点也必须分别以 <span class="math-inline">\(v_0,v_1,\ldots,v_{j-1}\)</span> 为父亲。</p>
+<p>因此，每种颜色只会出现在排列某个<strong>前缀节点的孩子中</strong>。</p>
+<p>更强地，可以从后往前归纳证明：</p>
+<div class="math-display">\[i&lt;j
+\Longrightarrow
+z(v_i,c)\ge z(v_j,c)
+\qquad\forall c.\]</div>
+<p>证明很简单。若 <span class="math-inline">\(v_j\)</span> 有颜色为 <span class="math-inline">\(c\)</span> 的孩子 <span class="math-inline">\(y\)</span>，那么 <span class="math-inline">\(v_i\)</span> 也有对应孩子 <span class="math-inline">\(x\)</span>，并且同色节点的顺序与父亲顺序一致，所以 <span class="math-inline">\(x\)</span> 出现在 <span class="math-inline">\(y\)</span> 前面。</p>
+<p>由于孩子一定出现在父亲之后，可以使用归纳假设得到</p>
+<div class="math-display">\[sz_x\ge sz_y,\]</div>
+<p>也就是</p>
+<div class="math-display">\[z(v_i,c)\ge z(v_j,c).\]</div>
+<p>最后对所有颜色求和：</p>
+<div class="math-display">\[sz_u&#x3D;1+\sum_c z(u,c),\]</div>
+<p>于是得到</p>
+<div class="math-display">\[i&lt;j\Longrightarrow sz_{v_i}\ge sz_{v_j}.\]</div>
+<p>所以任意合法排列一定按照 <span class="math-inline">\(sz\)</span> 非增。</p>
+<hr>
+<h3 id="真正的判定条件"><a href="#真正的判定条件" class="headerlink" title="真正的判定条件"></a>真正的判定条件</h3><p>上面的性质还能进一步加强：</p>
+<div class="math-display">\[\boxed{
+sz_u\ge sz_v
+\Longrightarrow
+z(u,c)\ge z(v,c)\quad\forall c
+}\]</div>
+<p>如果 <span class="math-inline">\(u\)</span> 本来就在 <span class="math-inline">\(v\)</span> 前面，这就是刚才的结论。</p>
+<p>否则 <span class="math-inline">\(v\)</span> 在 <span class="math-inline">\(u\)</span> 前面，于是有</p>
+<div class="math-display">\[z(v,c)\ge z(u,c)\quad\forall c,\]</div>
+<p>进而 <span class="math-inline">\(sz_v\ge sz_u\)</span>。</p>
+<p>又已知 <span class="math-inline">\(sz_u\ge sz_v\)</span>，所以二者大小相等。由于</p>
+<div class="math-display">\[sz_u&#x3D;1+\sum_c z(u,c),\]</div>
+<p>所有逐维不等式只能全部取等号：</p>
+<div class="math-display">\[z(u,c)&#x3D;z(v,c)\quad\forall c.\]</div>
+<p>因此结论仍然成立。</p>
+<p>这也解释了为什么用 <span class="math-inline">\(deg\)</span> 排序是错误的：<span class="math-inline">\(deg\)</span> 只记录某种颜色是否出现，而真正决定顺序的是每种颜色对应孩子的<strong>子树大小</strong>。</p>
+<p>于是我们得到了一组与编号无关的条件：</p>
+<ol>
+<li>每个节点的孩子颜色互不相同；</li>
+<li>如果 <span class="math-inline">\(sz_u\ge sz_v\)</span>，则对任意颜色 <span class="math-inline">\(c\)</span> 都有 <span class="math-inline">\(z(u,c)\ge z(v,c)\)</span>。</li>
+</ol>
+<p>这两个条件事实上也是充分的。</p>
+<p>构造时，每种颜色维护一个 FIFO 队列，队列中存当前可以编号的这种颜色的节点。每次从所有队首中选择 <span class="math-inline">\(sz\)</span> 最大的节点编号，再把它的孩子加入对应颜色的队尾。</p>
+<p>由于上述偏序关系，编号顺序一定满足 <span class="math-inline">\(sz\)</span> 非增；同时对于任意颜色 <span class="math-inline">\(c\)</span>，一旦某个已经编号的节点没有颜色为 <span class="math-inline">\(c\)</span> 的孩子，即</p>
+<div class="math-display">\[z(u,c)&#x3D;0,\]</div>
+<p>那么后面的节点也全部满足 <span class="math-inline">\(z(v,c)&#x3D;0\)</span>。</p>
+<p>因此，有颜色 <span class="math-inline">\(c\)</span> 孩子的节点恰好形成编号序列的一个前缀，而它们的颜色 <span class="math-inline">\(c\)</span> 的孩子又按照父亲顺序依次进入 FIFO。</p>
+<p>所以第 <span class="math-inline">\(i\)</span> 个颜色为 <span class="math-inline">\(c\)</span> 的节点，其父亲恰好就是编号为 <span class="math-inline">\(i\)</span> 的节点，满足题目的定义。</p>
+<p>因此上述两个条件就是充要条件。</p>
+<hr>
+<h3 id="O-n-2-log-n-部分分"><a href="#O-n-2-log-n-部分分" class="headerlink" title="\(O(n^2\log n)\) 部分分"></a><span class="math-inline">\(O(n^2\log n)\)</span> 部分分</h3><p>现在判定一棵子树就很直接了。</p>
+<p>把子树中的节点按照 <span class="math-inline">\(sz\)</span> 从大到小排序：</p>
+<div class="math-display">\[v_0,v_1,\ldots,v_{k-1}.\]</div>
+<p>定义 <code>check(u,v)</code> 表示</p>
+<div class="math-display">\[z(u,c)\ge z(v,c)\quad\forall c.\]</div>
+<p>这个关系具有传递性，所以只需要检查相邻节点：</p>
+<div class="math-display">\[check(v_0,v_1),check(v_1,v_2),\ldots,check(v_{k-2},v_{k-1}).\]</div>
+<p>对于 <code>check(u,v)</code>，只需要枚举 <span class="math-inline">\(v\)</span> 拥有的颜色 <span class="math-inline">\(c\)</span>，检查 <span class="math-inline">\(u\)</span> 是否也有该颜色的孩子，并且</p>
+<div class="math-display">\[sz_{son(u,c)}\ge sz_{son(v,c)}.\]</div>
+<p>不存在的颜色视作 <span class="math-inline">\(0\)</span>。</p>
+<p>这样就得到了比较直接的 <span class="math-inline">\(O(n^2\log n)\)</span> 部分分。</p>
+<hr>
+<h3 id="正解：启发式合并"><a href="#正解：启发式合并" class="headerlink" title="正解：启发式合并"></a>正解：启发式合并</h3><p>注意到我们真正需要维护的东西只有：</p>
+<blockquote>
+<p>子树内所有节点按照 <span class="math-inline">\(sz\)</span> 排序后，相邻节点是否满足 <code>check</code>。</p>
+</blockquote>
+<p>因此可以从叶子向根处理。</p>
+<p>对于每个节点 <span class="math-inline">\(u\)</span>，维护一个按 <span class="math-inline">\(sz\)</span> 排序的 <code>set/map</code>，表示当前子树中的节点。若某个孩子子树已经不合法，则 <span class="math-inline">\(u\)</span> 显然也不合法。</p>
+<p>否则将所有孩子的集合启发式合并。</p>
+<p>每次把小集合中的元素插入大集合。插入一个节点 <span class="math-inline">\(x\)</span> 后，原集合中只有两组相邻关系发生变化：</p>
+<div class="math-display">\[pre(x),x\]</div>
+<p>和</p>
+<div class="math-display">\[x,nxt(x).\]</div>
+<p>因此只需要重新检查这两组关系。</p>
+<p>由于 <code>check</code> 具有传递性，只要所有相邻位置均合法，整个有序序列就合法。</p>
+<p>对于相同的 <span class="math-inline">\(sz\)</span>，如果子树合法，那么它们的 <span class="math-inline">\(z(u,c)\)</span> 必然全部相等，因此可以只保留一个代表节点。</p>
+<p>启发式合并保证每个元素所在集合每移动一次，集合大小至少翻倍，所以每个点至多被移动 <span class="math-inline">\(O(\log n)\)</span> 次。</p>
+<p>若使用平衡树维护 <span class="math-inline">\(sz\)</span> 顺序，并对每个节点的孩子按照颜色建立可查询结构，总复杂度为</p>
+<div class="math-display">\[O\bigl(n\log n(\log n+\log m)\bigr),\]</div>
+<p>在本题范围内即可通过。</p>
+<hr>
+<p>这道题最核心的逻辑链其实只有：</p>
+<div class="math-display">\[\text{合法排列}
+\Longrightarrow
+i&lt;j\Rightarrow z(v_i,c)\ge z(v_j,c)
+\Longrightarrow
+sz\text{ 单调}\]</div>
+<p>进一步得到</p>
+<div class="math-display">\[sz_u\ge sz_v
+\Longrightarrow
+z(u,c)\ge z(v,c),\]</div>
+<p>而这个逐颜色偏序反过来又足以构造合法排列。</p>
+<p>最后利用偏序的传递性：</p>
+<div class="math-display">\[\text{检查所有点对}
+\Longrightarrow
+\text{只检查 }sz\text{ 排序后的相邻点}
+\Longrightarrow
+\text{启发式合并维护相邻关系}.\]</div>
+<p>这就是整道题从性质到正解的完整主线。</p>
+</details>
+
+<h1 id="P10644-NordicOI-2022-能源网格-Power-Grid"><a href="#P10644-NordicOI-2022-能源网格-Power-Grid" class="headerlink" title="P10644 [NordicOI 2022] 能源网格 Power Grid"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P10644">P10644 [NordicOI 2022] 能源网格 Power Grid</a></h1><p>我写的做法太复杂了。<br>简单的方式应该是每次找到 <span class="math-inline">\(c_{i,j}\)</span> 最大的位置。<br>那么这个此时第 <span class="math-inline">\(i\)</span> 行和第 <span class="math-inline">\(j\)</span> 列的和一定有一个是最大的。</p>
+<p>那么接下来每一个判断一下就好。<br>发现每一个位置最多有两种选择。</p>
+<p>然后用背包判断。</p>
+<h1 id="P11343-KTSC-2023-R1-出租车旅行"><a href="#P11343-KTSC-2023-R1-出租车旅行" class="headerlink" title="P11343 [KTSC 2023 R1] 出租车旅行"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P11343">P11343 [KTSC 2023 R1] 出租车旅行</a></h1><p>首先确定一个转移顺序。</p>
+<p>我们发现一个最优的路径一定是 <span class="math-inline">\(B_i\)</span> 第减的。<br>假设路径为 <span class="math-inline">\(\dots \rightarrow p_x \rightarrow p_y \rightarrow p_z \rightarrow \dots\)</span>。</p>
+<p>如果 <span class="math-inline">\(B_{p_y}&gt;B_{p_x}\)</span> 那么不如直接从 <span class="math-inline">\(p_y\rightarrow p_z\)</span>。</p>
+<p>所以我们可以维护转移顺序。<br>但是转移的时候和路径长度有关。</p>
+<p>所以我们考虑使用点分治！！！</p>
+<p>这是这个题目的精髓。<br>在李超树上总是可以把距离看作 <span class="math-inline">\(dep_x + dep_y\)</span>。<br>如果在分治中心的同一个子树内，相当于是把距离算长了，那么一定不优。</p>
+<p>所以我们在每一个点分治的子树中维护一个李超线段树就好。</p>
+<p>注意最后求答案的时候不满足单调性，<span class="math-inline">\(B_i\)</span> 不一定递减，因为后面不需要再走了。<br>所以我们需要在最后对于在每一个重新查询一次。</p>
+<h1 id="P17570-「FAOI-R15」再声-recall"><a href="#P17570-「FAOI-R15」再声-recall" class="headerlink" title="P17570 「FAOI-R15」再声 recall"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P17570">P17570 「FAOI-R15」再声 recall</a></h1><p>首先考虑简化这个问题。</p>
+<p>考虑其实有很多操作是 <span class="math-inline">\(0\)</span>。</p>
+<p>根据线性基的基本性质。我们所有非主元（插入不进去的数）一定都可以和线性基中若干个位置异或和为 <span class="math-inline">\(0\)</span>。<br>那么我们只需要考虑把所有主元连成一个连通块就好。</p>
+<p>然后发现一个显然的性质，如果两个不交的集合合并，那么一定不优秀，原因是我们把两个一起合并更优。</p>
+<p>那么我们考虑每次多合并进来一个集合的代价，假设 <span class="math-inline">\(h_s\)</span> 表示 <span class="math-inline">\(s\)</span> 集合合并的最小代价（可以在非主元形成的线性基中查询得到）。<br>然后 <span class="math-inline">\(g_s\)</span> 是 <span class="math-inline">\(h_s\)</span> 后缀 <span class="math-inline">\(min\)</span> 的结果。<br>转移就是：</p>
+<div class="math-display">\[f_s+h_t\rightarrow f_{s\cup t}\]</div>
+<h1 id="CF506E-Mr-Kitayuta’s-Gift"><a href="#CF506E-Mr-Kitayuta’s-Gift" class="headerlink" title="CF506E Mr. Kitayuta’s Gift"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF506E">CF506E Mr. Kitayuta’s Gift</a></h1><h2 id="区间状态机"><a href="#区间状态机" class="headerlink" title="区间状态机"></a>区间状态机</h2><p>回文串问题，考虑从两边向中间构造最终的串，每次在两端放入两个相同的字符。用当前字符尽可能匹配剩余的 <span class="math-inline">\(s\)</span> 的两端，匹配成功就移动相应端点。因此，未匹配的部分始终是初始 <span class="math-inline">\(s\)</span> 的一个子串。对每个回文串，这套规则都给出唯一的匹配过程，避免了因为插入位置不同而重复计数。</p>
+<p>设 <span class="math-inline">\(n&#x3D;|s|\)</span>，将题目输入的插入字符数记为 <span class="math-inline">\(m\)</span>。先考虑 <span class="math-inline">\(n+m\)</span> 为偶数的情况，此时每一步都对应最终回文串中一对对称的字符。</p>
+<p>将剩余子串 <span class="math-inline">\(s[l\ldots r]\)</span> 看作一个状态。按两端是否相同，可以把状态分为两类。</p>
+<ul>
+<li><strong>红点</strong>（<span class="math-inline">\(s_l\ne s_r\)</span>）。选中其中一个端点的字符时，匹配掉这一个端点。选其他 <span class="math-inline">\(24\)</span> 种字符时，状态不变。</li>
+<li><strong>绿点</strong>（<span class="math-inline">\(s_l&#x3D;s_r\)</span>）。选中端点的字符时，匹配掉两端。若只剩一个字符，则匹配掉这一个字符。选其他 <span class="math-inline">\(25\)</span> 种字符时，状态不变。</li>
+</ul>
+<p>全部匹配后到达终点，此后每一步可以任选 <span class="math-inline">\(26\)</span> 种字符。下图以 <code>abaa</code> 为例。</p>
+<p><img src="/images/cf506e-original-states.png" alt="以 abaa 为例的原始区间状态机，红点表示两端不同，绿点表示两端相同"></p>
+<p><em>图 1. 沿非自环边前进时，剩余区间不断缩小。各点的自环表示本步没有匹配掉原串字符。</em></p>
+<h2 id="按红点数合并链"><a href="#按红点数合并链" class="headerlink" title="按红点数合并链"></a>按红点数合并链</h2><p>直接对这个状态机做矩阵快速幂仍然太慢，因为区间状态有 <span class="math-inline">\(O(n^2)\)</span> 个。先忽略自环，观察一条从初始状态到终点的链。</p>
+<p>设链上有 <span class="math-inline">\(r\)</span> 个红点。红点各匹配掉一个字符，绿点通常匹配掉两个字符，最后一个绿点也可能只匹配掉剩余的一个字符。因此绿点数必为</p>
+<div class="math-display">\[g&#x3D;\left\lceil\frac{n-r}{2}\right\rceil.\]</div>
+<p>对于两条红点数相同的链，红绿点出现的顺序可能不同，但它们的贡献相同。各点的自环次数可以独立分配，而两条链上的红点数、绿点数和终点数都相同，自环权又分别固定为 <span class="math-inline">\(24,25,26\)</span>。所以我们只需按红点数分类。</p>
+<p>设 <span class="math-inline">\(C_r\)</span> 表示忽略自环后，恰好经过 <span class="math-inline">\(r\)</span> 个红点的链数。它可以用区间 DP 统计。此时已经能对每类链分别计算贡献，再乘上 <span class="math-inline">\(C_r\)</span>，但分别做矩阵快速幂仍然太慢。</p>
+<p>最后将所有类型的链放进同一张图。把红点串成一条链，把绿点串成另一条链，用剩余的绿点数给绿点编号。对于有 <span class="math-inline">\(r\)</span> 个红点的类型，从第 <span class="math-inline">\(r\)</span> 个红点连向编号为 <span class="math-inline">\(\lceil(n-r)&#x2F;2\rceil\)</span> 的绿点，并将这条<strong>红绿交接边</strong>的权值设为 <span class="math-inline">\(C_r\)</span>。</p>
+<p><img src="/images/cf506e-compressed-automaton.png" alt="按红点数合并后的带权状态机，红链通过交接边进入绿链"></p>
+<p><em>图 2. 选择哪条红绿交接边，就确定了使用哪一类链。边权 <span class="math-inline">\(C_r\)</span> 一次计入该类所有原始链。</em></p>
+<p>全绿链对应 <span class="math-inline">\(r&#x3D;0\)</span>，没有红绿交接边，需要在初始向量中直接给相应绿点赋值 <span class="math-inline">\(C_0\)</span>。图中的虚线表示初始赋值，不消耗步数。压缩后的点数只有约 <span class="math-inline">\(n+\lceil n&#x2F;2\rceil\)</span> 个，便可以做矩阵快速幂。</p>
+<h2 id="奇数长度的中心"><a href="#奇数长度的中心" class="headerlink" title="奇数长度的中心"></a>奇数长度的中心</h2><p>最后考虑 <span class="math-inline">\(n+m\)</span> 为奇数。先按 <span class="math-inline">\(\lceil(n+m)&#x2F;2\rceil\)</span> 步计算，但最后一步实际上只放入<strong>中心的一个字符</strong>。如果此时还剩两个相等的原串字符，就不能靠这一个中心字符同时匹配它们。</p>
+<p>因此，重新统计那些以「剩两个字符的绿点」作为最后一个非终点状态的链，并在扣除用的矩阵中去掉终点自环。这样到达终点的路径恰好是在<strong>最后一步</strong>才进入终点的非法路径，从先前算出的总数中减去它们即可。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1784,93 +2731,8 @@ x_0y_1 &#x3D; w(z_0 + z_1)
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/06/27/2026-6-27%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wdwsy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wdwsy's Blog">
-      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | wdwsy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/06/27/2026-6-27%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">2026.6.27做题记录</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2026-06-27 22:39:32" itemprop="dateCreated datePublished" datetime="2026-06-27T22:39:32+08:00">2026-06-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-07-06 23:13:25" itemprop="dateModified" datetime="2026-07-06T23:13:25+08:00">2026-07-06</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="AT-abc262-h-ABC262Ex-Max-Limited-Sequence"><a href="#AT-abc262-h-ABC262Ex-Max-Limited-Sequence" class="headerlink" title="AT_abc262_h [ABC262Ex] Max Limited Sequence"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/AT_abc262_h">AT_abc262_h [ABC262Ex] Max Limited Sequence</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>求满足以下条件的长度为 $N$ 的序列 $A&#x3D;(A_1,A_2,\cdots A_N)$ 有多少种：</p>
-<ul>
-<li>$\forall i \in[1,N],0\leq A_i\leq M$</li>
-<li>$\forall i \in[1,Q],\max \limits_{L_i\leq j\leq R_i}A_j&#x3D;X_i$</li>
-</ul>
-<h2 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h2><p>我们考虑计算出每一个位置最严的限制。<br>然后每一种限制是独立的，假设我们现在考虑限制 $x$，我们记录 $f_{i,j}$ 表示填到了位置 $i$，上一次填 $x$ 的位置为 $j$ 的方案数。接下来我们对于一个限制 $[l,r]$ 其实就是要求 $[l,r]$ 中一定有等于 $x$ 的位置，于是我们在做到 $r$ 的时候在线段树上把 $[0,x)$ 的位置都设置为 $0$ 就好，转移如下：</p>
-<ol>
-<li>$f_{i,j}\leftarrow x\times f_{i-1,j}$ 当前位置填 $[0,x-1]$ 的任意一个数字。</li>
-<li>$f_{i,i}\leftarrow f_{i-1,j}$ 当前位置填入 $x$。</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

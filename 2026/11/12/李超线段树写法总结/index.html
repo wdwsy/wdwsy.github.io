@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wdwsy.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":240},"hljswrap":true,"codeblock":{"theme":{"light":"github-dark","dark":"github-dark-dimmed"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":true,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="维护若干条直线，每次加入一条 \(y&#x3D;kx+b\)，或者给定 \(x\)，查询所有直线在这个位置的最小值。文中的每条直线都覆盖完整值域。 如果每次都枚举所有直线，查询就是线性的。李超线段树利用两条直线至多相交一次的性质，把一次插入和一次查询都做到 \(O(\log C)\)。这里 \(C\) 表示整数值域内的坐标个数。以下统一讨论最小值，代码中的值域为 \([-V,V]\)，因此 \(C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="李超线段树写法总结">
+<meta property="og:url" content="https://wdwsy.github.io/2026/11/12/%E6%9D%8E%E8%B6%85%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="wdwsy&#39;s Blog">
+<meta property="og:description" content="维护若干条直线，每次加入一条 \(y&#x3D;kx+b\)，或者给定 \(x\)，查询所有直线在这个位置的最小值。文中的每条直线都覆盖完整值域。 如果每次都枚举所有直线，查询就是线性的。李超线段树利用两条直线至多相交一次的性质，把一次插入和一次查询都做到 \(O(\log C)\)。这里 \(C\) 表示整数值域内的坐标个数。以下统一讨论最小值，代码中的值域为 \([-V,V]\)，因此 \(C">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wdwsy.github.io/images/li-chao-insert.png">
+<meta property="og:image" content="https://wdwsy.github.io/images/li-chao-merge.png">
+<meta property="article:published_time" content="2026-11-12T15:59:49.000Z">
+<meta property="article:modified_time" content="2026-11-12T16:02:52.300Z">
+<meta property="article:author" content="wdwsy">
+<meta property="article:tag" content="算法,OIC++,NOI,信息学竞赛">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wdwsy.github.io/images/li-chao-insert.png">
+
+
+<link rel="canonical" href="https://wdwsy.github.io/2026/11/12/%E6%9D%8E%E8%B6%85%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://wdwsy.github.io/2026/11/12/%E6%9D%8E%E8%B6%85%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/","path":"2026/11/12/李超线段树写法总结/","title":"李超线段树写法总结"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>李超线段树写法总结 | wdwsy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">wdwsy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">算法的世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E5%86%99%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">普通写法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%8F%E4%B8%AA%E8%8A%82%E7%82%B9%E5%AD%98%E4%B8%80%E6%9D%A1%E7%9B%B4%E7%BA%BF"><span class="nav-number">1.1.</span> <span class="nav-text">每个节点存一条直线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AA%E9%9C%80%E8%A6%81%E9%80%92%E5%BD%92%E4%B8%80%E8%BE%B9"><span class="nav-number">1.2.</span> <span class="nav-text">为什么只需要递归一边</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E4%B8%8E%E6%9F%A5%E8%AF%A2%E4%BB%A3%E7%A0%81"><span class="nav-number">1.3.</span> <span class="nav-text">插入与查询代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%8E%E8%B6%85%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6"><span class="nav-number">2.</span> <span class="nav-text">李超线段树合并</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E6%80%BB%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AA%E6%9C%89%E4%B8%80%E4%B8%AA-log"><span class="nav-number">3.</span> <span class="nav-text">合并总复杂度为什么只有一个 log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8-CF932F-%E4%B8%AD%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">在 CF932F 中使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%9F%E6%95%B0%E5%80%BC%E5%9F%9F%E7%9A%84%E4%B8%AD%E7%82%B9"><span class="nav-number">4.1.</span> <span class="nav-text">负数值域的中点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="nav-number">5.</span> <span class="nav-text">完整代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wdwsy"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">wdwsy</p>
+  <div class="site-description" itemprop="description">算法竞赛、C++、OI 技术分享</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wdwsy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wdwsy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://wdwsy.github.io/2026/11/12/%E6%9D%8E%E8%B6%85%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wdwsy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wdwsy's Blog">
+      <meta itemprop="description" content="算法竞赛、C++、OI 技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="李超线段树写法总结 | wdwsy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          李超线段树写法总结
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-11-12 23:59:49" itemprop="dateCreated datePublished" datetime="2026-11-12T23:59:49+08:00">2026-11-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-11-13 00:02:52" itemprop="dateModified" datetime="2026-11-13T00:02:52+08:00">2026-11-13</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>维护若干条直线，每次加入一条 <span class="math-inline">\(y&#x3D;kx+b\)</span>，或者给定 <span class="math-inline">\(x\)</span>，查询所有直线在这个位置的最小值。文中的每条直线都覆盖完整值域。</p>
+<p>如果每次都枚举所有直线，查询就是线性的。李超线段树利用两条直线至多相交一次的性质，把一次插入和一次查询都做到 <span class="math-inline">\(O(\log C)\)</span>。这里 <span class="math-inline">\(C\)</span> 表示整数值域内的坐标个数。以下统一讨论最小值，代码中的值域为 <span class="math-inline">\([-V,V]\)</span>，因此 <span class="math-inline">\(C&#x3D;2V+1\)</span>。</p>
+<h2 id="普通写法"><a href="#普通写法" class="headerlink" title="普通写法"></a>普通写法</h2><h3 id="每个节点存一条直线"><a href="#每个节点存一条直线" class="headerlink" title="每个节点存一条直线"></a>每个节点存一条直线</h3><p>线段树按照横坐标划分区间。每个节点保存一条直线的编号，查询时沿横坐标对应的根到叶子的路径，把遇到的直线都代入求最小值。</p>
+<p>我们维护的性质是，<strong>每个位置的最优直线，都能在这条查询路径上找到。</strong></p>
+<p>节点保存的直线只负责提供一个候选答案。插入时比较当前节点的两条直线，把中点处更优的一条留在这里，另一条继续往下放。</p>
+<p>代码中，<code>p[id]</code> 保存直线，<code>t[u].v</code> 保存节点上的直线编号，<code>ls,rs</code> 是左右儿子，<code>rt[u]</code> 是第 <span class="math-inline">\(u\)</span> 棵李超树的根。</p>
+<h3 id="为什么只需要递归一边"><a href="#为什么只需要递归一边" class="headerlink" title="为什么只需要递归一边"></a>为什么只需要递归一边</h3><p>设当前节点表示 <span class="math-inline">\([l,r]\)</span>，中点为 <span class="math-inline">\(mid\)</span>。插入新直线后，先保证留下来的直线 <span class="math-inline">\(f\)</span> 在中点处更优，即</p>
+<div class="math-display">\[f(mid)\le g(mid).\]</div>
+<p>两条直线的差仍然是一次函数。如果 <span class="math-inline">\(g\)</span> 能在中点左边变得更优，那么它在右边就不会更优；右边同理。因此，<span class="math-inline">\(g\)</span> 只需要递归到一个儿子。</p>
+<p>下面两幅小图对应代码中的两个分支。蓝线 <span class="math-inline">\(f\)</span> 留在当前节点，橙线 <span class="math-inline">\(g\)</span> 向下递归，阴影表示递归到的半边。</p>
+<p><img src="/images/li-chao-insert.png" alt="中点留下蓝线，橙线分别递归右半区间和左半区间"></p>
+<p>我的写法在交换后只比较右端点。</p>
+<ul>
+<li>若 <span class="math-inline">\(f(r)&lt;g(r)\)</span>，蓝线在中点和右端点都更优，所以整个右半区间都可以由蓝线处理，橙线递归左边。</li>
+<li>否则，橙线在右端点处不劣。结合蓝线在中点处更优，可以确定左半区间由蓝线处理，橙线递归右边。</li>
+</ul>
+<p>相等时选择右边也成立。即使橙线已经被完全覆盖，继续递归一个分支仍然保持 <span class="math-inline">\(O(\log C)\)</span> 的单次复杂度。</p>
+<h3 id="插入与查询代码"><a href="#插入与查询代码" class="headerlink" title="插入与查询代码"></a>插入与查询代码</h3><p>下面的 <code>update</code> 和 <code>query</code> 都直接使用我的通过代码。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">(<span class="type">int</span> id, <span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> &amp;u)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!u) &#123;</span><br><span class="line">        u = ++idx, t[u].v = id;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> mid = l + (r - l) / <span class="number">2</span>; <span class="comment">// 注意，这里有负下标，不能写 (l + r) / 2，否则会死循环，比如 (-1 + 0) / 2 = 0</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">better</span>(id, t[u].v, mid)) <span class="built_in">swap</span>(id, t[u].v);</span><br><span class="line">    <span class="keyword">if</span> (l == r) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">better</span>(t[u].v, id, r)) <span class="built_in">update</span>(id, l, mid, t[u].ls);</span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">update</span>(id, mid + <span class="number">1</span>, r, t[u].rs);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">query</span><span class="params">(<span class="type">int</span> pos, <span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!u) <span class="keyword">return</span> <span class="number">0x7f7f7f7f7f7f7f7fll</span>;</span><br><span class="line">    ll res = p[t[u].v].<span class="built_in">get</span>(pos);</span><br><span class="line">    <span class="keyword">if</span> (l == r) <span class="keyword">return</span> res;</span><br><span class="line">    <span class="type">int</span> mid = l + (r - l) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (pos &lt;= mid) res = <span class="built_in">min</span>(res, <span class="built_in">query</span>(pos, l, mid, t[u].ls));</span><br><span class="line">    <span class="keyword">else</span> res = <span class="built_in">min</span>(res, <span class="built_in">query</span>(pos, mid + <span class="number">1</span>, r, t[u].rs));</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>插入每层只走一个儿子，所以是 <span class="math-inline">\(O(\log C)\)</span>。查询把当前节点的直线与对应儿子的查询结果取最小值，也只走一条路径。</p>
+<p>动态开点时，<strong>遇到空节点，存下整条直线就返回</strong>。因此一次普通直线插入至多新建一个节点。</p>
+<h2 id="李超线段树合并"><a href="#李超线段树合并" class="headerlink" title="李超线段树合并"></a>李超线段树合并</h2><p>两棵树使用相同的值域划分，就可以按对应区间合并。</p>
+<p>设 <code>merge(x,y,l,r)</code> 把 <code>y</code> 合并进 <code>x</code>。</p>
+<ol>
+<li>一边为空，直接保留另一边。</li>
+<li>两边都是叶子，保留取值更小的直线。</li>
+<li>否则，把 <code>y</code> 根节点保存的直线插入当前的 <code>x</code> 子树，再分别合并左右儿子。</li>
+</ol>
+<p><img src="/images/li-chao-merge.png" alt="两棵李超树按相同区间对齐，插入来源根的直线，再合并对应儿子"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">merge</span><span class="params">(<span class="type">int</span> &amp;x, <span class="type">int</span> &amp;y, <span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!x || !y) &#123; x += y; <span class="keyword">return</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">better</span>(t[y].v, t[x].v, l)) t[x].v = t[y].v;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> mid = l + (r - l) / <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">update</span>(t[y].v, l, r, x);</span><br><span class="line">    <span class="built_in">merge</span>(t[x].ls, t[y].ls, l, mid);</span><br><span class="line">    <span class="built_in">merge</span>(t[x].rs, t[y].rs, mid + <span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意这里传给 <code>update</code> 的是<strong>当前区间 <span class="math-inline">\([l,r]\)</span> 和当前根 <code>x</code></strong>。递归到哪一层，就从哪一层继续插入。</p>
+<p>这个过程会共享、修改原有节点。合并后，来源根 <code>y</code> 对应的旧树就退出后续操作，后面统一使用合并结果。代码保留了 <code>rt[v]</code> 的数值，但父亲继续使用的是 <code>rt[u]</code>。</p>
+<h2 id="合并总复杂度为什么只有一个-log"><a href="#合并总复杂度为什么只有一个-log" class="headerlink" title="合并总复杂度为什么只有一个 log"></a>合并总复杂度为什么只有一个 log</h2><p>容易想到，合并会调用很多次 <code>update</code>，而一次 <code>update</code> 又是 <span class="math-inline">\(O(\log C)\)</span>，是不是最后要算成 <span class="math-inline">\(O(n\log^2 C)\)</span>？</p>
+<p>我们需要把这些插入路径放到一起计费。</p>
+<p>设完整值域树最大深度为 <span class="math-inline">\(H&#x3D;\lceil\log_2 C\rceil\)</span>，根深度为 <span class="math-inline">\(0\)</span>。对每个仍在使用的结构节点，按它<strong>还能向下走多少层</strong>记一个权重</p>
+<div class="math-display">\[H-d+1,\]</div>
+<p>其中 <span class="math-inline">\(d\)</span> 是节点深度。把所有权重之和记为势能 <span class="math-inline">\(\Phi\)</span>。尚未合完的来源子树也计入其中。</p>
+<p>现在考虑深度 <span class="math-inline">\(d\)</span> 上一次两边都非空的合并。来源根 <code>y</code> 在本次合并后被消耗，其儿子继续参与递归。这先减少 <span class="math-inline">\(H-d+1\)</span> 的势能。</p>
+<p>如果 <code>update</code> 经过 <span class="math-inline">\(k\)</span> 个已有节点，最后新建了一个节点，那么新节点深度为 <span class="math-inline">\(d+k\)</span>。因为一次插入至多新建一个节点，所以势能净减少</p>
+<div class="math-display">\[\Phi_{\text{前}}-\Phi_{\text{后}}
+&#x3D;(H-d+1)-(H-d-k+1)&#x3D;k.\]</div>
+<p>这次插入的时间为 <span class="math-inline">\(O(k+1)\)</span>，而两边非空时 <span class="math-inline">\(k\ge1\)</span>，所以势能下降足以支付它的时间。</p>
+<p>如果没有新建节点，势能直接减少 <span class="math-inline">\(H-d+1\)</span>，这也足以支付向下走到叶子的整条路径。叶子处直接比较的情况同样只需 <span class="math-inline">\(O(1)\)</span>。</p>
+<p><strong>每次外部普通插入至多新增一个节点，最多注入 <span class="math-inline">\(H+1\)</span> 的势能。</strong> 因此，<span class="math-inline">\(n\)</span> 次普通插入一共只能注入 <span class="math-inline">\(O(nH)\)</span> 势能，所有合并内部的插入总时间也就是 <span class="math-inline">\(O(nH)\)</span>。</p>
+<p>每次非空碰撞最多额外产生两个子递归，递归本身的开销也能一起计入。若顶层合并调用数为 <span class="math-inline">\(q\)</span>，总合并时间为</p>
+<div class="math-display">\[\boxed{O(n\log C+q)}.\]</div>
+<p>树上 DP 中只需要沿每条父子边合并一次，<span class="math-inline">\(q&#x3D;n-1\)</span>，于是总时间为 <span class="math-inline">\(O(n\log C)\)</span>。再加上每个点的一次普通插入和一次查询，整体仍然是一个 <span class="math-inline">\(\log\)</span>。</p>
+<p>这个证明允许中途交换直线，也计入了合并时新开节点的费用。前提是使用相同的坐标划分，并且每次合并的两棵活动树没有共享节点，来源树合并后退出使用。</p>
+<p>代码中的节点池只增加 <code>idx</code>，没有回收已经消耗的来源节点。节点池应按 <span class="math-inline">\(O(n\log C)\)</span> 的累计开点数预留。</p>
+<h2 id="在-CF932F-中使用"><a href="#在-CF932F-中使用" class="headerlink" title="在 CF932F 中使用"></a>在 CF932F 中使用</h2><p>题目是 <a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/932/F">CF932F Escape Through Leaf</a>。</p>
+<p>设 <span class="math-inline">\(f_u\)</span> 为从 <span class="math-inline">\(u\)</span> 出发跳到某个叶子的最小代价。叶子满足 <span class="math-inline">\(f_u&#x3D;0\)</span>，其余节点满足</p>
+<div class="math-display">\[f_u&#x3D;\min_{v\in\operatorname{subtree}(u)\setminus\{u\}}
+\{a_u b_v+f_v\}.\]</div>
+<p>每个后代 <span class="math-inline">\(v\)</span> 提供一条直线</p>
+<div class="math-display">\[y&#x3D;b_vx+f_v,\]</div>
+<p>所以当前点只需要在 <span class="math-inline">\(x&#x3D;a_u\)</span> 处查询。</p>
+<p>处理顺序就是，先递归每个儿子，把儿子的李超树全部合并，再查询 <span class="math-inline">\(f_u\)</span>，最后加入当前点的直线 <span class="math-inline">\(y&#x3D;b_ux+f_u\)</span>。</p>
+<p><strong>一定先查询、再插入自己</strong>，因为转移只能跳向真后代。题目保证 <span class="math-inline">\(n\ge2\)</span>，并规定根不是叶子，代码中的叶子判断与此一致。</p>
+<h3 id="负数值域的中点"><a href="#负数值域的中点" class="headerlink" title="负数值域的中点"></a>负数值域的中点</h3><p>我在这个题里踩过的坑是</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> mid = (l + r) / <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>C++ 的整数除法向零取整。在 <span class="math-inline">\([-1,0]\)</span> 上，这会得到 <span class="math-inline">\(mid&#x3D;0\)</span>，左儿子的区间还是 <span class="math-inline">\([-1,0]\)</span>。递归区间没有缩小，动态开点可能不断形成长链，最终 RE。</p>
+<p>三个函数里的中点都使用</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> mid = l + (r - l) / <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这样在当前值域范围内，就能保证非叶节点的左右儿子都严格缩小。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><p>下面保留我的通过代码。三个函数共享相同的值域 <span class="math-inline">\([-V,V]\)</span>，查询空树时返回正无穷。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100005</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> V = <span class="number">100000</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> a[N], b[N], rt[N];</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; e[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Line</span> &#123;</span><br><span class="line">    ll k, b;</span><br><span class="line">    <span class="function">ll <span class="title">get</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123; <span class="keyword">return</span> x * k + b; &#125;</span><br><span class="line">&#125;p[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">    <span class="type">int</span> ls, rs, v;</span><br><span class="line">&#125;t[N * <span class="number">64</span>];</span><br><span class="line"><span class="type">int</span> idx;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">better</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> pos)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> p[x].<span class="built_in">get</span>(pos) &lt; p[y].<span class="built_in">get</span>(pos);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">(<span class="type">int</span> id, <span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> &amp;u)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!u) &#123;</span><br><span class="line">        u = ++idx, t[u].v = id;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> mid = l + (r - l) / <span class="number">2</span>; <span class="comment">// 注意，这里有负下标，不能写 (l + r) / 2，否则会死循环，比如 (-1 + 0) / 2 = 0</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">better</span>(id, t[u].v, mid)) <span class="built_in">swap</span>(id, t[u].v);</span><br><span class="line">    <span class="keyword">if</span> (l == r) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">better</span>(t[u].v, id, r)) <span class="built_in">update</span>(id, l, mid, t[u].ls);</span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">update</span>(id, mid + <span class="number">1</span>, r, t[u].rs);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">merge</span><span class="params">(<span class="type">int</span> &amp;x, <span class="type">int</span> &amp;y, <span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!x || !y) &#123; x += y; <span class="keyword">return</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">better</span>(t[y].v, t[x].v, l)) t[x].v = t[y].v;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> mid = l + (r - l) / <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">update</span>(t[y].v, l, r, x);</span><br><span class="line">    <span class="built_in">merge</span>(t[x].ls, t[y].ls, l, mid);</span><br><span class="line">    <span class="built_in">merge</span>(t[x].rs, t[y].rs, mid + <span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">query</span><span class="params">(<span class="type">int</span> pos, <span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!u) <span class="keyword">return</span> <span class="number">0x7f7f7f7f7f7f7f7fll</span>;</span><br><span class="line">    ll res = p[t[u].v].<span class="built_in">get</span>(pos);</span><br><span class="line">    <span class="keyword">if</span> (l == r) <span class="keyword">return</span> res;</span><br><span class="line">    <span class="type">int</span> mid = l + (r - l) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (pos &lt;= mid) res = <span class="built_in">min</span>(res, <span class="built_in">query</span>(pos, l, mid, t[u].ls));</span><br><span class="line">    <span class="keyword">else</span> res = <span class="built_in">min</span>(res, <span class="built_in">query</span>(pos, mid + <span class="number">1</span>, r, t[u].rs));</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> fa)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (u != <span class="number">1</span> &amp;&amp; e[u].<span class="built_in">size</span>() == <span class="number">1</span>) &#123;</span><br><span class="line">        p[u] = &#123;b[u], <span class="number">0</span>&#125;;</span><br><span class="line">        <span class="built_in">update</span>(u, -V, V, rt[u]);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> v : e[u]) <span class="keyword">if</span> (v != fa) &#123;</span><br><span class="line">        <span class="built_in">dfs</span>(v, u);</span><br><span class="line">        <span class="built_in">merge</span>(rt[u], rt[v], -V, V);</span><br><span class="line">    &#125;</span><br><span class="line">    p[u] = &#123;b[u], <span class="built_in">query</span>(a[u], -V, V, rt[u])&#125;;</span><br><span class="line">    <span class="built_in">update</span>(u, -V, V, rt[u]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) cin &gt;&gt; a[i];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) cin &gt;&gt; b[i];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="type">int</span> a, b;</span><br><span class="line">        cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">        e[a].<span class="built_in">push_back</span>(b);</span><br><span class="line">        e[b].<span class="built_in">push_back</span>(a);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        cout &lt;&lt; p[i].b &lt;&lt; <span class="string">&quot; \n&quot;</span>[i == n];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://cp-algorithms.com/geometry/convex_hull_trick.html">CP-Algorithms · Convex hull trick and Li Chao tree</a></li>
+<li><a target="_blank" rel="noopener" href="https://oi-wiki.org/ds/li-chao-tree/#%E5%90%88%E5%B9%B6">OI Wiki · 李超线段树合并</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/11/12/%E5%8E%86%E5%8F%B2%E5%92%8C%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/" rel="prev" title="历史和写法总结">
+                  <i class="fa fa-angle-left"></i> 历史和写法总结
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class=""></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">wdwsy</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script defer src="/js/blog-code.js"></script>
+
+</body>
+</html>
